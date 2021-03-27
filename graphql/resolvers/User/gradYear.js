@@ -1,5 +1,5 @@
 export default (user, args, { authenticationRequired }) => {
-    authenticationRequired();
+  authenticationRequired();
 
-    return user.gradYear;
+  return user.gradYear;
 };

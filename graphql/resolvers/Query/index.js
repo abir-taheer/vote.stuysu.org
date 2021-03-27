@@ -1,7 +1,7 @@
-import authenticatedUser from './authenticatedUser';
+import authenticatedUser from "./authenticatedUser";
 
 const Query = {
-    authenticatedUser,
+  authenticatedUser,
 };
 
 export default Query;

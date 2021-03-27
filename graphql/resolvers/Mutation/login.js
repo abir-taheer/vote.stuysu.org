@@ -1,18 +1,42 @@
-import { ForbiddenError } from "apollo-server-micro";
+import { ApolloError, ForbiddenError } from "apollo-server-micro";
 import fieldsCannotBeEmpty from "../../../utils/user-input/fieldsCannotBeEmpty";
+import getIdTokenPayload from "../../../utils/auth/getIdTokenPayload";
+import User from "../../../models/user";
+import getJWTSecret from "../../../utils/auth/getJWTSecret";
+import { sign } from "jsonwebtoken";
+import validateIdTokenPayload from "../../../utils/auth/validateIdTokenPayload";
 
-export default async (
-  mutation,
-  { idToken, setSessionCookie },
-  { signedIn }
-) => {
+export default async (mutation, { idToken }, { signedIn }) => {
   if (signedIn) {
     throw new ForbiddenError("You are already signed in.");
   }
 
   fieldsCannotBeEmpty({ idToken });
 
-  // TODO: ADD IMPLEMENTATION FOR LOGIN
+  const payload = await getIdTokenPayload(idToken);
+  validateIdTokenPayload(payload);
 
-  return null;
+  const user = await User.findByEmail();
+
+  if (!user) {
+    throw new ApolloError(
+      "There is no user with that email address",
+      "UNKNOWN_USER"
+    );
+  }
+
+  const { id, email, firstName, lastName } = user;
+
+  const tokenData = {
+    user: {
+      id,
+      email,
+      firstName,
+      lastName,
+    },
+  };
+
+  const secret = await getJWTSecret();
+
+  return sign(tokenData, secret, { expiresIn: "30d" });
 };

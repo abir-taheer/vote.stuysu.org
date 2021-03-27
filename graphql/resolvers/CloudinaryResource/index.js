@@ -1,7 +1,7 @@
-import url from './url';
+import url from "./url";
 
 const CloudinaryResourceResolvers = {
-    url,
+  url,
 };
 
 export default CloudinaryResourceResolvers;

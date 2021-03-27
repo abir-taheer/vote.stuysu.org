@@ -1,7 +1,7 @@
-import { gql } from 'apollo-server-micro';
+import { gql } from "apollo-server-micro";
 
 export default gql`
-    type Mutation {
-        login(idToken: String!): String!
-    }
+  type Mutation {
+    login(idToken: String!): String!
+  }
 `;

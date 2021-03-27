@@ -1,1 +1,1 @@
-export default user => user.firstName + ' ' + user.lastName;
+export default (user) => user.firstName + " " + user.lastName;
