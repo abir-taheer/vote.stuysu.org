@@ -6,7 +6,7 @@ import getJWTSecret from "../../../utils/auth/getJWTSecret";
 import { sign } from "jsonwebtoken";
 import validateIdTokenPayload from "../../../utils/auth/validateIdTokenPayload";
 
-export default async (mutation, { idToken }, { signedIn }) => {
+export default async (mutation, { idToken }, { signedIn, setCookie }) => {
   if (signedIn) {
     throw new ForbiddenError("You are already signed in.");
   }
@@ -16,7 +16,7 @@ export default async (mutation, { idToken }, { signedIn }) => {
   const payload = await getIdTokenPayload(idToken);
   validateIdTokenPayload(payload);
 
-  const user = await User.findByEmail();
+  const user = await User.findByEmail(payload.email);
 
   if (!user) {
     throw new ApolloError(
@@ -38,5 +38,8 @@ export default async (mutation, { idToken }, { signedIn }) => {
 
   const secret = await getJWTSecret();
 
-  return sign(tokenData, secret, { expiresIn: "30d" });
+  const jwt = sign(tokenData, secret, { expiresIn: "30d" });
+  setCookie("auth-jwt", jwt, { httpOnly: true, maxAge: 60 * 60 * 24 * 30 });
+
+  return jwt;
 };

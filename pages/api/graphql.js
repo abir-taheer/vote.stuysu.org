@@ -3,11 +3,12 @@ import typeDefs from "../../graphql/typeDefs";
 import resolvers from "../../graphql/resolvers";
 import getJWTData from "../../utils/auth/getJWTData";
 import User from "../../models/user";
+import unboundSetCookie from "../../utils/middleware/setCookie";
 
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: async ({ req }) => {
+  context: async ({ req, res }) => {
     let user, signedIn, anonymousId;
 
     let jwt =
@@ -36,11 +37,14 @@ const apolloServer = new ApolloServer({
       }
     }
 
+    const setCookie = unboundSetCookie.bind(unboundSetCookie, res);
+
     return {
       user,
       signedIn,
       authenticationRequired,
       anonymousId,
+      setCookie,
     };
   },
   playground: {
