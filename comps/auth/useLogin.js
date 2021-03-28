@@ -1,9 +1,12 @@
-import GoogleLogin from "react-google-login";
-import { GOOGLE_CLIENT_ID } from "../../constants";
 import { gql, useMutation } from "@apollo/client";
 import { useContext } from "react";
 import UserContext from "./UserContext";
 import alertDialog from "../dialog/alertDialog";
+
+import { useGoogleLogin } from "react-google-login";
+import { GOOGLE_CLIENT_ID } from "../../constants";
+import confirmDialog from "../dialog/confirmDialog";
+import DialogContentText from "@material-ui/core/DialogContentText";
 
 const MUTATION = gql`
   mutation($idToken: String!) {
@@ -11,7 +14,7 @@ const MUTATION = gql`
   }
 `;
 
-const GoogleLoginButton = () => {
+const useLogin = () => {
   const [login, { loading }] = useMutation(MUTATION);
   const user = useContext(UserContext);
 
@@ -42,16 +45,38 @@ const GoogleLoginButton = () => {
     }
   };
 
-  return (
-    <GoogleLogin
-      clientId={GOOGLE_CLIENT_ID}
-      buttonText="Login With Google"
-      onSuccess={onSuccess}
-      onFailure={console.log}
-      cookiePolicy={"single_host_origin"}
-      disabled={loading}
-    />
-  );
+  const { signIn: googleSignIn } = useGoogleLogin({
+    onSuccess,
+    clientId: GOOGLE_CLIENT_ID,
+    cookiePolicy: "single_host_origin",
+    onFailure: console.log,
+    uxMode: "popup",
+  });
+
+  const signIn = async () => {
+    const confirmed = await confirmDialog({
+      title: "Before you log in",
+      body: (
+        <DialogContentText>
+          <p>This app uses Google OAuth to sign you in.</p>
+          <p>
+            Please sign in using your <b>@stuy.edu</b> email address.
+          </p>
+          <p>
+            If the login popup doesn't open, refresh the page and try again or
+            contact stuyboe@gmail.com
+          </p>
+        </DialogContentText>
+      ),
+      acceptanceText: "Sign In With Google",
+    });
+
+    if (confirmed) {
+      googleSignIn();
+    }
+  };
+
+  return { signIn, loading };
 };
 
-export default GoogleLoginButton;
+export default useLogin;

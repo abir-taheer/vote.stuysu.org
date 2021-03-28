@@ -33,14 +33,29 @@ const UserProvider = ({ children }) => {
 
   const value = {
     signedIn: false,
-    user: null,
     refetch,
     logout,
+    id: null,
+    firstName: null,
+    lastName: null,
+    email: null,
+    gradYear: null,
+    grade: null,
   };
 
   if (!loading && data?.authenticatedUser) {
     value.signedIn = true;
-    value.user = data.authenticatedUser;
+
+    const {
+      id,
+      firstName,
+      lastName,
+      email,
+      gradYear,
+      grade,
+    } = data.authenticatedUser;
+
+    Object.assign(value, { id, firstName, lastName, email, gradYear, grade });
   }
 
   return <UserContext.Provider children={children} value={value} />;

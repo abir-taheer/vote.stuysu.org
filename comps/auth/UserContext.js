@@ -2,9 +2,15 @@ import { createContext } from "react";
 
 export const defaultUserContextValue = {
   signedIn: false,
-  user: null,
   refetch: () => {},
   logout: () => {},
+  id: null,
+  firstName: null,
+  lastName: null,
+  email: null,
+  gradYear: null,
+  grade: null,
+
 };
 
 const UserContext = createContext(defaultUserContextValue);

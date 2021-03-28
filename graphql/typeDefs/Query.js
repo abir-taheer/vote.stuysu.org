@@ -4,5 +4,8 @@ export default gql`
   type Query {
     # Returns the current user if authentication is provided (is signed in), otherwise returns null
     authenticatedUser: User
+
+    electionById(id: ObjectId!): Election
+    electionByUrl(url: String!): Election
   }
 `;

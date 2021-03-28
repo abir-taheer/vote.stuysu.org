@@ -1,3 +1,3 @@
 export const GOOGLE_CLIENT_ID =
-  process.env.GOOGLE_CLIENT_ID ||
-  "665058591652-nip7dff0g61g7n69lf3bgkvj16i9j6dm.apps.googleusercontent.com";
+  process.env.NEXT_APP_GOOGLE_CLIENT_ID ||
+  "665058591652-jorca8bro1h1g11875qpef466tts0ebd.apps.googleusercontent.com";

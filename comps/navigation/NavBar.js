@@ -7,14 +7,19 @@ import Button from "@material-ui/core/Button";
 
 import styles from "./NavBar.module.css";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import NavDrawer from "./NavDrawer";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import useLogin from "../auth/useLogin";
+import UserContext from "../auth/UserContext";
 
 const NavBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const router = useRouter();
+
+  const { signIn, loading } = useLogin();
+  const user = useContext(UserContext);
 
   const path = router.asPath;
 
@@ -67,9 +72,26 @@ const NavBar = () => {
               </Button>
             </Link>
 
-            <Button disableRipple className={styles.menuItem}>
-              Login
-            </Button>
+            {!user.signedIn && (
+              <Button
+                disableRipple
+                className={styles.menuItem}
+                onClick={signIn}
+                disabled={loading}
+              >
+                Login
+              </Button>
+            )}
+
+            {user.signedIn && (
+              <Button
+                disableRipple
+                className={styles.menuItem}
+                onClick={user.logout}
+              >
+                Hi {user.firstName}!
+              </Button>
+            )}
           </div>
           <IconButton
             className={styles.menuButton}
