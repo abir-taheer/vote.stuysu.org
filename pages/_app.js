@@ -4,14 +4,17 @@ import apolloClient from "../comps/apollo/apolloClient";
 import UserProvider from "../comps/auth/UserProvider";
 import SharedDialog from "../comps/dialog/SharedDialog";
 import { StylesProvider } from "@material-ui/core/styles";
+import ThemeContext from "../comps/theme/ThemeContext";
 
 function App({ Component, pageProps }) {
   return (
     <ApolloProvider client={apolloClient}>
       <UserProvider>
         <StylesProvider injectFirst>
-          <SharedDialog />
-          <Component {...pageProps} />
+          <ThemeContext>
+            <SharedDialog />
+            <Component {...pageProps} />
+          </ThemeContext>
         </StylesProvider>
       </UserProvider>
     </ApolloProvider>
