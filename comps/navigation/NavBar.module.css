@@ -1,0 +1,31 @@
+.toolbar {
+  display: flex;
+}
+
+.title {
+  flex-grow: 1;
+  color: black;
+}
+
+.appBar {
+  background: white;
+  max-width: 1200px;
+  margin: auto;
+  color: black;
+}
+
+@media (max-width: 850px) {
+  .menuLinks {
+    display: none;
+  }
+}
+
+@media (min-width: 851px) {
+  .menuButton {
+    display: none;
+  }
+}
+
+.menuItem {
+  margin: 0 0.5rem;
+}

@@ -5,6 +5,7 @@ import UserProvider from "../comps/auth/UserProvider";
 import SharedDialog from "../comps/dialog/SharedDialog";
 import { StylesProvider } from "@material-ui/core/styles";
 import ThemeContext from "../comps/theme/ThemeContext";
+import NavBar from "../comps/navigation/NavBar";
 
 function App({ Component, pageProps }) {
   return (
@@ -12,8 +13,9 @@ function App({ Component, pageProps }) {
       <UserProvider>
         <StylesProvider injectFirst>
           <ThemeContext>
-            <SharedDialog />
+            <NavBar />
             <Component {...pageProps} />
+            <SharedDialog />
           </ThemeContext>
         </StylesProvider>
       </UserProvider>

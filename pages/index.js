@@ -1,9 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import GoogleLoginButton from "../comps/auth/GoogleLoginButton";
-import Button from "@material-ui/core/Button";
-import confirmDialog from "./../comps/dialog/confirmDialog";
-import alertDialog from "../comps/dialog/alertDialog";
 
 export default function Home() {
   return (
@@ -15,24 +12,16 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          <span className={styles.purpleTextGradient}>Get your vote out</span>{" "}
+          🗳️
         </h1>
-        <GoogleLoginButton />
-        <Button
-          onClick={async () => {
-            alertDialog({
-              title: "Failed to Log In",
-              body: "There was an error logging you in.",
-            });
-          }}
-        >
-          Hello
-        </Button>
 
         <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
+          "There's no such thing as a vote that doesn't matter." <br />
+          &mdash; Barack Obama
         </p>
+
+        <GoogleLoginButton />
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
