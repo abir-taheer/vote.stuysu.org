@@ -9,6 +9,7 @@ const UserSchema = new Schema({
   email: String,
   googleSub: String,
   gradYear: Number,
+  adminPrivileges: Boolean,
 });
 
 UserSchema.statics.idLoader = findOneLoaderFactory("User");

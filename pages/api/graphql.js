@@ -33,7 +33,14 @@ const apolloServer = new ApolloServer({
 
     function authenticationRequired() {
       if (!signedIn) {
-        throw new ForbiddenError("You must be signed in to use this endpoint");
+        throw new ForbiddenError("You must be signed in to perform that query");
+      }
+    }
+
+    function adminRequired() {
+      authenticationRequired();
+      if (!user.adminPrivileges) {
+        throw new ForbiddenError("You must be an admin to perform that query");
       }
     }
 
@@ -42,6 +49,7 @@ const apolloServer = new ApolloServer({
     return {
       user,
       signedIn,
+      adminRequired,
       authenticationRequired,
       anonymousId,
       setCookie,
