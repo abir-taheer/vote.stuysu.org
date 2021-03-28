@@ -1,6 +1,9 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import GoogleLoginButton from "../comps/auth/GoogleLoginButton";
+import Button from "@material-ui/core/Button";
+import confirmDialog from "./../comps/dialog/confirmDialog";
+import alertDialog from "../comps/dialog/alertDialog";
 
 export default function Home() {
   return (
@@ -15,6 +18,16 @@ export default function Home() {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
         <GoogleLoginButton />
+        <Button
+          onClick={async () => {
+            alertDialog({
+              title: "Failed to Log In",
+              body: "There was an error logging you in.",
+            });
+          }}
+        >
+          Hello
+        </Button>
 
         <p className={styles.description}>
           Get started by editing{" "}
