@@ -1,7 +1,6 @@
 import Election from "../../../models/election";
 import fieldsCannotBeEmpty from "../../../utils/user-input/fieldsCannotBeEmpty";
 import { ForbiddenError } from "apollo-server-micro";
-import CloudinaryResource from "../../../models/cloudinaryResource";
 
 export default async (
   _,

@@ -29,6 +29,7 @@
     background-position: 0% 50%;
   }
 }
+
 @-moz-keyframes purple-gradient {
   0% {
     background-position: 0% 50%;
@@ -40,6 +41,7 @@
     background-position: 0% 50%;
   }
 }
+
 @keyframes purple-gradient {
   0% {
     background-position: 0% 50%;

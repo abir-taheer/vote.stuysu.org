@@ -19,7 +19,6 @@ export default function Home() {
           "There's no such thing as a vote that doesn't matter." <br />
           &mdash; Barack Obama
         </p>
-
       </main>
 
       <footer className={styles.footer}>

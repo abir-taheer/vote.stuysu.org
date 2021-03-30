@@ -11,6 +11,17 @@ class DialogQueue {
     this.emitter = new EventEmitter();
   }
 
+  static getPromise() {
+    const obj = {};
+
+    obj.Promise = new Promise((resolve, reject) => {
+      obj.resolve = resolve;
+      obj.reject = reject;
+    });
+
+    return obj;
+  }
+
   async startQueue() {
     if (this.isActive || this.queue.length === 0) {
       return;
@@ -27,17 +38,6 @@ class DialogQueue {
     }
 
     this.isActive = false;
-  }
-
-  static getPromise() {
-    const obj = {};
-
-    obj.Promise = new Promise((resolve, reject) => {
-      obj.resolve = resolve;
-      obj.reject = reject;
-    });
-
-    return obj;
   }
 
   add(info) {

@@ -9,10 +9,10 @@ const ElectionSchema = new Schema({
   allowedGradYears: [Number],
   coverPicId: String,
   type: {
-      type: String,
-      enum: ["runoff", "plurality"],
-      default: "plurality"
-  }
+    type: String,
+    enum: ["runoff", "plurality"],
+    default: "plurality",
+  },
 });
 
 ElectionSchema.statics.idLoader = findOneLoaderFactory("Election");

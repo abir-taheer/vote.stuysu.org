@@ -3,13 +3,12 @@ import Button from "@material-ui/core/Button";
 import styles from "./NavBar.module.css";
 import Popover from "@material-ui/core/Popover";
 import UserContext from "../auth/UserContext";
-import confirmDialog from "../dialog/confirmDialog";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 
 const UserMenuItem = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const user = useContext(UserContext);
-  
+
   return (
     <>
       <Button
