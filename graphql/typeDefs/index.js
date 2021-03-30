@@ -5,6 +5,9 @@ import Mutation from "./Mutation";
 import Query from "./Query";
 import scalars from "./scalars";
 import User from "./User";
+import Candidate from "./Candidate";
+import Picture from "./Picture";
+import PluralityVote from "./PluralityVote";
 
 const typeDefs = [
   CloudinaryResource,
@@ -13,6 +16,9 @@ const typeDefs = [
   Mutation,
   Query,
   User,
+  Candidate,
+  Picture,
+  PluralityVote,
   scalars,
 ];
 

@@ -1,6 +1,7 @@
 import Election from "../../../models/election";
 import { UserInputError } from "apollo-server-micro";
 import fieldsCannotBeEmpty from "../../../utils/user-input/fieldsCannotBeEmpty";
+import Picture from "../../../models/picture";
 
 export default async (
   _,
@@ -11,7 +12,7 @@ export default async (
 
   fieldsCannotBeEmpty({ name, url, coverPicId });
 
-  const election = await Election.find(id);
+  const election = await Election.findById(id);
 
   if (!election) {
     throw new UserInputError("There's no election with that ID");
@@ -28,6 +29,12 @@ export default async (
 
   if (end < start) {
     throw new UserInputError("The start date must be before the end date");
+  }
+
+  const coverPic = await Picture.findById(coverPicId);
+
+  if (!coverPic) {
+    throw new UserInputError("There's no picture with that id");
   }
 
   election.name = name;

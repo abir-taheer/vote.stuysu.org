@@ -5,10 +5,12 @@ export default gql`
     id: ObjectId!
     name: String!
     url: String!
+    picture: Picture!
     allowedGradYears: [Int!]!
     type: ElectionType!
-    start: DateTime
-    end: DateTime
-    completed: Boolean
+    start: DateTime!
+    end: DateTime!
+    completed: Boolean!
+    candidates: [Candidate!]!
   }
 `;

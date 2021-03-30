@@ -12,7 +12,6 @@ const CloudinaryResourceSchema = new mongoose.Schema({
   format: String,
   resourceType: String,
   createdAt: Date,
-  tags: [String],
 });
 
 CloudinaryResourceSchema.statics.idLoader = new DataLoader(

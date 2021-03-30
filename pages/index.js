@@ -16,8 +16,7 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          "There's no such thing as a vote that doesn't matter." <br />
-          &mdash; Barack Obama
+          "There's no such thing as a vote that doesn't matter."
         </p>
 
         <img
