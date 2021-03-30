@@ -9,7 +9,18 @@ export default gql`
       name: String!
       url: String!
       coverPicId: String!
-      type: ElectionTypes!
+      type: ElectionType!
+      allowedGradYears: [Int!]!
+      start: DateTime!
+      end: DateTime!
+    ): Election
+
+    editElection(
+      id: ObjectId!
+      name: String!
+      url: String!
+      coverPicId: String!
+      type: ElectionType!
       allowedGradYears: [Int!]!
       start: DateTime!
       end: DateTime!

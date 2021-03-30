@@ -1,7 +1,7 @@
 import { gql } from "apollo-server-micro";
 
 export default gql`
-  enum ElectionTypes {
+  enum ElectionType {
     runoff
     plurality
   }

@@ -1,6 +1,6 @@
 import Election from "../../../models/election";
 import fieldsCannotBeEmpty from "../../../utils/user-input/fieldsCannotBeEmpty";
-import { ForbiddenError } from "apollo-server-micro";
+import { UserInputError } from "apollo-server-micro";
 
 export default async (
   _,
@@ -11,13 +11,13 @@ export default async (
   fieldsCannotBeEmpty({ name, url, coverPicId });
 
   if (end < start) {
-    throw new ForbiddenError("The start time must be before the end time");
+    throw new UserInputError("The start time must be before the end time");
   }
 
   const existingElection = await Election.findOne({ url });
 
   if (existingElection) {
-    throw new ForbiddenError("There's already an election at that url");
+    throw new UserInputError("There's already an election at that url");
   }
 
   return await Election.create({

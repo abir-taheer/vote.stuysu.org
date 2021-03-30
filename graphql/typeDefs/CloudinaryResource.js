@@ -8,8 +8,8 @@ export default gql`
     format: String
     resourceType: String
     createdAt: DateTime
-    tags: [String!]!
-
+    alt: String
+    
     # Dynamic props
     url: String
   }

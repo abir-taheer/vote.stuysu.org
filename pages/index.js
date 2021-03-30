@@ -1,14 +1,12 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Grid from "@material-ui/core/Grid";
 import voting from "./../img/voting.svg";
 
 export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Home | StuyBOE Voting Site</title>
       </Head>
 
       <main className={styles.main}>
@@ -28,15 +26,6 @@ export default function Home() {
           style={{ maxWidth: "90%", height: 400, objectFit: "contain" }}
         />
       </main>
-
-      <footer className={styles.footer}>
-        <p>
-          Created by{" "}
-          <a href={"https://github.com/abir-taheer"} target={"_blank"}>
-            Abir Taheer
-          </a>
-        </p>
-      </footer>
     </div>
   );
 }

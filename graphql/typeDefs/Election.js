@@ -6,7 +6,7 @@ export default gql`
     name: String!
     url: String!
     allowedGradYears: [Int!]!
-    type: ElectionTypes!
+    type: ElectionType!
     start: DateTime
     end: DateTime
     completed: Boolean

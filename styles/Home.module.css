@@ -1,5 +1,5 @@
 .container {
-  min-height: 100vh;
+  min-height: 80vh;
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
@@ -7,50 +7,59 @@
   align-items: center;
 }
 
-.purpleTextGradient {
-  background-image: linear-gradient(270deg, #764ba2, #667eea);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+@media (min-width: 801px) {
+  .purpleTextGradient {
+    background-image: linear-gradient(270deg, #764ba2, #667eea);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 
-  -webkit-animation: purple-gradient 5s ease infinite;
-  -moz-animation: purple-gradient 5s ease infinite;
-  animation: purple-gradient 5s ease infinite;
+    -webkit-animation: purple-gradient 5s ease infinite;
+    -moz-animation: purple-gradient 5s ease infinite;
+    animation: purple-gradient 5s ease infinite;
+  }
+}
+
+@media (max-width: 800px) {
+  .purpleTextGradient {
+    color: #667eea;
+    font-size: 48px;
+  }
 }
 
 @-webkit-keyframes purple-gradient {
   0% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
   50% {
     background-position: 100% 50%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
 }
 
 @-moz-keyframes purple-gradient {
   0% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
   50% {
     background-position: 100% 50%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
 }
 
 @keyframes purple-gradient {
   0% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
   50% {
     background-position: 100% 50%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
 }
 
@@ -59,15 +68,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer {
-  width: 100%;
-  height: 100px;
-  border-top: 1px solid #eaeaea;
-  display: flex;
   justify-content: center;
   align-items: center;
 }

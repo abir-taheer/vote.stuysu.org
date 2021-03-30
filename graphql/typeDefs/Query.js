@@ -7,5 +7,8 @@ export default gql`
 
     electionById(id: ObjectId!): Election
     electionByUrl(url: String!): Election
+    
+    openElections: [Election!]!
+    pastElections: [Election!]!
   }
 `;

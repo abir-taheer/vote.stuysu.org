@@ -6,6 +6,7 @@ import SharedDialog from "../comps/dialog/SharedDialog";
 import { StylesProvider } from "@material-ui/core/styles";
 import ThemeContext from "../comps/theme/ThemeContext";
 import NavBar from "../comps/navigation/NavBar";
+import Footer from "../comps/shared/Footer";
 
 function App({ Component, pageProps }) {
   return (
@@ -16,6 +17,7 @@ function App({ Component, pageProps }) {
             <NavBar />
             <Component {...pageProps} />
             <SharedDialog />
+            <Footer />
           </ThemeContext>
         </StylesProvider>
       </UserProvider>
