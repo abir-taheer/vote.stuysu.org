@@ -11,6 +11,8 @@ export default gql`
       coverPicId: String!
       type: ElectionTypes!
       allowedGradYears: [Int!]!
+      start: DateTime!
+      end: DateTime!
     ): Election
   }
 `;

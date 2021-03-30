@@ -13,6 +13,9 @@ const ElectionSchema = new Schema({
     enum: ["runoff", "plurality"],
     default: "plurality",
   },
+  start: Date,
+  end: Date,
+  completed: Boolean,
 });
 
 ElectionSchema.statics.idLoader = findOneLoaderFactory("Election");

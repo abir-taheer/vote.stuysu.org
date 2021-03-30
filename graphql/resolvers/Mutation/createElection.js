@@ -4,11 +4,15 @@ import { ForbiddenError } from "apollo-server-micro";
 
 export default async (
   _,
-  { name, url, coverPicId, type, allowedGradYears },
+  { name, url, coverPicId, type, allowedGradYears, start, end },
   { adminRequired }
 ) => {
   adminRequired();
   fieldsCannotBeEmpty({ name, url, coverPicId });
+
+  if (end < start) {
+    throw new ForbiddenError("The start time must be before the end time");
+  }
 
   const existingElection = await Election.findOne({ url });
 
@@ -20,7 +24,10 @@ export default async (
     name,
     url,
     type,
+    start,
+    end,
     coverPicId,
     allowedGradYears,
+    completed: false,
   });
 };

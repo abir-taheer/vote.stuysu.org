@@ -1,5 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import Grid from "@material-ui/core/Grid";
+import voting from "./../img/voting.svg";
 
 export default function Home() {
   return (
@@ -19,6 +21,12 @@ export default function Home() {
           "There's no such thing as a vote that doesn't matter." <br />
           &mdash; Barack Obama
         </p>
+
+        <img
+          src={voting}
+          alt={"People representing voting"}
+          style={{ maxWidth: "90%", height: 400, objectFit: "contain" }}
+        />
       </main>
 
       <footer className={styles.footer}>

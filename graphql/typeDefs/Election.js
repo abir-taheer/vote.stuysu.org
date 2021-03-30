@@ -7,5 +7,8 @@ export default gql`
     url: String!
     allowedGradYears: [Int!]!
     type: ElectionTypes!
+    start: DateTime
+    end: DateTime
+    completed: Boolean
   }
 `;
