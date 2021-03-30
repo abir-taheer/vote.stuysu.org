@@ -10,7 +10,6 @@ export const defaultUserContextValue = {
   email: null,
   gradYear: null,
   grade: null,
-
 };
 
 const UserContext = createContext(defaultUserContextValue);

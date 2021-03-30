@@ -7,6 +7,7 @@ import { useGoogleLogin } from "react-google-login";
 import { GOOGLE_CLIENT_ID } from "../../constants";
 import confirmDialog from "../dialog/confirmDialog";
 import DialogContentText from "@material-ui/core/DialogContentText";
+import Link from "@material-ui/core/Link";
 
 const MUTATION = gql`
   mutation($idToken: String!) {
@@ -58,9 +59,20 @@ const useLogin = () => {
       title: "Before you log in",
       body: (
         <DialogContentText>
-          <p>This app uses Google OAuth to sign you in.</p>
           <p>
-            Please sign in using your <b>@stuy.edu</b> email address.
+            This app uses{" "}
+            <Link
+              href={"https://developers.google.com/identity/protocols/oauth2"}
+              target={"_blank"}
+              color={"secondary"}
+            >
+              Google OAuth
+            </Link>{" "}
+            to sign you in and only requests the basic profile scope.
+          </p>
+          <p>
+            Click the "Sign In With Google" button on the bottom right and sign
+            in using your <b>@stuy.edu</b> email address.
           </p>
           <p>
             If the login popup doesn't open, refresh the page and try again or

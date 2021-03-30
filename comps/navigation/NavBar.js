@@ -13,15 +13,16 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import useLogin from "../auth/useLogin";
 import UserContext from "../auth/UserContext";
+import UserMenuItem from "./UserMenuItem";
 
 const NavBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const router = useRouter();
+  const path = router.asPath;
 
   const { signIn, loading } = useLogin();
-  const user = useContext(UserContext);
 
-  const path = router.asPath;
+  const user = useContext(UserContext);
 
   return (
     <>
@@ -83,15 +84,7 @@ const NavBar = () => {
               </Button>
             )}
 
-            {user.signedIn && (
-              <Button
-                disableRipple
-                className={styles.menuItem}
-                onClick={user.logout}
-              >
-                Hi {user.firstName}!
-              </Button>
-            )}
+            {user.signedIn && <UserMenuItem />}
           </div>
           <IconButton
             className={styles.menuButton}

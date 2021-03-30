@@ -29,3 +29,15 @@
 .menuItem {
   margin: 0 0.5rem;
 }
+
+.userItemPopover {
+  padding: 1rem;
+}
+
+.drawerHeading {
+  padding: 0.5rem 1rem;
+}
+
+.drawerHeading p {
+  margin: 0.5rem 0;
+}

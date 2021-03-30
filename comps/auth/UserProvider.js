@@ -1,5 +1,6 @@
-import UserContext, { defaultUserContextValue } from "./UserContext";
+import UserContext from "./UserContext";
 import { gql, useMutation, useQuery } from "@apollo/client";
+import confirmDialog from "../dialog/confirmDialog";
 
 const QUERY = gql`
   query {
@@ -11,6 +12,7 @@ const QUERY = gql`
       lastName
       gradYear
       grade
+      adminPrivileges
     }
   }
 `;
@@ -26,9 +28,16 @@ const UserProvider = ({ children }) => {
   const [performLogout] = useMutation(LOGOUT_MUTATION);
 
   const logout = async () => {
-    window.localStorage.clear();
-    await performLogout();
-    await refetch();
+    const confirmation = await confirmDialog({
+      title: "Confirm Signing Out",
+      body: "Are you sure you want to sign out?",
+    });
+
+    if (confirmation) {
+      window.localStorage.clear();
+      await performLogout();
+      await refetch();
+    }
   };
 
   const value = {
@@ -48,14 +57,25 @@ const UserProvider = ({ children }) => {
 
     const {
       id,
+      name,
       firstName,
       lastName,
       email,
       gradYear,
       grade,
+      adminPrivileges,
     } = data.authenticatedUser;
 
-    Object.assign(value, { id, firstName, lastName, email, gradYear, grade });
+    Object.assign(value, {
+      id,
+      name,
+      firstName,
+      lastName,
+      email,
+      gradYear,
+      grade,
+      adminPrivileges,
+    });
   }
 
   return <UserContext.Provider children={children} value={value} />;
