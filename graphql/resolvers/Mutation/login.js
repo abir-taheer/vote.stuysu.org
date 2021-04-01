@@ -39,7 +39,10 @@ export default async (mutation, { idToken }, { signedIn, setCookie }) => {
   const secret = await getJWTSecret();
 
   const jwt = sign(tokenData, secret, { expiresIn: "30d" });
-  setCookie("auth-jwt", jwt, { httpOnly: true, maxAge: 60 * 60 * 24 * 30 });
+  setCookie("auth-jwt", jwt, {
+    httpOnly: true,
+    maxAge: 60 * 60 * 24 * 30 * 1000,
+  });
 
   return jwt;
 };

@@ -43,8 +43,16 @@ export default gql`
       adminPrivileges: Boolean!
     ): User!
 
+    createCandidate(
+      electionId: ObjectId!
+      name: String!
+      blurb: String!
+      url: String!
+      pictureId: ObjectId
+    ): Candidate!
+
     completeElection(id: ObjectId!): Election!
-    
+
     votePlurality(electionId: ObjectId!, candidateId: ObjectId!): PluralityVote!
   }
 `;

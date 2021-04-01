@@ -6,7 +6,6 @@ import alertDialog from "../dialog/alertDialog";
 import { useGoogleLogin } from "react-google-login";
 import { GOOGLE_CLIENT_ID } from "../../constants";
 import confirmDialog from "../dialog/confirmDialog";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import Link from "@material-ui/core/Link";
 
 const MUTATION = gql`
@@ -58,7 +57,7 @@ const useLogin = () => {
     const confirmed = await confirmDialog({
       title: "Before you log in",
       body: (
-        <DialogContentText>
+        <div>
           <p>
             This app uses{" "}
             <Link
@@ -78,7 +77,7 @@ const useLogin = () => {
             If the login popup doesn't open, refresh the page and try again or
             contact stuyboe@gmail.com
           </p>
-        </DialogContentText>
+        </div>
       ),
       acceptanceText: "Sign In With Google",
     });

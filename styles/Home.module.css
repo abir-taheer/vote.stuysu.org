@@ -1,12 +1,3 @@
-.container {
-  min-height: 80vh;
-  padding: 0 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 @media (min-width: 801px) {
   .purpleTextGradient {
     background-image: linear-gradient(270deg, #764ba2, #667eea);
@@ -61,15 +52,6 @@
   100% {
     background-position: 0 50%;
   }
-}
-
-.main {
-  padding: 5rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .title a:hover,

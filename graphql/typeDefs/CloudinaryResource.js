@@ -9,7 +9,7 @@ export default gql`
     resourceType: String
     createdAt: DateTime
     alt: String
-    
+
     # Dynamic props
     url: String
   }

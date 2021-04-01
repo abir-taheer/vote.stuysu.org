@@ -6,7 +6,7 @@ const headers = {};
 const authJwt = globalThis.localStorage?.getItem("auth-jwt");
 
 if (authJwt) {
-  headers["auth-jwt"] = authJwt;
+  headers.authorization = authJwt;
 }
 
 const apolloClient = new ApolloClient({

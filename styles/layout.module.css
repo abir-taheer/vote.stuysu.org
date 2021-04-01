@@ -1,0 +1,28 @@
+.container {
+  min-height: 80vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  padding: 5rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.largeVector {
+  max-width: 90%;
+  max-height: 350px;
+  object-fit: contain;
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+}

@@ -7,9 +7,7 @@ export default gql`
     blurb: String!
 
     url: String!
-
     election: Election!
-
     picture: Picture!
     active: Boolean!
   }
