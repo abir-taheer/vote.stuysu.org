@@ -10,5 +10,7 @@ export default gql`
 
     openElections: [Election!]!
     pastElections: [Election!]!
+    
+    date: DateTime
   }
 `;

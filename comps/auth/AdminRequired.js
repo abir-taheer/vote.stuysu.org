@@ -4,6 +4,7 @@ import AuthenticationRequired from "./AuthenticationRequired";
 import entryDenied from "./../../img/entry-denied.svg";
 import layout from "./../../styles/layout.module.css";
 import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
 
 const AdminRequired = ({ children }) => {
   const user = useContext(UserContext);
@@ -21,16 +22,16 @@ const AdminRequired = ({ children }) => {
               }
             />
 
-            <h1 className={layout.title}>
+            <Typography variant={"h1"} align={"center"}>
               You need to be an admin to view this page
-            </h1>
+            </Typography>
 
-            <p>
+            <Typography variant={"subtitle1"} align={"center"}>
               If this is a mistake or emergency, contact{" "}
               <Link href={"mailto:abir@taheer.me"} color={"secondary"}>
                 abir@taheer.me
               </Link>
-            </p>
+            </Typography>
           </main>
         </div>
       </AuthenticationRequired>

@@ -43,6 +43,19 @@ const NavBar = () => {
                 Home
               </Button>
             </Link>
+
+            {user.signedIn && user.adminPrivileges && (
+              <Link href={"/admin"}>
+                <Button
+                  disableRipple
+                  className={styles.menuItem}
+                  color={path === "/admin" ? "primary" : undefined}
+                >
+                  Admin Panel
+                </Button>
+              </Link>
+            )}
+
             <Link href={"/open"}>
               <Button
                 disableRipple

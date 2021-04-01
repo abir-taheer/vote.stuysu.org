@@ -16,6 +16,7 @@ const apolloServer = new ApolloServer({
       req.headers["x-access-token"] ||
       req.headers["authorization"];
 
+
     if (jwt && jwt.startsWith("Bearer ")) {
       jwt = jwt.replace("Bearer ", "");
     }

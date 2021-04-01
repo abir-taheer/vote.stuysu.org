@@ -5,11 +5,11 @@ import Picture from "../../../models/picture";
 
 export default async (
   _,
-  { name, url, coverPicId, type, allowedGradYears, start, end },
+  { name, url, pictureId, type, allowedGradYears, start, end },
   { adminRequired }
 ) => {
   adminRequired();
-  fieldsCannotBeEmpty({ name, url, coverPicId });
+  fieldsCannotBeEmpty({ name, url, pictureId });
 
   if (end < start) {
     throw new UserInputError("The start time must be before the end time");
@@ -33,7 +33,7 @@ export default async (
     type,
     start,
     end,
-    coverPicId,
+    pictureId,
     allowedGradYears,
     completed: false,
   });

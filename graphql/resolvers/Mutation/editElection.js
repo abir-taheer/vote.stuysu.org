@@ -5,12 +5,12 @@ import Picture from "../../../models/picture";
 
 export default async (
   _,
-  { id, name, url, coverPicId, type, allowedGradYears, start, end },
+  { id, name, url, pictureId, type, allowedGradYears, start, end },
   { adminRequired }
 ) => {
   adminRequired();
 
-  fieldsCannotBeEmpty({ name, url, coverPicId });
+  fieldsCannotBeEmpty({ name, url, pictureId });
 
   const election = await Election.findById(id);
 
@@ -39,7 +39,7 @@ export default async (
 
   election.name = name;
   election.url = url;
-  election.coverPicId = coverPicId;
+  election.pictureId = pictureId;
   election.type = type;
   election.allowedGradYears = allowedGradYears;
   election.start = start;

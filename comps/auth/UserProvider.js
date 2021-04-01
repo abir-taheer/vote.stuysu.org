@@ -1,6 +1,9 @@
 import UserContext from "./UserContext";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import confirmDialog from "../dialog/confirmDialog";
+import withApollo from "../apollo/withApollo";
+import { useEffect, useState } from "react";
+import DateContext from "../shared/DateContext";
 
 const QUERY = gql`
   query {
@@ -14,6 +17,8 @@ const QUERY = gql`
       grade
       adminPrivileges
     }
+
+    date
   }
 `;
 
@@ -26,6 +31,18 @@ const LOGOUT_MUTATION = gql`
 const UserProvider = ({ children }) => {
   const { data, loading, refetch } = useQuery(QUERY);
   const [performLogout] = useMutation(LOGOUT_MUTATION);
+  const [dateOffset, setDateOffset] = useState(0);
+
+  useEffect(() => {
+    if (data?.date) {
+      const localTime = new Date();
+      const serverTime = new Date(data.date);
+
+      setDateOffset(serverTime.getTime() - localTime.getTime());
+    }
+  }, [data]);
+
+  const getNow = () => new Date(Date.now() + dateOffset);
 
   const logout = async () => {
     const confirmation = await confirmDialog({
@@ -36,7 +53,7 @@ const UserProvider = ({ children }) => {
     if (confirmation) {
       window.localStorage.clear();
       await performLogout();
-      await refetch();
+      window.location.reload();
     }
   };
 
@@ -78,7 +95,11 @@ const UserProvider = ({ children }) => {
     });
   }
 
-  return <UserContext.Provider children={children} value={value} />;
+  return (
+    <DateContext.Provider value={{ offset: dateOffset, getNow }}>
+      <UserContext.Provider children={children} value={value} />
+    </DateContext.Provider>
+  );
 };
 
-export default UserProvider;
+export default withApollo({ ssr: true })(UserProvider);

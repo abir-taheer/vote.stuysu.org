@@ -4,6 +4,7 @@ import carryingKey from "./../../img/carrying-key.svg";
 import layout from "./../../styles/layout.module.css";
 import Button from "@material-ui/core/Button";
 import useLogin from "./useLogin";
+import Typography from "@material-ui/core/Typography";
 
 const AuthenticationRequired = ({ children }) => {
   const user = useContext(UserContext);
@@ -18,9 +19,9 @@ const AuthenticationRequired = ({ children }) => {
             src={carryingKey}
             alt={"Two people carrying a key"}
           />
-          <h1 className={layout.title}>
+          <Typography variant={"h1"} className={layout.title}>
             You need to sign in to view this page
-          </h1>
+          </Typography>
           <Button color={"secondary"} variant={"contained"} onClick={signIn}>
             Sign In
           </Button>

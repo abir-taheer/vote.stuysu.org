@@ -9,6 +9,8 @@ const PictureSchema = new Schema({
   uploadedBy: Schema.Types.ObjectId,
 });
 
+PictureSchema.statics.idLoader = findOneLoaderFactory("Picture");
+
 const Picture =
   mongoose.models.Picture || mongoose.model("Picture", PictureSchema);
 

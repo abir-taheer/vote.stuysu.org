@@ -8,7 +8,7 @@ export default gql`
     createElection(
       name: String!
       url: String!
-      coverPicId: ObjectId!
+      pictureId: ObjectId!
       type: ElectionType!
       allowedGradYears: [Int!]!
       start: DateTime!
@@ -19,7 +19,7 @@ export default gql`
       id: ObjectId!
       name: String!
       url: String!
-      coverPicId: ObjectId!
+      pictureId: ObjectId!
       type: ElectionType!
       allowedGradYears: [Int!]!
       start: DateTime!

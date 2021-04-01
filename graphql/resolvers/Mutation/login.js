@@ -42,6 +42,7 @@ export default async (mutation, { idToken }, { signedIn, setCookie }) => {
   setCookie("auth-jwt", jwt, {
     httpOnly: true,
     maxAge: 60 * 60 * 24 * 30 * 1000,
+    path: "/"
   });
 
   return jwt;
