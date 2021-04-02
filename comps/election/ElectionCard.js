@@ -7,11 +7,16 @@ import Typography from "@material-ui/core/Typography";
 import Link from "next/link";
 
 import styles from "./ElectionCard.module.css";
-import useReadableDate from "../../utils/date/useReadableDate";
+import ElectionCardDate from "./ElectionCardDate";
 
-const ElectionCard = ({ picture, name, start, end, href }) => {
-  const readableDate = useReadableDate(true);
-
+const ElectionCard = ({
+  picture,
+  name,
+  start,
+  end,
+  href,
+  dateUpdateInterval = 1000,
+}) => {
   return (
     <Card>
       <Link href={href}>
@@ -25,12 +30,12 @@ const ElectionCard = ({ picture, name, start, end, href }) => {
             <Typography gutterBottom variant="h2">
               {name}
             </Typography>
-            <Typography variant={"body2"} color={"secondary"}>
-              Starts: {readableDate(start)}
-            </Typography>
-            <Typography variant={"body2"} color={"primary"}>
-              Ends: {readableDate(end)}
-            </Typography>
+            {/*Put the dates in a separate component because they re-render every second*/}
+            <ElectionCardDate
+              start={start}
+              end={end}
+              dateUpdateInterval={dateUpdateInterval}
+            />
           </CardContent>
         </CardActionArea>
       </Link>

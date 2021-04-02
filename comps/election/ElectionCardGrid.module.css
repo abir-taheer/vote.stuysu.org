@@ -1,0 +1,10 @@
+@media (min-width: 500px) {
+  .grid {
+    width: 85vw;
+    max-width: 1200px;
+  }
+}
+
+.grid {
+  margin: 1rem 0;
+}
