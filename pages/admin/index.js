@@ -1,9 +1,12 @@
-export async function getServerSideProps({ res }) {
-  res.statusCode = 302;
-  res.setHeader("Location", `/admin/elections`); // Replace <link> with your url link
-  return { props: {} };
-}
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function AdminRedirect() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/admin/elections");
+  });
+
   return null;
 }
