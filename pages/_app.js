@@ -5,7 +5,6 @@ import { StylesProvider } from "@material-ui/core/styles";
 import ThemeContext from "../comps/theme/ThemeContext";
 import NavBar from "../comps/navigation/NavBar";
 import Footer from "../comps/shared/Footer";
-import withApollo from "../comps/apollo/withApollo";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { PUBLIC_URL } from "../constants";
@@ -31,4 +30,4 @@ function App({ Component, pageProps }) {
   );
 }
 
-export default withApollo({ ssr: true })(App);
+export default App;
