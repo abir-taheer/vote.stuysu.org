@@ -4,6 +4,7 @@ import AdminTabBar from "../../../comps/admin/AdminTabBar";
 import Typography from "@material-ui/core/Typography";
 
 import layout from "./../../../styles/layout.module.css";
+import styles from "./../../../styles/Elections.module.css";
 import { useFormik } from "formik";
 
 import TextField from "@material-ui/core/TextField";
@@ -48,10 +49,9 @@ const CreateElection = () => {
 
           <AdminTabBar />
 
-          <form onSubmit={handleSubmit}>
-            <FormGroup
-            >
-              <FormControl component="fieldset">
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <FormGroup row>
+              <FormControl component="fieldset" fullWidth>
                 <FormLabel component="legend">Election Name</FormLabel>
                 <TextField
                   name={"name"}
@@ -66,7 +66,7 @@ const CreateElection = () => {
                   fullWidth
                 />
               </FormControl>
-              <FormControl component="fieldset">
+              <FormControl component="fieldset" fullWidth>
                 <FormLabel component="legend">URL</FormLabel>
                 <TextField
                   name={"url"}
@@ -84,7 +84,7 @@ const CreateElection = () => {
                   fullWidth
                 />
               </FormControl>
-              <FormControl component="fieldset">
+              <FormControl component="fieldset" fullWidth>
                 <FormLabel component="legend">Election Type</FormLabel>
                 <RadioGroup
                   name="type"
@@ -106,7 +106,7 @@ const CreateElection = () => {
                   />
                 </RadioGroup>
               </FormControl>
-              <FormControl component="fieldset">
+              <FormControl component="fieldset" fullWidthp>
                 <FormLabel component="legend">Start Time</FormLabel>
                 <TextField
                   name={"start"}
