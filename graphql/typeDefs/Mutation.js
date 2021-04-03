@@ -54,5 +54,7 @@ export default gql`
     completeElection(id: ObjectId!): Election!
 
     votePlurality(electionId: ObjectId!, candidateId: ObjectId!): PluralityVote!
+
+    uploadPicture(alt: String!, file: Upload!): Picture!
   }
 `;

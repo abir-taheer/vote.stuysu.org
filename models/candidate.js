@@ -15,6 +15,8 @@ const CandidateSchema = new Schema({
   pictureId: Schema.Types.ObjectId,
   isActive: Boolean,
 
+  managerIds: [Schema.Types.ObjectId],
+
   social: {
     facebook: String,
     website: String,

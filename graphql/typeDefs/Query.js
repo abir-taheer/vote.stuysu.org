@@ -10,7 +10,10 @@ export default gql`
 
     openElections: [Election!]!
     pastElections: [Election!]!
-    
+
+    adminPictures: [Picture!]!
+    pictureById(id: ObjectId!): Picture
+
     date: DateTime
   }
 `;

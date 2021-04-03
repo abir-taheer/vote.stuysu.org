@@ -6,7 +6,7 @@ const uploadPicStream = (picture, publicId) =>
       { public_id: publicId },
       function (err, image) {
         if (err) {
-          console.log(err);
+          console.error(err);
         }
         err ? reject(err) : resolve(image);
       }
