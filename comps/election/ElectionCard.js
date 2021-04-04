@@ -22,7 +22,7 @@ const ElectionCard = ({
       <Link href={href}>
         <CardActionArea>
           <CardMedia
-            image={picture.resource.url}
+            image={picture?.resource?.url}
             title={picture.alt}
             className={styles.media}
           />

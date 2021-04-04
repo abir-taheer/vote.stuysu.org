@@ -6,3 +6,13 @@
   margin: 0.5rem;
   width: 300px;
 }
+
+.electionChangeButton {
+  margin: 1rem;
+}
+
+.deleteElectionButton {
+  border: 1px solid red;
+  color: red;
+  margin: 1rem;
+}

@@ -21,7 +21,7 @@ export default async (
     throw new UserInputError("There's already an election at that url");
   }
 
-  const coverPic = await Picture.findById(coverPicId);
+  const coverPic = await Picture.findById(pictureId);
 
   if (!coverPic) {
     throw new UserInputError("There's no picture with that id");

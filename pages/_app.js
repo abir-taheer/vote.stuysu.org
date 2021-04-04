@@ -8,6 +8,7 @@ import Footer from "../comps/shared/Footer";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { PUBLIC_URL } from "../constants";
+import { SnackbarProvider } from "notistack";
 
 function App({ Component, pageProps }) {
   const router = useRouter();
@@ -16,14 +17,20 @@ function App({ Component, pageProps }) {
     <UserProvider>
       <StylesProvider injectFirst>
         <ThemeContext>
-          <Head>
-            <meta property="og:site_name" content="StuyBOE Voting Site" />
-            <meta property="og:url" content={PUBLIC_URL + router.asPath} />
-          </Head>
-          <NavBar />
-          <Component {...pageProps} />
-          <SharedDialog />
-          <Footer />
+          <SnackbarProvider
+            classes={{
+              variantSuccess: "successSnackbar",
+            }}
+          >
+            <Head>
+              <meta property="og:site_name" content="StuyBOE Voting Site" />
+              <meta property="og:url" content={PUBLIC_URL + router.asPath} />
+            </Head>
+            <NavBar />
+            <Component {...pageProps} />
+            <SharedDialog />
+            <Footer />
+          </SnackbarProvider>
         </ThemeContext>
       </StylesProvider>
     </UserProvider>

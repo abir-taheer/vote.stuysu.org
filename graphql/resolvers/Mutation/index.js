@@ -7,8 +7,10 @@ import logout from "./logout";
 import editUser from "./editUser";
 import uploadPicture from "./uploadPicture";
 import votePlurality from "./votePlurality";
+import openElection from "./openElection";
 
 export default {
+  openElection,
   completeElection,
   createElection,
   createUser,

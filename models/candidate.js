@@ -25,8 +25,11 @@ const CandidateSchema = new Schema({
   },
 });
 
-CandidateSchema.statics.idLoader = findOneLoaderFactory("id");
-CandidateSchema.statics.electionIdLoader = findManyLoaderFactory("electionId");
+CandidateSchema.statics.idLoader = findOneLoaderFactory("Candidate");
+CandidateSchema.statics.electionIdLoader = findManyLoaderFactory(
+  "Candidate",
+  "electionId"
+);
 
 const Candidate =
   mongoose.models.Candidate || mongoose.model("Candidate", CandidateSchema);

@@ -10,7 +10,7 @@ const ElectionCardDate = ({ start, end, dateUpdateInterval }) => {
   const startDate = new Date(start);
   const endDate = new Date(end);
 
-  if (now < start) {
+  if (now < startDate) {
     return (
       <Typography variant={"body2"} color={"secondary"}>
         {startDate > now ? "Starts" : "Started"} {getReadableDate(start)}

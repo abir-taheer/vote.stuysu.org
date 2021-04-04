@@ -31,7 +31,7 @@ export default async (
     throw new UserInputError("The start date must be before the end date");
   }
 
-  const coverPic = await Picture.findById(coverPicId);
+  const coverPic = await Picture.findById(pictureId);
 
   if (!coverPic) {
     throw new UserInputError("There's no picture with that id");

@@ -4,3 +4,8 @@ body {
   font-family: "Poppins", sans-serif;
   margin: 0;
 }
+
+.successSnackbar {
+  background-color: #10ac84 !important;
+  color: white;
+}

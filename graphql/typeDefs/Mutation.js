@@ -52,6 +52,7 @@ export default gql`
     ): Candidate!
 
     completeElection(id: ObjectId!): Election!
+    openElection(id: ObjectId!): Election!
 
     votePlurality(electionId: ObjectId!, candidateId: ObjectId!): PluralityVote!
 
