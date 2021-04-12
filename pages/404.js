@@ -5,16 +5,24 @@ import Button from "@material-ui/core/Button";
 import HomeOutlined from "@material-ui/icons/HomeOutlined";
 import { useTheme } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import use404Image from "../utils/errors/use404Image";
 import { PUBLIC_URL } from "../constants";
 
 import { URL } from "url";
+import get404Image from "../utils/errors/get404Image";
 
-const Error404 = () => {
+export function getStaticProps() {
+  return {
+    props: {
+      image: get404Image(),
+    },
+    revalidate: 1,
+  };
+}
+
+const Error404 = ({ image }) => {
   const theme = useTheme();
   const title = "Page Not Found | StuyBOE Voting Site";
   const description = "That page could not be found on this site";
-  const image = use404Image();
 
   // Server side url class is undefined on client so choose based on which is available
   const Url = globalThis?.URL || URL;

@@ -6,7 +6,6 @@ import pablitaNotFound from "../../img/404-images/pablita-318.png";
 import pabloNotFound from "../../img/404-images/pablo-975.png";
 import paleListIsEmpty from "../../img/404-images/pale-list-is-empty.png";
 import searchingWithDog from "../../img/404-images/searching-with-dog.png";
-import { useState } from "react";
 
 const images = [
   {
@@ -59,8 +58,8 @@ const images = [
   },
 ];
 
-export default function use404Image() {
-  const [index] = useState(Math.floor(Math.random() * images.length));
+export default function get404Image() {
+  const index = Math.floor(Math.random() * images.length);
 
   return images[index];
 }
