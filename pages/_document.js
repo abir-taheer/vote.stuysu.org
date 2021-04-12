@@ -47,13 +47,13 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: SOURCE_GREETING,
-          }}
-        />
         <Head />
         <body>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: SOURCE_GREETING,
+            }}
+          />
           <Main />
           <NextScript />
         </body>
