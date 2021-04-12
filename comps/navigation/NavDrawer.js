@@ -7,7 +7,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Link from "next/link";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import HomeOutlined from "@material-ui/icons/HomeOutlined";
-import ArchiveOutlined from "@material-ui/icons/ArchiveOutlined";
 import HowToVoteOutlined from "@material-ui/icons/HowToVoteOutlined";
 import HelpOutline from "@material-ui/icons/HelpOutline";
 import LockOpenOutlined from "@material-ui/icons/LockOpenOutlined";
@@ -18,11 +17,14 @@ import styles from "./NavBar.module.css";
 import PowerSettingsNewOutlined from "@material-ui/icons/PowerSettingsNewOutlined";
 import Button from "@material-ui/core/Button";
 import useLogin from "../auth/useLogin";
+import AccountTreeOutlined from "@material-ui/icons/AccountTreeOutlined";
 
 const NavDrawer = ({ open, setOpen }) => {
   const router = useRouter();
   const user = useContext(UserContext);
   const { signIn } = useLogin();
+
+  const closeDrawer = () => setOpen(false);
 
   return (
     <Drawer open={open} onClose={() => setOpen(false)} anchor={"right"}>
@@ -72,8 +74,27 @@ const NavDrawer = ({ open, setOpen }) => {
 
         <br />
 
+        {user.signedIn && user.adminPrivileges && (
+          <Link href={"/admin"}>
+            <ListItem
+              button
+              selected={router.asPath.startsWith("/admin")}
+              onClick={closeDrawer}
+            >
+              <ListItemIcon>
+                <AccountTreeOutlined />
+              </ListItemIcon>
+              <ListItemText primary={"Admin Panel"} />
+            </ListItem>
+          </Link>
+        )}
+
         <Link href={"/"}>
-          <ListItem button selected={router.asPath === "/"}>
+          <ListItem
+            button
+            selected={router.asPath === "/"}
+            onClick={closeDrawer}
+          >
             <ListItemIcon>
               <HomeOutlined />
             </ListItemIcon>
@@ -81,26 +102,25 @@ const NavDrawer = ({ open, setOpen }) => {
           </ListItem>
         </Link>
 
-        <Link href={"/open"}>
-          <ListItem button selected={router.asPath === "/open"}>
+        <Link href={"/election"}>
+          <ListItem
+            button
+            selected={router.asPath.startsWith("/election")}
+            onClick={closeDrawer}
+          >
             <ListItemIcon>
               <HowToVoteOutlined />
             </ListItemIcon>
-            <ListItemText primary={"Open Elections"} />
-          </ListItem>
-        </Link>
-
-        <Link href={"/past"}>
-          <ListItem button selected={router.asPath === "/past"}>
-            <ListItemIcon>
-              <ArchiveOutlined />
-            </ListItemIcon>
-            <ListItemText primary={"Past Elections"} />
+            <ListItemText primary={"Elections"} />
           </ListItem>
         </Link>
 
         <Link href={"/faq"}>
-          <ListItem button selected={router.asPath.startsWith("/faq")}>
+          <ListItem
+            button
+            selected={router.asPath.startsWith("/faq")}
+            onClick={closeDrawer}
+          >
             <ListItemIcon>
               <HelpOutline />
             </ListItemIcon>

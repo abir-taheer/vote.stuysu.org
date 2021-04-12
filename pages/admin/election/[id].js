@@ -142,6 +142,7 @@ const ManageElection = () => {
     });
 
     const end = new Date(election.end);
+
     if (confirmation && dateContext.getNow() < end) {
       confirmation = await confirmDialog({
         title: "The election isn't over yet, are you really sure?",
@@ -200,13 +201,13 @@ const ManageElection = () => {
     <AdminRequired>
       <div className={layout.container}>
         <main className={layout.main}>
-          <BackButton href={"/admin/elections"} text={"Back To Elections"} />
+          <BackButton href={"/admin/election"} text={"Back To Elections"} />
           <Typography variant={"h1"} align={"center"}>
             Manage Election | Admin Panel
           </Typography>
           <AdminTabBar />
 
-          {!election && <ElectionNotFound href={"/admin/elections"} />}
+          {!election && <ElectionNotFound href={"/admin/election"} />}
 
           {!!election && (
             <>

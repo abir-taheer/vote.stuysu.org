@@ -5,7 +5,7 @@ export default function AdminRedirect() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/admin/elections");
+    router.push("/admin/election");
   });
 
   return null;

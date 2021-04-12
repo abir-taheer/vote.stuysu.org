@@ -16,7 +16,6 @@ const apolloServer = new ApolloServer({
       req.headers["x-access-token"] ||
       req.headers["authorization"];
 
-
     if (jwt && jwt.startsWith("Bearer ")) {
       jwt = jwt.replace("Bearer ", "");
     }
@@ -64,6 +63,14 @@ const apolloServer = new ApolloServer({
     },
   },
   introspection: true,
+  uploads: {
+    maxFileSize: 10000000,
+  },
+});
+
+export default apolloServer.createHandler({
+  path: "/api/graphql",
+  disableHealthCheck: true,
 });
 
 export const config = {
@@ -71,8 +78,3 @@ export const config = {
     bodyParser: false,
   },
 };
-
-export default apolloServer.createHandler({
-  path: "/api/graphql",
-  disableHealthCheck: true,
-});

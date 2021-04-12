@@ -11,12 +11,12 @@ import styles from "./AdminTabBar.module.css";
 
 const tabs = [
   {
-    path: "/admin/elections",
+    path: "/admin/election",
     label: "Elections",
     icon: <HowToVote />,
   },
   {
-    path: "/admin/users",
+    path: "/admin/user",
     label: "Users",
     icon: <AccountCircle />,
   },

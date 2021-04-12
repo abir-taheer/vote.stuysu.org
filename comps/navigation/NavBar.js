@@ -30,9 +30,12 @@ const NavBar = () => {
 
       <AppBar position="relative" className={styles.appBar} elevation={0}>
         <Toolbar className={styles.toolbar}>
-          <Typography variant="h6" className={styles.title}>
-            StuyBOE Voting Site
-          </Typography>
+          <Link href={"/"}>
+            <Typography variant="h6" className={styles.title}>
+              StuyBOE Voting Site
+            </Typography>
+          </Link>
+
           <div className={styles.menuLinks}>
             <Link href={"/"}>
               <Button
@@ -45,34 +48,24 @@ const NavBar = () => {
             </Link>
 
             {user.signedIn && user.adminPrivileges && (
-              <Link href={"/admin"}>
+              <Link href={"/admin/election"}>
                 <Button
                   disableRipple
                   className={styles.menuItem}
-                  color={path === "/admin" ? "primary" : undefined}
+                  color={path.startsWith("/admin") ? "primary" : undefined}
                 >
                   Admin Panel
                 </Button>
               </Link>
             )}
 
-            <Link href={"/open"}>
+            <Link href={"/election"}>
               <Button
                 disableRipple
                 className={styles.menuItem}
-                color={path === "/open" ? "primary" : undefined}
+                color={path.startsWith("/election") ? "primary" : undefined}
               >
-                Open Elections
-              </Button>
-            </Link>
-
-            <Link href={"/past"}>
-              <Button
-                disableRipple
-                className={styles.menuItem}
-                color={path === "/past" ? "primary" : undefined}
-              >
-                Past Elections
+                Elections
               </Button>
             </Link>
 

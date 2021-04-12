@@ -55,7 +55,7 @@ const CreateElection = () => {
 
     try {
       const { data } = await submit({ variables });
-      await router.push("/admin/elections/" + data.createElection.id);
+      await router.push("/admin/election/" + data.createElection.id);
       enqueueSnackbar("Successfully created election", { variant: "success" });
     } catch (er) {
       await alertDialog({ title: "Error creating election", body: er.message });

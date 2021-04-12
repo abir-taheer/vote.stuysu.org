@@ -1,5 +1,6 @@
 import mongoose from "./mongoose";
-import { randomBytes } from "crypto";
+import generateJWTSecret from "./statics/jwtSecret/generateNewSecret";
+import getCurrentJWTSecret from "./statics/jwtSecret/getCurrentSecret";
 
 const Schema = mongoose.Schema;
 
@@ -14,28 +15,9 @@ const thirtyDays = 1000 * 60 * 60 * 24 * 30;
 
 JWTSecretSchema.statics.maxAge = thirtyDays;
 
-JWTSecretSchema.statics.generateNewSecret = () => {
-  const secret = randomBytes(32).toString("hex");
-  const model = mongoose.model("JWTSecret");
+JWTSecretSchema.statics.generateNewSecret = generateJWTSecret;
 
-  const now = new Date();
-
-  const useUntil = new Date(now.getTime() + model.maxAge);
-  const maxTokenExpiration = new Date(useUntil.getTime() + model.maxAge);
-
-  return model.create({
-    secret,
-    useUntil,
-    maxTokenExpiration,
-    createdAt: now,
-  });
-};
-
-JWTSecretSchema.statics.getCurrentSecret = () => {
-  const model = mongoose.model("JWTSecret");
-  const now = new Date();
-  return model.findOne({ useUntil: { $gt: now } });
-};
+JWTSecretSchema.statics.getCurrentSecret = getCurrentJWTSecret;
 
 const JWTSecret =
   mongoose.models.JWTSecret || mongoose.model("JWTSecret", JWTSecretSchema);

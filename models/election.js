@@ -4,6 +4,8 @@ import calculatePluralityResults from "./methods/election/calculatePluralityResu
 import isVotingPeriod from "./methods/election/isVotingPeriod";
 import getEligibleVoters from "./methods/election/getNumEligibleVoters";
 import verifyUserCanVote from "./methods/election/verifyUserCanVote";
+import findElectionByUrl from "./statics/election/findByUrl";
+import queryElections from "./statics/election/queryElections";
 
 const Schema = mongoose.Schema;
 
@@ -70,6 +72,9 @@ ElectionSchema.methods.calculatePluralityResults = calculatePluralityResults;
 ElectionSchema.methods.verifyUserCanVote = verifyUserCanVote;
 
 ElectionSchema.statics.idLoader = findOneLoaderFactory("Election");
+
+ElectionSchema.statics.findByUrl = findElectionByUrl;
+ElectionSchema.statics.queryElections = queryElections;
 
 const Election =
   mongoose.models.Election || mongoose.model("Election", ElectionSchema);

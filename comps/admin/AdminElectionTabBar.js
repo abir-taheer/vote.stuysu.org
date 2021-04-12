@@ -9,15 +9,15 @@ import styles from "./AdminElectionTabBar.module.css";
 
 const tabs = [
   {
-    path: "/admin/elections/[id]",
+    path: "/admin/election/[id]",
     label: "Info",
   },
   {
-    path: "/admin/elections/[id]/candidates",
+    path: "/admin/election/[id]/candidates",
     label: "Candidates",
   },
   {
-    path: "/admin/elections/[id]/posts",
+    path: "/admin/election/[id]/posts",
     label: "Posts",
   },
 ];
