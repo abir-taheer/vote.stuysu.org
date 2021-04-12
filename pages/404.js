@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import HomeOutlined from "@material-ui/icons/HomeOutlined";
 import { useTheme } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import get404Image from "../utils/errors/get404Image";
+import use404Image from "../utils/errors/use404Image";
 import { PUBLIC_URL } from "../constants";
 
 import { URL } from "url";
@@ -14,12 +14,12 @@ const Error404 = () => {
   const theme = useTheme();
   const title = "Page Not Found | StuyBOE Voting Site";
   const description = "That page could not be found on this site";
-  const image = get404Image();
+  const image = use404Image();
 
   // Server side url class is undefined on client so choose based on which is available
   const Url = globalThis?.URL || URL;
 
-  const url = new Url(image.src, PUBLIC_URL).href;
+  const imageUrl = new Url(image.src, PUBLIC_URL).href;
 
   return (
     <div>
@@ -30,7 +30,7 @@ const Error404 = () => {
         <meta name="description" content={description} />
         <meta property="og:description" content={description} />
         <meta property="og:title" content={title} />
-        <meta property="og:image" content={url} />
+        <meta property="og:image" content={imageUrl} />
         <meta property="og:image:width" content={image.width} />
         <meta property="og:image:height" content={image.height} />
         <meta property="og:image:alt" content={image.alt} />
