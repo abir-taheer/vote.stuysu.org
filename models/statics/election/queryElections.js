@@ -23,6 +23,7 @@ export default async ({ page, resultsPerPage, query, filters }) => {
 
   const results = await Election.find(filter)
     .sort([
+      ["completed", "asc"],
       ["start", "desc"],
       ["end", "desc"],
       ["name", "asc"],
