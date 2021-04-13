@@ -52,7 +52,12 @@ export default async (_, __, { adminRequired, user }) => {
 
   // Remove faculty users, people without graduation years, and inactive users
   const eligibleUsers = stuyactivitiesUsers.filter(
-    (u) => !u.isFaculty && u.active && !!u.gradYear && !!u.email
+    (u) =>
+      !u.isFaculty &&
+      u.active &&
+      !!u.gradYear &&
+      !!u.email &&
+      u.email.endsWith("@stuy.edu")
   );
 
   const newUsers = [];
