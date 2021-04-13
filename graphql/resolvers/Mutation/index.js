@@ -8,6 +8,7 @@ import editUser from "./editUser";
 import uploadPicture from "./uploadPicture";
 import votePlurality from "./votePlurality";
 import openElection from "./openElection";
+import syncUsersWithStuyActivities from "./syncUsersWithStuyActivities";
 
 export default {
   openElection,
@@ -20,4 +21,5 @@ export default {
   logout,
   uploadPicture,
   votePlurality,
+  syncUsersWithStuyActivities,
 };

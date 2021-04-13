@@ -11,6 +11,7 @@ import Candidate from "./Candidate";
 import Picture from "./Picture";
 import PluralityVote from "./PluralityVote";
 import PublicKey from "./PublicKey";
+import StuyActivitiesSyncResult from "./StuyActivitiesSyncResult";
 
 const typeDefs = [
   CloudinaryResource,
@@ -26,6 +27,7 @@ const typeDefs = [
   scalars,
   ElectionResult,
   PublicKey,
+  StuyActivitiesSyncResult,
 ];
 
 export default typeDefs;

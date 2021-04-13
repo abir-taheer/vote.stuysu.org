@@ -63,7 +63,7 @@ const ElectionIndex = () => {
           variant={"outlined"}
         />
 
-        {loading && <CircularProgress />}
+        {loading && <CircularProgress className={layout.spaced} />}
 
         {!loading && (
           <ElectionCardGrid
@@ -71,7 +71,6 @@ const ElectionIndex = () => {
             page={allElections?.page}
             results={allElections?.results}
             onPageChange={(ev, page) => setPage(page)}
-            admin
           />
         )}
       </main>

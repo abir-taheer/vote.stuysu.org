@@ -57,5 +57,7 @@ export default gql`
     votePlurality(electionId: ObjectId!, candidateId: ObjectId!): PluralityVote!
 
     uploadPicture(alt: String!, file: Upload!): Picture!
+
+    syncUsersWithStuyActivities: StuyActivitiesSyncResult!
   }
 `;
