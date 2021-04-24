@@ -1,7 +1,8 @@
 import layout from "./../../styles/layout.module.css";
 import Typography from "@material-ui/core/Typography";
 import { useState } from "react";
-import { CircularProgress, TextField } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import TextField from "@material-ui/core/TextField";
 import { useRouter } from "next/router";
 import { parse } from "querystring";
 import Search from "@material-ui/icons/Search";

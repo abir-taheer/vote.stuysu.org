@@ -98,6 +98,17 @@ export default gql`
     ): UserResult
 
     """
+    Returns the user with the given object id or null if no users were found
+    """
+    userById(id: ObjectId!): User
+
+    """
+    Returns an array of users with the object ids given, preserving the original order.
+    Any object ids not found will be null in the returned arry
+    """
+    usersById(ids: [ObjectId!]!): [User]!
+
+    """
     Returns elections that match the query that have completed set to true
     """
     pastElections(

@@ -9,12 +9,14 @@ import uploadPicture from "./uploadPicture";
 import votePlurality from "./votePlurality";
 import openElection from "./openElection";
 import syncUsersWithStuyActivities from "./syncUsersWithStuyActivities";
+import createCandidate from "./createCandidate";
 
 export default {
   openElection,
   completeElection,
   createElection,
   createUser,
+  createCandidate,
   editElection,
   editUser,
   login,

@@ -9,8 +9,9 @@ import Add from "@material-ui/icons/Add";
 import Link from "next/link";
 
 import ElectionCardGrid from "../../../comps/election/ElectionCardGrid";
-import { useEffect, useState } from "react";
-import { CircularProgress, TextField } from "@material-ui/core";
+import { useState } from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import TextField from "@material-ui/core/TextField";
 import Search from "@material-ui/icons/Search";
 import { useRouter } from "next/router";
 

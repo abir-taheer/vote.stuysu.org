@@ -11,10 +11,14 @@ import candidateById from "./candidateById";
 import candidateByUrl from "./candidateByUrl";
 import allUsers from "./allUsers";
 import publicKey from "./publicKey";
+import userById from "./userById";
+import usersById from "./usersById";
 
 const Query = {
   adminPictures,
   allUsers,
+  userById,
+  usersById,
   allElections,
   authenticatedUser,
   candidateById,

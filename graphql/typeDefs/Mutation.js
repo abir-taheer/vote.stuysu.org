@@ -47,7 +47,12 @@ export default gql`
       electionId: ObjectId!
       name: String!
       blurb: String!
+      platform: String!
       url: String!
+      managerIds: [ObjectId!]!
+      """
+      If a picture id is not provided a picture will be generated using initials
+      """
       pictureId: ObjectId
     ): Candidate!
 

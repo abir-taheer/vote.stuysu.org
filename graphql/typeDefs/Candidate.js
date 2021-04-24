@@ -17,6 +17,11 @@ export default gql`
     blurb: String!
 
     """
+    Detailed information about the candidate and their campaign promises
+    """
+    platform: String!
+
+    """
     Url of the candidate
     """
     url: String!

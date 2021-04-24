@@ -11,14 +11,17 @@ const tabs = [
   {
     path: "/admin/election/[id]",
     label: "Info",
+    exact: true,
   },
   {
-    path: "/admin/election/[id]/candidates",
+    path: "/admin/election/[id]/candidate",
     label: "Candidates",
+    exact: false,
   },
   {
     path: "/admin/election/[id]/posts",
     label: "Posts",
+    exact: false,
   },
 ];
 
@@ -32,12 +35,14 @@ const AdminElectionTabBar = () => {
   }));
 
   const tabIndex = adjustedTabs.findIndex((tab) =>
-    router.asPath.startsWith(tab.path)
+    tab.exact ? router.asPath === tab.path : router.asPath.startsWith(tab.path)
   );
+
   const [value, setValue] = useState(tabIndex);
 
   useEffect(() => {
     setValue(tabIndex);
+    console.log(tabIndex);
   }, [router]);
 
   return (

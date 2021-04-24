@@ -1,0 +1,40 @@
+.form {
+  max-width: 1200px;
+}
+
+.nameControl {
+  margin-right: 1rem;
+  width: 282px;
+}
+
+.urlControl {
+  width: 282px;
+}
+
+.chip {
+  margin: 0.5rem;
+}
+
+.submitButton {
+  margin: 0.5rem;
+}
+
+.cancelButton {
+  margin: 0.5rem;
+}
+
+.uploadButton {
+  margin: 1rem;
+}
+
+.picture {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 5px 0 grey;
+}
+
+.pictureContainer {
+  text-align: center;
+}

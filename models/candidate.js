@@ -6,7 +6,9 @@ const Schema = mongoose.Schema;
 
 const CandidateSchema = new Schema({
   name: String,
+
   blurb: String,
+  platform: String,
 
   url: String,
 
