@@ -1,13 +1,12 @@
 import CloudinaryResource from "./CloudinaryResource";
 import Query from "./Query";
 import ObjectId from "graphql-scalar-objectid";
-import { GraphQLDate, GraphQLDateTime, GraphQLTime } from "graphql-iso-date";
-
 import User from "./User";
 import Mutation from "./Mutation";
 import Picture from "./Picture";
 import Election from "./Election";
 import Candidate from "./Candidate";
+import { resolvers as graphqlScalarResolvers } from "graphql-scalars";
 
 const Resolvers = {
   CloudinaryResource,
@@ -19,9 +18,7 @@ const Resolvers = {
   Candidate,
   // Custom Scalar Types
   ObjectId,
-  Date: GraphQLDate,
-  Time: GraphQLTime,
-  DateTime: GraphQLDateTime,
+  ...graphqlScalarResolvers,
 };
 
 export default Resolvers;
