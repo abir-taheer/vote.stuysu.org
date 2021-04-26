@@ -9,3 +9,13 @@ body {
   background-color: #10ac84 !important;
   color: white;
 }
+
+.tox-statusbar__branding {
+  display: none;
+}
+
+.platform-image,
+.platform-iframe {
+  max-width: 90vw;
+  max-height: 600px;
+}

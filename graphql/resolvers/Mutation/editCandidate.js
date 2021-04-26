@@ -5,6 +5,7 @@ import Picture from "../../../models/picture";
 import User from "../../../models/user";
 import { randomBytes } from "crypto";
 import getDefaultCandidatePic from "../../../utils/candidate/getDefaltCandidatePic";
+import sanitizePlatform from "../../../utils/candidate/sanitizePlatform";
 
 const cloudinary = require("cloudinary").v2;
 
@@ -72,6 +73,8 @@ export default async (
       throw new UserInputError("There's already another candidate at that url");
     }
   }
+
+  platform = sanitizePlatform(platform);
 
   candidate.name = name;
   candidate.url = url;

@@ -6,6 +6,7 @@ import Picture from "../../../models/picture";
 import getDefaultCandidatePic from "../../../utils/candidate/getDefaltCandidatePic";
 import { randomBytes } from "crypto";
 import User from "../../../models/user";
+import sanitizePlatform from "../../../utils/candidate/sanitizePlatform";
 
 const cloudinary = require("cloudinary").v2;
 
@@ -76,14 +77,17 @@ export default async (
     pictureId = picture.id;
   }
 
+  // Make sure the platform is sanitized before insertion
+  platform = sanitizePlatform(platform);
+
   return await Candidate.create({
     name,
     blurb,
-    platform,
     url,
     electionId,
     pictureId,
     managerIds,
+    platform,
     active: true,
     social: {
       facebook: null,

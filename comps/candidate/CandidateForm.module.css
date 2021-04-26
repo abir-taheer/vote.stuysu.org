@@ -2,13 +2,25 @@
   max-width: 1200px;
 }
 
-.nameControl {
-  margin-right: 1rem;
-  width: 282px;
+@media (min-width: 800px) {
+  .nameControl {
+    margin-right: 1rem;
+    width: calc(100% - (1rem + 282px));
+  }
+
+  .urlControl {
+    width: 282px;
+  }
 }
 
-.urlControl {
-  width: 282px;
+@media (max-width: 799px) {
+  .nameControl {
+    width: 100%;
+  }
+
+  .urlControl {
+    width: 100%;
+  }
 }
 
 .chip {
@@ -37,4 +49,10 @@
 
 .pictureContainer {
   text-align: center;
+  margin-top: 1rem;
+}
+
+.formGroup {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

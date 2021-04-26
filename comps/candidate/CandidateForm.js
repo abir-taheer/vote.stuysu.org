@@ -15,8 +15,9 @@ import AddAPhoto from "@material-ui/icons/AddAPhoto";
 import alertDialog from "../dialog/alertDialog";
 import Clear from "@material-ui/icons/Clear";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { CircularProgress } from "@material-ui/core";
 import Chip from "@material-ui/core/Chip";
+import PlatformEditor from "./PlatformEditor";
+import { FormHelperText } from "@material-ui/core";
 
 function getCandidateUrl(val) {
   return val
@@ -219,7 +220,8 @@ const CandidateForm = ({
             />
           </FormControl>
         </FormGroup>
-        <FormGroup>
+
+        <FormGroup className={styles.formGroup}>
           <FormControl component="fieldset" fullWidth>
             <FormLabel component="legend">Blurb</FormLabel>
             <TextField
@@ -239,25 +241,22 @@ const CandidateForm = ({
           </FormControl>
         </FormGroup>
 
-        <FormGroup>
+        <FormGroup className={styles.formGroup}>
           <FormControl component="fieldset" fullWidth>
             <FormLabel component="legend">Platform</FormLabel>
-            <TextField
-              multiline
-              name={"platform"}
+            <PlatformEditor
               value={values.platform}
-              onChange={handleChange}
-              error={touched.platform && !!errors.platform}
-              helperText={`Longer, more detailed submission of the candidate's platform and any relevant information`}
-              variant={"outlined"}
+              setValue={(val) => setFieldValue("platform", val)}
               disabled={disabled || isSubmitting}
-              onBlur={handleBlur}
-              fullWidth
             />
           </FormControl>
+          <FormHelperText>
+            A longer explanation of the candidate's policies and any relevant
+            information
+          </FormHelperText>
         </FormGroup>
 
-        <FormGroup row>
+        <FormGroup row className={styles.formGroup}>
           <FormControl fullWidth>
             <FormLabel>Add Users To Manage This Candidate</FormLabel>
             <Autocomplete
