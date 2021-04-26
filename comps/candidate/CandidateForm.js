@@ -162,6 +162,7 @@ const CandidateForm = ({
               startIcon={<Clear />}
               onClick={() => setFieldValue("picture", null)}
               className={styles.uploadButton}
+              disabled={disabled || isSubmitting}
             >
               Clear Upload
             </Button>
@@ -171,7 +172,7 @@ const CandidateForm = ({
               startIcon={<AddAPhoto />}
               onClick={uploadPicture}
               className={styles.uploadButton}
-              disabled={loadingUpload}
+              disabled={disabled || isSubmitting || loadingUpload}
             >
               Upload Image
             </Button>
@@ -189,7 +190,7 @@ const CandidateForm = ({
               helperText={touched.name && errors.name}
               placeholder={"John Appleseed & Alex Morgan"}
               variant={"outlined"}
-              disabled={isSubmitting}
+              disabled={disabled || isSubmitting}
               onBlur={handleBlur}
               fullWidth
             />
@@ -212,7 +213,7 @@ const CandidateForm = ({
               }
               placeholder={"john-alex"}
               variant={"outlined"}
-              disabled={isSubmitting}
+              disabled={disabled || isSubmitting}
               onBlur={handleBlur}
               fullWidth
             />
@@ -231,7 +232,7 @@ const CandidateForm = ({
               error={touched.blurb && !!errors.blurb}
               helperText={`Summarize the campaign in a tweet, less than 200 characters. (${values.blurb.length}/200)`}
               variant={"outlined"}
-              disabled={isSubmitting}
+              disabled={disabled || isSubmitting}
               onBlur={handleBlur}
               fullWidth
             />
@@ -249,7 +250,7 @@ const CandidateForm = ({
               error={touched.platform && !!errors.platform}
               helperText={`Longer, more detailed submission of the candidate's platform and any relevant information`}
               variant={"outlined"}
-              disabled={isSubmitting}
+              disabled={disabled || isSubmitting}
               onBlur={handleBlur}
               fullWidth
             />
@@ -261,8 +262,10 @@ const CandidateForm = ({
             <FormLabel>Add Users To Manage This Candidate</FormLabel>
             <Autocomplete
               multiple
+              disabled={disabled || isSubmitting}
               options={data?.allUsers?.results || []}
               getOptionLabel={(option) => option.name}
+              getOptionSelected={(opts, value) => opts.id === value.id}
               freeSolo
               loading={loadingUsers}
               value={values.managers}
@@ -287,6 +290,7 @@ const CandidateForm = ({
               renderInput={(params) => (
                 <TextField
                   {...params}
+                  disabled={disabled || isSubmitting}
                   variant="outlined"
                   label={"Select Users"}
                   value={userQuery}

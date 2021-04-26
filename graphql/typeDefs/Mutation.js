@@ -56,6 +56,16 @@ export default gql`
       pictureId: ObjectId
     ): Candidate!
 
+    editCandidate(
+      id: ObjectId!
+      name: String!
+      url: String!
+      blurb: String!
+      platform: String!
+      managerIds: [ObjectId!]!
+      pictureId: ObjectId
+    ): Candidate
+
     completeElection(id: ObjectId!): Election!
     openElection(id: ObjectId!): Election!
 

@@ -10,6 +10,7 @@ import votePlurality from "./votePlurality";
 import openElection from "./openElection";
 import syncUsersWithStuyActivities from "./syncUsersWithStuyActivities";
 import createCandidate from "./createCandidate";
+import editCandidate from "./editCandidate";
 
 export default {
   openElection,
@@ -17,6 +18,7 @@ export default {
   createElection,
   createUser,
   createCandidate,
+  editCandidate,
   editElection,
   editUser,
   login,

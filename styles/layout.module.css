@@ -30,3 +30,7 @@
 .spaced {
   margin: 1rem;
 }
+
+.link {
+  cursor: pointer;
+}

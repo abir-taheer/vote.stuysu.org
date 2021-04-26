@@ -15,7 +15,7 @@ const CandidateSchema = new Schema({
   electionId: Schema.Types.ObjectId,
 
   pictureId: Schema.Types.ObjectId,
-  isActive: Boolean,
+  active: Boolean,
 
   managerIds: [Schema.Types.ObjectId],
 

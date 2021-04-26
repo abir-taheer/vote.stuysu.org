@@ -40,5 +40,10 @@ export default gql`
     Whether or not the candidate is in good standing (not suspended)
     """
     active: Boolean!
+
+    """
+    Users who are able to manage the candidate's presence on the site
+    """
+    managers: [User!]!
   }
 `;

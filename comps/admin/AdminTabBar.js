@@ -11,17 +11,17 @@ import styles from "./AdminTabBar.module.css";
 
 const tabs = [
   {
-    path: "/admin/election",
+    path: ["/admin/election", "/admin/candidate"],
     label: "Elections",
     icon: <HowToVote />,
   },
   {
-    path: "/admin/user",
+    path: ["/admin/user"],
     label: "Users",
     icon: <AccountCircle />,
   },
   {
-    path: "/admin/faq",
+    path: ["/admin/faq"],
     label: "FAQs",
     icon: <Help />,
   },
@@ -29,7 +29,9 @@ const tabs = [
 
 const AdminTabBar = () => {
   const router = useRouter();
-  const tabIndex = tabs.findIndex((tab) => router.asPath.startsWith(tab.path));
+  const tabIndex = tabs.findIndex((tab) =>
+    tab.path.some((path) => router.asPath.startsWith(path))
+  );
   const [value, setValue] = useState(tabIndex);
 
   useEffect(() => {

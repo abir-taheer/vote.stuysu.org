@@ -1,5 +1,5 @@
 import Election from "../../../models/election";
-import { UserInputError } from "apollo-server-micro";
+import { ForbiddenError, UserInputError } from "apollo-server-micro";
 import fieldsCannotBeEmpty from "../../../utils/user-input/fieldsCannotBeEmpty";
 import Candidate from "../../../models/candidate";
 import Picture from "../../../models/picture";
@@ -18,14 +18,35 @@ export default async (
 
   fieldsCannotBeEmpty({ name, url });
 
-  const election = await Election.findById(electionId);
+  if (blurb.length > 200) {
+    throw new UserInputError("The blurb must be 200 characters or less");
+  }
 
+  if (platform.length > 10000) {
+    throw new UserInputError(
+      "The platform field must be less than 10,000 characters"
+    );
+  }
+
+  // Make sure the election that the candidate is associated to is valid
+  const election = await Election.findById(electionId);
   if (!election) {
     throw new UserInputError("There's no election with that id");
   }
 
-  const managers = await User.idLoader.loadMany(managerIds);
+  if (election.completed) {
+    throw new ForbiddenError(
+      "That election is closed and new candidates cannot be added"
+    );
+  }
 
+  // Make sure there's not already another candidate at that url
+  const urlIsUsed = await Candidate.exists({ electionId, url });
+  if (urlIsUsed) {
+    throw new UserInputError("There's already another candidate at that url");
+  }
+
+  const managers = await User.idLoader.loadMany(managerIds);
   for (let i = 0; i < managers.length; i++) {
     if (!managers[i]) {
       throw new UserInputError("There's no user with the id " + managerIds[i]);
@@ -63,7 +84,7 @@ export default async (
     electionId,
     pictureId,
     managerIds,
-    isActive: true,
+    active: true,
     social: {
       facebook: null,
       website: null,
