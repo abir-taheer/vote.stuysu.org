@@ -16,6 +16,12 @@ export default gql`
     id: ObjectId
   }
 
+  enum sortTypes {
+    random
+    alphabeticalDesc
+    alphabeticalAsc
+  }
+
   type Query {
     """
     Returns the current user if authentication is provided (is signed in), otherwise returns null
@@ -42,6 +48,22 @@ export default gql`
     Returns the candidate from the given election that has the specified url or null if there are no matches
     """
     candidateByUrl(url: String!, election: electionIdentifier!): Candidate
+
+    """
+    Returns all the candidates for a given election, can be filtered and sorted
+    By default it's sorted by random for fairness
+    """
+    candidatesByElectionId(
+      electionId: ObjectId!
+      query: String! = ""
+      sort: sortTypes! = random
+    ): [Candidate!]!
+
+    """
+    Takes the id of an election and returns whether or not the current signed in user has voted for that election
+    Returns null if the user is not signed in
+    """
+    userHasVoted(election: electionIdentifier!): Boolean
 
     """
     Returns elections that match the query regardless of completion status

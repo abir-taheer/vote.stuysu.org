@@ -1,3 +1,3 @@
 import Election from "../../../models/election";
 
-export default (_, { id }) => Election.findById(id);
+export default (_, { id }) => Election.idLoader.load(id);

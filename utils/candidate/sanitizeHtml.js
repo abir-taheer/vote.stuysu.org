@@ -1,7 +1,7 @@
-import sanitizeHtml from "sanitize-html";
+import sanitize from "sanitize-html";
 
-export default function sanitizePlatform(platform) {
-  return sanitizeHtml(platform, {
+export default function sanitizeHtml(platform) {
+  return sanitize(platform, {
     // Only allow that tags that are used by TinyMCE that we allow
     allowedTags: [
       "h1",
@@ -94,16 +94,16 @@ export default function sanitizePlatform(platform) {
 
     transformTags: {
       // Add a rel=noopener to links to prevent cross origin vulnerability
-      a: sanitizeHtml.simpleTransform("a", {
+      a: sanitize.simpleTransform("a", {
         rel: "noopener",
         target: "_blank",
       }),
 
       // Add a custom class to images and iframes that keeps them from overflowing the page
-      img: sanitizeHtml.simpleTransform("img", {
+      img: sanitize.simpleTransform("img", {
         class: "platform-image",
       }),
-      iframe: sanitizeHtml.simpleTransform("iframe", {
+      iframe: sanitize.simpleTransform("iframe", {
         class: "platform-iframe",
       }),
     },

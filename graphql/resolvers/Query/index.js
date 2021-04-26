@@ -13,6 +13,8 @@ import allUsers from "./allUsers";
 import publicKey from "./publicKey";
 import userById from "./userById";
 import usersById from "./usersById";
+import candidatesByElectionId from "./candidatesByElectionId";
+import userHasVoted from "./userHasVoted";
 
 const Query = {
   adminPictures,
@@ -23,6 +25,8 @@ const Query = {
   authenticatedUser,
   candidateById,
   candidateByUrl,
+  candidatesByElectionId,
+  userHasVoted,
   electionById,
   electionByUrl,
   openElections,

@@ -1,3 +1,3 @@
 import Picture from "../../../models/picture";
 
-export default (_, { id }) => Picture.findById(id);
+export default (_, { id }) => Picture.idLoader.load(id);

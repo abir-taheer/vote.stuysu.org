@@ -1,3 +1,3 @@
 import Candidate from "../../../models/candidate";
 
-export default (_, { id }) => Candidate.findById(id);
+export default (_, { id }) => Candidate.idLoader.load(id);

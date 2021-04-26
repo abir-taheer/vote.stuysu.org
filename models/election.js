@@ -72,6 +72,7 @@ ElectionSchema.methods.calculatePluralityResults = calculatePluralityResults;
 ElectionSchema.methods.verifyUserCanVote = verifyUserCanVote;
 
 ElectionSchema.statics.idLoader = findOneLoaderFactory("Election");
+ElectionSchema.statics.urlLoader = findOneLoaderFactory("Election", "url");
 
 ElectionSchema.statics.findByUrl = findElectionByUrl;
 ElectionSchema.statics.queryElections = queryElections;

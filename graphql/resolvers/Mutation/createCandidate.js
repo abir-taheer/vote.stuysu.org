@@ -6,7 +6,7 @@ import Picture from "../../../models/picture";
 import getDefaultCandidatePic from "../../../utils/candidate/getDefaltCandidatePic";
 import { randomBytes } from "crypto";
 import User from "../../../models/user";
-import sanitizePlatform from "../../../utils/candidate/sanitizePlatform";
+import sanitizeHtml from "../../../utils/candidate/sanitizeHtml";
 
 const cloudinary = require("cloudinary").v2;
 
@@ -78,7 +78,7 @@ export default async (
   }
 
   // Make sure the platform is sanitized before insertion
-  platform = sanitizePlatform(platform);
+  platform = sanitizeHtml(platform);
 
   return await Candidate.create({
     name,

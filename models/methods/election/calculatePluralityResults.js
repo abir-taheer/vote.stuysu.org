@@ -47,7 +47,7 @@ export default async function calculatePluralityResults() {
 
   const candidateResults = candidates.map((candidate) => {
     const numVotes = candidateVoteMap[candidate.id];
-    const rawPercentage = numVotes / totalVotes;
+    const rawPercentage = totalVotes > 0 ? numVotes / totalVotes : 0;
 
     return {
       candidateId: candidate.id,

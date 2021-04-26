@@ -15,7 +15,7 @@ const MUTATION = gql`
   }
 `;
 
-const useLogin = () => {
+const useLogin = (props) => {
   const [login, { loading }] = useMutation(MUTATION);
   const user = useContext(UserContext);
 
@@ -26,6 +26,10 @@ const useLogin = () => {
       localStorage.setItem("auth-jwt", jwt);
 
       await user.refetch();
+
+      if (props.onLogin) {
+        await props.onLogin();
+      }
     } catch (e) {
       const error = e.graphQLErrors[0];
       const code = error.extensions.code;
