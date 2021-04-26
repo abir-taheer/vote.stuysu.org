@@ -104,7 +104,7 @@ export default function sanitizePlatform(platform) {
         class: "platform-image",
       }),
       iframe: sanitizeHtml.simpleTransform("iframe", {
-        src: "platform-iframe",
+        class: "platform-iframe",
       }),
     },
 
