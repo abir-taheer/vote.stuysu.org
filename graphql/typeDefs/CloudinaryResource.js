@@ -13,12 +13,12 @@ export default gql`
     """
     For images and videos, the width of the resource
     """
-    width: Int
+    width: PositiveInt
 
     """
     For images and videos, the height of the resource
     """
-    height: Int
+    height: PositiveInt
 
     """
     The format of the resource, jpg, gif, svg, etc.
@@ -38,6 +38,6 @@ export default gql`
     """
     A dynamically generated url of the resource, hosted on cloudinary
     """
-    url: String
+    url: NonEmptyString
   }
 `;

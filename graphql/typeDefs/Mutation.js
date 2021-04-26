@@ -2,15 +2,15 @@ import { gql } from "apollo-server-micro";
 
 export default gql`
   type Mutation {
-    login(idToken: String!): String!
-    logout: Boolean
+    login(idToken: JWT!): JWT!
+    logout: Void!
 
     createElection(
       name: String!
       url: String!
       pictureId: ObjectId!
       type: ElectionType!
-      allowedGradYears: [Int!]!
+      allowedGradYears: [PositiveInt!]!
       start: DateTime!
       end: DateTime!
     ): Election!
@@ -21,7 +21,7 @@ export default gql`
       url: String!
       pictureId: ObjectId!
       type: ElectionType!
-      allowedGradYears: [Int!]!
+      allowedGradYears: [PositiveInt!]!
       start: DateTime!
       end: DateTime!
     ): Election!
@@ -29,8 +29,8 @@ export default gql`
     createUser(
       firstName: String!
       lastName: String!
-      gradYear: Int
-      email: String!
+      gradYear: PositiveInt
+      email: EmailAddress!
       adminPrivileges: Boolean!
     ): User!
 
@@ -38,8 +38,8 @@ export default gql`
       id: ObjectId!
       firstName: String!
       lastName: String!
-      gradYear: Int
-      email: String!
+      gradYear: PositiveInt
+      email: EmailAddress!
       adminPrivileges: Boolean!
     ): User!
 

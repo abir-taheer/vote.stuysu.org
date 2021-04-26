@@ -8,7 +8,7 @@ export default gql`
     """
     Url of the election. For the election at https://vote.stuysu.org/election/senior-caucus-20-21 the url is "senior-caucus-20-21"
     """
-    url: String
+    url: NonEmptyString
 
     """
     Id of the election, must be a valid object id
@@ -37,7 +37,7 @@ export default gql`
     Takes a url and returns the matching election.
     Example: For the election at https://vote.stuysu.org/election/senior-caucus-20-21 the url is 'senior-caucus-20-21'
     """
-    electionByUrl(url: String!): Election
+    electionByUrl(url: NonEmptyString!): Election
 
     """
     Takes an object id and returns the candidate with the matching id
@@ -47,7 +47,10 @@ export default gql`
     """
     Returns the candidate from the given election that has the specified url or null if there are no matches
     """
-    candidateByUrl(url: String!, election: electionIdentifier!): Candidate
+    candidateByUrl(
+      url: NonEmptyString!
+      election: electionIdentifier!
+    ): Candidate
 
     """
     Returns all the candidates for a given election, can be filtered and sorted
@@ -76,11 +79,11 @@ export default gql`
       """
       The page requested, if the string has more than one page of results.
       """
-      page: Int! = 1
+      page: PositiveInt! = 1
       """
       Number of results on each page. Must be between 1 and 50. Default is 9
       """
-      resultsPerPage: Int! = 9
+      resultsPerPage: PositiveInt! = 9
     ): ElectionResult!
 
     """
@@ -94,11 +97,11 @@ export default gql`
       """
       The page requested, if the string has more than one page of results.
       """
-      page: Int! = 1
+      page: PositiveInt! = 1
       """
       Number of results on each page. Must be between 1 and 50. Default is 9
       """
-      resultsPerPage: Int! = 9
+      resultsPerPage: PositiveInt! = 9
     ): ElectionResult!
 
     """
@@ -112,11 +115,11 @@ export default gql`
       """
       The page requested, if the query has more than one page of results.
       """
-      page: Int! = 1
+      page: PositiveInt! = 1
       """
       Number of results on each page. Must be between 1 and 50. Default is 9
       """
-      resultsPerPage: Int! = 9
+      resultsPerPage: PositiveInt! = 9
     ): UserResult
 
     """
@@ -141,11 +144,11 @@ export default gql`
       """
       The page requested, if the string has more than one page of results.
       """
-      page: Int! = 1
+      page: PositiveInt! = 1
       """
       Number of results on each page. Must be between 1 and 50. Default is 9
       """
-      resultsPerPage: Int! = 9
+      resultsPerPage: PositiveInt! = 9
     ): ElectionResult!
 
     """
@@ -162,7 +165,7 @@ export default gql`
     """
     Returns the current datetime on the server
     """
-    date: DateTime
+    date: DateTime!
 
     """
     Returns the current public key used to sign cross site requests

@@ -2,10 +2,10 @@ import { gql } from "apollo-server-micro";
 
 export default gql`
   type UserResult {
-    page: Int!
-    total: Int!
-    numPages: Int!
-    resultsPerPage: Int!
+    page: PositiveInt!
+    total: PositiveInt!
+    numPages: PositiveInt!
+    resultsPerPage: PositiveInt!
     hasNextPage: Boolean!
     hasPreviousPage: Boolean!
     results: [User!]!
