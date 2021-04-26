@@ -30,9 +30,9 @@ export default function sanitizePlatform(platform) {
     disallowedTagsMode: "discard",
     allowedAttributes: {
       a: ["href", "name", "target", "rel", "style", "title"],
-      img: ["src", "alt", "height", "width", "style"],
+      img: ["src", "alt", "height", "width", "style", "class"],
       span: ["style"],
-      iframe: ["allowfullscreen", "src", "height", "width", "style"],
+      iframe: ["allowfullscreen", "src", "height", "width", "style", "class"],
       h1: ["style"],
       h2: ["style"],
       h3: ["style"],

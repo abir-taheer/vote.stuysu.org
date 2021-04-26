@@ -39,6 +39,7 @@
     "url-join": "^4.0.1"
   },
   "devDependencies": {
+    "esm": "^3.2.25",
     "prettier": "^2.2.1"
   },
   "resolutions": {
