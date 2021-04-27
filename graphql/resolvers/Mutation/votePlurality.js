@@ -1,7 +1,6 @@
 import Election from "../../../models/election";
 import { ForbiddenError, UserInputError } from "apollo-server-micro";
 import Candidate from "../../../models/candidate";
-import mongoose from "../../../models/mongoose";
 
 export default async (
   _,
@@ -29,20 +28,16 @@ export default async (
     );
   }
 
-  // All of the checks are complete and now we can actually record the vote
-  if (!election.pluralityVotes) {
-    election.pluralityVotes = [];
-  }
-
   const vote = {
-    id: new mongoose.Types.ObjectId(),
+    id: Election.nanoid(),
     gradYear: user.gradYear,
     choice: candidate.id,
   };
 
-  election.pluralityVotes.push(vote);
-
-  await election.save();
+  await Election.findOneAndUpdate(
+    { _id: electionId },
+    { $push: { pluralityVotes: vote } }
+  );
 
   return vote;
 };

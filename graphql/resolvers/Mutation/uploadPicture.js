@@ -3,9 +3,6 @@ import uploadPicStream from "../../../utils/cloudinary/uploadPicStream";
 import { randomBytes } from "crypto";
 import Election from "../../../models/election";
 import Candidate from "../../../models/candidate";
-import fieldsCannotBeEmpty from "../../../utils/user-input/fieldsCannotBeEmpty";
-
-import fs from "fs";
 
 // Only admins and campaign managers should be able to upload pictures at this time
 export default async (
@@ -15,7 +12,6 @@ export default async (
 ) => {
   authenticationRequired();
 
-  fieldsCannotBeEmpty({ alt });
   const openElections = await Election.find({ completed: false });
 
   const idsOfOpenElections = openElections.map((e) => e.id);

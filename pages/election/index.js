@@ -10,7 +10,7 @@ import { gql, useQuery } from "@apollo/client";
 import ElectionCardGrid from "../../comps/election/ElectionCardGrid";
 
 const QUERY = gql`
-  query($query: String!, $page: Int!) {
+  query($query: String!, $page: PositiveInt!) {
     allElections(query: $query, page: $page) {
       page
       numPages

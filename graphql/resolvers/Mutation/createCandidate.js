@@ -1,6 +1,5 @@
 import Election from "../../../models/election";
 import { ForbiddenError, UserInputError } from "apollo-server-micro";
-import fieldsCannotBeEmpty from "../../../utils/user-input/fieldsCannotBeEmpty";
 import Candidate from "../../../models/candidate";
 import Picture from "../../../models/picture";
 import getDefaultCandidatePic from "../../../utils/candidate/getDefaltCandidatePic";
@@ -16,8 +15,6 @@ export default async (
   { adminRequired, user }
 ) => {
   adminRequired();
-
-  fieldsCannotBeEmpty({ name, url });
 
   if (blurb.length > 200) {
     throw new UserInputError("The blurb must be 200 characters or less");

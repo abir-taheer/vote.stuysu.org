@@ -4,5 +4,4 @@ export default (_, __, { setCookie }) => {
     httpOnly: true,
     path: "/",
   });
-  return true;
 };

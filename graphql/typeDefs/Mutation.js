@@ -3,7 +3,7 @@ import { gql } from "apollo-server-micro";
 export default gql`
   type Mutation {
     login(idToken: JWT!): JWT!
-    logout: Void!
+    logout: Void
 
     createElection(
       name: NonEmptyString!

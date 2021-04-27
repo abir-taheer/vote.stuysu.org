@@ -3,7 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { useSnackbar } from "notistack";
 
 const UPLOAD_MUTATION = gql`
-  mutation($file: Upload!, $alt: String!) {
+  mutation($file: Upload!, $alt: NonEmptyString!) {
     uploadPicture(alt: $alt, file: $file) {
       id
       alt

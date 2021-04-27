@@ -12,11 +12,11 @@ import { useSnackbar } from "notistack";
 
 const SUBMIT_MUTATION = gql`
   mutation(
-    $name: String!
-    $url: String!
+    $name: NonEmptyString!
+    $url: NonEmptyString!
     $pictureId: ObjectId!
     $type: ElectionType!
-    $allowedGradYears: [Int!]!
+    $allowedGradYears: [PositiveInt!]!
     $start: DateTime!
     $end: DateTime!
   ) {

@@ -3,7 +3,6 @@ import Tab from "@material-ui/core/Tab";
 import { useRouter } from "next/router";
 
 import { useEffect, useState } from "react";
-import Paper from "@material-ui/core/Paper";
 
 import styles from "./ElectionTabBar.module.css";
 

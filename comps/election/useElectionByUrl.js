@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 
 const URL_QUERY = gql`
-  query($url: String!) {
+  query($url: NonEmptyString!) {
     electionByUrl(url: $url) {
       id
       name

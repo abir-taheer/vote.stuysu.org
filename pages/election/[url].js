@@ -18,7 +18,7 @@ import useLogin from "../../comps/auth/useLogin";
 import ElectionOverviewText from "../../comps/election/ElectionOverviewText";
 
 const ELECTION_QUERY = gql`
-  query($url: String!) {
+  query($url: NonEmptyString!) {
     electionByUrl(url: $url) {
       id
       type

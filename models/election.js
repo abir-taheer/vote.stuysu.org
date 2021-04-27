@@ -8,7 +8,7 @@ import findElectionByUrl from "./statics/election/findByUrl";
 import queryElections from "./statics/election/queryElections";
 import { customAlphabet } from "nanoid";
 
-const nanoid = customAlphabet("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", 6);
+const nanoid = customAlphabet("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", 5);
 const Schema = mongoose.Schema;
 
 const ElectionSchema = new Schema({
@@ -74,7 +74,6 @@ const ElectionSchema = new Schema({
 });
 
 ElectionSchema.methods.isVotingPeriod = isVotingPeriod;
-
 ElectionSchema.methods.getNumEligibleVoters = getEligibleVoters;
 
 ElectionSchema.methods.calculatePluralityResults = calculatePluralityResults;
@@ -86,6 +85,7 @@ ElectionSchema.statics.urlLoader = findOneLoaderFactory("Election", "url");
 
 ElectionSchema.statics.findByUrl = findElectionByUrl;
 ElectionSchema.statics.queryElections = queryElections;
+ElectionSchema.statics.nanoid = nanoid;
 
 const Election =
   mongoose.models.Election || mongoose.model("Election", ElectionSchema);

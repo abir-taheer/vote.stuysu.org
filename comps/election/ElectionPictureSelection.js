@@ -26,7 +26,7 @@ const PICTURE_QUERY = gql`
 `;
 
 const UPLOAD_MUTATION = gql`
-  mutation($alt: String!, $file: Upload!) {
+  mutation($alt: NonEmptyString!, $file: Upload!) {
     uploadPicture(alt: $alt, file: $file) {
       id
     }
