@@ -1,6 +1,5 @@
 import User from "../../../models/user";
 import { UserInputError } from "apollo-server-micro";
-import fieldsCannotBeEmpty from "../../../utils/user-input/fieldsCannotBeEmpty";
 
 export default async (
   _,

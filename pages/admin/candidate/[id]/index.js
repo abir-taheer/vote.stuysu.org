@@ -51,8 +51,8 @@ const QUERY = gql`
 const MUTATION = gql`
   mutation(
     $id: ObjectId!
-    $name: String!
-    $url: String!
+    $name: NonEmptyString!
+    $url: NonEmptyString!
     $blurb: String!
     $platform: String!
     $managerIds: [ObjectId!]!

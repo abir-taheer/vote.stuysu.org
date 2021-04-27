@@ -10,12 +10,12 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 
 const MUTATION = gql`
-  mutation($idToken: String!) {
+  mutation($idToken: JWT!) {
     login(idToken: $idToken)
   }
 `;
 
-const useLogin = (props) => {
+const useLogin = (props = {}) => {
   const [login, { loading }] = useMutation(MUTATION);
   const user = useContext(UserContext);
 
@@ -31,6 +31,7 @@ const useLogin = (props) => {
         await props.onLogin();
       }
     } catch (e) {
+      console.log(e);
       const error = e.graphQLErrors[0];
       const code = error.extensions.code;
 

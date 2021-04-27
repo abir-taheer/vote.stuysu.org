@@ -3,10 +3,10 @@ import { gql } from "apollo-server-micro";
 export default gql`
   type Election {
     id: ObjectId!
-    name: String!
-    url: String!
+    name: NonEmptyString!
+    url: NonEmptyString!
     picture: Picture!
-    allowedGradYears: [Int!]!
+    allowedGradYears: [PositiveInt!]!
     type: ElectionType!
     start: DateTime!
     end: DateTime!

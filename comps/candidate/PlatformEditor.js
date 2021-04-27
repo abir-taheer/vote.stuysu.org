@@ -3,7 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { useSnackbar } from "notistack";
 
 const UPLOAD_MUTATION = gql`
-  mutation($file: Upload!, $alt: String!) {
+  mutation($file: Upload!, $alt: NonEmptyString!) {
     uploadPicture(alt: $alt, file: $file) {
       id
       alt
@@ -37,8 +37,8 @@ const PlatformEditor = ({ value, setValue, className, disabled }) => {
           ],
           toolbar:
             "formatselect | bold italic forecolor backcolor | \
-            alignleft aligncenter alignright alignjustify | \
-            bullist numlist outdent indent | link image media | removeformat",
+                        alignleft aligncenter alignright alignjustify | \
+                        bullist numlist outdent indent | link image media | removeformat",
           automatic_uploads: true,
           browser_spellcheck: true,
           images_upload_handler: (file, success, failure) => {

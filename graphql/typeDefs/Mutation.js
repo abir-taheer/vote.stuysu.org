@@ -2,35 +2,35 @@ import { gql } from "apollo-server-micro";
 
 export default gql`
   type Mutation {
-    login(idToken: String!): String!
-    logout: Boolean
+    login(idToken: JWT!): JWT!
+    logout: Void
 
     createElection(
-      name: String!
-      url: String!
+      name: NonEmptyString!
+      url: NonEmptyString!
       pictureId: ObjectId!
       type: ElectionType!
-      allowedGradYears: [Int!]!
+      allowedGradYears: [PositiveInt!]!
       start: DateTime!
       end: DateTime!
     ): Election!
 
     editElection(
       id: ObjectId!
-      name: String!
-      url: String!
+      name: NonEmptyString!
+      url: NonEmptyString!
       pictureId: ObjectId!
       type: ElectionType!
-      allowedGradYears: [Int!]!
+      allowedGradYears: [PositiveInt!]!
       start: DateTime!
       end: DateTime!
     ): Election!
 
     createUser(
-      firstName: String!
-      lastName: String!
-      gradYear: Int
-      email: String!
+      firstName: NonEmptyString!
+      lastName: NonEmptyString!
+      gradYear: PositiveInt
+      email: EmailAddress!
       adminPrivileges: Boolean!
     ): User!
 
@@ -38,17 +38,17 @@ export default gql`
       id: ObjectId!
       firstName: String!
       lastName: String!
-      gradYear: Int
-      email: String!
+      gradYear: PositiveInt
+      email: EmailAddress!
       adminPrivileges: Boolean!
     ): User!
 
     createCandidate(
       electionId: ObjectId!
-      name: String!
+      name: NonEmptyString!
       blurb: String!
       platform: String!
-      url: String!
+      url: NonEmptyString!
       managerIds: [ObjectId!]!
       """
       If a picture id is not provided a picture will be generated using initials
@@ -58,8 +58,8 @@ export default gql`
 
     editCandidate(
       id: ObjectId!
-      name: String!
-      url: String!
+      name: NonEmptyString!
+      url: NonEmptyString!
       blurb: String!
       platform: String!
       managerIds: [ObjectId!]!
@@ -71,7 +71,7 @@ export default gql`
 
     votePlurality(electionId: ObjectId!, candidateId: ObjectId!): PluralityVote!
 
-    uploadPicture(alt: String!, file: Upload!): Picture!
+    uploadPicture(alt: NonEmptyString!, file: Upload!): Picture!
 
     syncUsersWithStuyActivities: StuyActivitiesSyncResult!
   }

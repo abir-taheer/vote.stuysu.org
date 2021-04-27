@@ -1,4 +1,3 @@
-import fieldsCannotBeEmpty from "../../../utils/user-input/fieldsCannotBeEmpty";
 import User from "../../../models/user";
 
 export default (
@@ -7,8 +6,6 @@ export default (
   { adminRequired }
 ) => {
   adminRequired();
-
-  fieldsCannotBeEmpty({ firstName, lastName, email });
 
   return User.create({
     firstName,

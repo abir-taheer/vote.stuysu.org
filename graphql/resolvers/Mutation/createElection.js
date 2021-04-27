@@ -1,5 +1,4 @@
 import Election from "../../../models/election";
-import fieldsCannotBeEmpty from "../../../utils/user-input/fieldsCannotBeEmpty";
 import { UserInputError } from "apollo-server-micro";
 import Picture from "../../../models/picture";
 
@@ -9,7 +8,6 @@ export default async (
   { adminRequired }
 ) => {
   adminRequired();
-  fieldsCannotBeEmpty({ name, url, pictureId });
 
   if (end < start) {
     throw new UserInputError("The start time must be before the end time");

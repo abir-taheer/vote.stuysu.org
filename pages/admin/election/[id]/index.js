@@ -26,11 +26,11 @@ import LockOpen from "@material-ui/icons/LockOpen";
 const EDIT_MUTATION = gql`
   mutation(
     $id: ObjectId!
-    $name: String!
-    $url: String!
+    $name: NonEmptyString!
+    $url: NonEmptyString!
     $pictureId: ObjectId!
     $type: ElectionType!
-    $allowedGradYears: [Int!]!
+    $allowedGradYears: [PositiveInt!]!
     $start: DateTime!
     $end: DateTime!
   ) {

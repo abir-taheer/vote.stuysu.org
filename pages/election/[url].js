@@ -9,16 +9,12 @@ import ElectionTabBar from "../../comps/election/ElectionTabBar";
 import BackButton from "../../comps/shared/BackButton";
 import useFormatDate from "../../utils/date/useFormatDate";
 import capitalize from "@material-ui/core/utils/capitalize";
-import Link from "next/link";
-import Button from "@material-ui/core/Button";
-import PeopleOutlined from "@material-ui/icons/PeopleOutlined";
-import HowToVote from "@material-ui/icons/HowToVote";
 import UserContext from "../../comps/auth/UserContext";
 import useLogin from "../../comps/auth/useLogin";
 import ElectionOverviewText from "../../comps/election/ElectionOverviewText";
 
 const ELECTION_QUERY = gql`
-  query($url: String!) {
+  query($url: NonEmptyString!) {
     electionByUrl(url: $url) {
       id
       type

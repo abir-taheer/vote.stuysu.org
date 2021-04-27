@@ -2,10 +2,10 @@ import { gql } from "apollo-server-micro";
 
 export default gql`
   type ElectionResult {
-    page: Int!
-    total: Int!
-    numPages: Int!
-    resultsPerPage: Int!
+    page: NonNegativeInt!
+    total: NonNegativeInt!
+    numPages: NonNegativeInt!
+    resultsPerPage: PositiveInt!
     hasNextPage: Boolean!
     hasPreviousPage: Boolean!
     results: [Election!]!

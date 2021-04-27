@@ -5,10 +5,10 @@ export default gql`
     id: ObjectId!
     firstName: String
     lastName: String
-    email: String
+    email: EmailAddress
     name: String
-    gradYear: Int
-    grade: Int
+    gradYear: PositiveInt
+    grade: PositiveInt
     adminPrivileges: Boolean
   }
 `;

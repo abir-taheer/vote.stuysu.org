@@ -1,6 +1,5 @@
 import Election from "../../../models/election";
 import { UserInputError } from "apollo-server-micro";
-import fieldsCannotBeEmpty from "../../../utils/user-input/fieldsCannotBeEmpty";
 import Picture from "../../../models/picture";
 
 export default async (
@@ -9,8 +8,6 @@ export default async (
   { adminRequired }
 ) => {
   adminRequired();
-
-  fieldsCannotBeEmpty({ name, url, pictureId });
 
   const election = await Election.findById(id);
 

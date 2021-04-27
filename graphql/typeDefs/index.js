@@ -12,6 +12,7 @@ import Picture from "./Picture";
 import PluralityVote from "./PluralityVote";
 import PublicKey from "./PublicKey";
 import StuyActivitiesSyncResult from "./StuyActivitiesSyncResult";
+import { typeDefs as graphqlScalarDefs } from "graphql-scalars";
 
 const typeDefs = [
   CloudinaryResource,
@@ -28,6 +29,7 @@ const typeDefs = [
   ElectionResult,
   PublicKey,
   StuyActivitiesSyncResult,
+  ...graphqlScalarDefs,
 ];
 
 export default typeDefs;

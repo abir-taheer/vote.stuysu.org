@@ -1,5 +1,4 @@
 import { ApolloError, ForbiddenError } from "apollo-server-micro";
-import fieldsCannotBeEmpty from "../../../utils/user-input/fieldsCannotBeEmpty";
 import getIdTokenPayload from "../../../utils/auth/getIdTokenPayload";
 import User from "../../../models/user";
 import getJWTSecret from "../../../utils/auth/getJWTSecret";
@@ -10,8 +9,6 @@ export default async (mutation, { idToken }, { signedIn, setCookie }) => {
   if (signedIn) {
     throw new ForbiddenError("You are already signed in.");
   }
-
-  fieldsCannotBeEmpty({ idToken });
 
   const payload = await getIdTokenPayload(idToken);
   validateIdTokenPayload(payload);

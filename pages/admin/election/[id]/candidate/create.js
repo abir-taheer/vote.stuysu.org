@@ -23,8 +23,8 @@ const QUERY = gql`
 const CREATE_MUTATION = gql`
   mutation(
     $electionId: ObjectId!
-    $name: String!
-    $url: String!
+    $name: NonEmptyString!
+    $url: NonEmptyString!
     $blurb: String!
     $platform: String!
     $managerIds: [ObjectId!]!

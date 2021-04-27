@@ -9,7 +9,7 @@ export default gql`
     """
     Name of the candidate
     """
-    name: String!
+    name: NonEmptyString!
 
     """
     Short blurb (max 200 characters) describing the candidate's platform
@@ -24,7 +24,7 @@ export default gql`
     """
     Url of the candidate
     """
-    url: String!
+    url: NonEmptyString!
 
     """
     The election that the candidate belongs to
