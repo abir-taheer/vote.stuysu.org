@@ -17,7 +17,7 @@ import Clear from "@material-ui/icons/Clear";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Chip from "@material-ui/core/Chip";
 import PlatformEditor from "./PlatformEditor";
-import { FormHelperText } from "@material-ui/core";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 function getCandidateUrl(val) {
   return val
