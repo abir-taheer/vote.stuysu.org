@@ -2,7 +2,7 @@ import { gql } from "apollo-server-micro";
 
 export default gql`
   type PluralityVote {
-    id: ObjectId!
+    id: NonEmptyString!
     gradYear: PositiveInt
     choice: Candidate
   }

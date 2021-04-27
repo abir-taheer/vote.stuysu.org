@@ -6,7 +6,9 @@ import getEligibleVoters from "./methods/election/getNumEligibleVoters";
 import verifyUserCanVote from "./methods/election/verifyUserCanVote";
 import findElectionByUrl from "./statics/election/findByUrl";
 import queryElections from "./statics/election/queryElections";
+import { customAlphabet } from "nanoid";
 
+const nanoid = customAlphabet("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", 6);
 const Schema = mongoose.Schema;
 
 const ElectionSchema = new Schema({
@@ -29,6 +31,10 @@ const ElectionSchema = new Schema({
   runoffVotes: {
     type: [
       {
+        id: {
+          type: String,
+          default: () => nanoid(),
+        },
         gradYear: Number,
         choices: [Schema.Types.ObjectId],
       },
@@ -41,6 +47,10 @@ const ElectionSchema = new Schema({
   pluralityVotes: {
     type: [
       {
+        id: {
+          type: String,
+          default: () => nanoid(),
+        },
         gradYear: Number,
         choice: Schema.Types.ObjectId,
       },

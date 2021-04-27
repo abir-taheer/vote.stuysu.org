@@ -6,8 +6,8 @@ export default gql`
     logout: Void!
 
     createElection(
-      name: String!
-      url: String!
+      name: NonEmptyString!
+      url: NonEmptyString!
       pictureId: ObjectId!
       type: ElectionType!
       allowedGradYears: [PositiveInt!]!
@@ -17,8 +17,8 @@ export default gql`
 
     editElection(
       id: ObjectId!
-      name: String!
-      url: String!
+      name: NonEmptyString!
+      url: NonEmptyString!
       pictureId: ObjectId!
       type: ElectionType!
       allowedGradYears: [PositiveInt!]!
@@ -27,8 +27,8 @@ export default gql`
     ): Election!
 
     createUser(
-      firstName: String!
-      lastName: String!
+      firstName: NonEmptyString!
+      lastName: NonEmptyString!
       gradYear: PositiveInt
       email: EmailAddress!
       adminPrivileges: Boolean!
@@ -45,10 +45,10 @@ export default gql`
 
     createCandidate(
       electionId: ObjectId!
-      name: String!
+      name: NonEmptyString!
       blurb: String!
       platform: String!
-      url: String!
+      url: NonEmptyString!
       managerIds: [ObjectId!]!
       """
       If a picture id is not provided a picture will be generated using initials
@@ -58,8 +58,8 @@ export default gql`
 
     editCandidate(
       id: ObjectId!
-      name: String!
-      url: String!
+      name: NonEmptyString!
+      url: NonEmptyString!
       blurb: String!
       platform: String!
       managerIds: [ObjectId!]!
@@ -71,7 +71,7 @@ export default gql`
 
     votePlurality(electionId: ObjectId!, candidateId: ObjectId!): PluralityVote!
 
-    uploadPicture(alt: String!, file: Upload!): Picture!
+    uploadPicture(alt: NonEmptyString!, file: Upload!): Picture!
 
     syncUsersWithStuyActivities: StuyActivitiesSyncResult!
   }
