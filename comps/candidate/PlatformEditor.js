@@ -37,8 +37,8 @@ const PlatformEditor = ({ value, setValue, className, disabled }) => {
           ],
           toolbar:
             "formatselect | bold italic forecolor backcolor | \
-            alignleft aligncenter alignright alignjustify | \
-            bullist numlist outdent indent | link image media | removeformat",
+                        alignleft aligncenter alignright alignjustify | \
+                        bullist numlist outdent indent | link image media | removeformat",
           automatic_uploads: true,
           browser_spellcheck: true,
           images_upload_handler: (file, success, failure) => {
