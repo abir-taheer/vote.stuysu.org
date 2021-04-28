@@ -14,16 +14,19 @@ const tabs = [
     path: ["/admin/election", "/admin/candidate"],
     label: "Elections",
     icon: <HowToVote />,
+    href: "/admin/election",
   },
   {
     path: ["/admin/user"],
     label: "Users",
     icon: <AccountCircle />,
+    href: "/admin/user",
   },
   {
     path: ["/admin/faq"],
     label: "FAQs",
     icon: <Help />,
+    href: "/admin/faq",
   },
 ];
 
@@ -49,7 +52,7 @@ const AdminTabBar = () => {
         <Tab
           label={tab.label}
           key={tab.path}
-          onClick={() => router.push(tab.path)}
+          onClick={() => router.push(tab.href)}
           icon={tab.icon}
         />
       ))}

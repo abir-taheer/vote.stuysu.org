@@ -34,3 +34,9 @@
 .link {
   cursor: pointer;
 }
+
+@media (min-width: 1400px) {
+  .grid {
+    width: 1200px;
+  }
+}

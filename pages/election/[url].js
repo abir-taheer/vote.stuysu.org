@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { gql, useQuery } from "@apollo/client";
 import withApollo from "../../comps/apollo/withApollo";
@@ -9,9 +9,8 @@ import ElectionTabBar from "../../comps/election/ElectionTabBar";
 import BackButton from "../../comps/shared/BackButton";
 import useFormatDate from "../../utils/date/useFormatDate";
 import capitalize from "@material-ui/core/utils/capitalize";
-import UserContext from "../../comps/auth/UserContext";
-import useLogin from "../../comps/auth/useLogin";
 import ElectionOverviewText from "../../comps/election/ElectionOverviewText";
+import Head from "next/head";
 
 const ELECTION_QUERY = gql`
   query($url: NonEmptyString!) {
@@ -37,8 +36,6 @@ const ELECTION_QUERY = gql`
 `;
 
 const Election = () => {
-  const user = useContext(UserContext);
-  const { signIn, loading: signInLoading } = useLogin();
   const router = useRouter();
   const { url } = router.query;
   const { data, refetch } = useQuery(ELECTION_QUERY, { variables: { url } });
@@ -59,6 +56,17 @@ const Election = () => {
 
   return (
     <div className={layout.container}>
+      <Head>
+        <title>{election.name} | StuyBOE Voting Site</title>
+        <meta
+          property="og:description"
+          content={`Learn about the candidates, vote, and view results for ${election.name}`}
+        />
+        <meta property="og:image" content={election.picture.resource?.url} />
+        <meta property="og:image:alt" content={election.picture.alt} />
+        <meta property="og:image:height" content={election.picture.height} />
+        <meta property="og:image:width" content={election.picture.width} />
+      </Head>
       <main className={layout.main}>
         <BackButton
           href={"/election"}

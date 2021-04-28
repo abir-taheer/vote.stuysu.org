@@ -9,6 +9,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { PUBLIC_URL } from "../constants";
 import { SnackbarProvider } from "notistack";
+import React from "react";
 
 function App({ Component, pageProps }) {
   const router = useRouter();
@@ -23,6 +24,9 @@ function App({ Component, pageProps }) {
             }}
           >
             <Head>
+              <title>StuyBOE Voting Site</title>
+              <meta property={"og:title"} content={"StuyBOE Voting Site"} />
+              <meta property="og:locale" content="en_US" />
               <meta property="og:site_name" content="StuyBOE Voting Site" />
               <meta property="og:url" content={PUBLIC_URL + router.asPath} />
             </Head>

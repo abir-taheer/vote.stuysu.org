@@ -11,20 +11,22 @@ import Link from "next/link";
 import joinUrl from "url-join";
 import Button from "@material-ui/core/Button";
 import Add from "@material-ui/icons/Add";
+import Grid from "@material-ui/core/Grid";
+import CandidateCard from "../../../../../comps/candidate/CandidateCard";
 
 const QUERY = gql`
   query($id: ObjectId!) {
     electionById(id: $id) {
       id
       name
-      candidates {
+      candidates(sort: alphabeticalAsc) {
         id
         name
+        blurb
         picture {
           resource {
             url
           }
-
           alt
         }
       }
@@ -34,8 +36,9 @@ const QUERY = gql`
 
 const CandidateIndex = () => {
   const router = useRouter();
-  const { id } = router.query;
-  const { data, loading } = useQuery(QUERY, { variables: { id } });
+  const { data, loading } = useQuery(QUERY, {
+    variables: { id: router.query.id },
+  });
 
   const election = data?.electionById;
 
@@ -56,6 +59,7 @@ const CandidateIndex = () => {
               <Typography variant={"h2"} color={"secondary"}>
                 {election.name}
               </Typography>
+
               <AdminElectionTabBar />
 
               <Link href={joinUrl(router.asPath, "/create")}>
@@ -63,10 +67,32 @@ const CandidateIndex = () => {
                   color={"secondary"}
                   variant={"outlined"}
                   startIcon={<Add />}
+                  className={layout.spaced}
                 >
                   Add A Candidate
                 </Button>
               </Link>
+
+              <Typography variant={"body1"} gutterBottom>
+                Click on any of the candidates
+              </Typography>
+              <Grid
+                container
+                justify={"center"}
+                className={layout.grid}
+                spacing={3}
+              >
+                {election.candidates.map(({ picture, blurb, name, id }) => (
+                  <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
+                    <CandidateCard
+                      picture={picture}
+                      blurb={blurb}
+                      name={name}
+                      href={"/admin/candidate/" + id}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
             </>
           )}
         </main>

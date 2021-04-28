@@ -33,6 +33,23 @@ CandidateSchema.statics.electionIdLoader = findManyLoaderFactory(
   "electionId"
 );
 
+CandidateSchema.statics.ascElectionIdLoader = findManyLoaderFactory(
+  "Candidate",
+  "electionId",
+  {},
+  {},
+  { sort: { name: 1 } }
+);
+
+CandidateSchema.statics.descElectionIdLoader = findManyLoaderFactory(
+  "Candidate",
+  "electionId",
+  {},
+  {},
+
+  { sort: { name: -1 } }
+);
+
 const Candidate =
   mongoose.models.Candidate || mongoose.model("Candidate", CandidateSchema);
 

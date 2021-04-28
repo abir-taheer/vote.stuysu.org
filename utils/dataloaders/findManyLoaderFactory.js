@@ -5,6 +5,7 @@ export default function findManyLoaderFactory(
   model,
   field,
   conditions = {},
+  projections = {},
   options = {}
 ) {
   const batchLoadFn = async (keys) => {
@@ -20,6 +21,7 @@ export default function findManyLoaderFactory(
         [field]: { $in: uniqueKeys },
         ...conditions,
       },
+      { ...projections },
       { ...options }
     );
 
