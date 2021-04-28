@@ -23,8 +23,13 @@ const ELECTION_QUERY = gql`
       completed
       picture {
         id
+        alt
         resource {
           url
+          height
+          width
+          resourceType
+          format
         }
       }
       userIsEligible
@@ -59,14 +64,33 @@ const Election = () => {
       <Head>
         <title>{election.name} | StuyBOE Voting Site</title>
         <meta
+          property={"og:title"}
+          content={`${election.name} | StuyBOE Voting Site`}
+        />
+        <meta
           property="og:description"
           content={`Learn about the candidates, vote, and view results for ${election.name}`}
         />
         <meta property="og:image" content={election.picture.resource?.url} />
         <meta property="og:image:alt" content={election.picture.alt} />
-        <meta property="og:image:height" content={election.picture.height} />
-        <meta property="og:image:width" content={election.picture.width} />
+        <meta
+          property="og:image:height"
+          content={election.picture.resource.height}
+        />
+        <meta
+          property="og:image:width"
+          content={election.picture.resource.width}
+        />
+        <meta
+          property="og:image:type"
+          content={
+            election.picture.resource.resourceType +
+            "/" +
+            election.picture.resource.format
+          }
+        />
       </Head>
+
       <main className={layout.main}>
         <BackButton
           href={"/election"}

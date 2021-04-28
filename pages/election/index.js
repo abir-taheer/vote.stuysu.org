@@ -8,6 +8,7 @@ import { parse } from "querystring";
 import Search from "@material-ui/icons/Search";
 import { gql, useQuery } from "@apollo/client";
 import ElectionCardGrid from "../../comps/election/ElectionCardGrid";
+import Head from "next/head";
 
 const QUERY = gql`
   query($query: String!, $page: PositiveInt!) {
@@ -54,6 +55,28 @@ const ElectionIndex = () => {
 
   return (
     <div className={layout.container}>
+      <Head>
+        <title>Elections | StuyBOE Voting Site</title>
+        <meta
+          property={"og:title"}
+          content={"Elections | StuyBOE Voting Site"}
+        />
+
+        <meta
+          property={"og:description"}
+          content={
+            "View all of the current and past elections for Student Union Elections"
+          }
+        />
+
+        <meta
+          property={"description"}
+          content={
+            "View all of the current and past elections for Student Union Elections"
+          }
+        />
+
+      </Head>
       <main className={layout.main}>
         <Typography variant={"h1"}>Elections</Typography>
         <TextField
