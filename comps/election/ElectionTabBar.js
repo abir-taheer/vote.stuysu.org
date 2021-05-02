@@ -21,7 +21,7 @@ const tabs = [
     completed: null,
   },
   {
-    path: "/election/[url]/results",
+    path: "/election/[url]/result",
     label: "Results",
     exact: false,
     completed: true,
@@ -38,14 +38,19 @@ const ElectionTabBar = ({ completed }) => {
   const router = useRouter();
   const { url } = router.query;
 
-  const adjustedTabs = tabs.map((tab) => ({
-    ...tab,
-    path: tab.path.replace("[url]", url || ""),
-  }));
+  const isMatch = (tab) =>
+    tab.exact ? router.asPath === tab.path : router.asPath.startsWith(tab.path);
 
-  const tabIndex = adjustedTabs.findIndex((tab) =>
-    tab.exact ? router.asPath === tab.path : router.asPath.startsWith(tab.path)
-  );
+  const adjustedTabs = tabs
+    .map((tab) => ({
+      ...tab,
+      path: tab.path.replace("[url]", url || ""),
+    }))
+    .filter(
+      (tab) =>
+        tab.completed === null || tab.completed === completed || isMatch(tab)
+    );
+  const tabIndex = adjustedTabs.findIndex(isMatch);
 
   const [value, setValue] = useState(tabIndex);
 
@@ -60,16 +65,14 @@ const ElectionTabBar = ({ completed }) => {
       textColor="primary"
       className={styles.tabs}
     >
-      {adjustedTabs.map((tab) =>
-        (tab.completed === null) ^ (tab.completed === completed) ? (
-          <Tab
-            label={tab.label}
-            key={tab.path}
-            onClick={() => router.push(tab.path)}
-            icon={tab.icon}
-          />
-        ) : null
-      )}
+      {adjustedTabs.map((tab) => (
+        <Tab
+          label={tab.label}
+          key={tab.path}
+          onClick={() => router.push(tab.path)}
+          icon={tab.icon}
+        />
+      ))}
     </Tabs>
   );
 };

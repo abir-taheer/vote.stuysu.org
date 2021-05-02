@@ -5,7 +5,7 @@ import AdminTabBar from "../../../../../comps/admin/AdminTabBar";
 import Typography from "@material-ui/core/Typography";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { CircularProgress } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import ElectionNotFound from "../../../../../comps/election/ElectionNotFound";
 import CandidateForm from "../../../../../comps/candidate/CandidateForm";
 import alertDialog from "../../../../../comps/dialog/alertDialog";

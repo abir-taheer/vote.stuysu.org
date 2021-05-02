@@ -6,6 +6,7 @@ import Mutation from "./Mutation";
 import Picture from "./Picture";
 import Election from "./Election";
 import Candidate from "./Candidate";
+import PluralityVote from "./PluralityVote";
 import { resolvers as graphqlScalarResolvers } from "graphql-scalars";
 
 const Resolvers = {
@@ -16,6 +17,7 @@ const Resolvers = {
   Picture,
   Election,
   Candidate,
+  PluralityVote,
   // Custom Scalar Types
   ObjectId,
   ...graphqlScalarResolvers,

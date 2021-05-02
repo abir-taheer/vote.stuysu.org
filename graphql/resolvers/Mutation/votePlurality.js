@@ -22,7 +22,7 @@ export default async (
     throw new UserInputError("There is no candidate with that id");
   }
 
-  if (!candidate.isActive) {
+  if (!candidate.active) {
     throw new ForbiddenError(
       "That candidate is not running and you may not cast a vote for them"
     );
@@ -34,9 +34,9 @@ export default async (
     choice: candidate.id,
   };
 
-  await Election.findOneAndUpdate(
+  await Election.update(
     { _id: electionId },
-    { $push: { pluralityVotes: vote } }
+    { $push: { pluralityVotes: vote, voterIds: user.id } }
   );
 
   return vote;

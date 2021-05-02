@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { gql, useQuery } from "@apollo/client";
-import withApollo from "../../comps/apollo/withApollo";
-import layout from "./../../styles/layout.module.css";
-import Error404 from "../404";
+import withApollo from "../../../comps/apollo/withApollo";
+import layout from "../../../styles/layout.module.css";
+import Error404 from "../../404";
 import Typography from "@material-ui/core/Typography";
-import ElectionTabBar from "../../comps/election/ElectionTabBar";
-import BackButton from "../../comps/shared/BackButton";
-import useFormatDate from "../../utils/date/useFormatDate";
+import ElectionTabBar from "../../../comps/election/ElectionTabBar";
+import BackButton from "../../../comps/shared/BackButton";
+import useFormatDate from "../../../utils/date/useFormatDate";
 import capitalize from "@material-ui/core/utils/capitalize";
-import ElectionOverviewText from "../../comps/election/ElectionOverviewText";
+import ElectionOverviewText from "../../../comps/election/ElectionOverviewText";
 import Head from "next/head";
 
 const ELECTION_QUERY = gql`
@@ -59,6 +59,8 @@ const Election = () => {
   const start = new Date(election.start);
   const end = new Date(election.end);
 
+  const voteId = globalThis?.localStorage?.getItem("vote-id-" + election.id);
+
   return (
     <div className={layout.container}>
       <Head>
@@ -102,6 +104,12 @@ const Election = () => {
         </Typography>
 
         <ElectionTabBar completed={election.completed} />
+        {!!voteId && (
+          <Typography variant={"h3"} gutterBottom>
+            Your Vote ID Is: <code className={layout.voteId}>{voteId}</code>
+          </Typography>
+        )}
+
         <div>
           <Typography variant={"body1"}>
             Start{now < start ? "s" : "ed"}:{" "}

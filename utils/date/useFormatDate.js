@@ -75,7 +75,37 @@ const useFormatDate = (updateLive = false, updateInterval) => {
     });
   }
 
-  return { getReadableDate, now };
+  function formatDuration(duration) {
+    const days = duration.days();
+    const hours = duration.hours();
+    const minutes = duration.minutes();
+    const seconds = duration.seconds();
+
+    let parts = [];
+    if (days > 0) {
+      parts.push(days + " days");
+    }
+
+    if (hours > 0 || days > 0) {
+      parts.push(hours + " hours");
+    }
+
+    if (days < 1 && minutes > 0) {
+      parts.push(minutes + " minutes");
+    }
+
+    if (days < 1 && hours < 1) {
+      parts.push(seconds + " seconds");
+    }
+
+    if (parts.length > 1) {
+      parts[parts.length - 1] = "and " + parts[parts.length - 1];
+    }
+
+    return parts.join(parts.length > 2 ? ", " : " ");
+  }
+
+  return { getReadableDate, now, formatDuration };
 };
 
 export default useFormatDate;

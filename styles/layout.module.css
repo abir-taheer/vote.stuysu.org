@@ -23,6 +23,13 @@
   text-align: center;
 }
 
+.smallVector {
+  max-width: 70%;
+  max-height: 200px;
+  object-fit: contain;
+  text-align: center;
+}
+
 .title {
   text-align: center;
 }
@@ -39,4 +46,21 @@
   .grid {
     width: 1200px;
   }
+}
+
+.centerContainer {
+  text-align: center;
+}
+
+.voteId {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 0.5rem;
+  color: #6c5ce7;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.fixedWidthDescription {
+  max-width: 500px;
 }

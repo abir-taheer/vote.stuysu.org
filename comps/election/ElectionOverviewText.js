@@ -7,6 +7,10 @@ import BarChart from "@material-ui/icons/BarChart";
 import PeopleOutlined from "@material-ui/icons/PeopleOutlined";
 import useLogin from "../auth/useLogin";
 import HowToVoteOutlined from "@material-ui/icons/HowToVoteOutlined";
+import layout from "../../styles/layout.module.css";
+import waitingPale from "./../../img/pale-waiting.png";
+import dalia from "./../../img/dalia-by-cindy-zheng.gif";
+import ImageWithPopover from "../shared/ImageWithPopover";
 
 const ElectionOverviewText = ({
   isOpen,
@@ -25,6 +29,14 @@ const ElectionOverviewText = ({
   if (completed) {
     return (
       <>
+        <ImageWithPopover
+          src={dalia}
+          alt={"A small blob blowing confetti. Art by Cindy Zheng"}
+          className={layout.smallVector}
+          popover={<Link href={"https://google.com"}>Art by Pamela Giani</Link>}
+          center
+        />
+
         <Typography variant={"h3"}>
           The election's over and results are available 🎉
         </Typography>
@@ -53,11 +65,19 @@ const ElectionOverviewText = ({
   if (now > end) {
     return (
       <>
+        <ImageWithPopover
+          src={waitingPale}
+          alt={"Someone leaning against a clock"}
+          className={layout.smallVector}
+          title={"Vector provided by icons8"}
+          center
+        />
+        <br />
         <Typography variant={"h3"}>
           The election's over but results aren't out yet
         </Typography>
 
-        <Typography variant={"body1"} paragraph>
+        <Typography variant={"body1"} paragraph gutterBottom>
           Don't worry, this page will automatically update once they're out 😌
         </Typography>
       </>
