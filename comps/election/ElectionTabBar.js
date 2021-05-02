@@ -5,6 +5,10 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import styles from "./ElectionTabBar.module.css";
+import DashboardOutlined from "@material-ui/icons/DashboardOutlined";
+import GroupWorkOutlined from "@material-ui/icons/GroupWorkOutlined";
+import HowToVoteOutlined from "@material-ui/icons/HowToVoteOutlined";
+import BallotOutlined from "@material-ui/icons/BallotOutlined";
 
 const tabs = [
   {
@@ -13,24 +17,28 @@ const tabs = [
     exact: true,
     // null or boolean value for filtering based on completion
     completed: null,
+    icon: <DashboardOutlined />,
   },
   {
     path: "/election/[url]/candidate",
     label: "Candidates",
     exact: false,
     completed: null,
+    icon: <GroupWorkOutlined />,
   },
   {
     path: "/election/[url]/result",
     label: "Results",
     exact: false,
     completed: true,
+    icon: <BallotOutlined />,
   },
   {
     path: "/election/[url]/vote",
     label: "Vote",
     exact: false,
     completed: false,
+    icon: <HowToVoteOutlined />,
   },
 ];
 

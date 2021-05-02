@@ -23,7 +23,7 @@ const CandidateCard = ({ href, picture, blurb, name }) => {
             </Typography>
             {/*Put the dates in a separate component because they re-render every second*/}
             <Typography variant={"body2"} color={"textSecondary"} gutterBottom>
-              {blurb}
+              {blurb || "This candidate has not provided a blurb"}
             </Typography>
           </CardContent>
         </CardActionArea>

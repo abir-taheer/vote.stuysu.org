@@ -9,6 +9,7 @@ import BackButton from "../../../../../comps/shared/BackButton";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import withApollo from "../../../../../comps/apollo/withApollo";
+import CandidateTabBar from "../../../../../comps/candidate/CandidateTabBar";
 
 const QUERY = gql`
   query($electionUrl: NonEmptyString!, $candidateUrl: NonEmptyString!) {
@@ -29,11 +30,13 @@ const QUERY = gql`
         }
       }
       active
+      isManager
     }
     electionByUrl(url: $electionUrl) {
       id
       name
       url
+      completed
     }
   }
 `;
@@ -72,7 +75,14 @@ function CandidatePage() {
       <Head>
         <title>{title}</title>
         <meta property={"og:title"} content={title} />
-        <meta property="og:description" content={candidate.blurb} />
+        <meta
+          property={"description"}
+          content={candidate.blurb || "Candidate for " + election.name}
+        />
+        <meta
+          property="og:description"
+          content={candidate.blurb || "Candidate for " + election.name}
+        />
         <meta property="og:image" content={candidate.picture.resource?.url} />
         <meta property="og:image:alt" content={candidate.picture.alt} />
         <meta
@@ -110,6 +120,12 @@ function CandidatePage() {
           {candidate.name}
         </Typography>
 
+        <CandidateTabBar
+          isManager={candidate.isManager}
+          electionCompleted={election.completed}
+          active={candidate.active}
+        />
+
         <div className={layout.largePageBodyContainer}>
           <Typography
             variant={"h2"}
@@ -119,6 +135,16 @@ function CandidatePage() {
           >
             Blurb:
           </Typography>
+          {!candidate.blurb && (
+            <Typography
+              variant={"body1"}
+              color={"textSecondary"}
+              className={layout.spaced}
+            >
+              This candidate has not {!election.completed && "yet"} provided a
+              blurb
+            </Typography>
+          )}
           <Typography
             variant={"body1"}
             children={candidate.blurb}
@@ -134,6 +160,16 @@ function CandidatePage() {
           >
             Platform:
           </Typography>
+          {!candidate.platform && (
+            <Typography
+              variant={"body1"}
+              color={"textSecondary"}
+              className={layout.spaced}
+            >
+              This candidate has not {!election.completed && "yet"} provided a
+              platform
+            </Typography>
+          )}
           <div
             dangerouslySetInnerHTML={{ __html: candidate.platform }}
             className={layout.spaced}

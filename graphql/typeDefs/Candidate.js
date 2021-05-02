@@ -45,5 +45,10 @@ export default gql`
     Users who are able to manage the candidate's presence on the site
     """
     managers: [User!]!
+
+    """
+    Returns true if the user is signed in and is a campaign manager for this candidate
+    """
+    isManager: Boolean
   }
 `;
