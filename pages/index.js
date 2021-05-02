@@ -3,12 +3,22 @@ import styles from "../styles/Home.module.css";
 import layout from "../styles/layout.module.css";
 import voting from "./../img/voting.svg";
 import Typography from "@material-ui/core/Typography";
+import React from "react";
 
 export default function Home() {
   return (
     <div className={layout.container}>
       <Head>
         <title>Home | StuyBOE Voting Site</title>
+        <meta property={"og:title"} content={"Home | StuyBOE Voting Site"} />
+        <meta
+          property={"og:image"}
+          content={"https://vote.stuysu.org/logo512.png"}
+        />
+        <meta property={"og:image:height"} content={512} />
+        <meta property={"og:image:width"} content={512} />
+        <meta property={"og:image:alt"} content={"Board of Elections Logo"} />
+        <meta property="og:image:type" content="image/png" />
       </Head>
 
       <main className={layout.main}>
