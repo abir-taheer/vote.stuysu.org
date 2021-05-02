@@ -15,11 +15,14 @@ export default function findManyLoaderFactory(
 
     const uniqueKeys = [...new Set(keys)];
 
+    const actualConditions =
+      conditions instanceof Function ? conditions() : conditions;
+
     /** @type Array */
     const entries = await Model.find(
       {
         [field]: { $in: uniqueKeys },
-        ...conditions,
+        ...actualConditions,
       },
       { ...projections },
       { ...options }

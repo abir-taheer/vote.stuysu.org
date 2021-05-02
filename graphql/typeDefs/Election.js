@@ -25,5 +25,8 @@ export default gql`
     (If the election is not completed and the current time is in between the start and end time)
     """
     isOpen: Boolean!
+
+    activeAnnouncements: [Announcement!]!
+    allAnnouncements: [Announcement!]!
   }
 `;

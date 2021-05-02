@@ -13,8 +13,10 @@ import PluralityVote from "./PluralityVote";
 import PublicKey from "./PublicKey";
 import StuyActivitiesSyncResult from "./StuyActivitiesSyncResult";
 import { typeDefs as graphqlScalarDefs } from "graphql-scalars";
+import Announcement from "./Announcement";
 
 const typeDefs = [
+  Announcement,
   CloudinaryResource,
   Election,
   ElectionTypes,
