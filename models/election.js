@@ -7,6 +7,7 @@ import verifyUserCanVote from "./methods/election/verifyUserCanVote";
 import findElectionByUrl from "./statics/election/findByUrl";
 import queryElections from "./statics/election/queryElections";
 import { customAlphabet } from "nanoid";
+import calculateRunoffResults from "./methods/election/calculateRunoffResults";
 
 const nanoid = customAlphabet("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", 5);
 const Schema = mongoose.Schema;
@@ -44,6 +45,28 @@ const ElectionSchema = new Schema({
     select: false,
   },
 
+  runoffResults: {
+    rounds: [
+      {
+        number: Number,
+        numVotes: Number,
+        results: [
+          {
+            candidateId: Schema.Types.ObjectId,
+            eliminated: Boolean,
+            percentage: Number,
+            numVotes: Number,
+          },
+        ],
+        eliminatedCandidateIds: [Schema.Types.ObjectId],
+      },
+    ],
+    winnerId: Schema.Types.ObjectId,
+    totalVotes: Number,
+    isTie: Boolean,
+    numEligibleVoters: Number,
+  },
+
   pluralityVotes: {
     type: [
       {
@@ -77,6 +100,7 @@ ElectionSchema.methods.isVotingPeriod = isVotingPeriod;
 ElectionSchema.methods.getNumEligibleVoters = getEligibleVoters;
 
 ElectionSchema.methods.calculatePluralityResults = calculatePluralityResults;
+ElectionSchema.methods.calculateRunoffResults = calculateRunoffResults;
 
 ElectionSchema.methods.verifyUserCanVote = verifyUserCanVote;
 
