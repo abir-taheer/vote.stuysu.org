@@ -6,7 +6,7 @@ import User from "../../models/user";
 import unboundSetCookie from "../../utils/middleware/setCookie";
 import { createComplexityLimitRule } from "graphql-validation-complexity";
 
-const ComplexityLimitRule = createComplexityLimitRule(25000, {
+const ComplexityLimitRule = createComplexityLimitRule(35000, {
   scalarCost: 1,
   objectCost: 5,
   listFactor: 10,
