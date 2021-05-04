@@ -15,6 +15,7 @@ import Delete from "@material-ui/icons/Delete";
 import alertDialog from "../../../comps/dialog/alertDialog";
 import { useSnackbar } from "notistack";
 import confirmDialog from "../../../comps/dialog/confirmDialog";
+import BackButton from "../../../comps/shared/BackButton";
 
 const QUERY = gql`
   query($id: ObjectId!) {
@@ -150,6 +151,10 @@ export default function ManageAnnouncement() {
     <AdminRequired>
       <div className={layout.container}>
         <main className={layout.main}>
+          <BackButton
+            href={"/admin/announcement"}
+            text={"Back To Announcements"}
+          />
           <Typography variant={"h1"}>
             Manage Announcement | Admin Panel
           </Typography>
