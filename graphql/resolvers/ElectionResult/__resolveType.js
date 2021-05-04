@@ -1,4 +1,6 @@
 export default (result) => {
+  console.log(result);
+
   if (result.rounds) {
     return "RunoffResult";
   }
