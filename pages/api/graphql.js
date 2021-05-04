@@ -4,6 +4,13 @@ import resolvers from "../../graphql/resolvers";
 import getJWTData from "../../utils/auth/getJWTData";
 import User from "../../models/user";
 import unboundSetCookie from "../../utils/middleware/setCookie";
+import { createComplexityLimitRule } from "graphql-validation-complexity";
+
+const ComplexityLimitRule = createComplexityLimitRule(25000, {
+  scalarCost: 1,
+  objectCost: 5,
+  listFactor: 10,
+});
 
 const apolloServer = new ApolloServer({
   typeDefs,
@@ -66,6 +73,7 @@ const apolloServer = new ApolloServer({
   uploads: {
     maxFileSize: 10000000,
   },
+  validationRules: [ComplexityLimitRule],
 });
 
 export default apolloServer.createHandler({

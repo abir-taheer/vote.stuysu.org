@@ -6,7 +6,7 @@ export default (election, _, { user, authenticationRequired }) => {
 
     if (!user.adminPrivileges) {
       throw new ForbiddenError(
-        "At this time must be an admin to view the results of this election"
+        "At this time you must be an admin to view the results of this election"
       );
     }
   }
