@@ -11,8 +11,14 @@ import openElection from "./openElection";
 import syncUsersWithStuyActivities from "./syncUsersWithStuyActivities";
 import createCandidate from "./createCandidate";
 import editCandidate from "./editCandidate";
+import editAnnouncement from "./editAnnouncement";
+import createAnnouncement from "./createAnnouncement";
+import deleteAnnouncement from "./deleteAnnouncement";
 
 export default {
+  createAnnouncement,
+  editAnnouncement,
+  deleteAnnouncement,
   openElection,
   completeElection,
   createElection,

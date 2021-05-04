@@ -134,6 +134,28 @@ export default gql`
     usersById(ids: [ObjectId!]!): [User]!
 
     """
+    Takes an id and returns the announcement that it belongs to
+    """
+    announcementById(id: ObjectId!): Announcement
+
+    allAnnouncements(
+      """
+      A string used to filter announcements by title and content
+      """
+      query: String! = ""
+
+      """
+      The page requested, if the query has more than one page of results.
+      """
+      page: PositiveInt! = 1
+
+      """
+      Number of results on each page. Must be between 1 and 50. Default is 9
+      """
+      resultsPerPage: PositiveInt! = 9
+    ): AnnouncementResult!
+
+    """
     Returns elections that match the query that have completed set to true
     """
     pastElections(

@@ -1,6 +1,7 @@
 import mongoose from "./mongoose";
 import findOneLoaderFactory from "../utils/dataloaders/findOneLoaderFactory";
 import findManyLoaderFactory from "../utils/dataloaders/findManyLoaderFactory";
+import queryAnnouncements from "./statics/announcement/queryAnnouncements";
 const Schema = mongoose.Schema;
 
 const AnnouncementSchema = new Schema({
@@ -11,8 +12,10 @@ const AnnouncementSchema = new Schema({
   permanent: Boolean,
   electionId: Schema.Types.ObjectId,
   showOnHome: Boolean,
+  updatedAt: Date,
 });
 
+AnnouncementSchema.statics.queryAnnouncements = queryAnnouncements;
 AnnouncementSchema.statics.idLoader = findOneLoaderFactory("Announcement");
 AnnouncementSchema.statics.electionIdLoaderAll = findManyLoaderFactory(
   "Announcement",

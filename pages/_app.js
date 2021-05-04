@@ -9,35 +9,39 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { PUBLIC_URL } from "../constants";
 import { SnackbarProvider } from "notistack";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from "@date-io/moment";
 import React from "react";
 
 function App({ Component, pageProps }) {
   const router = useRouter();
 
   return (
-    <UserProvider>
-      <StylesProvider injectFirst>
-        <ThemeContext>
-          <SnackbarProvider
-            classes={{
-              variantSuccess: "successSnackbar",
-            }}
-          >
-            <Head>
-              <title>StuyBOE Voting Site</title>
-              <meta property="og:type" content="website" />
-              <meta property="og:locale" content="en_US" />
-              <meta property="og:site_name" content="StuyBOE Voting Site" />
-              <meta property="og:url" content={PUBLIC_URL + router.asPath} />
-            </Head>
-            <NavBar />
-            <Component {...pageProps} />
-            <SharedDialog />
-            <Footer />
-          </SnackbarProvider>
-        </ThemeContext>
-      </StylesProvider>
-    </UserProvider>
+    <MuiPickersUtilsProvider utils={MomentUtils}>
+      <UserProvider>
+        <StylesProvider injectFirst>
+          <ThemeContext>
+            <SnackbarProvider
+              classes={{
+                variantSuccess: "successSnackbar",
+              }}
+            >
+              <Head>
+                <title>StuyBOE Voting Site</title>
+                <meta property="og:type" content="website" />
+                <meta property="og:locale" content="en_US" />
+                <meta property="og:site_name" content="StuyBOE Voting Site" />
+                <meta property="og:url" content={PUBLIC_URL + router.asPath} />
+              </Head>
+              <NavBar />
+              <Component {...pageProps} />
+              <SharedDialog />
+              <Footer />
+            </SnackbarProvider>
+          </ThemeContext>
+        </StylesProvider>
+      </UserProvider>
+    </MuiPickersUtilsProvider>
   );
 }
 

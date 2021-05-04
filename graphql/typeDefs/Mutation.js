@@ -26,6 +26,29 @@ export default gql`
       end: DateTime!
     ): Election!
 
+    createAnnouncement(
+      title: NonEmptyString!
+      body: NonEmptyString!
+      permanent: Boolean!
+      end: DateTime
+      start: DateTime
+      showOnHome: Boolean!
+      electionId: ObjectId
+    ): Announcement!
+
+    editAnnouncement(
+      id: ObjectId!
+      title: NonEmptyString!
+      body: NonEmptyString!
+      permanent: Boolean!
+      end: DateTime
+      start: DateTime
+      showOnHome: Boolean!
+      electionId: ObjectId
+    ): Announcement!
+
+    deleteAnnouncement(id: ObjectId!): Void
+
     createUser(
       firstName: NonEmptyString!
       lastName: NonEmptyString!

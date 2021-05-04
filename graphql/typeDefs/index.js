@@ -14,9 +14,11 @@ import PublicKey from "./PublicKey";
 import StuyActivitiesSyncResult from "./StuyActivitiesSyncResult";
 import { typeDefs as graphqlScalarDefs } from "graphql-scalars";
 import Announcement from "./Announcement";
+import AnnouncementResult from "./AnnouncementResult";
 
 const typeDefs = [
   Announcement,
+  AnnouncementResult,
   CloudinaryResource,
   Election,
   ElectionTypes,

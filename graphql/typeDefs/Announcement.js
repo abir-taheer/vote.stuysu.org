@@ -10,5 +10,6 @@ export default gql`
     permanent: Boolean!
     election: Election
     showOnHome: Boolean!
+    updatedAt: DateTime!
   }
 `;

@@ -15,9 +15,13 @@ import userById from "./userById";
 import usersById from "./usersById";
 import candidatesByElectionId from "./candidatesByElectionId";
 import userHasVoted from "./userHasVoted";
+import allAnnouncements from "./allAnnouncements";
+import announcementById from "./announcementById";
 
 const Query = {
+  announcementById,
   adminPictures,
+  allAnnouncements,
   allUsers,
   userById,
   usersById,

@@ -39,7 +39,7 @@ async function validate(values) {
     const end = new Date(values.end);
 
     if (end < start) {
-      errors.end = "The end must be before the start";
+      errors.end = "The start must be before the end";
     }
   }
 

@@ -1,0 +1,19 @@
+.form {
+  max-width: 1200px;
+}
+
+.formControl {
+  margin: 0.5rem;
+}
+
+.submitButton {
+  margin: 0.5rem;
+}
+
+.cancelButton {
+  margin: 0.5rem;
+}
+
+.dateControl {
+  
+}

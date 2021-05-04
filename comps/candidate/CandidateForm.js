@@ -16,7 +16,7 @@ import alertDialog from "../dialog/alertDialog";
 import Clear from "@material-ui/icons/Clear";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Chip from "@material-ui/core/Chip";
-import PlatformEditor from "./PlatformEditor";
+import TinyEditor from "../shared/TinyEditor";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
 function getCandidateUrl(val) {
@@ -244,7 +244,7 @@ const CandidateForm = ({
         <FormGroup className={styles.formGroup}>
           <FormControl component="fieldset" fullWidth>
             <FormLabel component="legend">Platform</FormLabel>
-            <PlatformEditor
+            <TinyEditor
               value={values.platform}
               setValue={(val) => setFieldValue("platform", val)}
               disabled={disabled || isSubmitting}

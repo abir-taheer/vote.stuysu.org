@@ -14,7 +14,7 @@ const UPLOAD_MUTATION = gql`
   }
 `;
 
-const PlatformEditor = ({ value, setValue, className, disabled }) => {
+const TinyEditor = ({ value, setValue, className, disabled }) => {
   const [uploadPicture] = useMutation(UPLOAD_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -82,4 +82,4 @@ const PlatformEditor = ({ value, setValue, className, disabled }) => {
   );
 };
 
-export default PlatformEditor;
+export default TinyEditor;

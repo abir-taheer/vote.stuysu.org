@@ -1,11 +1,12 @@
-import HowToVote from "@material-ui/icons/HowToVote";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import Help from "@material-ui/icons/Help";
+import AccountCircleOutlined from "@material-ui/icons/AccountCircleOutlined";
+import HowToVoteOutlined from "@material-ui/icons/HowToVoteOutlined";
+import HelpOutlined from "@material-ui/icons/HelpOutlineOutlined";
+import NotificationsActiveOutlinedIcon from "@material-ui/icons/NotificationsActiveOutlined";
 
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import { useRouter } from "next/router";
 
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "./AdminTabBar.module.css";
 
@@ -13,20 +14,26 @@ const tabs = [
   {
     path: ["/admin/election", "/admin/candidate"],
     label: "Elections",
-    icon: <HowToVote />,
+    icon: <HowToVoteOutlined />,
     href: "/admin/election",
   },
   {
     path: ["/admin/user"],
     label: "Users",
-    icon: <AccountCircle />,
+    icon: <AccountCircleOutlined />,
     href: "/admin/user",
   },
   {
     path: ["/admin/faq"],
     label: "FAQs",
-    icon: <Help />,
+    icon: <HelpOutlined />,
     href: "/admin/faq",
+  },
+  {
+    path: ["/admin/announcement"],
+    label: "Announcements",
+    icon: <NotificationsActiveOutlinedIcon />,
+    href: "/admin/announcement",
   },
 ];
 
