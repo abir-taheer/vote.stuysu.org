@@ -1,7 +1,7 @@
 import { gql } from "apollo-server-micro";
 
 export default gql`
-  type StuyActivitiesSyncResult {
+  type StuyActivitiesSync {
     totalUsersCreated: PositiveInt!
     completedAt: Date!
   }

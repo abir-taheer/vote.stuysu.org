@@ -84,7 +84,7 @@ export default gql`
       Number of results on each page. Must be between 1 and 50. Default is 9
       """
       resultsPerPage: PositiveInt! = 9
-    ): ElectionResult!
+    ): ElectionQueryResult!
 
     """
     Returns elections that match the query that have completed set to false
@@ -102,7 +102,7 @@ export default gql`
       Number of results on each page. Must be between 1 and 50. Default is 9
       """
       resultsPerPage: PositiveInt! = 9
-    ): ElectionResult!
+    ): ElectionQueryResult!
 
     """
     Returns users that match the given query
@@ -120,7 +120,7 @@ export default gql`
       Number of results on each page. Must be between 1 and 50. Default is 9
       """
       resultsPerPage: PositiveInt! = 9
-    ): UserResult
+    ): UserQueryResult
 
     """
     Returns the user with the given object id or null if no users were found
@@ -153,7 +153,7 @@ export default gql`
       Number of results on each page. Must be between 1 and 50. Default is 9
       """
       resultsPerPage: PositiveInt! = 9
-    ): AnnouncementResult!
+    ): AnnouncementQueryResult!
 
     """
     Returns elections that match the query that have completed set to true
@@ -171,7 +171,7 @@ export default gql`
       Number of results on each page. Must be between 1 and 50. Default is 9
       """
       resultsPerPage: PositiveInt! = 9
-    ): ElectionResult!
+    ): ElectionQueryResult!
 
     """
     Admins Only!

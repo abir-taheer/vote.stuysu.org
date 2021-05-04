@@ -26,6 +26,8 @@ export default gql`
     """
     isOpen: Boolean!
 
+    results: ElectionResult!
+
     activeAnnouncements: [Announcement!]!
     allAnnouncements: [Announcement!]!
   }

@@ -1,7 +1,7 @@
 import { gql } from "apollo-server-micro";
 
 export default gql`
-  type UserResult {
+  type UserQueryResult {
     page: PositiveInt!
     total: PositiveInt!
     numPages: PositiveInt!

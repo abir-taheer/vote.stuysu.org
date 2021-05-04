@@ -1,9 +1,10 @@
 import { typeDefs as graphqlScalarDefs } from "graphql-scalars";
 import Announcement from "./Announcement";
-import AnnouncementResult from "./AnnouncementResult";
+import AnnouncementQueryResult from "./AnnouncementQueryResult";
 import Candidate from "./Candidate";
 import CloudinaryResource from "./CloudinaryResource";
 import Election from "./Election";
+import ElectionQueryResult from "./ElectionQueryResult";
 import ElectionResult from "./ElectionResult";
 import ElectionTypes from "./ElectionTypes";
 import Mutation from "./Mutation";
@@ -13,18 +14,22 @@ import PluralityResult from "./PluralityResult";
 import PluralityVote from "./PluralityVote";
 import PublicKey from "./PublicKey";
 import Query from "./Query";
+import RunoffResult from "./RunoffResult";
+import RunoffRound from "./RunoffRound";
+import RunoffRoundResult from "./RunoffRoundResult";
 import scalars from "./scalars";
-import StuyActivitiesSyncResult from "./StuyActivitiesSyncResult";
+import StuyActivitiesSync from "./StuyActivitiesSync";
 import User from "./User";
-import UserResult from "./UserResult";
+import UserQueryResult from "./UserQueryResult";
 
 const typeDefs = [
   ...graphqlScalarDefs,
   Announcement,
-  AnnouncementResult,
+  AnnouncementQueryResult,
   Candidate,
   CloudinaryResource,
   Election,
+  ElectionQueryResult,
   ElectionResult,
   ElectionTypes,
   Mutation,
@@ -34,10 +39,13 @@ const typeDefs = [
   PluralityVote,
   PublicKey,
   Query,
+  RunoffResult,
+  RunoffRound,
+  RunoffRoundResult,
   scalars,
-  StuyActivitiesSyncResult,
+  StuyActivitiesSync,
   User,
-  UserResult,
+  UserQueryResult,
 ];
 
 export default typeDefs;
