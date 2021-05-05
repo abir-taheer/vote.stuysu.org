@@ -267,6 +267,7 @@ const CandidateForm = ({
               getOptionSelected={(opts, value) => opts.id === value.id}
               freeSolo
               filterSelectedOptions={false}
+              filterOptions={(opts) => opts}
               loading={loadingUsers}
               value={values.managers}
               onChange={(ev, opts) => setFieldValue("managers", opts)}
