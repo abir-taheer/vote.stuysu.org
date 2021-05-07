@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import ElectionNotFound from "../../../../comps/election/ElectionNotFound";
 import { gql } from "@apollo/client";
 import layout from "../../../../styles/layout.module.css";
@@ -8,11 +7,12 @@ import Head from "next/head";
 import BackButton from "../../../../comps/shared/BackButton";
 import Typography from "@material-ui/core/Typography";
 import ElectionTabBar from "../../../../comps/election/ElectionTabBar";
-import React, { useState } from "react";
+import { useState } from "react";
 import { TextField } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import CandidateCard from "../../../../comps/candidate/CandidateCard";
 import withApollo from "../../../../comps/apollo/withApollo";
+import LoadingScreen from "../../../../comps/shared/LoadingScreen";
 
 const QUERY = gql`
   query($url: NonEmptyString!) {
@@ -56,7 +56,7 @@ function ElectionCandidates() {
   const [query, setQuery] = useState("");
 
   if (loading) {
-    return <CircularProgress />;
+    return <LoadingScreen />;
   }
 
   const election = data?.electionByUrl;
@@ -143,5 +143,4 @@ function ElectionCandidates() {
   );
 }
 
-
-export default withApollo({ssr: true})(ElectionCandidates);
+export default withApollo({ ssr: true })(ElectionCandidates);

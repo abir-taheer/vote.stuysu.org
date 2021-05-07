@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { gql } from "@apollo/client/core";
 import { useMutation, useQuery } from "@apollo/client";
-import { CircularProgress } from "@material-ui/core";
 import Error404 from "../../404";
 import AdminRequired from "../../../comps/auth/AdminRequired";
 import layout from "./../../../styles/layout.module.css";
@@ -16,6 +15,7 @@ import alertDialog from "../../../comps/dialog/alertDialog";
 import { useSnackbar } from "notistack";
 import confirmDialog from "../../../comps/dialog/confirmDialog";
 import BackButton from "../../../comps/shared/BackButton";
+import LoadingScreen from "../../../comps/shared/LoadingScreen";
 
 const QUERY = gql`
   query($id: ObjectId!) {
@@ -92,7 +92,7 @@ export default function ManageAnnouncement() {
   const { enqueueSnackbar } = useSnackbar();
 
   if (loading) {
-    return <CircularProgress />;
+    return <LoadingScreen />;
   }
 
   const announcement = data?.announcementById;

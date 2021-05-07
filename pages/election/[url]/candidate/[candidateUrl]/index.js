@@ -1,15 +1,14 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { CircularProgress } from "@material-ui/core";
 import ElectionNotFound from "../../../../../comps/election/ElectionNotFound";
 import CandidateNotFound from "../../../../../comps/candidate/CandidateNotFound";
 import layout from "../../../../../styles/layout.module.css";
 import Head from "next/head";
 import BackButton from "../../../../../comps/shared/BackButton";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
 import withApollo from "../../../../../comps/apollo/withApollo";
 import CandidateTabBar from "../../../../../comps/candidate/CandidateTabBar";
+import LoadingScreen from "../../../../../comps/shared/LoadingScreen";
 
 const QUERY = gql`
   query($electionUrl: NonEmptyString!, $candidateUrl: NonEmptyString!) {
@@ -50,7 +49,7 @@ function CandidatePage() {
   });
 
   if (loading) {
-    return <CircularProgress />;
+    return <LoadingScreen />;
   }
 
   const election = data?.electionByUrl;

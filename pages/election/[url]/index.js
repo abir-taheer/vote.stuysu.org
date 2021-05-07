@@ -11,6 +11,7 @@ import useFormatDate from "../../../utils/date/useFormatDate";
 import capitalize from "@material-ui/core/utils/capitalize";
 import ElectionOverviewText from "../../../comps/election/ElectionOverviewText";
 import Head from "next/head";
+import LoadingScreen from "../../../comps/shared/LoadingScreen";
 
 const ELECTION_QUERY = gql`
   query($url: NonEmptyString!) {
@@ -43,13 +44,19 @@ const ELECTION_QUERY = gql`
 const Election = () => {
   const router = useRouter();
   const { url } = router.query;
-  const { data, refetch } = useQuery(ELECTION_QUERY, { variables: { url } });
+  const { data, loading, refetch } = useQuery(ELECTION_QUERY, {
+    variables: { url },
+  });
   const { getReadableDate, now } = useFormatDate(true, 10000);
 
   // Refetch every 10 seconds so the user knows exactly when the election ends
   useEffect(async () => {
     await refetch();
   }, [now]);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   const election = data?.electionByUrl;
   if (!election) {

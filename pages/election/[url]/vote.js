@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import { useContext } from "react";
 import UserContext from "../../../comps/auth/UserContext";
 import layout from "../../../styles/layout.module.css";
 import Head from "next/head";
@@ -10,7 +10,6 @@ import ElectionTabBar from "../../../comps/election/ElectionTabBar";
 import ElectionNotFound from "../../../comps/election/ElectionNotFound";
 import PluralityVote from "../../../comps/vote/PluralityVote";
 import useFormatDate from "../../../utils/date/useFormatDate";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
 import useLogin from "../../../comps/auth/useLogin";
 import gingerCatAccessBlocked from "./../../../img/ginger-cat-access-blocked.png";
@@ -18,6 +17,7 @@ import cherryNoMessages from "./../../../img/cherry-no-messages.png";
 import rush from "./../../../img/rush-20.png";
 import Link from "next/link";
 import voteSticker from "../../../img/sticker-vota.gif";
+import LoadingScreen from "../../../comps/shared/LoadingScreen";
 
 const QUERY = gql`
   query($url: NonEmptyString!) {
@@ -62,7 +62,7 @@ export default function Vote() {
   const election = data?.electionByUrl;
 
   if (loading) {
-    return <CircularProgress />;
+    return <LoadingScreen />;
   }
 
   if (!election) {
