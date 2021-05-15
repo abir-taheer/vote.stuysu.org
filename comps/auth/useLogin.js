@@ -31,21 +31,19 @@ const useLogin = (props = {}) => {
         await props.onLogin();
       }
     } catch (e) {
-      console.log(e);
-      const error = e.graphQLErrors[0];
-      const code = error.extensions.code;
-
-      if (code === "FORBIDDEN") {
-        await alertDialog({
-          title: "There was an error authenticating you",
-          body: e.message,
-        });
-      }
+      console.error(e);
+      const error = e.graphQLErrors?.[0];
+      const code = error?.extensions?.code;
 
       if (code === "UNKNOWN_USER") {
         await alertDialog({
           title: "There was an error authenticating you",
           body: `There's no user with the email address ${profileObj.email} in the database. \nIf you feel this is an error, please email stuyboe@gmail.com`,
+        });
+      } else {
+        await alertDialog({
+          title: "There was an error authenticating you",
+          body: e.message,
         });
       }
     }
