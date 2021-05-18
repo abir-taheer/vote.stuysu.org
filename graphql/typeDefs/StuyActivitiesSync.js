@@ -2,7 +2,7 @@ import { gql } from "apollo-server-micro";
 
 export default gql`
   type StuyActivitiesSync {
-    totalUsersCreated: PositiveInt!
+    totalUsersCreated: NonNegativeInt!
     completedAt: Date!
   }
 `;
