@@ -7,12 +7,21 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Add from "@material-ui/icons/Add";
 import Link from "next/link";
-import { TextField } from "@material-ui/core";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import TextField from "@material-ui/core/TextField";
 import Search from "@material-ui/icons/Search";
+import styles from "../../../comps/election/ElectionCardGrid.module.css";
+import Pagination from "@material-ui/lab/Pagination";
+import List from "@material-ui/core/List";
+import moment from "moment-timezone/moment-timezone-utils";
+import { Divider } from "@material-ui/core";
 
 const QUERY = gql`
-  query($query: String!) {
-    allAnnouncements(query: $query) {
+  query($query: String!, $page: PositiveInt!) {
+    allAnnouncements(query: $query, page: $page) {
       page
       numPages
       results {
@@ -27,7 +36,10 @@ const QUERY = gql`
 
 const AdminAnnouncements = () => {
   const [query, setQuery] = useState("");
-  const { data, loading } = useQuery(QUERY, { variables: { query } });
+  const [page, setPage] = useState(1);
+  const { data, loading } = useQuery(QUERY, { variables: { query, page } });
+
+  const onPageChange = (ev, pg) => setPage(pg);
 
   return (
     <AdminRequired>
@@ -61,7 +73,46 @@ const AdminAnnouncements = () => {
               startAdornment: <Search />,
             }}
           />
-          <pre>{JSON.stringify(data, null, 2)}</pre>
+
+          <List>
+            {data?.allAnnouncements.results.map((announcement) => (
+              <>
+                <ListItem alignItems="flex-start" key={announcement.id}>
+                  <ListItemText
+                    primary={
+                      <Typography
+                        paragraph
+                        className={layout.listItemPrimaryText}
+                      >
+                        {announcement.title}
+                      </Typography>
+                    }
+                    secondary={
+                      "Last Updated: " +
+                      moment(announcement.updatedAt).format(
+                        "MMMM Do YYYY, h:mm:ss a z"
+                      )
+                    }
+                  />
+
+                  <ListItemSecondaryAction>
+                    <Link href={"/admin/announcement/" + announcement.id}>
+                      <Button color={"secondary"} variant={"contained"}>
+                        View
+                      </Button>
+                    </Link>
+                  </ListItemSecondaryAction>
+                </ListItem>
+                <Divider />
+              </>
+            ))}
+          </List>
+          <Pagination
+            count={data?.allAnnouncements.numPages}
+            page={data?.allAnnouncements.page}
+            onChange={onPageChange}
+            className={styles.pagination}
+          />
         </main>
       </div>
     </AdminRequired>

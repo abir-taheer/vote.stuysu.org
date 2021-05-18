@@ -58,7 +58,7 @@ const TinyEditor = ({ value, setValue, className, disabled }) => {
           media_dimensions: false,
           media_url_resolver: (data, resolve, reject) => {
             const url = new window.URL(data.url);
-            const allowedHosts = /^(?:\w|\d|\.)*(?:youtube|vimeo)\.com$/;
+            const allowedHosts = /^(?:\w|\d|\.)*(?:youtube\.com|vimeo\.com|youtu\.be)$/;
             const hostIsAllowed = !!url.hostname.match(allowedHosts);
             if (hostIsAllowed) {
               resolve("");

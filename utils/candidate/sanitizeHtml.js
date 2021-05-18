@@ -114,6 +114,7 @@ export default function sanitizeHtml(platform) {
       "youtube.com",
       "vimeo.com",
       "player.vimeo.com",
+      "youtu.be",
     ],
     nestingLimit: 5,
   });
