@@ -37,7 +37,7 @@ const QUERY = gql`
 const AdminAnnouncements = () => {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
-  const { data, loading } = useQuery(QUERY, { variables: { query, page } });
+  const { data } = useQuery(QUERY, { variables: { query, page } });
 
   const onPageChange = (ev, pg) => setPage(pg);
 
@@ -75,28 +75,26 @@ const AdminAnnouncements = () => {
           />
 
           <List>
-            {data?.allAnnouncements.results.map((announcement) => (
+            {data?.allAnnouncements.results.map(({ id, title, updatedAt }) => (
               <>
-                <ListItem alignItems="flex-start" key={announcement.id}>
+                <ListItem alignItems="flex-start" key={id}>
                   <ListItemText
                     primary={
                       <Typography
                         paragraph
                         className={layout.listItemPrimaryText}
                       >
-                        {announcement.title}
+                        {title}
                       </Typography>
                     }
                     secondary={
                       "Last Updated: " +
-                      moment(announcement.updatedAt).format(
-                        "MMMM Do YYYY, h:mm:ss a z"
-                      )
+                      moment(updatedAt).format("MMMM Do YYYY, h:mm:ss a z")
                     }
                   />
 
                   <ListItemSecondaryAction>
-                    <Link href={"/admin/announcement/" + announcement.id}>
+                    <Link href={"/admin/announcement/" + id}>
                       <Button color={"secondary"} variant={"contained"}>
                         View
                       </Button>
@@ -107,9 +105,10 @@ const AdminAnnouncements = () => {
               </>
             ))}
           </List>
+
           <Pagination
-            count={data?.allAnnouncements.numPages}
-            page={data?.allAnnouncements.page}
+            count={data?.allAnnouncements.numPages || 1}
+            page={page}
             onChange={onPageChange}
             className={styles.pagination}
           />
