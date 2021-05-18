@@ -11,10 +11,17 @@ import { PUBLIC_URL } from "../constants";
 import { SnackbarProvider } from "notistack";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
-import React from "react";
+import { useEffect } from "react";
+import ReactGA from "react-ga";
+
+ReactGA.initialize(process.env.NEXT_APP_GTAG_ID || "UA-75064374-8");
 
 function App({ Component, pageProps }) {
   const router = useRouter();
+
+  useEffect(() => {
+    ReactGA.pageview(router.asPath);
+  }, [router.asPath]);
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
