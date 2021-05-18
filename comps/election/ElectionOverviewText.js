@@ -11,6 +11,7 @@ import layout from "../../styles/layout.module.css";
 import waitingPale from "./../../img/pale-waiting.png";
 import dalia from "./../../img/dalia-by-cindy-zheng.gif";
 import ImageWithPopover from "../shared/ImageWithPopover";
+import StyledLink from "@material-ui/core/Link";
 
 const ElectionOverviewText = ({
   isOpen,
@@ -29,13 +30,13 @@ const ElectionOverviewText = ({
   if (completed) {
     return (
       <>
-        <ImageWithPopover
-          src={dalia}
-          alt={"A small blob blowing confetti. Art by Cindy Zheng"}
-          className={layout.smallVector}
-          popover={<Link href={"https://google.com"}>Art by Pamela Giani</Link>}
-          center
-        />
+        <div className={layout.centerContainer}>
+          <img
+            src={dalia}
+            alt={"A small blob blowing confetti. Art by Cindy Zheng"}
+            className={layout.smallVector}
+          />
+        </div>
 
         <Typography variant={"h3"}>
           The election's over and results are available 🎉
@@ -65,13 +66,14 @@ const ElectionOverviewText = ({
   if (now > end) {
     return (
       <>
-        <ImageWithPopover
-          src={waitingPale}
-          alt={"Someone leaning against a clock"}
-          className={layout.smallVector}
-          title={"Vector provided by icons8"}
-          center
-        />
+        <div className={layout.centerContainer}>
+          <img
+            src={waitingPale}
+            alt={"Someone leaning against a clock"}
+            className={layout.smallVector}
+          />
+        </div>
+
         <br />
         <Typography variant={"h3"}>
           The election's over but results aren't out yet
