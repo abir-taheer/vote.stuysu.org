@@ -6,12 +6,25 @@ export default async ({ page, resultsPerPage, query, filters }) => {
 
   const words = query.split(/\s/).filter(Boolean);
 
+  const adminFilterIndex = words.indexOf(":admin");
+  const onlyAdmin = adminFilterIndex !== -1;
+
+  if (onlyAdmin) {
+    words.splice(adminFilterIndex, 1);
+  }
+
   const $and = words.map((word) => {
     const regex = new RegExp(escapeStringRegexp(word), "i");
     const $or = [{ firstName: regex }, { lastName: regex }, { email: regex }];
 
     return { $or };
   });
+
+  if (onlyAdmin) {
+    $and.push({
+      adminPrivileges: true,
+    });
+  }
 
   const filter = { ...filters };
 

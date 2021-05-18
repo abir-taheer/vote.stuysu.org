@@ -44,6 +44,7 @@ const USER_QUERY = gql`
         email
         gradYear
         grade
+        adminPrivileges
       }
     }
   }
@@ -127,6 +128,19 @@ const UserIndex = () => {
             label={"Search Users"}
             value={query}
             onChange={(ev) => setQuery(ev.target.value)}
+            helperText={
+              <>
+                To filter only users who have admin privileges, add{" "}
+                <Typography
+                  component={"span"}
+                  color={"primary"}
+                  variant={"inherit"}
+                >
+                  <b>:admin</b>
+                </Typography>{" "}
+                to your search
+              </>
+            }
           />
 
           <div className={layout.scrollableListContainer}>
@@ -140,23 +154,35 @@ const UserIndex = () => {
 
             <List className={layout.scrollableList}>
               {data?.allUsers.results.map(
-                ({ id, name, email, grade, gradYear }) => (
+                ({ id, name, email, grade, gradYear, adminPrivileges }) => (
                   <div key={id}>
                     <ListItem>
                       <ListItemText
                         primary={
-                          <Typography
-                            paragraph
-                            className={layout.listItemPrimaryText}
-                            gutterBottom
-                          >
-                            {name}
-                          </Typography>
+                          <>
+                            <Typography
+                              paragraph
+                              className={layout.listItemPrimaryText}
+                              gutterBottom
+                            >
+                              {name}
+                            </Typography>{" "}
+                            {adminPrivileges && (
+                              <Typography
+                                variant={"subtitle2"}
+                                color={"primary"}
+                              >
+                                (BOE Admin)
+                              </Typography>
+                            )}
+                          </>
                         }
                         secondary={
-                          <Typography variant={"subtitle2"}>
-                            {email} | Class of {gradYear} | Grade {grade}
-                          </Typography>
+                          <>
+                            <Typography variant={"subtitle2"}>
+                              {email} | Class of {gradYear} | Grade {grade}
+                            </Typography>
+                          </>
                         }
                       />
 
