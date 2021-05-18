@@ -65,7 +65,10 @@ const AdminAnnouncements = () => {
           <TextField
             label={"Search Announcements"}
             value={query}
-            onChange={(ev) => setQuery(ev.target.value)}
+            onChange={(ev) => {
+              setQuery(ev.target.value);
+              setPage(1);
+            }}
             variant={"outlined"}
             color={"primary"}
             className={layout.spaced}
