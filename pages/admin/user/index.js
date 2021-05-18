@@ -128,49 +128,52 @@ const UserIndex = () => {
             value={query}
             onChange={(ev) => setQuery(ev.target.value)}
           />
-          {loadingUsers && <CircularProgress />}
-          {!loadingUsers && !data?.allUsers.total && (
-            <Typography paragraph>
-              There are no users for that search query
-            </Typography>
-          )}
 
-          <List>
-            {data?.allUsers.results.map(
-              ({ id, name, email, grade, gradYear }) => (
-                <>
-                  <ListItem key={id}>
-                    <ListItemText
-                      primary={
-                        <Typography
-                          paragraph
-                          className={layout.listItemPrimaryText}
-                          gutterBottom
-                        >
-                          {name}
-                        </Typography>
-                      }
-                      secondary={
-                        <Typography variant={"subtitle2"}>
-                          {email} | Class of {gradYear} | Grade {grade}
-                        </Typography>
-                      }
-                    />
+          <div className={layout.scrollableListContainer}>
+            {loadingUsers && <CircularProgress />}
 
-                    <ListItemSecondaryAction>
-                      <Link href={"/admin/user/edit/" + id}>
-                        <IconButton edge="end" focusRipple>
-                          <Create />
-                        </IconButton>
-                      </Link>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <Divider />
-                </>
-              )
+            {!loadingUsers && !!data?.allUsers.total ? (
+              <List>
+                {data?.allUsers.results.map(
+                  ({ id, name, email, grade, gradYear }) => (
+                    <>
+                      <ListItem key={id}>
+                        <ListItemText
+                          primary={
+                            <Typography
+                              paragraph
+                              className={layout.listItemPrimaryText}
+                              gutterBottom
+                            >
+                              {name}
+                            </Typography>
+                          }
+                          secondary={
+                            <Typography variant={"subtitle2"}>
+                              {email} | Class of {gradYear} | Grade {grade}
+                            </Typography>
+                          }
+                        />
+
+                        <ListItemSecondaryAction>
+                          <Link href={"/admin/user/edit/" + id}>
+                            <IconButton edge="end" focusRipple>
+                              <Create />
+                            </IconButton>
+                          </Link>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                      <Divider />
+                    </>
+                  )
+                )}
+              </List>
+            ) : (
+              <Typography paragraph>
+                There are no users for that search query
+              </Typography>
             )}
-          </List>
-
+          </div>
           <Pagination
             count={data?.allUsers.numPages || 1}
             page={page}

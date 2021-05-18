@@ -88,3 +88,13 @@
 .listItemPrimaryText {
   max-width: 230px;
 }
+
+.scrollableListContainer {
+  max-width: 95vw;
+  height: 300px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  text-align: center;
+}
