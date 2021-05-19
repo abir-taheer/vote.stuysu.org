@@ -8,12 +8,20 @@ export default async (
 ) => {
   adminRequired();
 
-  fieldsCannotBeEmpty({ firstName, lastName, email });
-
   const user = await User.findById(id);
 
   if (!user) {
     throw new UserInputError("There's no user with that id");
+  }
+
+  if (user.email !== email || user.gradYear !== gradYear) {
+    const exists = await User.exists({ email, gradYear });
+
+    if (exists) {
+      throw new UserInputError(
+        "There's already another user with that email and graduation year."
+      );
+    }
   }
 
   user.firstName = firstName;

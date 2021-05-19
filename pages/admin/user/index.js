@@ -180,7 +180,9 @@ const UserIndex = () => {
                         secondary={
                           <>
                             <Typography variant={"subtitle2"}>
-                              {email} | Class of {gradYear} | Grade {grade}
+                              {email}
+                              {gradYear &&
+                                ` | Class of ${gradYear} | Grade ${grade}`}
                             </Typography>
                           </>
                         }

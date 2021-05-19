@@ -75,7 +75,6 @@ const ElectionIndex = () => {
             "View all of the current and past elections for Student Union Elections"
           }
         />
-
       </Head>
       <main className={layout.main}>
         <Typography variant={"h1"}>Elections</Typography>

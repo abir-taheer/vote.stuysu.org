@@ -8,7 +8,7 @@ export default gql`
     email: EmailAddress
     name: String
     gradYear: PositiveInt
-    grade: PositiveInt
+    grade: NonNegativeInt
     adminPrivileges: Boolean
   }
 `;

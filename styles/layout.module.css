@@ -13,6 +13,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 }
 
 .largeVector {
@@ -105,5 +106,5 @@
 
 .scrollableList {
   overflow: auto;
-  max-height: calc(100% - 1rem)
+  max-height: calc(100% - 1rem);
 }

@@ -12,7 +12,7 @@ import React from "react";
 import { useFormik } from "formik";
 import Chip from "@material-ui/core/Chip";
 import School from "@material-ui/icons/School";
-import {KeyboardDateTimePicker} from "@material-ui/pickers";
+import { KeyboardDateTimePicker } from "@material-ui/pickers";
 
 async function validate(values) {
   const errors = {};
@@ -199,34 +199,34 @@ const ElectionForm = ({
         <FormControl component="fieldset" className={styles.formControl}>
           <FormLabel component="legend">Start Time</FormLabel>
           <KeyboardDateTimePicker
-              variant="inline"
-              inputVariant={"outlined"}
-              value={values.start}
-              onChange={(val) => setFieldValue("start", val)}
-              onError={console.log}
-              format="MM/DD/yyyy hh:mma"
-              ampm
-              error={touched.start && !!errors.start}
-              helperText={touched.start && errors.start}
-              disabled={disabled || isSubmitting}
-              placeholder="05/05/2021 06:00am"
+            variant="inline"
+            inputVariant={"outlined"}
+            value={values.start}
+            onChange={(val) => setFieldValue("start", val)}
+            onError={console.log}
+            format="MM/DD/yyyy hh:mma"
+            ampm
+            error={touched.start && !!errors.start}
+            helperText={touched.start && errors.start}
+            disabled={disabled || isSubmitting}
+            placeholder="05/05/2021 06:00am"
           />
         </FormControl>
 
         <FormControl component="fieldset" className={styles.formControl}>
           <FormLabel component="legend">End Time</FormLabel>
           <KeyboardDateTimePicker
-              variant="inline"
-              inputVariant={"outlined"}
-              value={values.end}
-              onChange={(val) => setFieldValue("end", val)}
-              onError={console.log}
-              format="MM/DD/yyyy hh:mma"
-              placeholder="05/05/2021 07:00pm"
-              disabled={disabled || isSubmitting}
-              error={touched.end && !!errors.end}
-              helperText={touched.end && errors.end}
-              ampm
+            variant="inline"
+            inputVariant={"outlined"}
+            value={values.end}
+            onChange={(val) => setFieldValue("end", val)}
+            onError={console.log}
+            format="MM/DD/yyyy hh:mma"
+            placeholder="05/05/2021 07:00pm"
+            disabled={disabled || isSubmitting}
+            error={touched.end && !!errors.end}
+            helperText={touched.end && errors.end}
+            ampm
           />
         </FormControl>
       </FormGroup>
