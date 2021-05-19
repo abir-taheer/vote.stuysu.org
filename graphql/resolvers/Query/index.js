@@ -17,6 +17,7 @@ import candidatesByElectionId from "./candidatesByElectionId";
 import userHasVoted from "./userHasVoted";
 import allAnnouncements from "./allAnnouncements";
 import announcementById from "./announcementById";
+import userIsDeletable from "./userIsDeletable";
 
 const Query = {
   announcementById,
@@ -25,6 +26,7 @@ const Query = {
   allUsers,
   userById,
   usersById,
+  userIsDeletable,
   allElections,
   authenticatedUser,
   candidateById,

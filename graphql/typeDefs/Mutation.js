@@ -59,12 +59,14 @@ export default gql`
 
     editUser(
       id: ObjectId!
-      firstName: String!
-      lastName: String!
+      firstName: NonEmptyString!
+      lastName: NonEmptyString!
       gradYear: PositiveInt
       email: EmailAddress!
       adminPrivileges: Boolean!
     ): User!
+
+    deleteUser(id: ObjectId!): Void
 
     createCandidate(
       electionId: ObjectId!

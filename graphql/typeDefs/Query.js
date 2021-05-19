@@ -128,6 +128,12 @@ export default gql`
     userById(id: ObjectId!): User
 
     """
+    Takes the id of a user and returns whether or not that user can be deleted
+    ONLY ADMINS CAN USE THIS
+    """
+    userIsDeletable(id: ObjectId!): Boolean!
+
+    """
     Returns an array of users with the object ids given, preserving the original order.
     Any object ids not found will be null in the returned arry
     """

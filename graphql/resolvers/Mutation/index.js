@@ -14,6 +14,7 @@ import editCandidate from "./editCandidate";
 import editAnnouncement from "./editAnnouncement";
 import createAnnouncement from "./createAnnouncement";
 import deleteAnnouncement from "./deleteAnnouncement";
+import deleteUser from "./deleteUser";
 
 export default {
   createAnnouncement,
@@ -24,6 +25,7 @@ export default {
   createElection,
   createUser,
   createCandidate,
+  deleteUser,
   editCandidate,
   editElection,
   editUser,

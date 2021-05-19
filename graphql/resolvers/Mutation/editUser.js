@@ -1,10 +1,10 @@
 import User from "../../../models/user";
-import { UserInputError } from "apollo-server-micro";
+import { ForbiddenError, UserInputError } from "apollo-server-micro";
 
 export default async (
   _,
   { id, firstName, lastName, email, gradYear, adminPrivileges },
-  { adminRequired }
+  { adminRequired, user: authenticatedUser }
 ) => {
   adminRequired();
 
@@ -22,6 +22,12 @@ export default async (
         "There's already another user with that email and graduation year."
       );
     }
+  }
+
+  if (user.id === authenticatedUser.id && !adminPrivileges) {
+    throw new ForbiddenError(
+      "You are not allowed to remove your own admin privileges. Ask another admin to do this for you."
+    );
   }
 
   user.firstName = firstName;
