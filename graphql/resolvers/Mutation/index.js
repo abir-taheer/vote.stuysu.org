@@ -7,6 +7,7 @@ import logout from "./logout";
 import editUser from "./editUser";
 import uploadPicture from "./uploadPicture";
 import votePlurality from "./votePlurality";
+import voteRunoff from "./voteRunoff";
 import openElection from "./openElection";
 import syncUsersWithStuyActivities from "./syncUsersWithStuyActivities";
 import createCandidate from "./createCandidate";
@@ -33,5 +34,6 @@ export default {
   logout,
   uploadPicture,
   votePlurality,
+  voteRunoff,
   syncUsersWithStuyActivities,
 };

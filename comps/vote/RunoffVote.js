@@ -2,19 +2,17 @@ import { gql } from "@apollo/client/core";
 import { useContext, useState } from "react";
 import { useMutation } from "@apollo/client";
 import FormControl from "@material-ui/core/FormControl";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Button from "@material-ui/core/Button";
-import Radio from "@material-ui/core/Radio";
 import FormLabel from "@material-ui/core/FormLabel";
 import DateContext from "../shared/DateContext";
 import moment from "moment-timezone";
 import useFormatDate from "../../utils/date/useFormatDate";
-import styles from "./PluralityVote.module.css";
+import styles from "./RunoffVote.module.css";
 import confirmDialog from "../dialog/confirmDialog";
 import Typography from "@material-ui/core/Typography";
 import alertDialog from "../dialog/alertDialog";
+import Head from "next/head";
 
 const MUTATION = gql`
   mutation($candidateId: ObjectId!, $electionId: ObjectId!) {
@@ -29,8 +27,7 @@ const MUTATION = gql`
   }
 `;
 
-const PluralityVote = ({ election, candidates, refetch }) => {
-  const [candidateId, setCandidateId] = useState(null);
+const RunoffVote = ({ election, candidates, refetch }) => {
   const { formatDuration } = useFormatDate(false);
   const { getNow } = useContext(DateContext);
   const [vote, { loading }] = useMutation(MUTATION, {
@@ -86,21 +83,14 @@ const PluralityVote = ({ election, candidates, refetch }) => {
 
   return (
     <form>
+      <Head></Head>
       <FormControl component="fieldset">
         <FormLabel component="legend">
-          Select your candidate of preference
+          Order the candidates based on your preference
         </FormLabel>
-        <RadioGroup value={candidateId} onChange={(ev, i) => setCandidateId(i)}>
-          {candidates.map(({ id, name }) => (
-            <FormControlLabel
-              value={id}
-              key={id}
-              control={<Radio />}
-              label={name}
-              className={styles.option}
-            />
-          ))}
-        </RadioGroup>
+        {candidates.map((c) => (
+          <p>{c.name}</p>
+        ))}
 
         <FormHelperText>
           Voting will end in {formatDuration(duration)}
@@ -119,4 +109,4 @@ const PluralityVote = ({ election, candidates, refetch }) => {
   );
 };
 
-export default PluralityVote;
+export default RunoffVote;

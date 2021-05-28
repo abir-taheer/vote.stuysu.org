@@ -95,6 +95,7 @@ export default gql`
     openElection(id: ObjectId!): Election!
 
     votePlurality(electionId: ObjectId!, candidateId: ObjectId!): PluralityVote!
+    voteRunoff(electionId: ObjectId!, choices: [ObjectId!]!): RunoffVote!
 
     uploadPicture(alt: NonEmptyString!, file: Upload!): Picture!
 

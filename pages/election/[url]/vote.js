@@ -18,6 +18,7 @@ import rush from "./../../../img/rush-20.png";
 import Link from "next/link";
 import voteSticker from "../../../img/sticker-vota.gif";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
+import RunoffVote from "../../../comps/vote/RunoffVote";
 
 const QUERY = gql`
   query($url: NonEmptyString!) {
@@ -122,6 +123,14 @@ export default function Vote() {
           <>
             {election.type === "plurality" && (
               <PluralityVote
+                candidates={election.candidates}
+                election={election}
+                refetch={refetch}
+              />
+            )}
+
+            {election.type === "runoff" && (
+              <RunoffVote
                 candidates={election.candidates}
                 election={election}
                 refetch={refetch}
