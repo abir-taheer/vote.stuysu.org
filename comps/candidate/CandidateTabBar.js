@@ -20,33 +20,25 @@ const tabs = [
     active: null,
     icon: <PeopleOutlined />,
   },
-  {
-    path: "/election/[url]/candidate/[candidateUrl]/q-a",
-    label: "Q & A",
-    exact: false,
-    isManager: null,
-    electionCompleted: null,
-    active: null,
-    icon: <QuestionAnswerOutlined />,
-  },
-  {
-    path: "/election/[url]/candidate/[candidateUrl]/strike",
-    label: "Strikes",
-    exact: false,
-    isManager: null,
-    electionCompleted: null,
-    active: null,
-    icon: <ReportProblemOutlined />,
-  },
-  {
-    path: "/election/[url]/candidate/[candidateUrl]/admin",
-    exact: false,
-    label: "Admin",
-    isManager: true,
-    electionCompleted: false,
-    active: true,
-    icon: <BuildOutlined />,
-  },
+  // {
+  //   path: "/election/[url]/candidate/[candidateUrl]/q-a",
+  //   label: "Q & A",
+  //   exact: false,
+  //   isManager: null,
+  //   electionCompleted: null,
+  //   active: null,
+  //   icon: <QuestionAnswerOutlined />,
+  // },
+  // {
+  //   path: "/election/[url]/candidate/[candidateUrl]/strike",
+  //   label: "Strikes",
+  //   exact: false,
+  //   isManager: null,
+  //   electionCompleted: null,
+  //   active: null,
+  //   icon: <ReportProblemOutlined />,
+  // },
+  //
 ];
 
 const CandidateTabBar = ({ isManager, active, electionCompleted }) => {
