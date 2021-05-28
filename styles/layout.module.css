@@ -82,6 +82,11 @@
     width: 800px;
   }
 }
+@media (min-width: 600px) {
+  .wideTextContainer {
+    min-width: 550px;
+  }
+}
 
 .deleteButton {
   margin: 1rem;

@@ -11,7 +11,7 @@ import {
 import Typography from "@material-ui/core/Typography";
 import brokenGlass from "./../../img/marginalia-fatal-error.png";
 import layout from "./../../styles/layout.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "@material-ui/lab/Pagination";
 import { Chart } from "react-google-charts";
 import Confetti from "react-confetti";
@@ -19,6 +19,7 @@ import List from "@material-ui/core/List";
 import IconButton from "@material-ui/core/IconButton";
 import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
 import useWindowSize from "react-use/lib/useWindowSize";
+import capitalize from "@material-ui/core/utils/capitalize";
 
 const QUERY = gql`
   query($id: ObjectId!) {
@@ -76,7 +77,7 @@ const QUERY = gql`
   }
 `;
 
-const RunoffResult = ({ id }) => {
+const RunoffResult = ({ id, election }) => {
   const { data, loading } = useQuery(QUERY, { variables: { id } });
   const [round, setRound] = useState(1);
   const { width } = useWindowSize();
@@ -139,9 +140,36 @@ const RunoffResult = ({ id }) => {
     ]),
   ];
 
+  const turnout =
+    results.numEligibleVoters > 0
+      ? Math.round((results.totalVotes * 1000) / results.numEligibleVoters) / 10
+      : 0;
+
   return (
     <>
+      <div className={layout.wideTextContainer}>
+        <Typography>
+          Election Type: <b>{capitalize(election.type)}</b>
+        </Typography>
+        <Typography>
+          Graduating Class{election.allowedGradYears.length > 1 && "es"}:{" "}
+          <b>{election.allowedGradYears.join(", ")}</b>
+        </Typography>
+        <Typography>
+          Number of Eligible Voters: <b>{results.numEligibleVoters}</b>
+        </Typography>
+        <Typography>
+          Total Votes: <b>{results.totalVotes}</b>
+        </Typography>
+        <Typography>
+          Voter Turnout: <b>{turnout}%</b>
+        </Typography>
+      </div>
       <Typography variant={"h2"}>Round {round}</Typography>
+      <Typography variant={"body2"}>
+        {currentRound.numVotes} votes this round
+      </Typography>
+
       <Chart
         chartType="PieChart"
         data={graphData}

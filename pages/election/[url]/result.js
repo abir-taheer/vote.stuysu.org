@@ -21,6 +21,7 @@ const QUERY = gql`
       start
       end
       completed
+      allowedGradYears
       picture {
         id
         alt
@@ -105,7 +106,7 @@ export default function Vote() {
         {canShowResults ? (
           <>
             {election.type === "runoff" && (
-              <RunoffResult id={election.id} completed={election.completed} />
+              <RunoffResult id={election.id} election={election} />
             )}
           </>
         ) : (
