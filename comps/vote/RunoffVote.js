@@ -203,8 +203,7 @@ const RunoffVote = ({ election, candidates, refetch }) => {
     <form>
       <FormControl component="fieldset">
         <FormLabel component="legend">
-          Drag and drop the candidates based on your order of preference. <br />
-          Swipe to remove a candidate from your ballot
+          Drag and drop the candidates based on your order of preference.
         </FormLabel>
         <SortableList
           items={{ choices, handleMoveUp, handleMoveDown, handleRemove }}
