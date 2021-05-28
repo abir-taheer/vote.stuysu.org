@@ -19,3 +19,11 @@ body {
   max-width: 90vw;
   max-height: 600px;
 }
+
+.runoff-choice {
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}

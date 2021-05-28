@@ -1,18 +1,13 @@
 import { gql } from "@apollo/client/core";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import Button from "@material-ui/core/Button";
 import FormLabel from "@material-ui/core/FormLabel";
-import DateContext from "../shared/DateContext";
-import moment from "moment-timezone";
-import useFormatDate from "../../utils/date/useFormatDate";
 import styles from "./RunoffVote.module.css";
 import confirmDialog from "../dialog/confirmDialog";
 import Typography from "@material-ui/core/Typography";
 import alertDialog from "../dialog/alertDialog";
-import Head from "next/head";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -21,6 +16,12 @@ import IconButton from "@material-ui/core/IconButton";
 import Close from "@material-ui/icons/Close";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import { useMediaQuery } from "@material-ui/core";
+import VotingCountDown from "./VotingCountDown";
+import arrayMove from "array-move";
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import Chip from "@material-ui/core/Chip";
+import Add from "@material-ui/icons/Add";
 
 const MUTATION = gql`
   mutation($choices: [ObjectId!]!, $electionId: ObjectId!) {
@@ -35,11 +36,83 @@ const MUTATION = gql`
   }
 `;
 
+const SortableItem = SortableElement(
+  ({
+    value: {
+      id,
+      name,
+      handleMoveUp,
+      choices,
+      handleMoveDown,
+      handleRemove,
+      index,
+      isDesktop,
+    },
+  }) => (
+    <ListItem key={id} button className={"runoff-choice"}>
+      <ListItemText primary={name} className={styles.name} />
+      <ListItemSecondaryAction>
+        {isDesktop && (
+          <>
+            <IconButton
+              aria-label={"Move candidate up"}
+              onClick={() => handleMoveUp(index)}
+              disabled={index === 0}
+            >
+              <ArrowUpward />
+            </IconButton>
+            <IconButton
+              aria-label={"Move Candidate Down"}
+              onClick={() => handleMoveDown(index)}
+              disabled={index + 1 === choices.length}
+            >
+              <ArrowDownward />
+            </IconButton>
+          </>
+        )}
+        <IconButton
+          aria-label={"Remove Candidate"}
+          onClick={() => handleRemove(index)}
+          disabled={choices.length <= 1}
+        >
+          <Close />
+        </IconButton>
+      </ListItemSecondaryAction>
+    </ListItem>
+  )
+);
+
+const SortableList = SortableContainer(
+  ({ items: { choices, handleMoveUp, handleMoveDown, handleRemove } }) => {
+    const isDesktop = useMediaQuery("(min-width: 800px)");
+
+    return (
+      <List className={styles.list}>
+        {choices.map(({ id, name }, index) => (
+          <SortableItem
+            key={id}
+            index={index}
+            value={{
+              index,
+              id,
+              choices,
+              isDesktop,
+              name,
+              handleMoveUp,
+              handleMoveDown,
+              handleRemove,
+            }}
+          />
+        ))}
+      </List>
+    );
+  }
+);
+
 const RunoffVote = ({ election, candidates, refetch }) => {
   const [choices, setChoices] = useState(candidates);
   const [removed, setRemoved] = useState([]);
-  const { formatDuration } = useFormatDate(false);
-  const { getNow } = useContext(DateContext);
+
   const [vote, { loading }] = useMutation(MUTATION, {
     variables: {
       electionId: election.id,
@@ -47,26 +120,24 @@ const RunoffVote = ({ election, candidates, refetch }) => {
     },
   });
 
-  const now = moment(getNow());
-  const end = moment(election.end);
-  const duration = moment.duration(end.diff(now));
-
   const handleSubmit = async () => {
     const confirmation = await confirmDialog({
       title: "Confirm Vote",
       body: (
-        <Typography variant={"body1"}>
-          Just to confirm, the order of your preference is:
+        <>
+          <Typography variant={"body1"} className={styles.confirmHeading}>
+            Just to confirm, the order of your preference is:
+          </Typography>
           <ol>
             {choices.map((c) => (
-              <li>
+              <li className={styles.confirmationList}>
                 <Typography component={"span"} color={"secondary"}>
                   {c.name}
                 </Typography>
               </li>
             ))}
           </ol>
-        </Typography>
+        </>
       ),
     });
 
@@ -104,78 +175,67 @@ const RunoffVote = ({ election, candidates, refetch }) => {
     setRemoved((existing) => existing.concat(removed));
   };
 
+  const handleRestore = (index) => {
+    const newRemoved = [...removed];
+    const restored = newRemoved.splice(index, 1);
+
+    setRemoved(newRemoved);
+    setChoices((existing) => existing.concat(restored));
+  };
+
   const handleMoveUp = (index) => {
     const newChoices = [...choices];
-
-    const temp = choices[index - 1];
-    choices[index - 1] = choices[index];
-    choices[index] = temp;
+    newChoices[index - 1] = choices[index];
+    newChoices[index] = choices[index - 1];
 
     setChoices(newChoices);
   };
 
   const handleMoveDown = (index) => {
     const newChoices = [...choices];
-
-    const temp = choices[index + 1];
-    choices[index + 1] = choices[index];
-    choices[index] = temp;
+    newChoices[index + 1] = choices[index];
+    newChoices[index] = choices[index + 1];
 
     setChoices(newChoices);
   };
 
   return (
     <form>
-      <Head>
-        <script
-          src={
-            "https://cdnjs.cloudflare.com/ajax/libs/slipjs/2.1.1/slip.min.js"
-          }
-        />
-      </Head>
       <FormControl component="fieldset">
         <FormLabel component="legend">
-          Order the candidates based on your preference
+          Drag and drop the candidates based on your order of preference. <br />
+          Swipe to remove a candidate from your ballot
         </FormLabel>
-
-        <List>
-          {choices.map(({ id, name }, i) => (
-            <ListItem key={id}>
-              <ListItemText primary={name} />
-              {choices.length > 1 && (
-                <ListItemSecondaryAction>
-                  {i > 0 && (
-                    <IconButton
-                      aria-label={"Move candidate up"}
-                      onClick={() => handleMoveUp(i)}
-                    >
-                      <ArrowUpward />
-                    </IconButton>
-                  )}
-                  {i + 1 < choices.length && (
-                    <IconButton
-                      aria-label={"Move Candidate Down"}
-                      onClick={() => handleMoveDown(i)}
-                    >
-                      <ArrowDownward />
-                    </IconButton>
-                  )}
-
-                  <IconButton
-                    aria-label={"Remove Candidate"}
-                    onClick={() => handleRemove(i)}
-                  >
-                    <Close />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              )}
-            </ListItem>
-          ))}
-        </List>
-
-        <FormHelperText>
-          Voting will end in {formatDuration(duration)}
-        </FormHelperText>
+        <SortableList
+          items={{ choices, handleMoveUp, handleMoveDown, handleRemove }}
+          onSortEnd={({ oldIndex, newIndex }) =>
+            setChoices(arrayMove(choices, oldIndex, newIndex))
+          }
+          distance={5}
+          lockAxis={"y"}
+        />
+        {!!removed.length && (
+          <>
+            <Typography variant={"body1"} color={"primary"}>
+              Removed Candidates:
+            </Typography>
+            <Typography variant={"body2"}>
+              Click on any of them to add them back to your ballot
+            </Typography>
+            <div>
+              {removed.map(({ id, name }) => (
+                <Chip
+                  key={id}
+                  label={name}
+                  onClick={handleRestore}
+                  icon={<Add />}
+                  className={styles.removedChip}
+                />
+              ))}
+            </div>
+          </>
+        )}
+        <VotingCountDown end={election.end} />
         <Button
           variant="outlined"
           color="primary"

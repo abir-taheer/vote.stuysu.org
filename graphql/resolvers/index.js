@@ -14,6 +14,7 @@ import Query from "./Query";
 import RunoffResult from "./RunoffResult";
 import RunoffRound from "./RunoffRound";
 import RunoffRoundResult from "./RunoffRoundResult";
+import RunoffVote from "./RunoffVote";
 import User from "./User";
 
 const Resolvers = {
@@ -35,6 +36,7 @@ const Resolvers = {
   RunoffResult,
   RunoffRound,
   RunoffRoundResult,
+  RunoffVote,
   User,
 };
 

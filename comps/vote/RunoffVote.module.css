@@ -1,26 +1,41 @@
 .option {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .submit {
-    margin: 1rem 0;
+  margin: 1rem 0;
 }
 
 .voteId {
-    background: rgba(0, 0, 0, 0.08);
-    border-radius: 10px;
-    padding: 0.5rem;
-    color: #6c5ce7;
-    font-size: 1.5rem;
-    font-weight: bold;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 0.5rem;
+  color: #6c5ce7;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .description {
-    max-width: 500px;
+  max-width: 500px;
 }
 
 .sticker {
-    max-width: 200px;
-    max-height: 200px;
-    object-fit: contain;
+  max-width: 200px;
+  max-height: 200px;
+  object-fit: contain;
+}
+
+.name {
+  max-width: 350px;
+}
+
+.confirmationList {
+  list-style: decimal;
+}
+
+.removedChip {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.confirmHeading {
 }
