@@ -11,7 +11,7 @@ import {
 import Typography from "@material-ui/core/Typography";
 import brokenGlass from "./../../img/marginalia-fatal-error.png";
 import layout from "./../../styles/layout.module.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Pagination from "@material-ui/lab/Pagination";
 import { Chart } from "react-google-charts";
 import Confetti from "react-confetti";
@@ -80,6 +80,31 @@ const RunoffResult = ({ id }) => {
   const { data, loading } = useQuery(QUERY, { variables: { id } });
   const [round, setRound] = useState(1);
   const { width } = useWindowSize();
+  const [confetti, setConfetti] = useState(false);
+  const [height, setHeight] = useState(globalThis?.innerHeight);
+
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      data &&
+      data.electionResults?.rounds.length === round &&
+      !confetti
+    ) {
+      const scrollHandler = () => {
+        const offsetTop = window.innerHeight + window.scrollY;
+        const pageHeight = window.document.body.offsetHeight;
+
+        if (pageHeight - offsetTop < 300) {
+          setConfetti(true);
+          setHeight(pageHeight);
+        }
+      };
+
+      window.addEventListener("scroll", scrollHandler);
+
+      return () => window.removeEventListener("scroll", scrollHandler);
+    }
+  }, [data, round, confetti]);
 
   if (loading) {
     return <CircularProgress />;
@@ -126,7 +151,13 @@ const RunoffResult = ({ id }) => {
       />
 
       {round === results.rounds.length && (
-        <Confetti width={width * 0.9} recycle={false} numberOfPieces={200} />
+        <Confetti
+          width={width * 0.9}
+          height={height}
+          recycle={false}
+          run={confetti}
+          numberOfPieces={200}
+        />
       )}
 
       <List>
