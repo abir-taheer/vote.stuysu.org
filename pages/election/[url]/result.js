@@ -8,7 +8,6 @@ import BackButton from "../../../comps/shared/BackButton";
 import Typography from "@material-ui/core/Typography";
 import ElectionTabBar from "../../../comps/election/ElectionTabBar";
 import ElectionNotFound from "../../../comps/election/ElectionNotFound";
-import useFormatDate from "../../../utils/date/useFormatDate";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
 import RunoffResult from "../../../comps/election/RunoffResult";
 import cat from "./../../../img/ginger-cat-access-blocked.png";
@@ -44,7 +43,6 @@ export default function Vote() {
   const { data, refetch, loading } = useQuery(QUERY, {
     variables: { url, isReady },
   });
-  const { now, getReadableDate } = useFormatDate(true, 1000);
   const user = useContext(UserContext);
 
   // Update the election open form every 5 seconds
@@ -105,7 +103,11 @@ export default function Vote() {
         <ElectionTabBar completed={election.completed} />
 
         {canShowResults ? (
-          <>{election.type === "runoff" && <RunoffResult id={election.id} />}</>
+          <>
+            {election.type === "runoff" && (
+              <RunoffResult id={election.id} completed={election.completed} />
+            )}
+          </>
         ) : (
           <>
             <img

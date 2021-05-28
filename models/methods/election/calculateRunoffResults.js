@@ -22,7 +22,7 @@ export default async function calculateRunoffResults() {
   let isTie = false;
   let totalVotes = votes.length;
 
-  const eliminated = [];
+  const eliminated = new Set();
 
   if (votes.length > 0) {
     let complete = false;
@@ -30,6 +30,10 @@ export default async function calculateRunoffResults() {
     while (!complete) {
       number++;
       let numVotesThisRound = 0;
+
+      if (number === 7) {
+        break;
+      }
 
       let voteCountsThisRound = {};
 
@@ -43,7 +47,7 @@ export default async function calculateRunoffResults() {
 
       votes.forEach((vote) => {
         const activeVote = vote.choices.find(
-          (choice) => !eliminated.includes(choice)
+          (choice) => !eliminated.has(choice.toString())
         );
 
         if (activeVote) {
@@ -61,8 +65,15 @@ export default async function calculateRunoffResults() {
 
       let minVotes = voteCountsThisRound[candidateIdsThisRound[0]];
 
+      isTie = true;
+      complete = true;
       candidateIdsThisRound.forEach((candidateId) => {
         const currentCandidateNumVotes = voteCountsThisRound[candidateId];
+
+        if (currentCandidateNumVotes !== minVotes) {
+          isTie = false;
+          complete = false;
+        }
 
         if (currentCandidateNumVotes < minVotes) {
           minVotes = currentCandidateNumVotes;
@@ -71,7 +82,7 @@ export default async function calculateRunoffResults() {
 
       const results = candidateIdsThisRound.map((id) => {
         const candidateNumVotesThisRound = voteCountsThisRound[id];
-        const isEliminated = candidateNumVotesThisRound === minVotes;
+        const isEliminated = !isTie && candidateNumVotesThisRound === minVotes;
         const percentage =
           numVotesThisRound > 0
             ? Math.round(
@@ -80,21 +91,13 @@ export default async function calculateRunoffResults() {
             : 0;
 
         if (isEliminated) {
-          eliminated.push(id);
+          eliminated.add(id);
           eliminatedThisRound.push(id);
         }
 
-        if (percentage >= 50) {
-          if (winnerId) {
-            // This means a tie
-            winnerId = null;
-            complete = false;
-            isTie = true;
-          } else {
-            winnerId = id;
-            complete = true;
-            isTie = false;
-          }
+        if (percentage >= 50 && !isTie) {
+          winnerId = id;
+          complete = true;
         }
 
         return {
