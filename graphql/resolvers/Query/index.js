@@ -2,6 +2,7 @@ import authenticatedUser from "./authenticatedUser";
 import allElections from "./allElections";
 import electionById from "./electionById";
 import electionByUrl from "./electionByUrl";
+import electionResults from "./electionResults";
 import openElections from "./openElections";
 import pastElections from "./pastElections";
 import adminPictures from "./adminPictures";
@@ -35,6 +36,7 @@ const Query = {
   userHasVoted,
   electionById,
   electionByUrl,
+  electionResults,
   openElections,
   pastElections,
   pictureById,

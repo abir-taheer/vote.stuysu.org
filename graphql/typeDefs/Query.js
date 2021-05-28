@@ -191,6 +191,11 @@ export default gql`
     pictureById(id: ObjectId!): Picture
 
     """
+    Takes an election identifier and returns the results of that election if available to the current user
+    """
+    electionResults(election: electionIdentifier!): ElectionResult!
+
+    """
     Returns the current datetime on the server
     """
     date: DateTime!
