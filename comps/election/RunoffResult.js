@@ -94,7 +94,7 @@ const RunoffResult = ({ id }) => {
         const offsetTop = window.innerHeight + window.scrollY;
         const pageHeight = window.document.body.offsetHeight;
 
-        if (pageHeight - offsetTop < 300) {
+        if (pageHeight - offsetTop < 150) {
           setConfetti(true);
           setHeight(pageHeight);
         }
