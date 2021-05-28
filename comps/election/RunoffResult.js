@@ -11,7 +11,7 @@ import {
 import Typography from "@material-ui/core/Typography";
 import brokenGlass from "./../../img/marginalia-fatal-error.png";
 import layout from "./../../styles/layout.module.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Pagination from "@material-ui/lab/Pagination";
 import { Chart } from "react-google-charts";
 import Confetti from "react-confetti";
@@ -126,12 +126,7 @@ const RunoffResult = ({ id }) => {
       />
 
       {round === results.rounds.length && (
-        <Confetti
-          width={width * 0.9}
-          height={globalThis?.document?.body?.scrollHeight}
-          recycle={false}
-          numberOfPieces={200}
-        />
+        <Confetti width={width * 0.9} recycle={false} numberOfPieces={200} />
       )}
 
       <List>

@@ -108,6 +108,10 @@ export default async function calculateRunoffResults() {
         };
       });
 
+      if (winnerId) {
+        results.forEach((r) => (r.eliminated = false));
+      }
+
       if (numVotesThisRound) {
         results.sort((a, b) => b.numVotes - a.numVotes);
 
