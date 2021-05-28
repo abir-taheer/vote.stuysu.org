@@ -2,13 +2,14 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { useRouter } from "next/router";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import styles from "./ElectionTabBar.module.css";
 import DashboardOutlined from "@material-ui/icons/DashboardOutlined";
 import GroupWorkOutlined from "@material-ui/icons/GroupWorkOutlined";
 import HowToVoteOutlined from "@material-ui/icons/HowToVoteOutlined";
 import BallotOutlined from "@material-ui/icons/BallotOutlined";
+import UserContext from "../auth/UserContext";
 
 const tabs = [
   {
@@ -17,6 +18,7 @@ const tabs = [
     exact: true,
     // null or boolean value for filtering based on completion
     completed: null,
+    showIfAdmin: null,
     icon: <DashboardOutlined />,
   },
   {
@@ -24,6 +26,7 @@ const tabs = [
     label: "Candidates",
     exact: false,
     completed: null,
+    showIfAdmin: null,
     icon: <GroupWorkOutlined />,
   },
   {
@@ -31,6 +34,7 @@ const tabs = [
     label: "Results",
     exact: false,
     completed: true,
+    showIfAdmin: true,
     icon: <BallotOutlined />,
   },
   {
@@ -38,6 +42,7 @@ const tabs = [
     label: "Vote",
     exact: false,
     completed: false,
+    showIfAdmin: null,
     icon: <HowToVoteOutlined />,
   },
 ];
@@ -45,6 +50,7 @@ const tabs = [
 const ElectionTabBar = ({ completed }) => {
   const router = useRouter();
   const { url } = router.query;
+  const { signedIn, adminPrivileges } = useContext(UserContext);
 
   const isMatch = (tab) =>
     tab.exact ? router.asPath === tab.path : router.asPath.startsWith(tab.path);
@@ -56,8 +62,12 @@ const ElectionTabBar = ({ completed }) => {
     }))
     .filter(
       (tab) =>
-        tab.completed === null || tab.completed === completed || isMatch(tab)
+        tab.completed === null ||
+        tab.completed === completed ||
+        isMatch(tab) ||
+        (tab.showIfAdmin && signedIn && adminPrivileges)
     );
+
   const tabIndex = adjustedTabs.findIndex(isMatch);
 
   const [value, setValue] = useState(tabIndex);

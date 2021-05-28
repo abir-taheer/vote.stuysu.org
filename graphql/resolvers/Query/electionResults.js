@@ -12,7 +12,13 @@ export default async (_, { election: { id, url } }, { user, signedIn }) => {
     throw new UserInputError("Do not pass both an id and a url");
   }
 
-  const election = await Election.findOne({ id, url });
+  const election = id
+    ? await Election.findById(id)
+    : await Election.findOne({ url });
+
+  if (!election) {
+    throw new UserInputError("There's no election with that id or url");
+  }
 
   if (!election.completed) {
     if (!signedIn || !user.adminPrivileges) {

@@ -8,7 +8,7 @@ import HowToVote from "@material-ui/icons/HowToVote";
 
 const ElectionNotFound = ({ href }) => {
   return (
-    <>
+    <div className={layout.centerContainer}>
       <img
         src={searching}
         className={layout.largeVector}
@@ -26,7 +26,7 @@ const ElectionNotFound = ({ href }) => {
           Back To Elections
         </Button>
       </Link>
-    </>
+    </div>
   );
 };
 

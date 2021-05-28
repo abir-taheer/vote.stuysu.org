@@ -10,10 +10,12 @@ import ElectionTabBar from "../../../comps/election/ElectionTabBar";
 import ElectionNotFound from "../../../comps/election/ElectionNotFound";
 import useFormatDate from "../../../utils/date/useFormatDate";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
+import RunoffResult from "../../../comps/election/RunoffResult";
+import cat from "./../../../img/ginger-cat-access-blocked.png";
 
 const QUERY = gql`
-  query($url: NonEmptyString!) {
-    electionByUrl(url: $url) {
+  query($url: NonEmptyString!, $isReady: Boolean!) {
+    electionByUrl(url: $url) @include(if: $isReady) {
       id
       type
       name
@@ -38,22 +40,25 @@ const QUERY = gql`
 export default function Vote() {
   const router = useRouter();
   const { url } = router.query;
-  const { data, refetch, loading } = useQuery(QUERY, { variables: { url } });
+  const isReady = !!url;
+  const { data, refetch, loading } = useQuery(QUERY, {
+    variables: { url, isReady },
+  });
   const { now, getReadableDate } = useFormatDate(true, 1000);
   const user = useContext(UserContext);
 
   // Update the election open form every 5 seconds
-  const election = data?.electionByUrl;
 
-  if (loading) {
+  if (!isReady || loading) {
     return <LoadingScreen />;
   }
+  const election = data?.electionByUrl;
 
   if (!election) {
     return <ElectionNotFound href={"/election"} />;
   }
 
-  const voteId = globalThis?.localStorage?.getItem("vote-id-" + election.id);
+  const canShowResults = user.adminPrivileges || election.completed;
 
   return (
     <div className={layout.container}>
@@ -98,6 +103,21 @@ export default function Vote() {
         </Typography>
 
         <ElectionTabBar completed={election.completed} />
+
+        {canShowResults ? (
+          <>{election.type === "runoff" && <RunoffResult id={election.id} />}</>
+        ) : (
+          <>
+            <img
+              src={cat}
+              alt={"A cat in front of a computer"}
+              className={layout.largeVector}
+            />
+            <Typography>
+              Results aren't available for this election yet
+            </Typography>
+          </>
+        )}
       </main>
     </div>
   );

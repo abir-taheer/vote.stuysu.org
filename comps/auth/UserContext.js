@@ -5,6 +5,7 @@ export const defaultUserContextValue = {
   refetch: () => {},
   logout: () => {},
   id: null,
+  adminPrivileges: false,
   firstName: null,
   lastName: null,
   email: null,
