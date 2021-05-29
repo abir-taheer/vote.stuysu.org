@@ -22,6 +22,7 @@ import scalars from "./scalars";
 import StuyActivitiesSync from "./StuyActivitiesSync";
 import User from "./User";
 import UserQueryResult from "./UserQueryResult";
+import Vote from "./Vote";
 
 const typeDefs = [
   ...graphqlScalarDefs,
@@ -48,6 +49,7 @@ const typeDefs = [
   StuyActivitiesSync,
   User,
   UserQueryResult,
+  Vote,
 ];
 
 export default typeDefs;

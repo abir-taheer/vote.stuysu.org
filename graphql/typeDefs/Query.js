@@ -204,5 +204,15 @@ export default gql`
     Returns the current public key used to sign cross site requests
     """
     publicKey: PublicKey!
+
+    """
+    Get all of the votes for a certain election
+    """
+    allVotes(election: electionIdentifier!): [Vote!]!
+
+    """
+    Get all the users who voted in a certain election
+    """
+    allVoters(election: electionIdentifier!): [User!]!
   }
 `;

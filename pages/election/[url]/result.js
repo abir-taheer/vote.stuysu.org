@@ -65,7 +65,7 @@ export default function Vote() {
         <title>Results - {election.name} | StuyBOE Voting Site</title>
         <meta
           property={"og:title"}
-          content={`Vote - ${election.name} | StuyBOE Voting Site`}
+          content={`Results - ${election.name} | StuyBOE Voting Site`}
         />
         <meta
           property="og:description"

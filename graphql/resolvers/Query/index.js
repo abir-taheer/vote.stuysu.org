@@ -1,5 +1,7 @@
 import authenticatedUser from "./authenticatedUser";
 import allElections from "./allElections";
+import allVotes from "./allVotes";
+import allVoters from "./allVoters";
 import electionById from "./electionById";
 import electionByUrl from "./electionByUrl";
 import electionResults from "./electionResults";
@@ -25,6 +27,8 @@ const Query = {
   adminPictures,
   allAnnouncements,
   allUsers,
+  allVotes,
+  allVoters,
   userById,
   usersById,
   userIsDeletable,
