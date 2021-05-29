@@ -37,7 +37,7 @@ const QUERY = gql`
   }
 `;
 
-export default function Vote() {
+function Result() {
   const router = useRouter();
   const { url } = router.query;
   const isReady = !!url;
@@ -125,3 +125,5 @@ export default function Vote() {
     </div>
   );
 }
+
+export default withApollo({ ssr: true })(Result);
