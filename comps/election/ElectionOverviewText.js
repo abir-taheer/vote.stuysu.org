@@ -48,7 +48,7 @@ const ElectionOverviewText = ({
           </Typography>
         )}
 
-        <Link href={"/election/" + url + "/candidate"}>
+        <Link href={"/election/" + url + "/result"}>
           <Button
             variant={"contained"}
             color={"primary"}
