@@ -11,6 +11,7 @@ import ElectionNotFound from "../../../comps/election/ElectionNotFound";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
 import RunoffResult from "../../../comps/election/RunoffResult";
 import cat from "./../../../img/ginger-cat-access-blocked.png";
+import withApollo from "../../../comps/apollo/withApollo";
 
 const QUERY = gql`
   query($url: NonEmptyString!, $isReady: Boolean!) {

@@ -39,7 +39,7 @@ function App({ Component, pageProps }) {
                 <meta property="og:type" content="website" />
                 <meta property="og:locale" content="en_US" />
                 <meta property="og:site_name" content="StuyBOE Voting Site" />
-                {/*<meta property="og:url" content={PUBLIC_URL + router.asPath} />*/}
+                <meta property="og:url" content={PUBLIC_URL + router.asPath} />
               </Head>
               <NavBar />
               <Component {...pageProps} />
