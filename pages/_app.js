@@ -18,6 +18,7 @@ ReactGA.initialize(process.env.NEXT_APP_GTAG_ID || "UA-75064374-8");
 
 function App({ Component, pageProps }) {
   const router = useRouter();
+  console.log(router);
 
   useEffect(() => {
     ReactGA.pageview(router.asPath);
@@ -38,7 +39,7 @@ function App({ Component, pageProps }) {
                 <meta property="og:type" content="website" />
                 <meta property="og:locale" content="en_US" />
                 <meta property="og:site_name" content="StuyBOE Voting Site" />
-                <meta property="og:url" content={PUBLIC_URL + router.asPath} />
+                {/*<meta property="og:url" content={PUBLIC_URL + router.asPath} />*/}
               </Head>
               <NavBar />
               <Component {...pageProps} />
