@@ -54,7 +54,6 @@ const PictureUploadDialog = () => {
       const { reject, resolve } = params;
       setPromise({ resolve, reject });
       if (params.file) {
-        console.log(params.file);
         setFile(params.file);
       }
       setOpen(true);

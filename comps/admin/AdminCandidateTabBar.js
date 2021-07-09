@@ -42,7 +42,6 @@ const AdminCandidateTabBar = () => {
 
   useEffect(() => {
     setValue(tabIndex);
-    console.log(tabIndex);
   }, [router]);
 
   return (

@@ -18,7 +18,6 @@ ReactGA.initialize(process.env.NEXT_APP_GTAG_ID || "UA-75064374-8");
 
 function App({ Component, pageProps }) {
   const router = useRouter();
-  console.log(router);
 
   useEffect(() => {
     ReactGA.pageview(router.asPath);

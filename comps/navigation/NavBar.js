@@ -69,15 +69,15 @@ const NavBar = () => {
               </Button>
             </Link>
 
-            {/*<Link href={"/faq"}>*/}
-            {/*  <Button*/}
-            {/*    disableRipple*/}
-            {/*    className={styles.menuItem}*/}
-            {/*    color={path.startsWith("/faq") ? "primary" : undefined}*/}
-            {/*  >*/}
-            {/*    FAQs*/}
-            {/*  </Button>*/}
-            {/*</Link>*/}
+            <Link href={"/faq"}>
+              <Button
+                disableRipple
+                className={styles.menuItem}
+                color={path.startsWith("/faq") ? "primary" : undefined}
+              >
+                FAQs
+              </Button>
+            </Link>
 
             {!user.signedIn && (
               <Button

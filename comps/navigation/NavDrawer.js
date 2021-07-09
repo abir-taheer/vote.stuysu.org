@@ -115,18 +115,18 @@ const NavDrawer = ({ open, setOpen }) => {
           </ListItem>
         </Link>
 
-        {/*<Link href={"/faq"}>*/}
-        {/*  <ListItem*/}
-        {/*    button*/}
-        {/*    selected={router.asPath.startsWith("/faq")}*/}
-        {/*    onClick={closeDrawer}*/}
-        {/*  >*/}
-        {/*    <ListItemIcon>*/}
-        {/*      <HelpOutline />*/}
-        {/*    </ListItemIcon>*/}
-        {/*    <ListItemText primary={"FAQs"} />*/}
-        {/*  </ListItem>*/}
-        {/*</Link>*/}
+        <Link href={"/faq"}>
+          <ListItem
+            button
+            selected={router.asPath.startsWith("/faq")}
+            onClick={closeDrawer}
+          >
+            <ListItemIcon>
+              <HelpOutline />
+            </ListItemIcon>
+            <ListItemText primary={"FAQs"} />
+          </ListItem>
+        </Link>
       </List>
     </Drawer>
   );
