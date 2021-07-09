@@ -159,7 +159,7 @@ const Election = () => {
         </div>
 
         {!!election.activeAnnouncements.length && (
-          <>
+          <div className={layout.spaced}>
             <Typography variant={"h2"} color={"primary"} align={"center"}>
               Announcements 📣
             </Typography>
@@ -172,7 +172,7 @@ const Election = () => {
                 updatedAt={announcement.updatedAt}
               />
             ))}
-          </>
+          </div>
         )}
       </main>
     </div>
