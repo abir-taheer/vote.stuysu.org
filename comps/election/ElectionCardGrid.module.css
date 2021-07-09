@@ -3,6 +3,10 @@
     width: 85vw;
     max-width: 1200px;
   }
+
+  .fullWidthList {
+    width: 450px;
+  }
 }
 
 .grid {

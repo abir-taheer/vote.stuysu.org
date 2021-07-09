@@ -16,6 +16,7 @@ import RunoffRound from "./RunoffRound";
 import RunoffRoundResult from "./RunoffRoundResult";
 import RunoffVote from "./RunoffVote";
 import User from "./User";
+import Vote from "./Vote";
 
 const Resolvers = {
   // Custom Scalar Types
@@ -38,6 +39,7 @@ const Resolvers = {
   RunoffRoundResult,
   RunoffVote,
   User,
+  Vote,
 };
 
 export default Resolvers;

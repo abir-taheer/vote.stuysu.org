@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 import Add from "@material-ui/icons/Add";
 import Link from "next/link";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import TextField from "@material-ui/core/TextField";
@@ -77,7 +76,7 @@ const AdminAnnouncements = () => {
             }}
           />
 
-          <List>
+          <List className={styles.fullWidthList}>
             {data?.allAnnouncements.results.map(({ id, title, updatedAt }) => (
               <>
                 <ListItem alignItems="flex-start" key={id}>
