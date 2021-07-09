@@ -12,6 +12,8 @@ import capitalize from "@material-ui/core/utils/capitalize";
 import ElectionOverviewText from "../../../comps/election/ElectionOverviewText";
 import Head from "next/head";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
+import { Card } from "@material-ui/core";
+import ElectionAnnouncementCard from "../../../comps/election/ElectionAnnouncementCard";
 
 const ELECTION_QUERY = gql`
   query($url: NonEmptyString!) {
@@ -32,6 +34,12 @@ const ELECTION_QUERY = gql`
           resourceType
           format
         }
+      }
+      activeAnnouncements {
+        id
+        title
+        body
+        updatedAt
       }
       userIsEligible
       isOpen
@@ -106,7 +114,7 @@ const Election = () => {
           variant={"outlined"}
           text={"Back To Elections"}
         />
-        <Typography variant={"h1"} className={layout.title} color={"primary"}>
+        <Typography variant={"h1"} className={layout.title}>
           {election.name}
         </Typography>
 
@@ -118,6 +126,10 @@ const Election = () => {
         )}
 
         <div>
+          <Typography variant={"h2"} color={"primary"} align={"center"}>
+            Status 💡
+          </Typography>
+
           <Typography variant={"body1"}>
             Start{now < start ? "s" : "ed"}:{" "}
             <Typography color={"secondary"} component={"span"}>
@@ -145,6 +157,23 @@ const Election = () => {
             refetch={refetch}
           />
         </div>
+
+        {!!election.activeAnnouncements.length && (
+          <>
+            <Typography variant={"h2"} color={"primary"} align={"center"}>
+              Announcements 📣
+            </Typography>
+
+            {election.activeAnnouncements.map((announcement) => (
+              <ElectionAnnouncementCard
+                key={announcement.id}
+                title={announcement.title}
+                body={announcement.body}
+                updatedAt={announcement.updatedAt}
+              />
+            ))}
+          </>
+        )}
       </main>
     </div>
   );

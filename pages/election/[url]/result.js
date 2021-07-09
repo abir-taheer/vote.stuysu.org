@@ -98,7 +98,7 @@ function Result() {
           variant={"outlined"}
           text={"Back To Elections"}
         />
-        <Typography variant={"h1"} className={layout.title} color={"primary"}>
+        <Typography variant={"h1"} className={layout.title}>
           {election.name}
         </Typography>
 
