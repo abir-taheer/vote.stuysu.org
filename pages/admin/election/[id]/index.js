@@ -24,7 +24,7 @@ import Lock from "@material-ui/icons/Lock";
 import LockOpen from "@material-ui/icons/LockOpen";
 
 const EDIT_MUTATION = gql`
-  mutation(
+  mutation (
     $id: ObjectId!
     $name: NonEmptyString!
     $url: NonEmptyString!
@@ -65,7 +65,7 @@ const EDIT_MUTATION = gql`
 `;
 
 const CLOSE_MUTATION = gql`
-  mutation($id: ObjectId!) {
+  mutation ($id: ObjectId!) {
     completeElection(id: $id) {
       id
       completed
@@ -74,7 +74,7 @@ const CLOSE_MUTATION = gql`
 `;
 
 const OPEN_MUTATION = gql`
-  mutation($id: ObjectId!) {
+  mutation ($id: ObjectId!) {
     openElection(id: $id) {
       id
       completed

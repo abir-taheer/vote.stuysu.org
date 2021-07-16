@@ -33,7 +33,7 @@ const SYNC_MUTATION = gql`
 `;
 
 const USER_QUERY = gql`
-  query($page: PositiveInt!, $query: String!) {
+  query ($page: PositiveInt!, $query: String!) {
     allUsers(page: $page, query: $query) {
       numPages
       page

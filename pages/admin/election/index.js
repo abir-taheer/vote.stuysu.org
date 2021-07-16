@@ -16,7 +16,7 @@ import Search from "@material-ui/icons/Search";
 import { useRouter } from "next/router";
 
 const ELECTIONS_QUERY = gql`
-  query(
+  query (
     $query: String!
     $openElectionsPage: PositiveInt!
     $pastElectionsPage: PositiveInt!

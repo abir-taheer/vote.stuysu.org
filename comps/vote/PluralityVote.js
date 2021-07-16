@@ -17,7 +17,7 @@ import Typography from "@material-ui/core/Typography";
 import alertDialog from "../dialog/alertDialog";
 
 const MUTATION = gql`
-  mutation($candidateId: ObjectId!, $electionId: ObjectId!) {
+  mutation ($candidateId: ObjectId!, $electionId: ObjectId!) {
     votePlurality(candidateId: $candidateId, electionId: $electionId) {
       id
       choice {

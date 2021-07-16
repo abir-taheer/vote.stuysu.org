@@ -24,7 +24,7 @@ import Chip from "@material-ui/core/Chip";
 import Add from "@material-ui/icons/Add";
 
 const MUTATION = gql`
-  mutation($choices: [ObjectId!]!, $electionId: ObjectId!) {
+  mutation ($choices: [ObjectId!]!, $electionId: ObjectId!) {
     voteRunoff(choices: $choices, electionId: $electionId) {
       id
       choices {

@@ -1,9 +1,8 @@
 .card {
-    padding: 1rem;
-    max-width: 500px;
+  padding: 1rem;
+  max-width: 500px;
 }
 
 .hr {
-    opacity: 0.4;
+  opacity: 0.4;
 }
-

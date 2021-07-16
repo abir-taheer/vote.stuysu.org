@@ -17,7 +17,7 @@ import UserNotFound from "../../../../comps/user/UserNotFound";
 import confirmDialog from "../../../../comps/dialog/confirmDialog";
 
 const QUERY = gql`
-  query($id: ObjectId!, $pageReady: Boolean!) {
+  query ($id: ObjectId!, $pageReady: Boolean!) {
     userById(id: $id) @include(if: $pageReady) {
       id
       firstName
@@ -32,7 +32,7 @@ const QUERY = gql`
 `;
 
 const EDIT_MUTATION = gql`
-  mutation(
+  mutation (
     $id: ObjectId!
     $firstName: NonEmptyString!
     $lastName: NonEmptyString!
@@ -60,7 +60,7 @@ const EDIT_MUTATION = gql`
 `;
 
 const DELETE_MUTATION = gql`
-  mutation($id: ObjectId!) {
+  mutation ($id: ObjectId!) {
     deleteUser(id: $id)
   }
 `;
@@ -73,10 +73,10 @@ const EditUser = () => {
   const pageReady = !!id;
   const { data, loading } = useQuery(QUERY, { variables: { id, pageReady } });
   const [edit] = useMutation(EDIT_MUTATION);
-  const [
-    deleteUser,
-    { loading: loadingDeleteUser },
-  ] = useMutation(DELETE_MUTATION, { variables: { id } });
+  const [deleteUser, { loading: loadingDeleteUser }] = useMutation(
+    DELETE_MUTATION,
+    { variables: { id } }
+  );
 
   const user = data?.userById;
   if (!pageReady) {

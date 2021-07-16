@@ -11,7 +11,7 @@ import CandidateTabBar from "../../../../../comps/candidate/CandidateTabBar";
 import LoadingScreen from "../../../../../comps/shared/LoadingScreen";
 
 const QUERY = gql`
-  query($electionUrl: NonEmptyString!, $candidateUrl: NonEmptyString!) {
+  query ($electionUrl: NonEmptyString!, $candidateUrl: NonEmptyString!) {
     candidateByUrl(url: $candidateUrl, election: { url: $electionUrl }) {
       id
       name

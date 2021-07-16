@@ -11,7 +11,7 @@ import CandidateForm from "../../../../../comps/candidate/CandidateForm";
 import alertDialog from "../../../../../comps/dialog/alertDialog";
 
 const QUERY = gql`
-  query($id: ObjectId!) {
+  query ($id: ObjectId!) {
     electionById(id: $id) {
       id
       name
@@ -21,7 +21,7 @@ const QUERY = gql`
 `;
 
 const CREATE_MUTATION = gql`
-  mutation(
+  mutation (
     $electionId: ObjectId!
     $name: NonEmptyString!
     $url: NonEmptyString!

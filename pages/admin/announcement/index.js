@@ -19,7 +19,7 @@ import moment from "moment-timezone/moment-timezone-utils";
 import { Divider } from "@material-ui/core";
 
 const QUERY = gql`
-  query($query: String!, $page: PositiveInt!) {
+  query ($query: String!, $page: PositiveInt!) {
     allAnnouncements(query: $query, page: $page) {
       page
       numPages

@@ -10,7 +10,7 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 
 const MUTATION = gql`
-  mutation($idToken: JWT!) {
+  mutation ($idToken: JWT!) {
     login(idToken: $idToken)
   }
 `;

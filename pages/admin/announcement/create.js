@@ -10,7 +10,7 @@ import alertDialog from "../../../comps/dialog/alertDialog";
 import { useRouter } from "next/router";
 
 const MUTATION = gql`
-  mutation(
+  mutation (
     $title: NonEmptyString!
     $body: NonEmptyString!
     $start: DateTime

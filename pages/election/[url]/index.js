@@ -16,7 +16,7 @@ import { Card } from "@material-ui/core";
 import ElectionAnnouncementCard from "../../../comps/election/ElectionAnnouncementCard";
 
 const ELECTION_QUERY = gql`
-  query($url: NonEmptyString!) {
+  query ($url: NonEmptyString!) {
     electionByUrl(url: $url) {
       id
       type

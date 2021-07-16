@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 
 const ID_QUERY = gql`
-  query($id: ObjectId!) {
+  query ($id: ObjectId!) {
     electionById(id: $id) {
       id
       name
