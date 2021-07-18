@@ -41,9 +41,21 @@ export default async (
     choices,
   };
 
-  await Election.update(
+  // Randomize the order of user ids to ensure votes can't be traced to emails
+  const $position =
+    Math.floor(Math.random() * 50) - Math.floor(Math.random() * 50);
+
+  await Election.updateOne(
     { _id: electionId },
-    { $push: { runoffVotes: vote, voterIds: user.id } }
+    {
+      $push: {
+        runoffVotes: vote,
+        voterIds: {
+          $each: [user.id],
+          $position,
+        },
+      },
+    }
   );
 
   return vote;

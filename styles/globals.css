@@ -27,3 +27,8 @@ body {
 li {
   list-style: none;
 }
+
+.MuiPickersBasePicker-container .MuiTypography-body1 {
+  line-height: 1;
+  margin: 0;
+}
