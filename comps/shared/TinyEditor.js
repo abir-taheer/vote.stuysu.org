@@ -3,7 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { useSnackbar } from "notistack";
 
 const UPLOAD_MUTATION = gql`
-  mutation($file: Upload!, $alt: NonEmptyString!) {
+  mutation ($file: Upload!, $alt: NonEmptyString!) {
     uploadPicture(alt: $alt, file: $file) {
       id
       alt
@@ -58,7 +58,8 @@ const TinyEditor = ({ value, setValue, className, disabled }) => {
           media_dimensions: false,
           media_url_resolver: (data, resolve, reject) => {
             const url = new window.URL(data.url);
-            const allowedHosts = /^(?:\w|\d|\.)*(?:youtube\.com|vimeo\.com|youtu\.be)$/;
+            const allowedHosts =
+              /^(?:\w|\d|\.)*(?:youtube\.com|vimeo\.com|youtu\.be)$/;
             const hostIsAllowed = !!url.hostname.match(allowedHosts);
             if (hostIsAllowed) {
               resolve("");

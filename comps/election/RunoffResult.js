@@ -22,7 +22,7 @@ import useWindowSize from "react-use/lib/useWindowSize";
 import capitalize from "@material-ui/core/utils/capitalize";
 
 const QUERY = gql`
-  query($id: ObjectId!) {
+  query ($id: ObjectId!) {
     electionResults(election: { id: $id }) {
       ... on RunoffResult {
         rounds {

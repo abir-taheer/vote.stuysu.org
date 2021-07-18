@@ -18,7 +18,7 @@ import BackButton from "../../../comps/shared/BackButton";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
 
 const QUERY = gql`
-  query($id: ObjectId!) {
+  query ($id: ObjectId!) {
     announcementById(id: $id) {
       id
       title
@@ -37,7 +37,7 @@ const QUERY = gql`
 `;
 
 const EDIT_MUTATION = gql`
-  mutation(
+  mutation (
     $id: ObjectId!
     $title: NonEmptyString!
     $body: NonEmptyString!
@@ -74,7 +74,7 @@ const EDIT_MUTATION = gql`
 `;
 
 const DELETE_MUTATION = gql`
-  mutation($id: ObjectId!) {
+  mutation ($id: ObjectId!) {
     deleteAnnouncement(id: $id)
   }
 `;
@@ -104,8 +104,7 @@ export default function ManageAnnouncement() {
   const handleDelete = async () => {
     const confirmation = await confirmDialog({
       title: "Are you sure you?",
-      body:
-        "Are you sure you want to delete this announcement? There is no way to undo this action.",
+      body: "Are you sure you want to delete this announcement? There is no way to undo this action.",
     });
 
     if (confirmation) {

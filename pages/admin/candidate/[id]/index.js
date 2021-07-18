@@ -17,7 +17,7 @@ import alertDialog from "../../../../comps/dialog/alertDialog";
 import { useSnackbar } from "notistack";
 
 const QUERY = gql`
-  query($id: ObjectId!) {
+  query ($id: ObjectId!) {
     candidateById(id: $id) {
       id
       name
@@ -49,7 +49,7 @@ const QUERY = gql`
 `;
 
 const MUTATION = gql`
-  mutation(
+  mutation (
     $id: ObjectId!
     $name: NonEmptyString!
     $url: NonEmptyString!

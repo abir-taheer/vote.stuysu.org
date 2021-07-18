@@ -90,8 +90,7 @@ const UserForm = ({
     } else {
       const confirmation = await confirmDialog({
         title: "Are you sure?",
-        body:
-          "Giving this person admin privileges will allow them to access this administration portal and possibly make dangerous changes",
+        body: "Giving this person admin privileges will allow them to access this administration portal and possibly make dangerous changes",
       });
 
       if (confirmation) {

@@ -11,7 +11,7 @@ import alertDialog from "../../../comps/dialog/alertDialog";
 import { useSnackbar } from "notistack";
 
 const SUBMIT_MUTATION = gql`
-  mutation(
+  mutation (
     $name: NonEmptyString!
     $url: NonEmptyString!
     $pictureId: ObjectId!

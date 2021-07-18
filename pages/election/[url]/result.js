@@ -14,7 +14,7 @@ import cat from "./../../../img/ginger-cat-access-blocked.png";
 import withApollo from "../../../comps/apollo/withApollo";
 
 const QUERY = gql`
-  query($url: NonEmptyString!, $isReady: Boolean!) {
+  query ($url: NonEmptyString!, $isReady: Boolean!) {
     electionByUrl(url: $url) @include(if: $isReady) {
       id
       type

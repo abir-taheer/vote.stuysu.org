@@ -15,7 +15,7 @@ import withApollo from "../../../../comps/apollo/withApollo";
 import LoadingScreen from "../../../../comps/shared/LoadingScreen";
 
 const QUERY = gql`
-  query($url: NonEmptyString!) {
+  query ($url: NonEmptyString!) {
     electionByUrl(url: $url) {
       id
       name

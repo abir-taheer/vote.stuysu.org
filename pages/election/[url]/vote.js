@@ -21,7 +21,7 @@ import LoadingScreen from "../../../comps/shared/LoadingScreen";
 import RunoffVote from "../../../comps/vote/RunoffVote";
 
 const QUERY = gql`
-  query($url: NonEmptyString!) {
+  query ($url: NonEmptyString!) {
     electionByUrl(url: $url) {
       id
       type

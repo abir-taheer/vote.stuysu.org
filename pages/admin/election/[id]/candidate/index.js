@@ -15,7 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import CandidateCard from "../../../../../comps/candidate/CandidateCard";
 
 const QUERY = gql`
-  query($id: ObjectId!) {
+  query ($id: ObjectId!) {
     electionById(id: $id) {
       id
       name

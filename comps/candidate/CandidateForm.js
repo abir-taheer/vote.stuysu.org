@@ -29,7 +29,7 @@ function getCandidateUrl(val) {
 }
 
 const UPLOAD_MUTATION = gql`
-  mutation($alt: NonEmptyString!, $file: Upload!) {
+  mutation ($alt: NonEmptyString!, $file: Upload!) {
     uploadPicture(alt: $alt, file: $file) {
       id
       alt
@@ -41,7 +41,7 @@ const UPLOAD_MUTATION = gql`
 `;
 
 const QUERY_USERS = gql`
-  query($query: String!) {
+  query ($query: String!) {
     allUsers(query: $query, resultsPerPage: 20) {
       results {
         id

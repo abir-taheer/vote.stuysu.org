@@ -9,7 +9,7 @@ import { useSnackbar } from "notistack";
 import alertDialog from "../../../comps/dialog/alertDialog";
 
 const MUTATION = gql`
-  mutation(
+  mutation (
     $firstName: NonEmptyString!
     $lastName: NonEmptyString!
     $email: EmailAddress!

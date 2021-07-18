@@ -11,7 +11,7 @@ import ElectionCardGrid from "../../comps/election/ElectionCardGrid";
 import Head from "next/head";
 
 const QUERY = gql`
-  query($query: String!, $page: PositiveInt!) {
+  query ($query: String!, $page: PositiveInt!) {
     allElections(query: $query, page: $page) {
       page
       numPages

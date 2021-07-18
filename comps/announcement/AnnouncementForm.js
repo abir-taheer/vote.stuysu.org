@@ -53,7 +53,7 @@ async function validate(values) {
 }
 
 const QUERY = gql`
-  query($query: String!) {
+  query ($query: String!) {
     allElections(query: $query) {
       results {
         id
