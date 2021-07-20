@@ -18,7 +18,10 @@ export default function ElectionAnnouncementCard({ title, updatedAt, body }) {
 
       <hr className={styles.hr} />
 
-      <div dangerouslySetInnerHTML={{ __html: body }} />
+      <div
+        className="sanitized-html"
+        dangerouslySetInnerHTML={{ __html: body }}
+      />
     </Card>
   );
 }
