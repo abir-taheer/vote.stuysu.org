@@ -33,6 +33,7 @@ const useLogin = (props = {}) => {
       window.google.accounts.id.initialize({
         client_id: GOOGLE_CLIENT_ID,
         callback: ({ credential }) => onSuccess(credential),
+        cancel_on_tap_outside: true,
       });
 
       window.google.accounts.id.prompt((notification) => {
