@@ -1,6 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import useScript from "./useScript";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GOOGLE_CLIENT_ID } from "../../constants";
 import alertDialog from "../dialog/alertDialog";
 import UserContext from "./UserContext";
@@ -13,12 +13,10 @@ const MUTATION = gql`
 
 export default function useGSI(props = {}) {
   const { onLogin } = props;
-
+  const [ready, setReady] = useState(false);
   const scriptStatus = useScript("https://accounts.google.com/gsi/client");
   const [login, { loading }] = useMutation(MUTATION);
   const user = useContext(UserContext);
-
-  const ready = scriptStatus === "ready";
 
   const onSuccess = async (tokenId) => {
     try {
@@ -58,7 +56,7 @@ export default function useGSI(props = {}) {
       });
     }
 
-    if (ready && user.ready && !user.signedIn) {
+    if (scriptStatus === "ready" && user.ready && !user.signedIn) {
       window.google.accounts.id.initialize({
         client_id: GOOGLE_CLIENT_ID,
         callback: ({ credential }) => onSuccess(credential),
@@ -71,6 +69,7 @@ export default function useGSI(props = {}) {
           console.log("One Tap isn't supported in this browser");
         }
       });
+      setReady(true);
     }
   }, [scriptStatus]);
 
