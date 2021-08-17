@@ -1,19 +1,23 @@
 import { useEffect, useRef } from "react";
-import useScript from "./useScript";
+import useGSI from "./useGSI";
+import { CircularProgress } from "@material-ui/core";
 
 export default function LoginButton() {
-  const scriptStatus = useScript("https://accounts.google.com/gsi/client");
+  const { ready, authenticating } = useGSI();
   const ref = useRef(null);
 
   useEffect(() => {
-    const scriptLoaded = scriptStatus === "ready" || scriptStatus === "idle";
-    if (scriptLoaded && ref.current && globalThis?.google) {
+    if (ready && ref.current && globalThis?.google) {
       globalThis.google.accounts.id.renderButton(ref.current, {
         theme: "outline",
         size: "large",
       });
     }
   });
+
+  if (authenticating) {
+    return <CircularProgress />;
+  }
 
   return <div ref={ref} />;
 }

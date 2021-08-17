@@ -1,6 +1,6 @@
-import { createMuiTheme, ThemeProvider as Provider } from "@material-ui/core";
+import { createTheme, ThemeProvider as Provider } from "@material-ui/core";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: "#6c5ce7",
