@@ -71,7 +71,7 @@ export default function useGSI(props = {}) {
       });
       setReady(true);
     }
-  }, [scriptStatus]);
+  }, [scriptStatus, user]);
 
   return { ready, authenticating: loading };
 }
