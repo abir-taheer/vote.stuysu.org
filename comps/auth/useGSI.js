@@ -11,7 +11,9 @@ const MUTATION = gql`
   }
 `;
 
-export default function useGSI({ onLogin } = {}) {
+export default function useGSI(props = {}) {
+  const { onLogin } = props;
+
   const scriptStatus = useScript("https://accounts.google.com/gsi/client");
   const [login, { loading }] = useMutation(MUTATION);
   const user = useContext(UserContext);
