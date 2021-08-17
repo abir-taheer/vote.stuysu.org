@@ -3,9 +3,12 @@ import styles from "../styles/Home.module.css";
 import layout from "../styles/layout.module.css";
 import voting from "./../img/voting.svg";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import React, { useContext } from "react";
+import LoginButton from "../comps/auth/LoginButton";
+import UserContext from "../comps/auth/UserContext";
 
 export default function Home() {
+  const user = useContext(UserContext);
   return (
     <div className={layout.container}>
       <Head>
@@ -38,6 +41,11 @@ export default function Home() {
           alt={"People representing voting"}
           className={layout.largeVector}
         />
+        {!user.signedIn && (
+          <div className={layout.flexCenter}>
+            <LoginButton />
+          </div>
+        )}
       </main>
     </div>
   );

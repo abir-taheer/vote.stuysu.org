@@ -113,3 +113,8 @@
   overflow: auto;
   max-height: calc(100% - 1rem);
 }
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+}
