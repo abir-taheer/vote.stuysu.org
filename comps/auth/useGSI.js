@@ -1,8 +1,9 @@
 import { gql, useMutation } from "@apollo/client";
 import useScript from "./useScript";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { GOOGLE_CLIENT_ID } from "../../constants";
 import alertDialog from "../dialog/alertDialog";
+import UserContext from "./UserContext";
 
 const MUTATION = gql`
   mutation ($idToken: JWT!) {
@@ -10,9 +11,10 @@ const MUTATION = gql`
   }
 `;
 
-export default function useGSI() {
+export default function useGSI({ onLogin }) {
   const scriptStatus = useScript("https://accounts.google.com/gsi/client");
   const [login, { loading }] = useMutation(MUTATION);
+  const user = useContext(UserContext);
 
   const ready = scriptStatus === "ready";
 
@@ -24,8 +26,8 @@ export default function useGSI() {
 
       await user.refetch();
 
-      if (props.onLogin) {
-        await props.onLogin();
+      if (onLogin) {
+        await onLogin();
       }
     } catch (e) {
       console.error(e);
@@ -54,7 +56,7 @@ export default function useGSI() {
       });
     }
 
-    if (ready) {
+    if (ready && user.ready && !user.signedIn) {
       window.google.accounts.id.initialize({
         client_id: GOOGLE_CLIENT_ID,
         callback: ({ credential }) => onSuccess(credential),

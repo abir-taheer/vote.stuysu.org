@@ -7,8 +7,8 @@ import LoginButton from "./LoginButton";
 import { CircularProgress } from "@material-ui/core";
 import useGSI from "./useGSI";
 
-const useLogin = () => {
-  const { ready, authenticating } = useGSI();
+const useLogin = ({ onLogin }) => {
+  const { ready, authenticating } = useGSI({ onLogin });
 
   const signIn = () => {
     {

@@ -11,6 +11,7 @@ export const defaultUserContextValue = {
   email: null,
   gradYear: null,
   grade: null,
+  ready: false,
 };
 
 const UserContext = createContext(defaultUserContextValue);

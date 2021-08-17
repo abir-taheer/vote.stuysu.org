@@ -68,7 +68,12 @@ const UserProvider = ({ children }) => {
     email: null,
     gradYear: null,
     grade: null,
+    ready: false,
   };
+
+  if (!loading) {
+    value.ready = true;
+  }
 
   if (!loading && data?.authenticatedUser) {
     value.signedIn = true;
@@ -93,6 +98,7 @@ const UserProvider = ({ children }) => {
       gradYear,
       grade,
       adminPrivileges,
+      ready: true,
     });
   }
 
