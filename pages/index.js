@@ -6,11 +6,13 @@ import Typography from "@material-ui/core/Typography";
 import React, { useContext } from "react";
 import LoginButton from "../comps/auth/LoginButton";
 import UserContext from "../comps/auth/UserContext";
+import Container from "@material-ui/core/Container";
+import Image from "next/image";
 
 export default function Home() {
   const user = useContext(UserContext);
   return (
-    <div className={layout.container}>
+    <Container maxWidth={"md"} className={layout.page}>
       <Head>
         <title>Home | StuyBOE Voting Site</title>
         <meta property={"og:title"} content={"Home | StuyBOE Voting Site"} />
@@ -24,29 +26,31 @@ export default function Home() {
         <meta property="og:image:type" content="image/png" />
       </Head>
 
-      <main className={layout.main}>
-        <Typography variant={"h1"} align={"center"} className={styles.title}>
-          <span className={styles.purpleTextGradient}>
-            Make your voice heard
-          </span>{" "}
-          📢
-        </Typography>
+      <Typography variant={"h1"} align={"center"} className={styles.title}>
+        <span className={styles.purpleTextGradient}>Make your voice heard</span>{" "}
+        📢
+      </Typography>
 
-        <Typography variant={"subtitle1"} className={styles.description}>
-          "There's no such thing as a vote that doesn't matter."
-        </Typography>
+      <Typography variant={"subtitle1"} className={styles.description}>
+        "There's no such thing as a vote that doesn't matter."
+      </Typography>
 
-        <img
+      <div className={layout.center}>
+        <Image
           src={voting}
           alt={"People representing voting"}
           className={layout.largeVector}
+          height={300}
+          width={300}
+          objectFit={"contain"}
         />
-        {!user.signedIn && (
-          <div className={layout.flexCenter}>
-            <LoginButton />
-          </div>
-        )}
-      </main>
-    </div>
+      </div>
+
+      {!user.signedIn && (
+        <div className={layout.center}>
+          <LoginButton />
+        </div>
+      )}
+    </Container>
   );
 }

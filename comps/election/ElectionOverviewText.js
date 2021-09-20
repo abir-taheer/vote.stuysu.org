@@ -10,8 +10,7 @@ import HowToVoteOutlined from "@material-ui/icons/HowToVoteOutlined";
 import layout from "../../styles/layout.module.css";
 import waitingPale from "./../../img/pale-waiting.png";
 import dalia from "./../../img/dalia-by-cindy-zheng.gif";
-import ImageWithPopover from "../shared/ImageWithPopover";
-import StyledLink from "@material-ui/core/Link";
+import Image from "next/image";
 
 const ElectionOverviewText = ({
   isOpen,
@@ -30,33 +29,42 @@ const ElectionOverviewText = ({
   if (completed) {
     return (
       <>
-        <div className={layout.centerContainer}>
-          <img
+        <div className={layout.center}>
+          <Image
             src={dalia}
+            objectFit={"contain"}
+            height={150}
+            width={200}
             alt={"A small blob blowing confetti. Art by Cindy Zheng"}
             className={layout.smallVector}
           />
         </div>
-
-        <Typography variant={"h3"}>
+        <Typography variant={"h3"} align={"center"}>
           The election's over and results are available 🎉
         </Typography>
 
         {userHasVoted && (
-          <Typography variant={"body1"} color={"primary"} paragraph>
+          <Typography
+            variant={"body1"}
+            color={"primary"}
+            paragraph
+            align={"center"}
+          >
             Someone awesome voted in this election (hint: it's you! 😎)
           </Typography>
         )}
 
-        <Link href={"/election/" + url + "/result"}>
-          <Button
-            variant={"contained"}
-            color={"primary"}
-            startIcon={<BarChart />}
-          >
-            View Results
-          </Button>
-        </Link>
+        <div className={layout.center}>
+          <Link href={"/election/" + url + "/result"} passHref>
+            <Button
+              variant={"contained"}
+              color={"secondary"}
+              startIcon={<BarChart />}
+            >
+              View Results
+            </Button>
+          </Link>
+        </div>
       </>
     );
   }
@@ -66,13 +74,14 @@ const ElectionOverviewText = ({
   if (now > end) {
     return (
       <>
-        <div className={layout.centerContainer}>
-          <img
-            src={waitingPale}
-            alt={"Someone leaning against a clock"}
-            className={layout.smallVector}
-          />
-        </div>
+        <Image
+          src={waitingPale}
+          alt={"Someone leaning against a clock"}
+          objectFit={"contain"}
+          height={200}
+          width={200}
+          className={layout.smallVector}
+        />
 
         <br />
         <Typography variant={"h3"}>
@@ -90,9 +99,11 @@ const ElectionOverviewText = ({
   if (userHasVoted) {
     return (
       <>
-        <Typography variant={"h3"}>Thanks for voting! 🥰 </Typography>
+        <Typography variant={"h3"} align={"center"}>
+          Thanks for voting! 🥰
+        </Typography>
 
-        <Typography variant={"body1"} paragraph>
+        <Typography variant={"body1"} paragraph align={"center"}>
           The election isn't over yet, but this page will automatically update
           once results are available
         </Typography>
@@ -104,18 +115,21 @@ const ElectionOverviewText = ({
   if (userIsEligible && isOpen) {
     return (
       <>
-        <Typography variant={"h3"}>
+        <Typography variant={"h3"} align={"center"}>
           You're eligible. It's time to vote! 🤩
         </Typography>
-        <Link href={"/election/" + url + "/vote"}>
-          <Button
-            variant={"contained"}
-            color={"primary"}
-            startIcon={<HowToVoteOutlined />}
-          >
-            Vote For This Election
-          </Button>
-        </Link>
+
+        <div className={layout.center}>
+          <Link href={"/election/" + url + "/vote"} passHref>
+            <Button
+              variant={"contained"}
+              color={"secondary"}
+              startIcon={<HowToVoteOutlined />}
+            >
+              Vote For This Election
+            </Button>
+          </Link>
+        </div>
       </>
     );
   }
@@ -123,12 +137,12 @@ const ElectionOverviewText = ({
   if (userIsEligible && !isOpen) {
     return (
       <>
-        <Typography variant={"h3"}>
+        <Typography variant={"h3"} align={"center"}>
           ⌛ You're eligible, but it's not time to vote yet ⌛
         </Typography>
-        <Typography variant={"body1"}>
+        <Typography variant={"body1"} align={"center"}>
           In the meantime, &nbsp;&nbsp;
-          <Link href={"/election/" + url + "/candidate"}>
+          <Link href={"/election/" + url + "/candidate"} passHref>
             <Button
               variant={"outlined"}
               color={"primary"}
@@ -146,8 +160,10 @@ const ElectionOverviewText = ({
   if (isOpen && !signedIn) {
     return (
       <>
-        <Typography variant={"h3"}>There's still time to vote ⌛</Typography>
-        <Typography variant={"body1"} paragraph>
+        <Typography variant={"h3"} align={"center"}>
+          There's still time to vote ⌛
+        </Typography>
+        <Typography variant={"body1"} paragraph align={"center"}>
           <Button
             variant={"contained"}
             color={"primary"}
@@ -165,10 +181,10 @@ const ElectionOverviewText = ({
   if (signedIn) {
     return (
       <>
-        <Typography variant={"h3"}>
+        <Typography variant={"h3"} align={"center"}>
           It looks like you're not eligible for this election
         </Typography>
-        <Typography variant={"body1"}>
+        <Typography variant={"body1"} align={"center"}>
           Still, that doesn't mean you can't have a look around &nbsp;
           ¯\_(ツ)_/¯
         </Typography>
@@ -178,8 +194,10 @@ const ElectionOverviewText = ({
 
   return (
     <>
-      <Typography variant={"h3"}>The election hasn't started yet</Typography>
-      <Typography variant={"body1"}>
+      <Typography variant={"h3"} align={"center"}>
+        The election hasn't started yet
+      </Typography>
+      <Typography variant={"body1"} align={"center"}>
         <Button
           variant={"contained"}
           color={"primary"}

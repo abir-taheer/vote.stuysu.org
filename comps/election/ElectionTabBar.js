@@ -47,7 +47,7 @@ const tabs = [
   },
 ];
 
-const ElectionTabBar = ({ completed }) => {
+export default function ElectionTabBar({ completed }) {
   const router = useRouter();
   const { url } = router.query;
   const { signedIn, adminPrivileges } = useContext(UserContext);
@@ -77,22 +77,23 @@ const ElectionTabBar = ({ completed }) => {
   }, [router]);
 
   return (
-    <Tabs
-      value={value}
-      indicatorColor="primary"
-      textColor="primary"
-      className={styles.tabs}
-    >
-      {adjustedTabs.map((tab) => (
-        <Tab
-          label={tab.label}
-          key={tab.path}
-          onClick={() => router.push(tab.path)}
-          icon={tab.icon}
-        />
-      ))}
-    </Tabs>
+    <div className={styles.container}>
+      <Tabs
+        value={value}
+        indicatorColor="primary"
+        textColor="primary"
+        className={styles.tabs}
+        variant={"scrollable"}
+      >
+        {adjustedTabs.map((tab) => (
+          <Tab
+            label={tab.label}
+            key={tab.path}
+            onClick={() => router.push(tab.path)}
+            icon={tab.icon}
+          />
+        ))}
+      </Tabs>
+    </div>
   );
-};
-
-export default ElectionTabBar;
+}

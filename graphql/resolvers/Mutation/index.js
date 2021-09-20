@@ -5,7 +5,6 @@ import editElection from "./editElection";
 import login from "./login";
 import logout from "./logout";
 import editUser from "./editUser";
-import uploadPicture from "./uploadPicture";
 import votePlurality from "./votePlurality";
 import voteRunoff from "./voteRunoff";
 import openElection from "./openElection";
@@ -32,7 +31,6 @@ export default {
   editUser,
   login,
   logout,
-  uploadPicture,
   votePlurality,
   voteRunoff,
   syncUsersWithStuyActivities,

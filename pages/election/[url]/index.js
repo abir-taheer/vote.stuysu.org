@@ -12,8 +12,8 @@ import capitalize from "@material-ui/core/utils/capitalize";
 import ElectionOverviewText from "../../../comps/election/ElectionOverviewText";
 import Head from "next/head";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
-import { Card } from "@material-ui/core";
 import ElectionAnnouncementCard from "../../../comps/election/ElectionAnnouncementCard";
+import Container from "@material-ui/core/Container";
 
 const ELECTION_QUERY = gql`
   query ($url: NonEmptyString!) {
@@ -77,7 +77,7 @@ const Election = () => {
   const voteId = globalThis?.localStorage?.getItem("vote-id-" + election.id);
 
   return (
-    <div className={layout.container}>
+    <Container className={layout.page} maxWidth={"md"}>
       <Head>
         <title>{election.name} | StuyBOE Voting Site</title>
         <meta
@@ -108,28 +108,28 @@ const Election = () => {
         />
       </Head>
 
-      <main className={layout.main}>
-        <BackButton
-          href={"/election"}
-          variant={"outlined"}
-          text={"Back To Elections"}
-        />
-        <Typography variant={"h1"} className={layout.title}>
-          {election.name}
+      <BackButton
+        href={"/election"}
+        variant={"outlined"}
+        text={"Back To Elections"}
+      />
+      <Typography variant={"h1"} className={layout.title}>
+        {election.name}
+      </Typography>
+
+      <ElectionTabBar completed={election.completed} />
+      {!!voteId && (
+        <Typography variant={"h3"} gutterBottom align={"center"}>
+          Your Vote ID Is: <code className={layout.voteId}>{voteId}</code>
+        </Typography>
+      )}
+
+      <div className={layout.contentContainer}>
+        <Typography variant={"h2"} color={"primary"} align={"center"}>
+          Status 💡
         </Typography>
 
-        <ElectionTabBar completed={election.completed} />
-        {!!voteId && (
-          <Typography variant={"h3"} gutterBottom>
-            Your Vote ID Is: <code className={layout.voteId}>{voteId}</code>
-          </Typography>
-        )}
-
-        <div>
-          <Typography variant={"h2"} color={"primary"} align={"center"}>
-            Status 💡
-          </Typography>
-
+        <Container maxWidth={"xs"}>
           <Typography variant={"body1"}>
             Start{now < start ? "s" : "ed"}:{" "}
             <Typography color={"secondary"} component={"span"}>
@@ -142,40 +142,40 @@ const Election = () => {
               {capitalize(getReadableDate(end))}
             </Typography>
           </Typography>
+        </Container>
 
-          <br />
+        <br />
 
-          <ElectionOverviewText
-            completed={election.completed}
-            url={url}
-            end={end}
-            start={start}
-            isOpen={election.isOpen}
-            userHasVoted={data.userHasVoted}
-            userIsEligible={election.userIsEligible}
-            now={now}
-            refetch={refetch}
-          />
+        <ElectionOverviewText
+          completed={election.completed}
+          url={url}
+          end={end}
+          start={start}
+          isOpen={election.isOpen}
+          userHasVoted={data.userHasVoted}
+          userIsEligible={election.userIsEligible}
+          now={now}
+          refetch={refetch}
+        />
+      </div>
+
+      {!!election.activeAnnouncements.length && (
+        <div className={layout.spaced}>
+          <Typography variant={"h2"} color={"primary"} align={"center"}>
+            Announcements 📣
+          </Typography>
+
+          {election.activeAnnouncements.map((announcement) => (
+            <ElectionAnnouncementCard
+              key={announcement.id}
+              title={announcement.title}
+              body={announcement.body}
+              updatedAt={announcement.updatedAt}
+            />
+          ))}
         </div>
-
-        {!!election.activeAnnouncements.length && (
-          <div className={layout.spaced}>
-            <Typography variant={"h2"} color={"primary"} align={"center"}>
-              Announcements 📣
-            </Typography>
-
-            {election.activeAnnouncements.map((announcement) => (
-              <ElectionAnnouncementCard
-                key={announcement.id}
-                title={announcement.title}
-                body={announcement.body}
-                updatedAt={announcement.updatedAt}
-              />
-            ))}
-          </div>
-        )}
-      </main>
-    </div>
+      )}
+    </Container>
   );
 };
 

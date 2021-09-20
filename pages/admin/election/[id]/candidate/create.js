@@ -1,5 +1,3 @@
-import React from "react";
-import AdminRequired from "../../../../../comps/auth/AdminRequired";
 import layout from "./../../../../../styles/layout.module.css";
 import AdminTabBar from "../../../../../comps/admin/AdminTabBar";
 import Typography from "@material-ui/core/Typography";
@@ -9,6 +7,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import ElectionNotFound from "../../../../../comps/election/ElectionNotFound";
 import CandidateForm from "../../../../../comps/candidate/CandidateForm";
 import alertDialog from "../../../../../comps/dialog/alertDialog";
+import Container from "@material-ui/core/Container";
+import BackButton from "../../../../../comps/shared/BackButton";
 
 const QUERY = gql`
   query ($id: ObjectId!) {
@@ -80,34 +80,38 @@ const CreateCandidate = () => {
   const election = data?.electionById;
 
   return (
-    <AdminRequired>
-      <div className={layout.container}>
-        <main className={layout.main}>
-          <Typography variant={"h1"}>Create Candidate | Admin Panel</Typography>
-          <AdminTabBar />
+    <Container className={layout.page} maxWidth={"md"}>
+      {election && (
+        <BackButton
+          href={"/admin/election/" + election.id + "/candidate"}
+          text={election.name + " candidates"}
+        />
+      )}
 
-          {loading && <CircularProgress />}
+      <Typography variant={"h1"} align={"center"}>
+        Create Candidate | Admin Panel
+      </Typography>
 
-          {!loading && !election && (
-            <ElectionNotFound href={"/admin/election"} />
-          )}
+      <AdminTabBar />
 
-          {!loading && !!election && (
-            <>
-              <Typography variant={"h2"} color={"secondary"}>
-                {election.name}
-              </Typography>
+      {loading && <CircularProgress />}
 
-              <CandidateForm
-                election={election}
-                submitLabel={"Create Candidate"}
-                onSubmit={onSubmit}
-              />
-            </>
-          )}
-        </main>
-      </div>
-    </AdminRequired>
+      {!loading && !election && <ElectionNotFound href={"/admin/election"} />}
+
+      {!loading && !!election && (
+        <>
+          <Typography variant={"h2"} color={"secondary"} align={"center"}>
+            {election.name}
+          </Typography>
+
+          <CandidateForm
+            election={election}
+            submitLabel={"Create Candidate"}
+            onSubmit={onSubmit}
+          />
+        </>
+      )}
+    </Container>
   );
 };
 

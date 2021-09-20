@@ -4,17 +4,18 @@ import ElectionCard from "./ElectionCard";
 import Pagination from "@material-ui/lab/Pagination";
 import Typography from "@material-ui/core/Typography";
 import searching from "./../../img/searching.svg";
+import layout from "./../../styles/layout.module.css";
+import Image from "next/image";
 
 const ElectionCardGrid = ({ page, results, numPages, onPageChange, admin }) => {
   if (!numPages) {
     return (
       <div className={styles.notFoundContainer}>
-        <img
+        <Image
           src={searching}
-          alt={
-            "Someone with a magnifying glass pointed at the ground, searching"
-          }
-          className={styles.notFoundImage}
+          alt={"Someone with a magnifying glass pointed at the ground"}
+          height={180}
+          width={250}
         />
         <Typography paragraph>
           There are no elections that match the given criteria
@@ -40,12 +41,9 @@ const ElectionCardGrid = ({ page, results, numPages, onPageChange, admin }) => {
           </Grid>
         ))}
       </Grid>
-      <Pagination
-        count={numPages}
-        page={page}
-        onChange={onPageChange}
-        className={styles.pagination}
-      />
+      <div className={layout.center}>
+        <Pagination count={numPages} page={page} onChange={onPageChange} />
+      </div>
     </div>
   );
 };

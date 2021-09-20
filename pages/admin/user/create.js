@@ -7,6 +7,8 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import alertDialog from "../../../comps/dialog/alertDialog";
+import Container from "@material-ui/core/Container";
+import BackButton from "../../../comps/shared/BackButton";
 
 const MUTATION = gql`
   mutation (
@@ -60,13 +62,17 @@ const Create = () => {
   };
 
   return (
-    <div className={layout.container}>
-      <main className={layout.main}>
-        <Typography variant={"h1"}>Create User | Admin Panel</Typography>
-        <AdminTabBar />
-        <UserForm submitLabel={"Create"} onSubmit={handleSubmit} />
-      </main>
-    </div>
+    <Container maxWidth={"md"} className={layout.page}>
+      <BackButton href={"/admin/user"} text={"Back To Users"} />
+
+      <Typography variant={"h1"} align={"center"}>
+        Create User | Admin Panel
+      </Typography>
+
+      <AdminTabBar />
+
+      <UserForm submitLabel={"Create"} onSubmit={handleSubmit} />
+    </Container>
   );
 };
 

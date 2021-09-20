@@ -1,2 +1,6 @@
-const withImages = require("next-images");
-module.exports = withImages();
+module.exports = {
+  reactStrictMode: true,
+  images: {
+    domains: ["vote.stuysu.org", "res.cloudinary.com"],
+  },
+};

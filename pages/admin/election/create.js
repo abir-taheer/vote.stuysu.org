@@ -1,5 +1,4 @@
 import React from "react";
-import AdminRequired from "../../../comps/auth/AdminRequired";
 import AdminTabBar from "../../../comps/admin/AdminTabBar";
 import Typography from "@material-ui/core/Typography";
 
@@ -9,6 +8,8 @@ import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import alertDialog from "../../../comps/dialog/alertDialog";
 import { useSnackbar } from "notistack";
+import Container from "@material-ui/core/Container";
+import BackButton from "../../../comps/shared/BackButton";
 
 const SUBMIT_MUTATION = gql`
   mutation (
@@ -64,19 +65,17 @@ const CreateElection = () => {
   }
 
   return (
-    <AdminRequired>
-      <div className={layout.container}>
-        <main className={layout.main}>
-          <Typography variant={"h1"} align={"center"}>
-            Create Election | Admin Panel
-          </Typography>
+    <Container maxWidth={"md"} className={layout.page}>
+      <BackButton href={"/admin/election"} text={"Back To Elections"} />
 
-          <AdminTabBar />
+      <Typography variant={"h1"} align={"center"}>
+        Create Election | Admin Panel
+      </Typography>
 
-          <ElectionForm onSubmit={handleSubmit} disabled={loading} />
-        </main>
-      </div>
-    </AdminRequired>
+      <AdminTabBar />
+
+      <ElectionForm onSubmit={handleSubmit} disabled={loading} />
+    </Container>
   );
 };
 

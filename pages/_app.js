@@ -13,6 +13,7 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import { useEffect } from "react";
 import ReactGA from "react-ga";
+import AdminWrapper from "../comps/auth/AdminWrapper";
 
 ReactGA.initialize(process.env.NEXT_APP_GTAG_ID || "UA-75064374-8");
 
@@ -41,7 +42,11 @@ function App({ Component, pageProps }) {
                 <meta property="og:url" content={PUBLIC_URL + router.asPath} />
               </Head>
               <NavBar />
-              <Component {...pageProps} />
+
+              <AdminWrapper>
+                <Component {...pageProps} />
+              </AdminWrapper>
+
               <SharedDialog />
               <Footer />
             </SnackbarProvider>

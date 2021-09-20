@@ -235,16 +235,17 @@ const RunoffVote = ({ election, candidates, refetch }) => {
           </>
         )}
         <VotingCountDown end={election.end} />
-        <Button
-          variant="outlined"
-          color="primary"
-          className={styles.submit}
-          disabled={!choices.length || loading}
-          onClick={handleSubmit}
-        >
-          Submit Vote
-        </Button>
       </FormControl>
+      <Button
+        variant="outlined"
+        color="primary"
+        className={styles.submit}
+        disabled={!choices.length || loading}
+        onClick={handleSubmit}
+        fullWidth
+      >
+        Submit Vote
+      </Button>
     </form>
   );
 };

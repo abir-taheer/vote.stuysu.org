@@ -4,7 +4,6 @@
 
 .formControl {
   margin: 0.5rem;
-  width: 300px;
 }
 
 .emailControl,
@@ -20,6 +19,10 @@
 
   .gradYearControl {
     width: 250px;
+  }
+
+  .formControl {
+    width: calc(50% - 1rem)
   }
 }
 

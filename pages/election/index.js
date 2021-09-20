@@ -9,6 +9,8 @@ import Search from "@material-ui/icons/Search";
 import { gql, useQuery } from "@apollo/client";
 import ElectionCardGrid from "../../comps/election/ElectionCardGrid";
 import Head from "next/head";
+import Container from "@material-ui/core/Container";
+import CenteredCircularProgress from "../../comps/shared/CenteredCircularProgress";
 
 const QUERY = gql`
   query ($query: String!, $page: PositiveInt!) {
@@ -54,7 +56,7 @@ const ElectionIndex = () => {
   const allElections = data?.allElections;
 
   return (
-    <div className={layout.container}>
+    <Container maxWidth={"md"} className={layout.page}>
       <Head>
         <title>Elections | StuyBOE Voting Site</title>
         <meta
@@ -76,8 +78,11 @@ const ElectionIndex = () => {
           }
         />
       </Head>
-      <main className={layout.main}>
-        <Typography variant={"h1"}>Elections</Typography>
+      <Typography variant={"h1"} align={"center"}>
+        Elections
+      </Typography>
+
+      <div className={layout.center}>
         <TextField
           value={query}
           label={"Search"}
@@ -85,19 +90,19 @@ const ElectionIndex = () => {
           InputProps={{ startAdornment: <Search /> }}
           variant={"outlined"}
         />
+      </div>
 
-        {loading && <CircularProgress className={layout.spaced} />}
+      {loading && <CenteredCircularProgress />}
 
-        {!loading && (
-          <ElectionCardGrid
-            numPages={allElections?.numPages}
-            page={allElections?.page}
-            results={allElections?.results}
-            onPageChange={(ev, page) => setPage(page)}
-          />
-        )}
-      </main>
-    </div>
+      {!loading && (
+        <ElectionCardGrid
+          numPages={allElections?.numPages}
+          page={allElections?.page}
+          results={allElections?.results}
+          onPageChange={(ev, page) => setPage(page)}
+        />
+      )}
+    </Container>
   );
 };
 

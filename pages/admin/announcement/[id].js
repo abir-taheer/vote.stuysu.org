@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { gql } from "@apollo/client/core";
 import { useMutation, useQuery } from "@apollo/client";
 import Error404 from "../../404";
-import AdminRequired from "../../../comps/auth/AdminRequired";
 import layout from "./../../../styles/layout.module.css";
 import Typography from "@material-ui/core/Typography";
 import AdminTabBar from "../../../comps/admin/AdminTabBar";
@@ -16,6 +15,7 @@ import { useSnackbar } from "notistack";
 import confirmDialog from "../../../comps/dialog/confirmDialog";
 import BackButton from "../../../comps/shared/BackButton";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
+import Container from "@material-ui/core/Container";
 
 const QUERY = gql`
   query ($id: ObjectId!) {
@@ -147,51 +147,44 @@ export default function ManageAnnouncement() {
   };
 
   return (
-    <AdminRequired>
-      <div className={layout.container}>
-        <main className={layout.main}>
-          <BackButton
-            href={"/admin/announcement"}
-            text={"Back To Announcements"}
-          />
-          <Typography variant={"h1"}>
-            Manage Announcement | Admin Panel
-          </Typography>
-          <AdminTabBar />
-          {!isEditing && (
-            <div>
-              <Button
-                variant={"outlined"}
-                color={"secondary"}
-                onClick={() => setIsEditing(true)}
-                className={layout.spaced}
-                startIcon={<Create />}
-              >
-                Edit Announcement
-              </Button>
-              <Button
-                variant={"outlined"}
-                className={layout.deleteButton}
-                startIcon={<Delete />}
-                onClick={handleDelete}
-              >
-                Delete Announcement
-              </Button>
-            </div>
-          )}
-          <AnnouncementForm
-            initialValues={announcement}
-            disabled={!isEditing}
-            showCancelButton
-            cancelLabel={"Cancel"}
-            onCancel={({ resetForm }) => {
-              resetForm();
-              setIsEditing(false);
-            }}
-            onSubmit={handleSubmit}
-          />
-        </main>
-      </div>
-    </AdminRequired>
+    <Container maxWidth={"md"} className={layout.page}>
+      <BackButton href={"/admin/announcement"} text={"Back To Announcements"} />
+      <Typography variant={"h1"} align={"center"}>
+        Manage Announcement | Admin Panel
+      </Typography>
+      <AdminTabBar />
+      {!isEditing && (
+        <div className={layout.center}>
+          <Button
+            variant={"outlined"}
+            color={"secondary"}
+            onClick={() => setIsEditing(true)}
+            className={layout.spaced}
+            startIcon={<Create />}
+          >
+            Edit Announcement
+          </Button>
+          <Button
+            variant={"outlined"}
+            className={layout.deleteButton}
+            startIcon={<Delete />}
+            onClick={handleDelete}
+          >
+            Delete Announcement
+          </Button>
+        </div>
+      )}
+      <AnnouncementForm
+        initialValues={announcement}
+        disabled={!isEditing}
+        showCancelButton
+        cancelLabel={"Cancel"}
+        onCancel={({ resetForm }) => {
+          resetForm();
+          setIsEditing(false);
+        }}
+        onSubmit={handleSubmit}
+      />
+    </Container>
   );
 }

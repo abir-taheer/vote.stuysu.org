@@ -37,34 +37,45 @@ const tabs = [
   },
 ];
 
-const AdminTabBar = () => {
-  const router = useRouter();
-  const tabIndex = tabs.findIndex((tab) =>
-    tab.path.some((path) => router.asPath.startsWith(path))
+const getActiveTabIndex = (path) =>
+  tabs.findIndex((tab) =>
+    tab.path.some((activePath) => path.startsWith(activePath))
   );
-  const [value, setValue] = useState(tabIndex);
+
+export default function AdminTabBar() {
+  const { pathname, push } = useRouter();
+  const previousPath = globalThis.sessionStorage?.getItem(
+    "previous-admin-path"
+  );
+
+  const [value, setValue] = useState(
+    previousPath ? getActiveTabIndex(previousPath) : getActiveTabIndex(pathname)
+  );
 
   useEffect(() => {
-    setValue(tabIndex);
-  }, [router]);
+    setValue(getActiveTabIndex(pathname));
+    globalThis.sessionStorage?.setItem("previous-admin-path", pathname);
+  }, [pathname]);
 
   return (
-    <Tabs
-      value={value}
-      indicatorColor="primary"
-      textColor="primary"
-      className={styles.tabs}
-    >
-      {tabs.map((tab) => (
-        <Tab
-          label={tab.label}
-          key={tab.path}
-          onClick={() => router.push(tab.href)}
-          icon={tab.icon}
-        />
-      ))}
-    </Tabs>
+    <div className={styles.center}>
+      <Tabs
+        value={value}
+        indicatorColor="primary"
+        textColor="primary"
+        className={styles.tabs}
+        scrollButtons={"on"}
+        variant={"scrollable"}
+      >
+        {tabs.map((tab) => (
+          <Tab
+            label={tab.label}
+            icon={tab.icon}
+            onClick={() => push(tab.href)}
+            key={tab.path.join(" ")}
+          />
+        ))}
+      </Tabs>
+    </div>
   );
-};
-
-export default AdminTabBar;
+}

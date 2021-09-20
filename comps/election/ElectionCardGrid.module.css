@@ -1,14 +1,3 @@
-@media (min-width: 500px) {
-  .grid {
-    width: 85vw;
-    max-width: 1200px;
-  }
-
-  .fullWidthList {
-    width: 450px;
-  }
-}
-
 .grid {
   margin: 1rem 0;
 }
@@ -17,13 +6,7 @@
   margin: 0.5rem;
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-}
-
 .notFoundContainer {
-  max-width: 400px;
   text-align: center;
   color: rgba(0, 0, 0, 0.6);
   font-weight: bold;
@@ -32,4 +15,8 @@
 .notFoundImage {
   opacity: 0.8;
   max-width: 300px;
+}
+
+.container {
+  margin-top: 20px;
 }

@@ -11,6 +11,8 @@ import defaultImage from "./../img/404-images/searching-with-dog.png";
 import { URL } from "url";
 import get404Image from "../utils/errors/get404Image";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import Container from "@material-ui/core/Container";
 
 const Error404 = () => {
   const theme = useTheme();
@@ -44,20 +46,23 @@ const Error404 = () => {
           content={"Someone with their dog, looking for something"}
         />
       </Head>
-      <div className={layout.container}>
-        <main className={layout.main}>
-          {image && (
-            <img
+      <Container className={layout.page} maxWidth={"md"}>
+        {image && (
+          <div className={layout.center}>
+            <Image
               src={image.src}
-              className={layout.largeVector}
               alt={image.alt}
+              width={300}
+              height={(300 / image.width) * image.height}
             />
-          )}
+          </div>
+        )}
 
-          <Typography variant={"h1"} align={"center"}>
-            Page not found
-          </Typography>
+        <Typography variant={"h1"} align={"center"}>
+          Page not found
+        </Typography>
 
+        <div className={layout.center}>
           <Link href={"/"} styles={layout.spaced}>
             <Button
               startIcon={<HomeOutlined />}
@@ -67,8 +72,8 @@ const Error404 = () => {
               Go Back Home
             </Button>
           </Link>
-        </main>
-      </div>
+        </div>
+      </Container>
     </div>
   );
 };

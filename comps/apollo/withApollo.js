@@ -7,7 +7,10 @@ const uri = process.env.NEXT_PUBLIC_API_URL || PUBLIC_URL + "/api/graphql";
 
 const createClient = (ctx) => {
   const cache = new InMemoryCache({});
-  const authorization = ctx?.req?.cookies["auth-jwt"] || "";
+  const authorization =
+    ctx?.req?.cookies["auth-jwt"] ||
+    globalThis.localStorage?.getItem("auth-jwt") ||
+    "";
 
   const link = createUploadLink({
     uri,

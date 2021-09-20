@@ -9,6 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import withApollo from "../../../../../comps/apollo/withApollo";
 import CandidateTabBar from "../../../../../comps/candidate/CandidateTabBar";
 import LoadingScreen from "../../../../../comps/shared/LoadingScreen";
+import Container from "@material-ui/core/Container";
+import Image from "next/image";
 
 const QUERY = gql`
   query ($electionUrl: NonEmptyString!, $candidateUrl: NonEmptyString!) {
@@ -70,7 +72,7 @@ function CandidatePage() {
   const title = `${candidate.name} for ${election.name} | StuyBOE Voting Site`;
   // Now that both election and candidate are defined we can do whatever
   return (
-    <div className={layout.container}>
+    <Container maxWidth={"md"} className={layout.page}>
       <Head>
         <title>{title}</title>
         <meta property={"og:title"} content={title} />
@@ -102,80 +104,82 @@ function CandidatePage() {
         />
       </Head>
 
-      <main className={layout.main}>
-        <BackButton
-          href={"/election/" + election.url + "/candidate"}
-          variant={"outlined"}
-          text={election.name}
-        />
+      <BackButton
+        href={"/election/" + election.url + "/candidate"}
+        variant={"outlined"}
+        text={election.name}
+      />
 
-        <img
+      <div className={layout.center}>
+        <Image
           src={candidate.picture.resource.url}
           alt={candidate.picture.alt}
+          height={200}
+          width={200}
           className={layout.candidatePicture}
         />
+      </div>
 
-        <Typography variant={"h1"} className={layout.title} color={"primary"}>
-          {candidate.name}
+      <Typography variant={"h1"} className={layout.title} color={"primary"}>
+        {candidate.name}
+      </Typography>
+
+      <CandidateTabBar
+        isManager={candidate.isManager}
+        electionCompleted={election.completed}
+        active={candidate.active}
+      />
+
+      <div className={layout.largePageBodyContainer}>
+        <Typography
+          variant={"h2"}
+          align={"left"}
+          className={layout.spaced}
+          color={"secondary"}
+        >
+          Blurb:
         </Typography>
-
-        <CandidateTabBar
-          isManager={candidate.isManager}
-          electionCompleted={election.completed}
-          active={candidate.active}
-        />
-
-        <div className={layout.largePageBodyContainer}>
-          <Typography
-            variant={"h2"}
-            align={"left"}
-            className={layout.spaced}
-            color={"secondary"}
-          >
-            Blurb:
-          </Typography>
-          {!candidate.blurb && (
-            <Typography
-              variant={"body1"}
-              color={"textSecondary"}
-              className={layout.spaced}
-            >
-              This candidate has not {!election.completed && "yet"} provided a
-              blurb
-            </Typography>
-          )}
+        {!candidate.blurb && (
           <Typography
             variant={"body1"}
-            children={candidate.blurb}
-            align={"left"}
+            color={"textSecondary"}
             className={layout.spaced}
-          />
-
-          <Typography
-            variant={"h2"}
-            align={"left"}
-            className={layout.spaced}
-            color={"secondary"}
           >
-            Platform:
+            This candidate has not {!election.completed && "yet"} provided a
+            blurb
           </Typography>
-          {!candidate.platform && (
-            <Typography
-              variant={"body1"}
-              color={"textSecondary"}
-              className={layout.spaced}
-            >
-              This candidate has not {!election.completed && "yet"} provided a
-              platform
-            </Typography>
-          )}
-          <div
-            dangerouslySetInnerHTML={{ __html: candidate.platform }}
+        )}
+        <Typography
+          variant={"body1"}
+          children={candidate.blurb}
+          align={"left"}
+          className={layout.spaced}
+        />
+
+        <Typography
+          variant={"h2"}
+          align={"left"}
+          className={layout.spaced}
+          color={"secondary"}
+        >
+          Platform:
+        </Typography>
+        {!candidate.platform && (
+          <Typography
+            variant={"body1"}
+            color={"textSecondary"}
             className={layout.spaced}
-          />
-        </div>
-      </main>
-    </div>
+          >
+            This candidate has not {!election.completed && "yet"} provided a
+            platform
+          </Typography>
+        )}
+        <div
+          dangerouslySetInnerHTML={{ __html: candidate.platform }}
+          className={layout.spaced}
+        />
+      </div>
+    </Container>
   );
 }
 

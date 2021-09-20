@@ -5,4 +5,4 @@ export const GOOGLE_CLIENT_ID =
 export const PUBLIC_URL =
   process.env.PUBLIC_URL || process.env.NODE_ENV === "production"
     ? "https://vote.stuysu.org"
-    : "http://localhost:3000";
+    : "https://localhost:3000";

@@ -175,9 +175,10 @@ const AnnouncementForm = ({
             />
           )}
         />
-        <FormHelperText>
-          If this announcement is specific to an election, you can select it
-          here and it will show up on that election's page
+        <FormHelperText error={touched.election && errors.election}>
+          {touched.election && errors.election
+            ? errors.election
+            : "If this announcement is specific to an election, you can select it here and it will show up on that election's page"}
         </FormHelperText>
       </FormControl>
 
