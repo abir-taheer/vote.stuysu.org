@@ -1,13 +1,13 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import layout from "../styles/layout.module.css";
-import voting from "./../img/voting.svg";
+import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
+import Head from "next/head";
+import Image from "next/image";
 import React, { useContext } from "react";
 import LoginButton from "../comps/auth/LoginButton";
 import UserContext from "../comps/auth/UserContext";
-import Container from "@material-ui/core/Container";
-import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import layout from "../styles/layout.module.css";
+import voting from "./../img/voting.svg";
 
 export default function Home() {
   const user = useContext(UserContext);

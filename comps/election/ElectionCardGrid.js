@@ -1,11 +1,11 @@
-import styles from "./ElectionCardGrid.module.css";
 import Grid from "@material-ui/core/Grid";
-import ElectionCard from "./ElectionCard";
-import Pagination from "@material-ui/lab/Pagination";
 import Typography from "@material-ui/core/Typography";
+import Pagination from "@material-ui/lab/Pagination";
+import Image from "next/image";
 import searching from "./../../img/searching.svg";
 import layout from "./../../styles/layout.module.css";
-import Image from "next/image";
+import ElectionCard from "./ElectionCard";
+import styles from "./ElectionCardGrid.module.css";
 
 const ElectionCardGrid = ({ page, results, numPages, onPageChange, admin }) => {
   if (!numPages) {

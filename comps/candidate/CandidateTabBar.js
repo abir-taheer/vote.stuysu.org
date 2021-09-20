@@ -1,14 +1,9 @@
-import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import { useRouter } from "next/router";
-
-import { useEffect, useState } from "react";
-
-import styles from "./CandidateTabBar.module.css";
+import Tabs from "@material-ui/core/Tabs";
 import PeopleOutlined from "@material-ui/icons/PeopleOutlined";
-import QuestionAnswerOutlined from "@material-ui/icons/QuestionAnswerOutlined";
-import ReportProblemOutlined from "@material-ui/icons/ReportProblemOutlined";
-import BuildOutlined from "@material-ui/icons/BuildOutlined";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import styles from "./CandidateTabBar.module.css";
 
 const tabs = [
   {

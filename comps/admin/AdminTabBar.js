@@ -1,11 +1,9 @@
-import AccountCircleOutlined from "@material-ui/icons/AccountCircleOutlined";
-import HowToVoteOutlined from "@material-ui/icons/HowToVoteOutlined";
-import HelpOutlined from "@material-ui/icons/HelpOutlineOutlined";
-import NotificationsActiveOutlinedIcon from "@material-ui/icons/NotificationsActiveOutlined";
-
-import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-
+import Tabs from "@material-ui/core/Tabs";
+import AccountCircleOutlined from "@material-ui/icons/AccountCircleOutlined";
+import HelpOutlined from "@material-ui/icons/HelpOutlineOutlined";
+import HowToVoteOutlined from "@material-ui/icons/HowToVoteOutlined";
+import NotificationsActiveOutlinedIcon from "@material-ui/icons/NotificationsActiveOutlined";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "./AdminTabBar.module.css";

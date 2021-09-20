@@ -1,17 +1,17 @@
 import { gql, useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
-import ElectionNotFound from "../../../../../comps/election/ElectionNotFound";
-import CandidateNotFound from "../../../../../comps/candidate/CandidateNotFound";
-import layout from "../../../../../styles/layout.module.css";
-import Head from "next/head";
-import BackButton from "../../../../../comps/shared/BackButton";
-import Typography from "@material-ui/core/Typography";
-import withApollo from "../../../../../comps/apollo/withApollo";
-import CandidateTabBar from "../../../../../comps/candidate/CandidateTabBar";
-import LoadingScreen from "../../../../../comps/shared/LoadingScreen";
-import Container from "@material-ui/core/Container";
-import Image from "next/image";
 import { getDataFromTree } from "@apollo/client/react/ssr";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Head from "next/head";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import withApollo from "../../../../../comps/apollo/withApollo";
+import CandidateNotFound from "../../../../../comps/candidate/CandidateNotFound";
+import CandidateTabBar from "../../../../../comps/candidate/CandidateTabBar";
+import ElectionNotFound from "../../../../../comps/election/ElectionNotFound";
+import BackButton from "../../../../../comps/shared/BackButton";
+import LoadingScreen from "../../../../../comps/shared/LoadingScreen";
+import layout from "../../../../../styles/layout.module.css";
 
 const QUERY = gql`
   query ($electionUrl: NonEmptyString!, $candidateUrl: NonEmptyString!) {

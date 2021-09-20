@@ -1,6 +1,6 @@
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { PUBLIC_URL } from "../../constants";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import withApollo from "next-with-apollo";
+import { PUBLIC_URL } from "../../constants";
 
 const uri = process.env.NEXT_PUBLIC_API_URL || PUBLIC_URL + "/api/graphql";
 

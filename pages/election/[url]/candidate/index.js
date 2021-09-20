@@ -1,20 +1,19 @@
-import { useRouter } from "next/router";
-import { useQuery } from "@apollo/client";
-import ElectionNotFound from "../../../../comps/election/ElectionNotFound";
-import { gql } from "@apollo/client";
-import layout from "../../../../styles/layout.module.css";
-import Head from "next/head";
-import BackButton from "../../../../comps/shared/BackButton";
-import Typography from "@material-ui/core/Typography";
-import ElectionTabBar from "../../../../comps/election/ElectionTabBar";
-import { useState } from "react";
-import { TextField } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import CandidateCard from "../../../../comps/candidate/CandidateCard";
-import withApollo from "../../../../comps/apollo/withApollo";
-import LoadingScreen from "../../../../comps/shared/LoadingScreen";
-import Container from "@material-ui/core/Container";
+import { gql, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
+import { TextField } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import withApollo from "../../../../comps/apollo/withApollo";
+import CandidateCard from "../../../../comps/candidate/CandidateCard";
+import ElectionNotFound from "../../../../comps/election/ElectionNotFound";
+import ElectionTabBar from "../../../../comps/election/ElectionTabBar";
+import BackButton from "../../../../comps/shared/BackButton";
+import LoadingScreen from "../../../../comps/shared/LoadingScreen";
+import layout from "../../../../styles/layout.module.css";
 
 const QUERY = gql`
   query ($url: NonEmptyString!) {

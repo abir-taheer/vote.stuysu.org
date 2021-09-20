@@ -1,27 +1,26 @@
-import { useContext, useState } from "react";
-import layout from "../../../../styles/layout.module.css";
-import styles from "../../../../styles/Elections.module.css";
-import Typography from "@material-ui/core/Typography";
-import AdminTabBar from "../../../../comps/admin/AdminTabBar";
-import { useRouter } from "next/router";
 import { gql, useMutation } from "@apollo/client";
-import withApollo from "../../../../comps/apollo/withApollo";
-import ElectionNotFound from "../../../../comps/election/ElectionNotFound";
-import BackButton from "../../../../comps/shared/BackButton";
-import AdminElectionTabBar from "../../../../comps/admin/AdminElectionTabBar";
-import ElectionForm from "../../../../comps/election/ElectionForm";
-import moment from "moment-timezone";
 import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
 import Create from "@material-ui/icons/Create";
-import alertDialog from "../../../../comps/dialog/alertDialog";
-import { useSnackbar } from "notistack";
-import useElectionById from "../../../../comps/election/useElectionById";
 import DeleteForever from "@material-ui/icons/DeleteForever";
-import confirmDialog from "../../../../comps/dialog/confirmDialog";
-import DateContext from "../../../../comps/shared/DateContext";
 import Lock from "@material-ui/icons/Lock";
 import LockOpen from "@material-ui/icons/LockOpen";
-import Container from "@material-ui/core/Container";
+import moment from "moment-timezone";
+import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
+import { useContext, useState } from "react";
+import AdminElectionTabBar from "../../../../comps/admin/AdminElectionTabBar";
+import AdminTabBar from "../../../../comps/admin/AdminTabBar";
+import alertDialog from "../../../../comps/dialog/alertDialog";
+import confirmDialog from "../../../../comps/dialog/confirmDialog";
+import ElectionForm from "../../../../comps/election/ElectionForm";
+import ElectionNotFound from "../../../../comps/election/ElectionNotFound";
+import useElectionById from "../../../../comps/election/useElectionById";
+import BackButton from "../../../../comps/shared/BackButton";
+import DateContext from "../../../../comps/shared/DateContext";
+import styles from "../../../../styles/Elections.module.css";
+import layout from "../../../../styles/layout.module.css";
 
 const EDIT_MUTATION = gql`
   mutation (
@@ -290,4 +289,4 @@ const ManageElection = () => {
   );
 };
 
-export default withApollo({ ssr: false })(ManageElection);
+export default ManageElection;

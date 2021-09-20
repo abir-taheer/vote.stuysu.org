@@ -1,27 +1,25 @@
-import layout from "../../../styles/layout.module.css";
-import Typography from "@material-ui/core/Typography";
-import AdminTabBar from "../../../comps/admin/AdminTabBar";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import Button from "@material-ui/core/Button";
-import { gql } from "@apollo/client/core";
-import { useMutation, useQuery } from "@apollo/client";
-import alertDialog from "../../../comps/dialog/alertDialog";
-import React, { useState } from "react";
-import SearchOutlined from "@material-ui/icons/SearchOutlined";
-import Sync from "@material-ui/icons/Sync";
-import TextField from "@material-ui/core/TextField";
-import Divider from "@material-ui/core/Divider";
-import Add from "@material-ui/icons/Add";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Link from "next/link";
-import Pagination from "@material-ui/lab/Pagination";
-import styles from "../../../comps/election/ElectionCardGrid.module.css";
-import IconButton from "@material-ui/core/IconButton";
-import Create from "@material-ui/icons/Create";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import Add from "@material-ui/icons/Add";
+import Create from "@material-ui/icons/Create";
+import SearchOutlined from "@material-ui/icons/SearchOutlined";
+import Sync from "@material-ui/icons/Sync";
+import Pagination from "@material-ui/lab/Pagination";
+import Link from "next/link";
+import React, { useState } from "react";
+import AdminTabBar from "../../../comps/admin/AdminTabBar";
+import alertDialog from "../../../comps/dialog/alertDialog";
+import layout from "../../../styles/layout.module.css";
 
 const SYNC_MUTATION = gql`
   mutation {

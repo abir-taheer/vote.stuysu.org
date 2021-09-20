@@ -1,20 +1,20 @@
 import completeElection from "./completeElection";
+import createAnnouncement from "./createAnnouncement";
+import createCandidate from "./createCandidate";
 import createElection from "./createElection";
 import createUser from "./createUser";
-import editElection from "./editElection";
-import login from "./login";
-import logout from "./logout";
-import editUser from "./editUser";
-import votePlurality from "./votePlurality";
-import voteRunoff from "./voteRunoff";
-import openElection from "./openElection";
-import syncUsersWithStuyActivities from "./syncUsersWithStuyActivities";
-import createCandidate from "./createCandidate";
-import editCandidate from "./editCandidate";
-import editAnnouncement from "./editAnnouncement";
-import createAnnouncement from "./createAnnouncement";
 import deleteAnnouncement from "./deleteAnnouncement";
 import deleteUser from "./deleteUser";
+import editAnnouncement from "./editAnnouncement";
+import editCandidate from "./editCandidate";
+import editElection from "./editElection";
+import editUser from "./editUser";
+import login from "./login";
+import logout from "./logout";
+import openElection from "./openElection";
+import syncUsersWithStuyActivities from "./syncUsersWithStuyActivities";
+import votePlurality from "./votePlurality";
+import voteRunoff from "./voteRunoff";
 
 export default {
   createAnnouncement,

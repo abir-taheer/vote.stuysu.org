@@ -1,14 +1,14 @@
-import layout from "./../../../../../styles/layout.module.css";
-import AdminTabBar from "../../../../../comps/admin/AdminTabBar";
-import Typography from "@material-ui/core/Typography";
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import ElectionNotFound from "../../../../../comps/election/ElectionNotFound";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import { useRouter } from "next/router";
+import AdminTabBar from "../../../../../comps/admin/AdminTabBar";
 import CandidateForm from "../../../../../comps/candidate/CandidateForm";
 import alertDialog from "../../../../../comps/dialog/alertDialog";
-import Container from "@material-ui/core/Container";
+import ElectionNotFound from "../../../../../comps/election/ElectionNotFound";
 import BackButton from "../../../../../comps/shared/BackButton";
+import layout from "./../../../../../styles/layout.module.css";
 
 const QUERY = gql`
   query ($id: ObjectId!) {

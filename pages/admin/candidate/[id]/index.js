@@ -1,21 +1,21 @@
-import layout from "../../../../styles/layout.module.css";
-import { useRouter } from "next/router";
 import { gql, useMutation, useQuery } from "@apollo/client";
-import Typography from "@material-ui/core/Typography";
-import AdminTabBar from "../../../../comps/admin/AdminTabBar";
+import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import ElectionNotFound from "../../../../comps/election/ElectionNotFound";
-import CandidateForm from "../../../../comps/candidate/CandidateForm";
-import Link from "next/link";
+import Container from "@material-ui/core/Container";
 import StyledLink from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
+import Create from "@material-ui/icons/Create";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import AdminCandidateTabBar from "../../../../comps/admin/AdminCandidateTabBar";
-import Button from "@material-ui/core/Button";
-import Create from "@material-ui/icons/Create";
+import AdminTabBar from "../../../../comps/admin/AdminTabBar";
+import CandidateForm from "../../../../comps/candidate/CandidateForm";
 import alertDialog from "../../../../comps/dialog/alertDialog";
-import { useSnackbar } from "notistack";
-import Container from "@material-ui/core/Container";
+import ElectionNotFound from "../../../../comps/election/ElectionNotFound";
 import BackButton from "../../../../comps/shared/BackButton";
+import layout from "../../../../styles/layout.module.css";
 
 const QUERY = gql`
   query ($id: ObjectId!) {

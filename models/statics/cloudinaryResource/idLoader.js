@@ -1,6 +1,6 @@
 import DataLoader from "dataloader";
-import mongoose from "../../mongoose";
 import cloudinaryResourceLoader from "../../../utils/dataloaders/cloudinaryResourceLoader";
+import mongoose from "../../mongoose";
 
 const cloudinaryIdLoader = new DataLoader(async (publicIds) => {
   const ids = [...new Set(publicIds)];

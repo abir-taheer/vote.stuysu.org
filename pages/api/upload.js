@@ -1,13 +1,13 @@
+import { randomBytes } from "crypto";
 import multer from "multer";
 import nextConnect from "next-connect";
-import checkAuth from "../../utils/middleware/checkAuth";
-import errorHandler from "../../utils/middleware/errorHandler";
-import HTTPError from "../../utils/errors/HTTPError";
-import Election from "../../models/election";
 import Candidate from "../../models/candidate";
-import { randomBytes } from "crypto";
+import Election from "../../models/election";
 import Picture from "../../models/picture";
 import uploadBuffer from "../../utils/cloudinary/uploadBuffer";
+import HTTPError from "../../utils/errors/HTTPError";
+import checkAuth from "../../utils/middleware/checkAuth";
+import errorHandler from "../../utils/middleware/errorHandler";
 
 export const config = {
   api: {

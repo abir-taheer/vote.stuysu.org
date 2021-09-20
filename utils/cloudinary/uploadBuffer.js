@@ -1,6 +1,5 @@
-import streamifier from "streamifier";
-
 import { v2 as cloudinary } from "cloudinary";
+import streamifier from "streamifier";
 
 export default function uploadBuffer(file, publicId) {
   return new Promise((resolve, reject) => {

@@ -1,20 +1,20 @@
 import { gql, useQuery } from "@apollo/client";
+import { getDataFromTree } from "@apollo/client/react/ssr";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import UserContext from "../../../comps/auth/UserContext";
-import layout from "../../../styles/layout.module.css";
-import Head from "next/head";
-import BackButton from "../../../comps/shared/BackButton";
-import Typography from "@material-ui/core/Typography";
-import ElectionTabBar from "../../../comps/election/ElectionTabBar";
-import ElectionNotFound from "../../../comps/election/ElectionNotFound";
-import LoadingScreen from "../../../comps/shared/LoadingScreen";
-import RunoffResult from "../../../comps/election/RunoffResult";
-import cat from "./../../../img/ginger-cat-access-blocked.png";
-import Container from "@material-ui/core/Container";
-import Image from "next/image";
 import withApollo from "../../../comps/apollo/withApollo";
-import { getDataFromTree } from "@apollo/client/react/ssr";
+import UserContext from "../../../comps/auth/UserContext";
+import ElectionNotFound from "../../../comps/election/ElectionNotFound";
+import ElectionTabBar from "../../../comps/election/ElectionTabBar";
+import RunoffResult from "../../../comps/election/RunoffResult";
+import BackButton from "../../../comps/shared/BackButton";
+import LoadingScreen from "../../../comps/shared/LoadingScreen";
+import layout from "../../../styles/layout.module.css";
+import cat from "./../../../img/ginger-cat-access-blocked.png";
 
 const QUERY = gql`
   query ($url: NonEmptyString!) {

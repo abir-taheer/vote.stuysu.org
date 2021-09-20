@@ -1,5 +1,4 @@
-import { gql } from "@apollo/client/core";
-import { useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import {
   Avatar,
   ListItem,
@@ -7,24 +6,24 @@ import {
   ListItemSecondaryAction,
   ListItemText,
 } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import brokenGlass from "./../../img/marginalia-fatal-error.png";
-import layout from "./../../styles/layout.module.css";
-import { useEffect, useState } from "react";
-import Pagination from "@material-ui/lab/Pagination";
-import { Chart } from "react-google-charts";
-import Confetti from "react-confetti";
-import List from "@material-ui/core/List";
-import IconButton from "@material-ui/core/IconButton";
-import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
-import useWindowSize from "react-use/lib/useWindowSize";
-import capitalize from "@material-ui/core/utils/capitalize";
-import CenteredCircularProgress from "../shared/CenteredCircularProgress";
-import Image from "next/image";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import { ArrowForwardIos, ArrowLeft, ArrowRight } from "@material-ui/icons";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import capitalize from "@material-ui/core/utils/capitalize";
+import { ArrowForwardIos } from "@material-ui/icons";
 import ArrowBackIos from "@material-ui/icons/ArrowBackIos";
+import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
+import Pagination from "@material-ui/lab/Pagination";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import Confetti from "react-confetti";
+import { Chart } from "react-google-charts";
+import useWindowSize from "react-use/lib/useWindowSize";
+import CenteredCircularProgress from "../shared/CenteredCircularProgress";
+import brokenGlass from "./../../img/marginalia-fatal-error.png";
+import layout from "./../../styles/layout.module.css";
 
 const QUERY = gql`
   query ($id: ObjectId!) {

@@ -1,5 +1,5 @@
-import Election from "../../../models/election";
 import { UserInputError } from "apollo-server-micro";
+import Election from "../../../models/election";
 
 export default (_, { query, page, resultsPerPage }) => {
   if (resultsPerPage < 1 || resultsPerPage > 50) {

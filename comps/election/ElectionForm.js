@@ -1,18 +1,18 @@
-import styles from "./ElectionForm.module.css";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import TextField from "@material-ui/core/TextField";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Radio from "@material-ui/core/Radio";
-import ElectionPictureSelection from "./ElectionPictureSelection";
 import Button from "@material-ui/core/Button";
-import React from "react";
-import { useFormik } from "formik";
 import Chip from "@material-ui/core/Chip";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormLabel from "@material-ui/core/FormLabel";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import TextField from "@material-ui/core/TextField";
 import School from "@material-ui/icons/School";
 import { KeyboardDateTimePicker } from "@material-ui/pickers";
+import { useFormik } from "formik";
+import React from "react";
+import styles from "./ElectionForm.module.css";
+import ElectionPictureSelection from "./ElectionPictureSelection";
 
 async function validate(values) {
   const errors = {};

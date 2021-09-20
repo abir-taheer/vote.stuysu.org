@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
 import { gql, useQuery } from "@apollo/client";
-import layout from "../../../styles/layout.module.css";
-import Error404 from "../../404";
+import { getDataFromTree } from "@apollo/client/react/ssr";
+import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
+import capitalize from "@material-ui/core/utils/capitalize";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import withApollo from "../../../comps/apollo/withApollo";
+import ElectionAnnouncementCard from "../../../comps/election/ElectionAnnouncementCard";
+import ElectionOverviewText from "../../../comps/election/ElectionOverviewText";
 import ElectionTabBar from "../../../comps/election/ElectionTabBar";
 import BackButton from "../../../comps/shared/BackButton";
-import useFormatDate from "../../../utils/date/useFormatDate";
-import capitalize from "@material-ui/core/utils/capitalize";
-import ElectionOverviewText from "../../../comps/election/ElectionOverviewText";
-import Head from "next/head";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
-import ElectionAnnouncementCard from "../../../comps/election/ElectionAnnouncementCard";
-import Container from "@material-ui/core/Container";
-import { getDataFromTree } from "@apollo/client/react/ssr";
-import withApollo from "../../../comps/apollo/withApollo";
+import layout from "../../../styles/layout.module.css";
+import useFormatDate from "../../../utils/date/useFormatDate";
+import Error404 from "../../404";
 
 const ELECTION_QUERY = gql`
   query ($url: NonEmptyString!) {

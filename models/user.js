@@ -1,8 +1,8 @@
-import mongoose from "./mongoose";
 import findOneLoaderFactory from "../utils/dataloaders/findOneLoaderFactory";
+import hasEverVoted from "./methods/user/hasEverVoted";
+import mongoose from "./mongoose";
 import findUserByEmail from "./statics/user/findByEmail";
 import queryUsers from "./statics/user/queryUsers";
-import hasEverVoted from "./methods/user/hasEverVoted";
 
 const Schema = mongoose.Schema;
 

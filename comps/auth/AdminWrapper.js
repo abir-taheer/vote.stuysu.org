@@ -1,15 +1,14 @@
-import React, { useContext } from "react";
-import UserContext from "./UserContext";
-import { useRouter } from "next/router";
-import Head from "next/head";
-import layout from "./../../styles/layout.module.css";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import entryDenied from "../../img/entry-denied.svg";
 import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
+import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import entryDenied from "../../img/entry-denied.svg";
 import CenteredCircularProgress from "../shared/CenteredCircularProgress";
+import layout from "./../../styles/layout.module.css";
+import UserContext from "./UserContext";
 
 // Any url prefixed with /admin will be handled by this wrapper
 export default function AdminWrapper({ children }) {

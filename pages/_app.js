@@ -1,20 +1,20 @@
-import "../styles/globals.css";
-import UserProvider from "../comps/auth/UserProvider";
-import SharedDialog from "../comps/dialog/SharedDialog";
+import MomentUtils from "@date-io/moment";
 import { StylesProvider } from "@material-ui/core/styles";
-import ThemeContext from "../comps/theme/ThemeContext";
-import NavBar from "../comps/navigation/NavBar";
-import Footer from "../comps/shared/Footer";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { PUBLIC_URL } from "../constants";
 import { SnackbarProvider } from "notistack";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import MomentUtils from "@date-io/moment";
 import { useEffect } from "react";
 import ReactGA from "react-ga";
-import AdminWrapper from "../comps/auth/AdminWrapper";
 import withApollo from "../comps/apollo/withApollo";
+import AdminWrapper from "../comps/auth/AdminWrapper";
+import UserProvider from "../comps/auth/UserProvider";
+import SharedDialog from "../comps/dialog/SharedDialog";
+import NavBar from "../comps/navigation/NavBar";
+import Footer from "../comps/shared/Footer";
+import ThemeContext from "../comps/theme/ThemeContext";
+import { PUBLIC_URL } from "../constants";
+import "../styles/globals.css";
 
 ReactGA.initialize(process.env.NEXT_APP_GTAG_ID || "UA-75064374-8");
 

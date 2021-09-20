@@ -1,18 +1,17 @@
+import { gql, useApolloClient } from "@apollo/client";
+import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import FormLabel from "@material-ui/core/FormLabel";
+import Typography from "@material-ui/core/Typography";
+import AddAPhoto from "@material-ui/icons/AddAPhoto";
+import Clear from "@material-ui/icons/Clear";
 import React, { useEffect, useState } from "react";
+import uploadPicture from "../../utils/upload/uploadPicture";
+import alertDialog from "../dialog/alertDialog";
 import PictureUploadDialog, {
   promptPicture,
 } from "../shared/PictureUploadDialog";
-import Button from "@material-ui/core/Button";
-import { gql, useApolloClient } from "@apollo/client";
-import alertDialog from "../dialog/alertDialog";
-import withApollo from "../apollo/withApollo";
-import AddAPhoto from "@material-ui/icons/AddAPhoto";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import styles from "./ElectionPictureSelection.module.css";
-import FormLabel from "@material-ui/core/FormLabel";
-import Clear from "@material-ui/icons/Clear";
-import Typography from "@material-ui/core/Typography";
-import uploadPicture from "../../utils/upload/uploadPicture";
 
 const PICTURE_QUERY = gql`
   query ($id: ObjectId!) {
@@ -123,4 +122,4 @@ const ElectionPictureSelection = ({
   );
 };
 
-export default withApollo({ ssr: false })(ElectionPictureSelection);
+export default ElectionPictureSelection;

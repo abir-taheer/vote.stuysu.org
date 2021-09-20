@@ -1,6 +1,6 @@
+import { CircularProgress } from "@material-ui/core";
 import { useEffect, useRef } from "react";
 import useGSI from "./useGSI";
-import { CircularProgress } from "@material-ui/core";
 
 export default function LoginButton() {
   const { ready, authenticating } = useGSI();

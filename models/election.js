@@ -1,13 +1,13 @@
-import mongoose from "./mongoose";
+import { customAlphabet } from "nanoid";
 import findOneLoaderFactory from "../utils/dataloaders/findOneLoaderFactory";
 import calculatePluralityResults from "./methods/election/calculatePluralityResults";
-import isVotingPeriod from "./methods/election/isVotingPeriod";
+import calculateRunoffResults from "./methods/election/calculateRunoffResults";
 import getEligibleVoters from "./methods/election/getNumEligibleVoters";
+import isVotingPeriod from "./methods/election/isVotingPeriod";
 import verifyUserCanVote from "./methods/election/verifyUserCanVote";
+import mongoose from "./mongoose";
 import findElectionByUrl from "./statics/election/findByUrl";
 import queryElections from "./statics/election/queryElections";
-import { customAlphabet } from "nanoid";
-import calculateRunoffResults from "./methods/election/calculateRunoffResults";
 
 const nanoid = customAlphabet("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ", 5);
 const Schema = mongoose.Schema;

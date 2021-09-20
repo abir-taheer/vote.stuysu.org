@@ -1,17 +1,16 @@
-import { useFormik } from "formik";
-import styles from "./UserForm.module.css";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
-import React from "react";
-import confirmDialog from "../dialog/confirmDialog";
-import calcGrade from "../../utils/user/calcGrade";
-import gradYear from "../../graphql/resolvers/User/gradYear";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormLabel from "@material-ui/core/FormLabel";
+import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import { useFormik } from "formik";
+import React from "react";
+import calcGrade from "../../utils/user/calcGrade";
+import confirmDialog from "../dialog/confirmDialog";
+import styles from "./UserForm.module.css";
 
 function gradYearIsValid(gradYear) {
   return (

@@ -1,5 +1,5 @@
-import mongoose from "./mongoose";
 import findOneLoaderFactory from "../utils/dataloaders/findOneLoaderFactory";
+import mongoose from "./mongoose";
 
 const Schema = mongoose.Schema;
 

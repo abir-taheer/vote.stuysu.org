@@ -1,5 +1,5 @@
-import Candidate from "../../../models/candidate";
 import { UserInputError } from "apollo-server-micro";
+import Candidate from "../../../models/candidate";
 import Election from "../../../models/election";
 
 export default async (_, { url, election }) => {

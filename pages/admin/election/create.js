@@ -1,15 +1,14 @@
+import { gql, useMutation } from "@apollo/client";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
 import React from "react";
 import AdminTabBar from "../../../comps/admin/AdminTabBar";
-import Typography from "@material-ui/core/Typography";
-
-import layout from "./../../../styles/layout.module.css";
-import ElectionForm from "../../../comps/election/ElectionForm";
-import { gql, useMutation } from "@apollo/client";
-import { useRouter } from "next/router";
 import alertDialog from "../../../comps/dialog/alertDialog";
-import { useSnackbar } from "notistack";
-import Container from "@material-ui/core/Container";
+import ElectionForm from "../../../comps/election/ElectionForm";
 import BackButton from "../../../comps/shared/BackButton";
+import layout from "./../../../styles/layout.module.css";
 
 const SUBMIT_MUTATION = gql`
   mutation (

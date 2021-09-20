@@ -1,22 +1,20 @@
-import layout from "./../../../../styles/layout.module.css";
-import Typography from "@material-ui/core/Typography";
-import AdminTabBar from "../../../../comps/admin/AdminTabBar";
-import { gql } from "@apollo/client/core";
-import { useRouter } from "next/router";
-import { useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import Button from "@material-ui/core/Button";
-import Delete from "@material-ui/icons/Delete";
-import Create from "@material-ui/icons/Create";
-import { useState } from "react";
-import UserForm from "../../../../comps/user/UserForm";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import alertDialog from "../../../../comps/dialog/alertDialog";
-import { useSnackbar } from "notistack";
-import BackButton from "../../../../comps/shared/BackButton";
-import UserNotFound from "../../../../comps/user/UserNotFound";
-import confirmDialog from "../../../../comps/dialog/confirmDialog";
 import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Create from "@material-ui/icons/Create";
+import Delete from "@material-ui/icons/Delete";
+import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
+import { useState } from "react";
+import AdminTabBar from "../../../../comps/admin/AdminTabBar";
+import alertDialog from "../../../../comps/dialog/alertDialog";
+import confirmDialog from "../../../../comps/dialog/confirmDialog";
+import BackButton from "../../../../comps/shared/BackButton";
 import CenteredCircularProgress from "../../../../comps/shared/CenteredCircularProgress";
+import UserForm from "../../../../comps/user/UserForm";
+import UserNotFound from "../../../../comps/user/UserNotFound";
+import layout from "./../../../../styles/layout.module.css";
 
 const QUERY = gql`
   query ($id: ObjectId!, $pageReady: Boolean!) {

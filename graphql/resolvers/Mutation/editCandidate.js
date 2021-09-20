@@ -1,8 +1,8 @@
 import { UserInputError } from "apollo-server-micro";
+import { randomBytes } from "crypto";
 import Candidate from "../../../models/candidate";
 import Picture from "../../../models/picture";
 import User from "../../../models/user";
-import { randomBytes } from "crypto";
 import getDefaultCandidatePic from "../../../utils/candidate/getDefaltCandidatePic";
 import sanitizeHtml from "../../../utils/candidate/sanitizeHtml";
 

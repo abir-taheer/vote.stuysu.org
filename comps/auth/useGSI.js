@@ -1,9 +1,9 @@
 import { gql, useMutation } from "@apollo/client";
-import useScript from "./useScript";
 import { useContext, useEffect, useState } from "react";
 import { GOOGLE_CLIENT_ID } from "../../constants";
 import alertDialog from "../dialog/alertDialog";
 import UserContext from "./UserContext";
+import useScript from "./useScript";
 
 const MUTATION = gql`
   mutation ($idToken: JWT!) {

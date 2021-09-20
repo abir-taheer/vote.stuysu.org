@@ -1,6 +1,6 @@
 import { UserInputError } from "apollo-server-micro";
-import Election from "../../../models/election";
 import Announcement from "../../../models/announcement";
+import Election from "../../../models/election";
 
 export default async (
   _,

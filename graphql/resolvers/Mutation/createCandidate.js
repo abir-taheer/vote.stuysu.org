@@ -1,10 +1,10 @@
-import Election from "../../../models/election";
 import { ForbiddenError, UserInputError } from "apollo-server-micro";
-import Candidate from "../../../models/candidate";
-import Picture from "../../../models/picture";
-import getDefaultCandidatePic from "../../../utils/candidate/getDefaltCandidatePic";
 import { randomBytes } from "crypto";
+import Candidate from "../../../models/candidate";
+import Election from "../../../models/election";
+import Picture from "../../../models/picture";
 import User from "../../../models/user";
+import getDefaultCandidatePic from "../../../utils/candidate/getDefaltCandidatePic";
 import sanitizeHtml from "../../../utils/candidate/sanitizeHtml";
 
 const cloudinary = require("cloudinary").v2;

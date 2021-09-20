@@ -1,5 +1,5 @@
-import Typography from "@material-ui/core/Typography";
 import { Card } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import React from "react";
 import useFormatDate from "../../utils/date/useFormatDate";
 import styles from "./ElectionAnnouncementCard.module.css";

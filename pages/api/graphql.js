@@ -1,10 +1,10 @@
 import { ApolloServer, ForbiddenError } from "apollo-server-micro";
-import typeDefs from "../../graphql/typeDefs";
-import resolvers from "../../graphql/resolvers";
-import unboundSetCookie from "../../utils/middleware/setCookie";
 import { createComplexityLimitRule } from "graphql-validation-complexity";
+import resolvers from "../../graphql/resolvers";
+import typeDefs from "../../graphql/typeDefs";
 import checkAuth from "../../utils/middleware/checkAuth";
 import runMiddleware from "../../utils/middleware/runMiddleware";
+import unboundSetCookie from "../../utils/middleware/setCookie";
 
 const ComplexityLimitRule = createComplexityLimitRule(35000, {
   scalarCost: 1,

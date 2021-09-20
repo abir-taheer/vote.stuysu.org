@@ -1,7 +1,7 @@
 import election from "./election";
-import picture from "./picture";
-import managers from "./managers";
 import isManager from "./isManager";
+import managers from "./managers";
+import picture from "./picture";
 
 export default {
   election,

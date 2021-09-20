@@ -1,18 +1,17 @@
-import Head from "next/head";
-import layout from "./../styles/layout.module.css";
-import Link from "next/link";
-import Button from "@material-ui/core/Button";
-import HomeOutlined from "@material-ui/icons/HomeOutlined";
 import { useTheme } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import { PUBLIC_URL } from "../constants";
-import defaultImage from "./../img/404-images/searching-with-dog.png";
-
-import { URL } from "url";
-import get404Image from "../utils/errors/get404Image";
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import HomeOutlined from "@material-ui/icons/HomeOutlined";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { URL } from "url";
+import { PUBLIC_URL } from "../constants";
+import get404Image from "../utils/errors/get404Image";
+import defaultImage from "./../img/404-images/searching-with-dog.png";
+import layout from "./../styles/layout.module.css";
 
 const Error404 = () => {
   const theme = useTheme();

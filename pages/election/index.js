@@ -1,16 +1,15 @@
-import layout from "./../../styles/layout.module.css";
-import Typography from "@material-ui/core/Typography";
-import { useState } from "react";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { gql, useQuery } from "@apollo/client";
+import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import Search from "@material-ui/icons/Search";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { parse } from "querystring";
-import Search from "@material-ui/icons/Search";
-import { gql, useQuery } from "@apollo/client";
+import { useState } from "react";
 import ElectionCardGrid from "../../comps/election/ElectionCardGrid";
-import Head from "next/head";
-import Container from "@material-ui/core/Container";
 import CenteredCircularProgress from "../../comps/shared/CenteredCircularProgress";
+import layout from "./../../styles/layout.module.css";
 
 const QUERY = gql`
   query ($query: String!, $page: PositiveInt!) {

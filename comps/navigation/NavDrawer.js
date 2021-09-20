@@ -1,23 +1,21 @@
-import React, { useContext } from "react";
+import Button from "@material-ui/core/Button";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-
-import Link from "next/link";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import AccountTreeOutlined from "@material-ui/icons/AccountTreeOutlined";
+import HelpOutline from "@material-ui/icons/HelpOutline";
 import HomeOutlined from "@material-ui/icons/HomeOutlined";
 import HowToVoteOutlined from "@material-ui/icons/HowToVoteOutlined";
-import HelpOutline from "@material-ui/icons/HelpOutline";
 import LockOpenOutlined from "@material-ui/icons/LockOpenOutlined";
-import { useRouter } from "next/router";
-import UserContext from "../auth/UserContext";
-
-import styles from "./NavBar.module.css";
 import PowerSettingsNewOutlined from "@material-ui/icons/PowerSettingsNewOutlined";
-import Button from "@material-ui/core/Button";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useContext } from "react";
 import useLogin from "../auth/useLogin";
-import AccountTreeOutlined from "@material-ui/icons/AccountTreeOutlined";
+import UserContext from "../auth/UserContext";
+import styles from "./NavBar.module.css";
 
 const NavDrawer = ({ open, setOpen }) => {
   const router = useRouter();

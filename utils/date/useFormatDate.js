@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import DateContext from "../../comps/shared/DateContext";
 import moment from "moment-timezone";
+import { useContext, useEffect, useState } from "react";
+import DateContext from "../../comps/shared/DateContext";
 
 const oneSecond = 1000;
 const thirtySeconds = oneSecond * 30;

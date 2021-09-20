@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import { useFormik } from "formik";
-import FormGroup from "@material-ui/core/FormGroup";
+import { gql, useQuery } from "@apollo/client";
+import Button from "@material-ui/core/Button";
+import Chip from "@material-ui/core/Chip";
 import FormControl from "@material-ui/core/FormControl";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import FormLabel from "@material-ui/core/FormLabel";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import { gql, useQuery } from "@apollo/client";
+import AddAPhoto from "@material-ui/icons/AddAPhoto";
+import Clear from "@material-ui/icons/Clear";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import { useFormik } from "formik";
+import React, { useState } from "react";
+import getDefaultCandidatePic from "../../utils/candidate/getDefaltCandidatePic";
+import uploadPicture from "../../utils/upload/uploadPicture";
+import alertDialog from "../dialog/alertDialog";
 import PictureUploadDialog, {
   promptPicture,
 } from "../shared/PictureUploadDialog";
-import styles from "./CandidateForm.module.css";
-import getDefaultCandidatePic from "../../utils/candidate/getDefaltCandidatePic";
-import AddAPhoto from "@material-ui/icons/AddAPhoto";
-import alertDialog from "../dialog/alertDialog";
-import Clear from "@material-ui/icons/Clear";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import Chip from "@material-ui/core/Chip";
 import TinyEditor from "../shared/TinyEditor";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import uploadPicture from "../../utils/upload/uploadPicture";
+import styles from "./CandidateForm.module.css";
 
 function getCandidateUrl(val) {
   return val

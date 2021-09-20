@@ -1,8 +1,8 @@
 import adminPrivileges from "./adminPrivileges";
-import name from "./name";
 import email from "./email";
 import grade from "./grade";
 import gradYear from "./gradYear";
+import name from "./name";
 
 export default {
   adminPrivileges,

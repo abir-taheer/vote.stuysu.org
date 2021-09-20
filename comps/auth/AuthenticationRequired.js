@@ -1,10 +1,10 @@
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { useContext } from "react";
-import UserContext from "./UserContext";
 import carryingKey from "./../../img/carrying-key.svg";
 import layout from "./../../styles/layout.module.css";
-import Button from "@material-ui/core/Button";
 import useLogin from "./useLogin";
-import Typography from "@material-ui/core/Typography";
+import UserContext from "./UserContext";
 
 const AuthenticationRequired = ({ children }) => {
   const user = useContext(UserContext);

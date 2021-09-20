@@ -1,11 +1,11 @@
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import HowToVote from "@material-ui/icons/HowToVote";
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import searching from "../../img/404-images/searching-with-dog.png";
 import layout from "../../styles/layout.module.css";
-import Typography from "@material-ui/core/Typography";
-import Link from "next/link";
-import Button from "@material-ui/core/Button";
-import HowToVote from "@material-ui/icons/HowToVote";
-import Image from "next/image";
 
 const ElectionNotFound = ({ href }) => {
   return (

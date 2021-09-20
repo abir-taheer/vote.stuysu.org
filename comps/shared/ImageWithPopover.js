@@ -1,11 +1,10 @@
-import { useState } from "react";
-import styles from "./ImageWithPopover.module.css";
-import Popover from "material-ui-popup-state/HoverPopover";
 import {
-  usePopupState,
   bindHover,
   bindPopover,
+  usePopupState,
 } from "material-ui-popup-state/hooks";
+import Popover from "material-ui-popup-state/HoverPopover";
+import styles from "./ImageWithPopover.module.css";
 
 const ImageWithPopover = ({
   src,

@@ -1,9 +1,9 @@
-import UserContext from "./UserContext";
 import { gql, useMutation, useQuery } from "@apollo/client";
-import confirmDialog from "../dialog/confirmDialog";
 import { useEffect, useState } from "react";
-import DateContext from "../shared/DateContext";
 import withApollo from "../apollo/withApollo";
+import confirmDialog from "../dialog/confirmDialog";
+import DateContext from "../shared/DateContext";
+import UserContext from "./UserContext";
 
 const QUERY = gql`
   query {

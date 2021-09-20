@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
+import Link from "next/link";
 import styles from "./CandidateCard.module.css";
 
 const CandidateCard = ({ href, picture, blurb, name }) => {

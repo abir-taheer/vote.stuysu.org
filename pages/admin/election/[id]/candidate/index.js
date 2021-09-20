@@ -1,19 +1,19 @@
-import layout from "./../../../../../styles/layout.module.css";
-import AdminTabBar from "../../../../../comps/admin/AdminTabBar";
-import AdminElectionTabBar from "../../../../../comps/admin/AdminElectionTabBar";
-import Typography from "@material-ui/core/Typography";
 import { gql, useQuery } from "@apollo/client";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import ElectionNotFound from "../../../../../comps/election/ElectionNotFound";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import joinUrl from "url-join";
 import Button from "@material-ui/core/Button";
-import Add from "@material-ui/icons/Add";
-import Grid from "@material-ui/core/Grid";
-import CandidateCard from "../../../../../comps/candidate/CandidateCard";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Add from "@material-ui/icons/Add";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import joinUrl from "url-join";
+import AdminElectionTabBar from "../../../../../comps/admin/AdminElectionTabBar";
+import AdminTabBar from "../../../../../comps/admin/AdminTabBar";
+import CandidateCard from "../../../../../comps/candidate/CandidateCard";
+import ElectionNotFound from "../../../../../comps/election/ElectionNotFound";
 import BackButton from "../../../../../comps/shared/BackButton";
+import layout from "./../../../../../styles/layout.module.css";
 
 const QUERY = gql`
   query ($id: ObjectId!) {

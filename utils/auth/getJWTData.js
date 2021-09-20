@@ -1,5 +1,5 @@
-import JWTSecret from "../../models/jwtSecret";
 import { verify } from "jsonwebtoken";
+import JWTSecret from "../../models/jwtSecret";
 
 const silentVerify = async (jwt, secret) => {
   try {

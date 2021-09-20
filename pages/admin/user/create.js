@@ -1,14 +1,13 @@
-import layout from "./../../../styles/layout.module.css";
+import { gql, useMutation } from "@apollo/client";
+import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import AdminTabBar from "../../../comps/admin/AdminTabBar";
-import UserForm from "../../../comps/user/UserForm";
-import { gql } from "@apollo/client/core";
-import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
+import AdminTabBar from "../../../comps/admin/AdminTabBar";
 import alertDialog from "../../../comps/dialog/alertDialog";
-import Container from "@material-ui/core/Container";
 import BackButton from "../../../comps/shared/BackButton";
+import UserForm from "../../../comps/user/UserForm";
+import layout from "./../../../styles/layout.module.css";
 
 const MUTATION = gql`
   mutation (

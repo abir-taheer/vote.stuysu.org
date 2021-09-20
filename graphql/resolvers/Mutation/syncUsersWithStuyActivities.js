@@ -1,7 +1,7 @@
+import { ApolloError } from "apollo-server-micro";
+import { get } from "axios";
 import { sign } from "jsonwebtoken";
 import KeyPair from "../../../models/keyPair";
-import { get } from "axios";
-import { ApolloError } from "apollo-server-micro";
 import User from "../../../models/user";
 
 export default async (_, __, { adminRequired, user }) => {

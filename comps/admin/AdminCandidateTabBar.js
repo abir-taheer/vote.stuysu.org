@@ -1,10 +1,8 @@
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import { useRouter } from "next/router";
-
-import { useEffect, useState } from "react";
 import Paper from "@material-ui/core/Paper";
-
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import styles from "./AdminElectionTabBar.module.css";
 
 const tabs = [

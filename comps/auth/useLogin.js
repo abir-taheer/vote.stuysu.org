@@ -1,12 +1,11 @@
-import alertDialog from "../dialog/alertDialog";
-import layout from "./../../styles/layout.module.css";
-
+import { CircularProgress } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
-import LoginButton from "./LoginButton";
-import { CircularProgress } from "@material-ui/core";
-import useGSI from "./useGSI";
 import { useState } from "react";
+import alertDialog from "../dialog/alertDialog";
+import layout from "./../../styles/layout.module.css";
+import LoginButton from "./LoginButton";
+import useGSI from "./useGSI";
 
 const useLogin = (props = {}) => {
   const { onLogin } = props;

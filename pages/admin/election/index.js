@@ -1,20 +1,17 @@
-import layout from "../../../styles/layout.module.css";
-import Typography from "@material-ui/core/Typography";
-import AdminTabBar from "../../../comps/admin/AdminTabBar";
 import { gql, useQuery } from "@apollo/client";
-import withApollo from "../../../comps/apollo/withApollo";
 import Button from "@material-ui/core/Button";
-import Add from "@material-ui/icons/Add";
-import Link from "next/link";
-
-import ElectionCardGrid from "../../../comps/election/ElectionCardGrid";
-import { useState } from "react";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import TextField from "@material-ui/core/TextField";
-import Search from "@material-ui/icons/Search";
-import { useRouter } from "next/router";
 import Container from "@material-ui/core/Container";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import Add from "@material-ui/icons/Add";
+import Search from "@material-ui/icons/Search";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import AdminTabBar from "../../../comps/admin/AdminTabBar";
+import ElectionCardGrid from "../../../comps/election/ElectionCardGrid";
 import CenteredCircularProgress from "../../../comps/shared/CenteredCircularProgress";
+import layout from "../../../styles/layout.module.css";
 
 const ELECTIONS_QUERY = gql`
   query (

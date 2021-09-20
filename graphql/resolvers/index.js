@@ -1,3 +1,4 @@
+import ObjectId from "graphql-scalar-objectid";
 import { resolvers as graphqlScalarResolvers } from "graphql-scalars";
 import Announcement from "./Announcement";
 import Candidate from "./Candidate";
@@ -5,7 +6,6 @@ import CloudinaryResource from "./CloudinaryResource";
 import Election from "./Election";
 import ElectionResult from "./ElectionResult";
 import Mutation from "./Mutation";
-import ObjectId from "graphql-scalar-objectid";
 import Picture from "./Picture";
 import PluralityCandidateResult from "./PluralityCandidateResult";
 import PluralityResult from "./PluralityResult";

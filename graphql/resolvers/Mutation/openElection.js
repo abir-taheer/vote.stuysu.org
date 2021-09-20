@@ -1,5 +1,5 @@
-import Election from "../../../models/election";
 import { UserInputError } from "apollo-server-micro";
+import Election from "../../../models/election";
 
 export default async (root, { id }, { adminRequired }) => {
   adminRequired();

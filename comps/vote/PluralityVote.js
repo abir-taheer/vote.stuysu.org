@@ -1,20 +1,19 @@
-import { gql } from "@apollo/client/core";
-import { useContext, useState } from "react";
-import { useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
+import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
-import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import Button from "@material-ui/core/Button";
-import Radio from "@material-ui/core/Radio";
 import FormLabel from "@material-ui/core/FormLabel";
-import DateContext from "../shared/DateContext";
-import moment from "moment-timezone";
-import useFormatDate from "../../utils/date/useFormatDate";
-import styles from "./PluralityVote.module.css";
-import confirmDialog from "../dialog/confirmDialog";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
+import moment from "moment-timezone";
+import { useContext, useState } from "react";
+import useFormatDate from "../../utils/date/useFormatDate";
 import alertDialog from "../dialog/alertDialog";
+import confirmDialog from "../dialog/confirmDialog";
+import DateContext from "../shared/DateContext";
+import styles from "./PluralityVote.module.css";
 
 const MUTATION = gql`
   mutation ($candidateId: ObjectId!, $electionId: ObjectId!) {

@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
 import Button from "@material-ui/core/Button";
-import styles from "./NavBar.module.css";
 import Popover from "@material-ui/core/Popover";
-import UserContext from "../auth/UserContext";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
+import React, { useContext, useState } from "react";
+import UserContext from "../auth/UserContext";
+import styles from "./NavBar.module.css";
 
 const UserMenuItem = () => {
   const [anchorEl, setAnchorEl] = useState(null);

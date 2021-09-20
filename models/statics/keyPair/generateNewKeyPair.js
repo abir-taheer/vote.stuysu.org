@@ -1,5 +1,5 @@
-import mongoose from "./../../mongoose";
 import generateSecureKeyPair from "../../../utils/auth/generateSecureKeyPair";
+import mongoose from "./../../mongoose";
 
 export default async function generateNewKeyPair() {
   const KeyPair = mongoose.model("KeyPair");

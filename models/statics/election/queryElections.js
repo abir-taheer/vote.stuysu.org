@@ -1,5 +1,5 @@
-import mongoose from "./../../mongoose";
 import escapeStringRegexp from "escape-string-regexp";
+import mongoose from "./../../mongoose";
 
 export default async ({ page, resultsPerPage, query, filters }) => {
   const offset = (page - 1) * resultsPerPage;

@@ -1,16 +1,16 @@
-import UserContext from "../auth/UserContext";
-import React, { useContext } from "react";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Link from "next/link";
 import BarChart from "@material-ui/icons/BarChart";
-import PeopleOutlined from "@material-ui/icons/PeopleOutlined";
-import useLogin from "../auth/useLogin";
 import HowToVoteOutlined from "@material-ui/icons/HowToVoteOutlined";
-import layout from "../../styles/layout.module.css";
-import waitingPale from "./../../img/pale-waiting.png";
-import dalia from "./../../img/dalia-by-cindy-zheng.gif";
+import PeopleOutlined from "@material-ui/icons/PeopleOutlined";
 import Image from "next/image";
+import Link from "next/link";
+import React, { useContext } from "react";
+import layout from "../../styles/layout.module.css";
+import useLogin from "../auth/useLogin";
+import UserContext from "../auth/UserContext";
+import dalia from "./../../img/dalia-by-cindy-zheng.gif";
+import waitingPale from "./../../img/pale-waiting.png";
 
 const ElectionOverviewText = ({
   isOpen,

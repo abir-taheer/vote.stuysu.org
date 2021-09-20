@@ -1,6 +1,6 @@
-import mongoose from "./mongoose";
-import findOneLoaderFactory from "../utils/dataloaders/findOneLoaderFactory";
 import findManyLoaderFactory from "../utils/dataloaders/findManyLoaderFactory";
+import findOneLoaderFactory from "../utils/dataloaders/findOneLoaderFactory";
+import mongoose from "./mongoose";
 import queryAnnouncements from "./statics/announcement/queryAnnouncements";
 const Schema = mongoose.Schema;
 
