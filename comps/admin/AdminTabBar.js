@@ -42,7 +42,7 @@ const getActiveTabIndex = (path) =>
     tab.path.some((activePath) => path.startsWith(activePath))
   );
 
-const AdminTabBar = () => {
+export default function AdminTabBar() {
   const { pathname, push } = useRouter();
   const previousPath = globalThis.sessionStorage?.getItem(
     "previous-admin-path"
@@ -78,6 +78,4 @@ const AdminTabBar = () => {
       </Tabs>
     </div>
   );
-};
-
-export default AdminTabBar;
+}

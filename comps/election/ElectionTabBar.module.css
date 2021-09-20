@@ -2,3 +2,8 @@
   margin-top: 0.5rem;
   margin-bottom: 2rem;
 }
+
+.container {
+  justify-content: center;
+  display: flex;
+}

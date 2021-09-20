@@ -203,6 +203,7 @@ const ManageElection = () => {
       <Typography variant={"h1"} align={"center"}>
         Manage Election | Admin Panel
       </Typography>
+
       <AdminTabBar />
 
       {!election && <ElectionNotFound href={"/admin/election"} />}
@@ -253,13 +254,15 @@ const ManageElection = () => {
           )}
 
           {election.completed && (
-            <Button
-              variant={"outlined"}
-              onClick={handleOpenElection}
-              startIcon={<LockOpen />}
-            >
-              Reopen Election
-            </Button>
+            <div className={layout.center}>
+              <Button
+                variant={"outlined"}
+                onClick={handleOpenElection}
+                startIcon={<LockOpen />}
+              >
+                Reopen Election
+              </Button>
+            </div>
           )}
 
           <ElectionForm

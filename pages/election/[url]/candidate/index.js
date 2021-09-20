@@ -13,6 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import CandidateCard from "../../../../comps/candidate/CandidateCard";
 import withApollo from "../../../../comps/apollo/withApollo";
 import LoadingScreen from "../../../../comps/shared/LoadingScreen";
+import Container from "@material-ui/core/Container";
 
 const QUERY = gql`
   query ($url: NonEmptyString!) {
@@ -78,7 +79,7 @@ function ElectionCandidates() {
   );
 
   return (
-    <div className={layout.container}>
+    <Container maxWidth={"md"} className={layout.page}>
       <Head>
         <title>{title}</title>
         <meta property={"og:title"} content={title} />
@@ -103,18 +104,19 @@ function ElectionCandidates() {
         />
       </Head>
 
-      <main className={layout.main}>
-        <BackButton
-          href={"/election"}
-          variant={"outlined"}
-          text={"Back To Elections"}
-        />
-        <Typography variant={"h1"} className={layout.title}>
-          {election.name}
-        </Typography>
+      <BackButton
+        href={"/election"}
+        variant={"outlined"}
+        text={"Back To Elections"}
+      />
 
-        <ElectionTabBar completed={election.completed} />
+      <Typography variant={"h1"} className={layout.title} align={"center "}>
+        {election.name}
+      </Typography>
 
+      <ElectionTabBar completed={election.completed} />
+
+      <div className={layout.center}>
         <TextField
           value={query}
           onChange={(ev) => setQuery(ev.target.value)}
@@ -122,24 +124,30 @@ function ElectionCandidates() {
           color={"primary"}
           label={"Search"}
         />
-        <Typography variant={"body2"} gutterBottom className={layout.spaced}>
-          Click on any of the candidates for more info
-        </Typography>
+      </div>
 
-        <Grid container justify={"center"} className={layout.grid} spacing={3}>
-          {candidates.map(({ picture, blurb, name, url, id }) => (
-            <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
-              <CandidateCard
-                picture={picture}
-                blurb={blurb}
-                name={name}
-                href={"/election/" + election.url + "/candidate/" + url}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </main>
-    </div>
+      <Typography
+        variant={"body2"}
+        align={"center"}
+        gutterBottom
+        className={layout.spaced}
+      >
+        Click on any of the candidates for more info
+      </Typography>
+
+      <Grid container justify={"center"} spacing={3}>
+        {candidates.map(({ picture, blurb, name, url, id }) => (
+          <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
+            <CandidateCard
+              picture={picture}
+              blurb={blurb}
+              name={name}
+              href={"/election/" + election.url + "/candidate/" + url}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 }
 

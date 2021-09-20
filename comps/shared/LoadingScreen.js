@@ -1,18 +1,18 @@
 import layout from "./../../styles/layout.module.css";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 
-const LoadingScreen = () => {
+export default function LoadingScreen() {
   return (
-    <div className={layout.container}>
-      <main className={layout.main}>
+    <Container maxWidth={"sm"} className={layout.page}>
+      <div className={layout.center}>
         <CircularProgress size={64} />
-        <Typography variant={"h1"} color={"primary"} align={"center"}>
-          Loading
-        </Typography>
-      </main>
-    </div>
-  );
-};
+      </div>
 
-export default LoadingScreen;
+      <Typography variant={"h1"} color={"primary"} align={"center"}>
+        Loading
+      </Typography>
+    </Container>
+  );
+}

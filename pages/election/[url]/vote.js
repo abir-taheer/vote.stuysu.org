@@ -19,6 +19,9 @@ import Link from "next/link";
 import voteSticker from "../../../img/sticker-vota.gif";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
 import RunoffVote from "../../../comps/vote/RunoffVote";
+import Container from "@material-ui/core/Container";
+import Image from "next/image";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
 
 const QUERY = gql`
   query ($url: NonEmptyString!) {
@@ -79,7 +82,7 @@ export default function Vote() {
   const isOpen = now > start && now < end && !election.completed;
 
   return (
-    <div className={layout.container}>
+    <Container maxWidth={"md"} className={layout.page}>
       <Head>
         <title>Vote - {election.name} | StuyBOE Voting Site</title>
         <meta
@@ -107,157 +110,175 @@ export default function Vote() {
         />
       </Head>
 
-      <main className={layout.main}>
-        <BackButton
-          href={"/election"}
-          variant={"outlined"}
-          text={"Back To Elections"}
-        />
-        <Typography variant={"h1"} className={layout.title}>
-          {election.name}
-        </Typography>
+      <BackButton
+        href={"/election"}
+        variant={"outlined"}
+        text={"Back To Elections"}
+      />
 
-        <ElectionTabBar completed={election.completed} />
+      <Typography variant={"h1"} className={layout.title} align={"center"}>
+        {election.name}
+      </Typography>
 
-        {election.userIsEligible && isOpen && !data?.userHasVoted && (
-          <>
-            {election.type === "plurality" && (
-              <PluralityVote
-                candidates={election.candidates}
-                election={election}
-                refetch={refetch}
-              />
-            )}
+      <ElectionTabBar completed={election.completed} />
 
-            {election.type === "runoff" && (
-              <RunoffVote
-                candidates={election.candidates}
-                election={election}
-                refetch={refetch}
-              />
-            )}
-          </>
-        )}
-
-        {election.userIsEligible && !isOpen && (
-          <>
-            <Typography variant={"h2"} color={"secondary"}>
-              This is election isn't open right now
-            </Typography>
-
-            <img
-              src={rush}
-              alt={"A yoyo with a clock on it"}
-              className={layout.smallVector}
+      {election.userIsEligible && isOpen && !data?.userHasVoted && (
+        <Container maxWidth={"sm"}>
+          {election.type === "plurality" && (
+            <PluralityVote
+              candidates={election.candidates}
+              election={election}
+              refetch={refetch}
             />
+          )}
 
-            {now < start && (
-              <Typography variant={"body1"}>
-                Starts {getReadableDate(start)}
+          {election.type === "runoff" && (
+            <RunoffVote
+              candidates={election.candidates}
+              election={election}
+              refetch={refetch}
+            />
+          )}
+        </Container>
+      )}
+
+      {election.userIsEligible && !isOpen && (
+        <>
+          <Typography variant={"h2"} color={"secondary"} align={"center"}>
+            This is election isn't open right now
+          </Typography>
+
+          <Image
+            src={rush}
+            alt={"A yoyo with a clock on it"}
+            className={layout.smallVector}
+          />
+
+          {now < start && (
+            <Typography variant={"body1"}>
+              Starts {getReadableDate(start)}
+            </Typography>
+          )}
+
+          {now > end && (
+            <Typography variant={"body1"}>
+              Ended {getReadableDate(end)}
+            </Typography>
+          )}
+
+          {election.completed && (
+            <Typography>
+              <Link href={"/election/" + url + "/result"}>
+                <Button variant={"outlined"} color={"primary"}>
+                  Results
+                </Button>
+              </Link>{" "}
+              &nbsp;for this election are available
+            </Typography>
+          )}
+          <br />
+        </>
+      )}
+
+      {data?.userHasVoted && (
+        <>
+          {isOpen && (
+            <>
+              <Typography variant={"h2"} color={"secondary"} align={"center"}>
+                Thanks for voting!
               </Typography>
-            )}
-
-            {now > end && (
-              <Typography variant={"body1"}>
-                Ended {getReadableDate(end)}
-              </Typography>
-            )}
-
-            {election.completed && (
-              <Typography>
-                <Link href={"/election/" + url + "/result"}>
-                  <Button variant={"outlined"} color={"primary"}>
-                    Results
-                  </Button>
-                </Link>{" "}
-                &nbsp;for this election are available
-              </Typography>
-            )}
-            <br />
-          </>
-        )}
-
-        {data?.userHasVoted && (
-          <>
-            {isOpen && (
-              <>
-                <Typography variant={"h2"} color={"secondary"}>
-                  Thanks for voting!
-                </Typography>
-                <img
+              <div className={layout.center}>
+                <Image
                   src={voteSticker}
                   alt={
                     "A sticker that says vota (meant to be pronounced as voter)"
                   }
+                  height={200}
+                  width={200}
+                  objectFit={"contain"}
                   className={layout.smallVector}
                 />
-              </>
-            )}
+              </div>
+            </>
+          )}
 
-            {voteId ? (
-              <>
-                <Typography variant={"h3"} align={"center"}>
-                  Your Vote ID is:{" "}
-                  <code className={layout.voteId}>{voteId}</code>
-                </Typography>
-                <Typography
-                  variant={"body1"}
-                  className={layout.fixedWidthDescription}
-                  gutterBottom
-                >
-                  You can use this code after the election is over to look up
-                  your vote and ensure that it was recorded accurately.
-                </Typography>
-                <Typography
-                  variant={"body1"}
-                  className={layout.fixedWidthDescription}
-                >
-                  We'll store this code in your browser for the time being but,
-                  because personally identifiable information is not stored with
-                  your vote,{" "}
-                  <b>we may be unable to show this code to you again</b>. It
-                  might be a good idea to write it down or take a screenshot of
-                  it.
-                </Typography>
-              </>
-            ) : (
-              <Typography variant={"body1"}>
-                Your vote id is not stored on this browser and cannot be
-                displayed.
+          {voteId ? (
+            <div>
+              <Typography variant={"h3"} align={"center"}>
+                Your Vote ID is: <code className={layout.voteId}>{voteId}</code>
               </Typography>
-            )}
-          </>
-        )}
+              <Typography variant={"body1"} gutterBottom>
+                You can use this code after the election is over to look up your
+                vote and ensure that it was recorded accurately.
+              </Typography>
+              <Typography variant={"body1"}>
+                We'll store this code in your browser for the time being but,
+                because personally identifiable information is not stored with
+                your vote,{" "}
+                <b>we may be unable to show this code to you again</b>. It might
+                be a good idea to write it down or take a screenshot of it.
+              </Typography>
+            </div>
+          ) : (
+            <Typography variant={"body1"} align={"center"}>
+              Your vote id is not stored on this browser and cannot be
+              displayed.
+            </Typography>
+          )}
+        </>
+      )}
 
-        {user.signedIn && !election.userIsEligible && (
-          <>
-            <img
+      {user.signedIn && !election.userIsEligible && (
+        <>
+          <div className={layout.center}>
+            <Image
               src={cherryNoMessages}
               alt={"A disappointed woman pointing at her phone"}
               className={layout.smallVector}
+              height={200}
+              width={200}
+              objectFit={"contain"}
             />
-            <Typography paragraph variant={"body1"} className={layout.spaced}>
-              You're not eligible to vote in this election
-            </Typography>
-          </>
-        )}
+          </div>
+          <Typography
+            paragraph
+            variant={"body1"}
+            className={layout.spaced}
+            align={"center"}
+          >
+            You're not eligible to vote in this election
+          </Typography>
+        </>
+      )}
 
-        {!user.signedIn && (
-          <>
-            <img
+      {!user.signedIn && (
+        <>
+          <div className={layout.center}>
+            <Image
               src={gingerCatAccessBlocked}
               alt={"A sad cat in front of a lock"}
+              height={200}
+              width={200}
+              objectFit={"contain"}
               className={layout.smallVector}
             />
-            <Typography gutterBottom paragraph variant={"body1"}>
-              You need to be signed in to vote for this election
-            </Typography>
-            <Button variant={"contained"} onClick={signIn} color={"primary"}>
+          </div>
+
+          <Typography gutterBottom paragraph variant={"body1"} align={"center"}>
+            You need to be signed in to vote for this election
+          </Typography>
+          <div className={layout.center}>
+            <Button
+              variant={"contained"}
+              onClick={signIn}
+              color={"primary"}
+              startIcon={<LockOpenIcon />}
+            >
               Sign In
             </Button>
-          </>
-        )}
-      </main>
-    </div>
+          </div>
+        </>
+      )}
+    </Container>
   );
 }

@@ -65,11 +65,7 @@
     width: 800px;
   }
 }
-@media (min-width: 600px) {
-  .wideTextContainer {
-    min-width: 550px;
-  }
-}
+
 
 .deleteButton {
   margin: 1rem;
@@ -104,4 +100,12 @@
   min-height: 70vh;
   padding-top: 40px;
   padding-bottom: 40px;
+}
+
+.contentContainer {
+  margin: 2rem 1rem;
+}
+
+.normalLine {
+  line-height: 1rem;
 }

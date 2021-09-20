@@ -41,7 +41,11 @@ const tabs = [
   //
 ];
 
-const CandidateTabBar = ({ isManager, active, electionCompleted }) => {
+export default function CandidateTabBar({
+  isManager,
+  active,
+  electionCompleted,
+}) {
   const router = useRouter();
   const { url, candidateUrl } = router.query;
 
@@ -77,6 +81,7 @@ const CandidateTabBar = ({ isManager, active, electionCompleted }) => {
       indicatorColor="primary"
       textColor="primary"
       className={styles.tabs}
+      centered
     >
       {adjustedTabs.map((tab) => (
         <Tab
@@ -88,6 +93,4 @@ const CandidateTabBar = ({ isManager, active, electionCompleted }) => {
       ))}
     </Tabs>
   );
-};
-
-export default CandidateTabBar;
+}

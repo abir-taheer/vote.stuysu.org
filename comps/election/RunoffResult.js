@@ -2,7 +2,6 @@ import { gql } from "@apollo/client/core";
 import { useQuery } from "@apollo/client";
 import {
   Avatar,
-  CircularProgress,
   ListItem,
   ListItemAvatar,
   ListItemSecondaryAction,
@@ -20,6 +19,12 @@ import IconButton from "@material-ui/core/IconButton";
 import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
 import useWindowSize from "react-use/lib/useWindowSize";
 import capitalize from "@material-ui/core/utils/capitalize";
+import CenteredCircularProgress from "../shared/CenteredCircularProgress";
+import Image from "next/image";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import { ArrowForwardIos, ArrowLeft, ArrowRight } from "@material-ui/icons";
+import ArrowBackIos from "@material-ui/icons/ArrowBackIos";
 
 const QUERY = gql`
   query ($id: ObjectId!) {
@@ -108,24 +113,36 @@ const RunoffResult = ({ id, election }) => {
   }, [data, round, confetti]);
 
   if (loading) {
-    return <CircularProgress />;
+    return <CenteredCircularProgress />;
   }
 
   const results = data?.electionResults;
+
   if (!results) {
-    return <Typography>There was an error loading the results</Typography>;
+    return (
+      <Typography align={"center"} variant={"body1"}>
+        There was an error loading the results
+      </Typography>
+    );
   }
 
   if (!results.totalVotes) {
     return (
       <>
-        <img
-          src={brokenGlass}
-          alt={"A person standing in front of a broken mirror"}
-          className={layout.largeVector}
-        />
+        <div className={layout.center}>
+          <Image
+            src={brokenGlass}
+            alt={"A person standing in front of a broken mirror"}
+            className={layout.largeVector}
+            height={300}
+            width={300}
+            objectFit={"contain"}
+          />
+        </div>
 
-        <Typography>There aren't any votes</Typography>
+        <Typography variant={"body1"} align={"center"}>
+          There aren't any votes
+        </Typography>
       </>
     );
   }
@@ -147,26 +164,76 @@ const RunoffResult = ({ id, election }) => {
 
   return (
     <>
-      <div className={layout.wideTextContainer}>
-        <Typography>
+      <Container maxWidth={"sm"}>
+        <Typography variant={"body1"}>
           Election Type: <b>{capitalize(election.type)}</b>
         </Typography>
-        <Typography>
+        <Typography variant={"body1"}>
           Graduating Class{election.allowedGradYears.length > 1 && "es"}:{" "}
           <b>{election.allowedGradYears.join(", ")}</b>
         </Typography>
-        <Typography>
+        <Typography variant={"body1"}>
           Number of Eligible Voters: <b>{results.numEligibleVoters}</b>
         </Typography>
-        <Typography>
+        <Typography variant={"body1"}>
           Total Votes: <b>{results.totalVotes}</b>
         </Typography>
-        <Typography>
+        <Typography variant={"body1"}>
           Voter Turnout: <b>{turnout}%</b>
         </Typography>
-      </div>
-      <Typography variant={"h2"}>Round {round}</Typography>
-      <Typography variant={"body2"}>
+      </Container>
+
+      <Grid
+        container
+        alignContent={"center"}
+        justifyContent={"center"}
+        spacing={3}
+      >
+        <Grid item>
+          <IconButton
+            color={"primary"}
+            disabled={round === 1}
+            onClick={() => setRound(round - 1)}
+          >
+            <ArrowBackIos />
+          </IconButton>
+        </Grid>
+        <Grid item>
+          <Typography
+            variant={"h2"}
+            align={"center"}
+            className={layout.normalLine}
+          >
+            Round{" "}
+            <Typography
+              variant={"inherit"}
+              component={"span"}
+              color={"secondary"}
+            >
+              {round}
+            </Typography>{" "}
+            of{" "}
+            <Typography
+              variant={"inherit"}
+              component={"span"}
+              color={"secondary"}
+            >
+              {results.rounds.length}
+            </Typography>
+          </Typography>
+        </Grid>
+        <Grid item>
+          <IconButton
+            color={"primary"}
+            disabled={round >= results.rounds.length}
+            onClick={() => setRound(round + 1)}
+          >
+            <ArrowForwardIos />
+          </IconButton>
+        </Grid>
+      </Grid>
+
+      <Typography variant={"body2"} align={"center"}>
         {currentRound.numVotes} votes this round
       </Typography>
 
@@ -188,46 +255,48 @@ const RunoffResult = ({ id, election }) => {
         />
       )}
 
-      <List>
-        {currentRound.results.map(
-          ({ candidate, percentage, numVotes, eliminated }) => {
-            return (
-              <ListItem key={round + "-" + candidate.id} button>
-                <ListItemAvatar>
-                  <Avatar
-                    alt={candidate.picture.alt}
-                    src={candidate.picture.resource.url}
+      <Container maxWidth={"sm"}>
+        <List>
+          {currentRound.results.map(
+            ({ candidate, percentage, numVotes, eliminated }) => {
+              return (
+                <ListItem key={round + "-" + candidate.id} button>
+                  <ListItemAvatar>
+                    <Avatar
+                      alt={candidate.picture.alt}
+                      src={candidate.picture.resource.url}
+                    />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={candidate.name}
+                    secondary={`${numVotes} Votes - ${percentage}%`}
                   />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={candidate.name}
-                  secondary={`${numVotes} Votes - ${percentage}%`}
-                />
-                {eliminated && (
-                  <ListItemSecondaryAction>
-                    <IconButton disabled>
-                      <HighlightOffRoundedIcon style={{ color: "red" }} />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                )}
-              </ListItem>
-            );
-          }
-        )}
-      </List>
-      <br />
-      <Pagination
-        page={round}
-        count={results.rounds.length}
-        onChange={(e, p) => setRound(p)}
-      />
+                  {eliminated && (
+                    <ListItemSecondaryAction>
+                      <IconButton disabled>
+                        <HighlightOffRoundedIcon style={{ color: "red" }} />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  )}
+                </ListItem>
+              );
+            }
+          )}
+        </List>
 
-      <br />
-      {round === results.rounds.length && (
-        <Typography color={"secondary"} variant={"h3"}>
-          Winner: {results.winner ? results.winner.name : "N/A"}
+        <br />
+        <Typography variant={"body1"} align={"center"} color={"textSecondary"}>
+          Round
         </Typography>
-      )}
+        <div className={layout.center}>
+          <Pagination page={round} count={results.rounds.length} />
+        </div>
+        {round === results.rounds.length && (
+          <Typography color={"secondary"} variant={"h3"}>
+            Winner: {results.winner ? results.winner.name : "N/A"}
+          </Typography>
+        )}
+      </Container>
     </>
   );
 };

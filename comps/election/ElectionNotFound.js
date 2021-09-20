@@ -5,12 +5,15 @@ import Typography from "@material-ui/core/Typography";
 import Link from "next/link";
 import Button from "@material-ui/core/Button";
 import HowToVote from "@material-ui/icons/HowToVote";
+import Image from "next/image";
 
 const ElectionNotFound = ({ href }) => {
   return (
     <div className={layout.centerContainer}>
-      <img
+      <Image
         src={searching}
+        height={304}
+        width={400}
         className={layout.largeVector}
         alt={"Someone with a magnifying glass looking at the ground"}
       />

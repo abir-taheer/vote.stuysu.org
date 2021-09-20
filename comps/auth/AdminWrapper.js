@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import entryDenied from "../../img/entry-denied.svg";
 import Link from "@material-ui/core/Link";
 import Image from "next/image";
+import CenteredCircularProgress from "../shared/CenteredCircularProgress";
 
 // Any url prefixed with /admin will be handled by this wrapper
 export default function AdminWrapper({ children }) {
@@ -47,9 +48,7 @@ export default function AdminWrapper({ children }) {
             }
           />
         </Head>
-        <div className={layout.center}>
-          <CircularProgress />
-        </div>
+        <CenteredCircularProgress />
       </>
     );
   }

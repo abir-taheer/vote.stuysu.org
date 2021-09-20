@@ -12,6 +12,8 @@ import LoadingScreen from "../../../comps/shared/LoadingScreen";
 import RunoffResult from "../../../comps/election/RunoffResult";
 import cat from "./../../../img/ginger-cat-access-blocked.png";
 import withApollo from "../../../comps/apollo/withApollo";
+import Container from "@material-ui/core/Container";
+import Image from "next/image";
 
 const QUERY = gql`
   query ($url: NonEmptyString!, $isReady: Boolean!) {
@@ -61,7 +63,7 @@ function Result() {
   const canShowResults = user.adminPrivileges || election.completed;
 
   return (
-    <div className={layout.container}>
+    <Container maxWidth={"md"} className={layout.page}>
       <Head>
         <title>Results - {election.name} | StuyBOE Voting Site</title>
         <meta
@@ -92,38 +94,42 @@ function Result() {
         />
       </Head>
 
-      <main className={layout.main}>
-        <BackButton
-          href={"/election"}
-          variant={"outlined"}
-          text={"Back To Elections"}
-        />
-        <Typography variant={"h1"} className={layout.title}>
-          {election.name}
-        </Typography>
+      <BackButton
+        href={"/election"}
+        variant={"outlined"}
+        text={"Back To Elections"}
+      />
 
-        <ElectionTabBar completed={election.completed} />
+      <Typography variant={"h1"} className={layout.title} align={"center"}>
+        {election.name}
+      </Typography>
 
-        {canShowResults ? (
-          <>
-            {election.type === "runoff" && (
-              <RunoffResult id={election.id} election={election} />
-            )}
-          </>
-        ) : (
-          <>
-            <img
+      <ElectionTabBar completed={election.completed} />
+
+      {canShowResults ? (
+        <>
+          {election.type === "runoff" && (
+            <RunoffResult id={election.id} election={election} />
+          )}
+        </>
+      ) : (
+        <>
+          <div className={layout.center}>
+            <Image
               src={cat}
               alt={"A cat in front of a computer"}
               className={layout.largeVector}
+              height={200}
+              width={200}
+              objectFit={"contain"}
             />
-            <Typography>
-              Results aren't available for this election yet
-            </Typography>
-          </>
-        )}
-      </main>
-    </div>
+          </div>
+          <Typography align={"center"} variant={"body1"}>
+            Results aren't available for this election yet
+          </Typography>
+        </>
+      )}
+    </Container>
   );
 }
 

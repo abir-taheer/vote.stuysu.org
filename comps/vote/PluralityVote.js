@@ -105,16 +105,18 @@ const PluralityVote = ({ election, candidates, refetch }) => {
         <FormHelperText>
           Voting will end in {formatDuration(duration)}
         </FormHelperText>
-        <Button
-          variant="outlined"
-          color="primary"
-          className={styles.submit}
-          disabled={!candidateId || loading}
-          onClick={handleSubmit}
-        >
-          Submit Vote
-        </Button>
       </FormControl>
+
+      <Button
+        fullWidth
+        variant="outlined"
+        color="primary"
+        className={styles.submit}
+        disabled={!candidateId || loading}
+        onClick={handleSubmit}
+      >
+        Submit Vote
+      </Button>
     </form>
   );
 };
