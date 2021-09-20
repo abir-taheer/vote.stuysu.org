@@ -1,23 +1,32 @@
-import { withApollo as createWithApollo } from "next-apollo";
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { PUBLIC_URL } from "../../constants";
+import withApollo from "next-with-apollo";
 
 const uri = process.env.NEXT_PUBLIC_API_URL || PUBLIC_URL + "/api/graphql";
 
-const createClient = (ctx) => {
-  const cache = new InMemoryCache({});
-  const authorization =
-    ctx?.req?.cookies["auth-jwt"] ||
-    globalThis.localStorage?.getItem("auth-jwt") ||
-    "";
+export default withApollo(
+  ({ ctx }) => {
+    const cache = new InMemoryCache({});
+    const authorization =
+      ctx?.req?.cookies["auth-jwt"] ||
+      globalThis.localStorage?.getItem("auth-jwt") ||
+      "";
 
-  return new ApolloClient({
-    cache,
-    uri,
-    headers: {
-      authorization,
+    return new ApolloClient({
+      cache,
+      uri,
+      headers: {
+        authorization,
+      },
+    });
+  },
+  {
+    render: ({ Page, props }) => {
+      return (
+        <ApolloProvider client={props.apollo}>
+          <Page {...props} />
+        </ApolloProvider>
+      );
     },
-  });
-};
-
-export default createWithApollo(createClient);
+  }
+);

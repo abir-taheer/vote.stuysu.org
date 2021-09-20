@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { gql, useQuery } from "@apollo/client";
-import withApollo from "../../../comps/apollo/withApollo";
 import layout from "../../../styles/layout.module.css";
 import Error404 from "../../404";
 import Typography from "@material-ui/core/Typography";
@@ -14,6 +13,8 @@ import Head from "next/head";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
 import ElectionAnnouncementCard from "../../../comps/election/ElectionAnnouncementCard";
 import Container from "@material-ui/core/Container";
+import { getDataFromTree } from "@apollo/client/react/ssr";
+import withApollo from "../../../comps/apollo/withApollo";
 
 const ELECTION_QUERY = gql`
   query ($url: NonEmptyString!) {
@@ -49,12 +50,14 @@ const ELECTION_QUERY = gql`
   }
 `;
 
-const Election = () => {
+const ElectionCandidates = () => {
   const router = useRouter();
-  const { url } = router.query;
+  const url = router.query.url || "";
   const { data, loading, refetch } = useQuery(ELECTION_QUERY, {
     variables: { url },
+    skip: !url,
   });
+
   const { getReadableDate, now } = useFormatDate(true, 10000);
 
   // Refetch every 10 seconds so the user knows exactly when the election ends
@@ -179,4 +182,4 @@ const Election = () => {
   );
 };
 
-export default withApollo({ ssr: true })(Election);
+export default withApollo(ElectionCandidates, { getDataFromTree });

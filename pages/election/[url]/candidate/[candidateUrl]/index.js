@@ -11,6 +11,7 @@ import CandidateTabBar from "../../../../../comps/candidate/CandidateTabBar";
 import LoadingScreen from "../../../../../comps/shared/LoadingScreen";
 import Container from "@material-ui/core/Container";
 import Image from "next/image";
+import { getDataFromTree } from "@apollo/client/react/ssr";
 
 const QUERY = gql`
   query ($electionUrl: NonEmptyString!, $candidateUrl: NonEmptyString!) {
@@ -183,4 +184,4 @@ function CandidatePage() {
   );
 }
 
-export default withApollo({ ssr: true })(CandidatePage);
+export default withApollo(CandidatePage, { getDataFromTree });

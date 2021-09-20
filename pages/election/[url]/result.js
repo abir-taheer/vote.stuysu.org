@@ -11,13 +11,14 @@ import ElectionNotFound from "../../../comps/election/ElectionNotFound";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
 import RunoffResult from "../../../comps/election/RunoffResult";
 import cat from "./../../../img/ginger-cat-access-blocked.png";
-import withApollo from "../../../comps/apollo/withApollo";
 import Container from "@material-ui/core/Container";
 import Image from "next/image";
+import withApollo from "../../../comps/apollo/withApollo";
+import { getDataFromTree } from "@apollo/client/react/ssr";
 
 const QUERY = gql`
-  query ($url: NonEmptyString!, $isReady: Boolean!) {
-    electionByUrl(url: $url) @include(if: $isReady) {
+  query ($url: NonEmptyString!) {
+    electionByUrl(url: $url) {
       id
       type
       name
@@ -43,15 +44,15 @@ const QUERY = gql`
 function Result() {
   const router = useRouter();
   const { url } = router.query;
-  const isReady = !!url;
   const { data, refetch, loading } = useQuery(QUERY, {
-    variables: { url, isReady },
+    variables: { url },
+    skip: !url,
   });
   const user = useContext(UserContext);
 
   // Update the election open form every 5 seconds
 
-  if (!isReady || loading) {
+  if (!url || loading) {
     return <LoadingScreen />;
   }
   const election = data?.electionByUrl;
@@ -133,4 +134,4 @@ function Result() {
   );
 }
 
-export default withApollo({ ssr: true })(Result);
+export default withApollo(Result, { getDataFromTree });

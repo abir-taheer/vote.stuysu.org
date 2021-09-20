@@ -22,6 +22,8 @@ import RunoffVote from "../../../comps/vote/RunoffVote";
 import Container from "@material-ui/core/Container";
 import Image from "next/image";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
+import { getDataFromTree } from "@apollo/client/react/ssr";
+import withApollo from "../../../comps/apollo/withApollo";
 
 const QUERY = gql`
   query ($url: NonEmptyString!) {
@@ -54,7 +56,7 @@ const QUERY = gql`
   }
 `;
 
-export default function Vote() {
+function Vote() {
   const router = useRouter();
   const { url } = router.query;
   const { data, refetch, loading } = useQuery(QUERY, { variables: { url } });
@@ -282,3 +284,5 @@ export default function Vote() {
     </Container>
   );
 }
+
+export default withApollo(Vote, { getDataFromTree });

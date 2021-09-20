@@ -14,6 +14,7 @@ import CandidateCard from "../../../../comps/candidate/CandidateCard";
 import withApollo from "../../../../comps/apollo/withApollo";
 import LoadingScreen from "../../../../comps/shared/LoadingScreen";
 import Container from "@material-ui/core/Container";
+import { getDataFromTree } from "@apollo/client/react/ssr";
 
 const QUERY = gql`
   query ($url: NonEmptyString!) {
@@ -151,4 +152,4 @@ function ElectionCandidates() {
   );
 }
 
-export default withApollo({ ssr: true })(ElectionCandidates);
+export default withApollo(ElectionCandidates, { getDataFromTree });

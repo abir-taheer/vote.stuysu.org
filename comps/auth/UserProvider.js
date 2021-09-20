@@ -1,9 +1,9 @@
 import UserContext from "./UserContext";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import confirmDialog from "../dialog/confirmDialog";
-import withApollo from "../apollo/withApollo";
 import { useEffect, useState } from "react";
 import DateContext from "../shared/DateContext";
+import withApollo from "../apollo/withApollo";
 
 const QUERY = gql`
   query {
@@ -109,4 +109,4 @@ const UserProvider = ({ children }) => {
   );
 };
 
-export default withApollo({ ssr: true })(UserProvider);
+export default withApollo(UserProvider);

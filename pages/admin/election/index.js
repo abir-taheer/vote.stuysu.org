@@ -147,4 +147,4 @@ const AdminElections = () => {
   );
 };
 
-export default withApollo({ ssr: false })(AdminElections);
+export default AdminElections;

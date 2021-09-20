@@ -14,6 +14,7 @@ import MomentUtils from "@date-io/moment";
 import { useEffect } from "react";
 import ReactGA from "react-ga";
 import AdminWrapper from "../comps/auth/AdminWrapper";
+import withApollo from "../comps/apollo/withApollo";
 
 ReactGA.initialize(process.env.NEXT_APP_GTAG_ID || "UA-75064374-8");
 
@@ -57,4 +58,4 @@ function App({ Component, pageProps }) {
   );
 }
 
-export default App;
+export default withApollo(App);

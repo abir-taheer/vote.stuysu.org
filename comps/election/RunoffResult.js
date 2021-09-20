@@ -208,7 +208,7 @@ const RunoffResult = ({ id, election }) => {
             <Typography
               variant={"inherit"}
               component={"span"}
-              color={"secondary"}
+              color={"textSecondary"}
             >
               {round}
             </Typography>{" "}
@@ -216,7 +216,7 @@ const RunoffResult = ({ id, election }) => {
             <Typography
               variant={"inherit"}
               component={"span"}
-              color={"secondary"}
+              color={"textSecondary"}
             >
               {results.rounds.length}
             </Typography>
