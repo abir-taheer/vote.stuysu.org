@@ -3,7 +3,7 @@ import PictureUploadDialog, {
   promptPicture,
 } from "../shared/PictureUploadDialog";
 import Button from "@material-ui/core/Button";
-import { gql, useApolloClient, useMutation } from "@apollo/client";
+import { gql, useApolloClient } from "@apollo/client";
 import alertDialog from "../dialog/alertDialog";
 import withApollo from "../apollo/withApollo";
 import AddAPhoto from "@material-ui/icons/AddAPhoto";

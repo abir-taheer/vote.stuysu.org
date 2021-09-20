@@ -1,21 +1,8 @@
-import { gql, useMutation } from "@apollo/client";
 import { Editor } from "@tinymce/tinymce-react";
 import { useSnackbar } from "notistack";
-
-const UPLOAD_MUTATION = gql`
-  mutation ($file: Upload!, $alt: NonEmptyString!) {
-    uploadPicture(alt: $alt, file: $file) {
-      id
-      alt
-      resource {
-        url
-      }
-    }
-  }
-`;
+import uploadPicture from "../../utils/upload/uploadPicture";
 
 const TinyEditor = ({ value, setValue, className, disabled }) => {
-  const [uploadPicture] = useMutation(UPLOAD_MUTATION);
   const { enqueueSnackbar } = useSnackbar();
 
   return (
@@ -42,13 +29,8 @@ const TinyEditor = ({ value, setValue, className, disabled }) => {
           automatic_uploads: true,
           browser_spellcheck: true,
           images_upload_handler: (file, success, failure) => {
-            uploadPicture({
-              variables: {
-                file: file.blob(),
-                alt: "Upload for platform field",
-              },
-            })
-              .then(({ data }) => success(data?.uploadPicture?.resource?.url))
+            uploadPicture(file.blob())
+              .then(({ data }) => success(data?.url))
               .catch(failure);
           },
           images_upload_url: false,

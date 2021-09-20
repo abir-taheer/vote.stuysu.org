@@ -97,8 +97,6 @@ export default gql`
     votePlurality(electionId: ObjectId!, candidateId: ObjectId!): PluralityVote!
     voteRunoff(electionId: ObjectId!, choices: [ObjectId!]!): RunoffVote!
 
-    uploadPicture(alt: NonEmptyString!, file: Upload!): Picture!
-
     syncUsersWithStuyActivities: StuyActivitiesSync!
   }
 `;

@@ -14,6 +14,7 @@ import TextField from "@material-ui/core/TextField";
 import Search from "@material-ui/icons/Search";
 import { useRouter } from "next/router";
 import Container from "@material-ui/core/Container";
+import CenteredCircularProgress from "../../../comps/shared/CenteredCircularProgress";
 
 const ELECTIONS_QUERY = gql`
   query (
@@ -115,7 +116,7 @@ const AdminElections = () => {
         />
       </div>
 
-      {loading && <CircularProgress />}
+      {loading && <CenteredCircularProgress />}
       {!loading && (
         <>
           <Typography variant={"h2"} align={"center"}>

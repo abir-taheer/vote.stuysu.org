@@ -5,7 +5,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import PictureUploadDialog, {
   promptPicture,
 } from "../shared/PictureUploadDialog";
@@ -18,6 +18,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import Chip from "@material-ui/core/Chip";
 import TinyEditor from "../shared/TinyEditor";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import uploadPicture from "../../utils/upload/uploadPicture";
 
 function getCandidateUrl(val) {
   return val
@@ -27,18 +28,6 @@ function getCandidateUrl(val) {
     .map((a) => a.split(/ +/).filter(Boolean)[0])
     .join("-");
 }
-
-const UPLOAD_MUTATION = gql`
-  mutation ($alt: NonEmptyString!, $file: Upload!) {
-    uploadPicture(alt: $alt, file: $file) {
-      id
-      alt
-      resource {
-        url
-      }
-    }
-  }
-`;
 
 const QUERY_USERS = gql`
   query ($query: String!) {
@@ -65,6 +54,7 @@ const CandidateForm = ({
   onCancel = () => {},
 }) => {
   const [userQuery, setUserQuery] = useState("");
+  const [uploading, setUploading] = useState(false);
   const { data, loading: loadingUsers } = useQuery(QUERY_USERS, {
     variables: { query: userQuery },
   });
@@ -105,23 +95,29 @@ const CandidateForm = ({
     validateOnChange: false,
   });
 
-  const [upload, { loading: loadingUpload }] = useMutation(UPLOAD_MUTATION);
-
-  async function uploadPicture() {
+  async function upload() {
     const picture = await promptPicture();
-    if (picture) {
-      const { data, error } = await upload({
-        variables: { alt: picture.alt, file: picture.file },
-      });
 
-      if (error) {
-        await alertDialog({
-          title: "Error uploading picture",
-          body: error.message,
+    if (picture) {
+      const { file, alt } = picture;
+
+      setUploading(true);
+
+      try {
+        const { data } = await uploadPicture(file, alt);
+
+        await setFieldValue("picture", {
+          id: data.id,
+          alt,
+          resource: {
+            url: data.url,
+          },
         });
-      } else {
-        await setFieldValue("picture", data.uploadPicture);
+      } catch (e) {
+        alertDialog({ title: "Error Uploading Picture", body: e.message });
       }
+
+      setUploading(false);
     }
   }
 
@@ -171,9 +167,9 @@ const CandidateForm = ({
             <Button
               variant={"outlined"}
               startIcon={<AddAPhoto />}
-              onClick={uploadPicture}
+              onClick={upload}
               className={styles.uploadButton}
-              disabled={disabled || isSubmitting || loadingUpload}
+              disabled={disabled || isSubmitting || uploading}
             >
               Upload Image
             </Button>
