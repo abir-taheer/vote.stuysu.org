@@ -9,12 +9,14 @@ import Delete from "@material-ui/icons/Delete";
 import Create from "@material-ui/icons/Create";
 import { useState } from "react";
 import UserForm from "../../../../comps/user/UserForm";
-import { CircularProgress } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import alertDialog from "../../../../comps/dialog/alertDialog";
 import { useSnackbar } from "notistack";
 import BackButton from "../../../../comps/shared/BackButton";
 import UserNotFound from "../../../../comps/user/UserNotFound";
 import confirmDialog from "../../../../comps/dialog/confirmDialog";
+import Container from "@material-ui/core/Container";
+import CenteredCircularProgress from "../../../../comps/shared/CenteredCircularProgress";
 
 const QUERY = gql`
   query ($id: ObjectId!, $pageReady: Boolean!) {
@@ -85,14 +87,12 @@ const EditUser = () => {
 
   if (pageReady && !loading && !user) {
     return (
-      <div className={layout.container}>
-        <main className={layout.main}>
-          <UserNotFound
-            href={"/admin/user"}
-            buttonLabel={"Back To Admin Panel"}
-          />
-        </main>
-      </div>
+      <Container maxWidth={"xs"} className={layout.page}>
+        <UserNotFound
+          href={"/admin/user"}
+          buttonLabel={"Back To Admin Panel"}
+        />
+      </Container>
     );
   }
 
@@ -146,51 +146,53 @@ const EditUser = () => {
   };
 
   return (
-    <div className={layout.container}>
-      <main className={layout.main}>
-        <BackButton href={"/admin/user"} text={"Back To Users"} />
-        <Typography variant={"h1"}>Edit User | Admin Panel</Typography>
+    <Container maxWidth={"md"} className={layout.page}>
+      <BackButton href={"/admin/user"} text={"Back To Users"} />
+      <Typography variant={"h1"} align={"center"}>
+        Edit User | Admin Panel
+      </Typography>
 
-        <AdminTabBar />
-        {!editing && (
-          <div>
-            <Button
-              startIcon={<Create />}
-              variant={"outlined"}
-              className={layout.spaced}
-              color={"secondary"}
-              onClick={() => setEditing(true)}
-            >
-              Edit User
-            </Button>
-            <Button
-              startIcon={<Delete />}
-              variant={"outlined"}
-              className={layout.deleteButton}
-              disabled={!data?.userIsDeletable || loadingDeleteUser}
-              onClick={handleDelete}
-            >
-              Delete User
-            </Button>
-          </div>
-        )}
+      <AdminTabBar />
+      {!editing && (
+        <div className={layout.center}>
+          <Button
+            startIcon={<Create />}
+            variant={"outlined"}
+            className={layout.spaced}
+            color={"secondary"}
+            onClick={() => setEditing(true)}
+          >
+            Edit User
+          </Button>
+          <Button
+            startIcon={<Delete />}
+            variant={"outlined"}
+            className={layout.deleteButton}
+            disabled={!data?.userIsDeletable || loadingDeleteUser}
+            onClick={handleDelete}
+          >
+            Delete User
+          </Button>
+        </div>
+      )}
 
-        {loading && <CircularProgress />}
-        {!loading && (
-          <UserForm
-            initialValues={user}
-            cancelLabel={"Cancel"}
-            showCancelButton
-            disabled={!editing}
-            onCancel={({ resetForm }) => {
-              resetForm();
-              setEditing(false);
-            }}
-            onSubmit={handleSubmit}
-          />
-        )}
-      </main>
-    </div>
+      {loading && <CenteredCircularProgress />}
+
+      {!loading && (
+        <UserForm
+          initialValues={user}
+          cancelLabel={"Cancel"}
+          showCancelButton
+          disabled={!editing}
+          onCancel={({ resetForm }) => {
+            resetForm();
+            setEditing(false);
+          }}
+          onSubmit={handleSubmit}
+          submitLabel={"Save"}
+        />
+      )}
+    </Container>
   );
 };
 

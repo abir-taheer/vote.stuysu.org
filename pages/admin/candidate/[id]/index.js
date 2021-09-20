@@ -1,4 +1,3 @@
-import AdminRequired from "../../../../comps/auth/AdminRequired";
 import layout from "../../../../styles/layout.module.css";
 import { useRouter } from "next/router";
 import { gql, useMutation, useQuery } from "@apollo/client";
@@ -15,6 +14,8 @@ import Button from "@material-ui/core/Button";
 import Create from "@material-ui/icons/Create";
 import alertDialog from "../../../../comps/dialog/alertDialog";
 import { useSnackbar } from "notistack";
+import Container from "@material-ui/core/Container";
+import BackButton from "../../../../comps/shared/BackButton";
 
 const QUERY = gql`
   query ($id: ObjectId!) {
@@ -136,76 +137,80 @@ const ManageCandidate = () => {
   };
 
   return (
-    <AdminRequired>
-      <div className={layout.container}>
-        <main className={layout.main}>
-          <Typography variant={"h1"}>Manage Candidate | Admin Panel</Typography>
-          <AdminTabBar />
+    <Container maxWidth={"md"} className={layout.page}>
+      {election && (
+        <BackButton
+          href={"/admin/election/" + election?.id + "/candidate"}
+          text={election?.name + " Candidates"}
+        />
+      )}
 
-          {loading && <CircularProgress />}
+      <Typography variant={"h1"} align={"center"}>
+        Manage Candidate | Admin Panel
+      </Typography>
 
-          {!loading && !candidate && (
-            <ElectionNotFound href={"/admin/election"} />
-          )}
+      <AdminTabBar />
 
-          {!loading && !!candidate && (
-            <>
-              <Typography variant={"h2"} color={"secondary"}>
-                {candidate.name}
-              </Typography>
-              <Typography variant={"body1"}>
-                Candidate for{" "}
-                <Link href={"/admin/election/" + election.id}>
-                  <StyledLink color={"secondary"} className={layout.link}>
-                    {election.name}
-                  </StyledLink>
-                </Link>
-              </Typography>
+      {loading && <CircularProgress />}
 
-              <AdminCandidateTabBar />
+      {!loading && !candidate && <ElectionNotFound href={"/admin/election"} />}
 
-              {!isEditing && (
-                <div>
-                  <Button
-                    className={layout.spaced}
-                    variant={"outlined"}
-                    color={"secondary"}
-                    startIcon={<Create />}
-                    onClick={() => setIsEditing(true)}
-                  >
-                    Edit Candidate
-                  </Button>
+      {!loading && !!candidate && (
+        <>
+          <Typography variant={"h2"} color={"secondary"} align={"center"}>
+            {candidate.name}
+          </Typography>
+          <Typography variant={"body1"} align={"center"}>
+            Candidate for{" "}
+            <Link href={"/admin/election/" + election.id} passHref>
+              <StyledLink color={"secondary"} className={layout.link}>
+                {election.name}
+              </StyledLink>
+            </Link>
+          </Typography>
 
-                  {candidate.active && (
-                    <Button className={layout.spaced} variant={"outlined"}>
-                      Suspend Candidate
-                    </Button>
-                  )}
+          <AdminCandidateTabBar />
 
-                  <Button className={layout.spaced} variant={"outlined"}>
-                    Delete Candidate
-                  </Button>
-                </div>
+          {!isEditing && (
+            <div className={layout.center}>
+              <Button
+                className={layout.spaced}
+                variant={"outlined"}
+                color={"secondary"}
+                startIcon={<Create />}
+                onClick={() => setIsEditing(true)}
+              >
+                Edit Candidate
+              </Button>
+
+              {candidate.active && (
+                <Button className={layout.spaced} variant={"outlined"}>
+                  Suspend Candidate
+                </Button>
               )}
-              <br />
 
-              <CandidateForm
-                election={election}
-                initialValues={candidate}
-                submitLabel={"Save"}
-                showCancelButton
-                onCancel={({ resetForm }) => {
-                  resetForm();
-                  setIsEditing(false);
-                }}
-                disabled={!isEditing}
-                onSubmit={handleSave}
-              />
-            </>
+              <Button className={layout.spaced} variant={"outlined"}>
+                Delete Candidate
+              </Button>
+            </div>
           )}
-        </main>
-      </div>
-    </AdminRequired>
+          <br />
+
+          <CandidateForm
+            election={election}
+            initialValues={candidate}
+            submitLabel={"Save"}
+            showCancelButton
+            onCancel={({ resetForm }) => {
+              resetForm();
+              setIsEditing(false);
+            }}
+            disabled={!isEditing}
+            onSubmit={handleSave}
+          />
+        </>
+      )}
+    </Container>
   );
 };
 

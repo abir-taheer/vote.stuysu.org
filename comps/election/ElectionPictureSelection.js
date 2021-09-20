@@ -12,6 +12,7 @@ import styles from "./ElectionPictureSelection.module.css";
 import FormLabel from "@material-ui/core/FormLabel";
 import Clear from "@material-ui/icons/Clear";
 import Typography from "@material-ui/core/Typography";
+import uploadPicture from "../../utils/upload/uploadPicture";
 
 const PICTURE_QUERY = gql`
   query ($id: ObjectId!) {
@@ -25,14 +26,6 @@ const PICTURE_QUERY = gql`
   }
 `;
 
-const UPLOAD_MUTATION = gql`
-  mutation ($alt: NonEmptyString!, $file: Upload!) {
-    uploadPicture(alt: $alt, file: $file) {
-      id
-    }
-  }
-`;
-
 const ElectionPictureSelection = ({
   value,
   setValue,
@@ -42,7 +35,6 @@ const ElectionPictureSelection = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [picture, setPicture] = useState(null);
-  const [upload] = useMutation(UPLOAD_MUTATION);
   const client = useApolloClient();
 
   useEffect(async () => {
@@ -60,15 +52,16 @@ const ElectionPictureSelection = ({
     }
   }, [value]);
 
-  const uploadPicture = async () => {
+  const handleUpload = async () => {
     const pictureInput = await promptPicture();
 
     if (pictureInput) {
       setLoading(true);
+      const { file, alt } = pictureInput;
       try {
-        const { data } = await upload({ variables: pictureInput });
+        const { data } = await uploadPicture(file, alt);
 
-        setValue(data.uploadPicture.id);
+        setValue(data.id);
       } catch (er) {
         await alertDialog({ title: "There was an error", body: er.message });
       }
@@ -96,7 +89,7 @@ const ElectionPictureSelection = ({
       {!loading && !value && (
         <Button
           startIcon={<AddAPhoto />}
-          onClick={uploadPicture}
+          onClick={handleUpload}
           variant={"outlined"}
           color={"primary"}
           className={styles.button}

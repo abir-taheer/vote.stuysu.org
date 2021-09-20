@@ -40,6 +40,8 @@ export default function Home() {
           src={voting}
           alt={"People representing voting"}
           className={layout.largeVector}
+          height={600}
+          width={800}
         />
         {!user.signedIn && (
           <div className={layout.flexCenter}>

@@ -1,21 +1,3 @@
-.container {
-  min-height: 80vh;
-  padding: 0 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-}
-
 .largeVector {
   max-width: 90%;
   max-height: 350px;
@@ -25,7 +7,7 @@
 
 .smallVector {
   max-width: 70%;
-  max-height: 200px;
+  max-height: 200px !important;
   object-fit: contain;
   text-align: center;
 }
@@ -42,18 +24,19 @@
   cursor: pointer;
 }
 
-@media (min-width: 1400px) {
-  .main {
-    padding: 5rem 1rem;
-  }
-
-  .grid {
-    width: 1200px;
+@media (max-width: 1200px) {
+  .page {
+    padding: 10px 15px;
   }
 }
 
 .centerContainer {
   text-align: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
 }
 
 .voteId {
@@ -99,8 +82,6 @@
 }
 
 .scrollableListContainer {
-  max-width: 95vw;
-  width: 500px;
   height: 300px;
   border: 1px solid grey;
   border-radius: 10px;
@@ -117,4 +98,10 @@
 .flexCenter {
   display: flex;
   justify-content: center;
+}
+
+.page {
+  min-height: 70vh;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }

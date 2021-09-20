@@ -136,7 +136,7 @@ const ElectionForm = ({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form onSubmit={handleSubmit}>
       <FormGroup row>
         <FormControl component="fieldset" className={styles.formControl}>
           <FormLabel component="legend">Election Name</FormLabel>
@@ -171,7 +171,6 @@ const ElectionForm = ({
           />
         </FormControl>
       </FormGroup>
-
       <FormControl component="fieldset" className={styles.formControl}>
         <FormLabel component="legend">Election Type</FormLabel>
         <RadioGroup
@@ -194,7 +193,6 @@ const ElectionForm = ({
           />
         </RadioGroup>
       </FormControl>
-
       <FormGroup row>
         <FormControl component="fieldset" className={styles.formControl}>
           <FormLabel component="legend">Start Time</FormLabel>
@@ -230,7 +228,6 @@ const ElectionForm = ({
           />
         </FormControl>
       </FormGroup>
-
       <div className={styles.gradYearContainer}>
         <FormLabel component="legend">
           Which Graduating Classes Can Vote?
@@ -248,6 +245,7 @@ const ElectionForm = ({
           type={"number"}
           min={2000}
           placeholder={"2021"}
+          className={styles.gradYearInput}
         />
         <Button
           variant={"contained"}
@@ -272,7 +270,6 @@ const ElectionForm = ({
           ))}
         </div>
       </div>
-
       <ElectionPictureSelection
         value={values.pictureId}
         setValue={(val) => setFieldValue("pictureId", val)}
@@ -280,9 +277,7 @@ const ElectionForm = ({
         touched={touched.pictureId}
         disabled={isSubmitting || disabled}
       />
-
       <hr />
-
       <Button
         onClick={submitForm}
         variant={"contained"}

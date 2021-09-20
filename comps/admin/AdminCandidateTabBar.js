@@ -45,17 +45,24 @@ const AdminCandidateTabBar = () => {
   }, [router]);
 
   return (
-    <Paper className={styles.paper}>
-      <Tabs value={value} indicatorColor="secondary" textColor="secondary">
-        {adjustedTabs.map((tab) => (
-          <Tab
-            label={tab.label}
-            key={tab.path}
-            onClick={() => router.push(tab.path)}
-          />
-        ))}
-      </Tabs>
-    </Paper>
+    <div className={styles.center}>
+      <Paper className={styles.paper}>
+        <Tabs
+          value={value}
+          indicatorColor="secondary"
+          textColor="secondary"
+          centered
+        >
+          {adjustedTabs.map((tab) => (
+            <Tab
+              label={tab.label}
+              key={tab.path}
+              onClick={() => router.push(tab.path)}
+            />
+          ))}
+        </Tabs>
+      </Paper>
+    </div>
   );
 };
 

@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import AdminRequired from "../../../../comps/auth/AdminRequired";
 import layout from "../../../../styles/layout.module.css";
 import styles from "../../../../styles/Elections.module.css";
 import Typography from "@material-ui/core/Typography";
@@ -22,6 +21,7 @@ import confirmDialog from "../../../../comps/dialog/confirmDialog";
 import DateContext from "../../../../comps/shared/DateContext";
 import Lock from "@material-ui/icons/Lock";
 import LockOpen from "@material-ui/icons/LockOpen";
+import Container from "@material-ui/core/Container";
 
 const EDIT_MUTATION = gql`
   mutation (
@@ -198,94 +198,92 @@ const ManageElection = () => {
   }
 
   return (
-    <AdminRequired>
-      <div className={layout.container}>
-        <main className={layout.main}>
-          <BackButton href={"/admin/election"} text={"Back To Elections"} />
-          <Typography variant={"h1"} align={"center"}>
-            Manage Election | Admin Panel
+    <Container maxWidth={"md"} className={layout.page}>
+      <BackButton href={"/admin/election"} text={"Back To Elections"} />
+      <Typography variant={"h1"} align={"center"}>
+        Manage Election | Admin Panel
+      </Typography>
+      <AdminTabBar />
+
+      {!election && <ElectionNotFound href={"/admin/election"} />}
+
+      {!!election && (
+        <>
+          <Typography variant={"h2"} color={"secondary"} align={"center"}>
+            {election.name}
           </Typography>
-          <AdminTabBar />
-
-          {!election && <ElectionNotFound href={"/admin/election"} />}
-
-          {!!election && (
-            <>
-              <Typography variant={"h2"} color={"secondary"}>
-                {election.name}
-              </Typography>
-              {election.completed && (
-                <Typography variant={"body1"} color={"primary"}>
-                  This election has been closed and changes cannot be made
-                </Typography>
-              )}
-              <AdminElectionTabBar />
-              {!election.completed && !editing && (
-                <div>
-                  <Button
-                    variant={"outlined"}
-                    color={"secondary"}
-                    onClick={() => setEditing(true)}
-                    startIcon={<Create />}
-                    className={styles.electionChangeButton}
-                  >
-                    Edit Election
-                  </Button>
-                  <Button
-                    variant={"outlined"}
-                    color={"primary"}
-                    onClick={handleCloseElection}
-                    startIcon={<Lock />}
-                    className={styles.electionChangeButton}
-                  >
-                    Close Election
-                  </Button>
-
-                  <Button
-                    variant={"outlined"}
-                    onClick={() => setEditing(true)}
-                    startIcon={<DeleteForever />}
-                    className={styles.deleteElectionButton}
-                  >
-                    Delete Election
-                  </Button>
-                </div>
-              )}
-
-              {election.completed && (
-                <Button
-                  variant={"outlined"}
-                  onClick={handleOpenElection}
-                  startIcon={<LockOpen />}
-                >
-                  Reopen Election
-                </Button>
-              )}
-
-              <ElectionForm
-                disabled={!editing || loading}
-                initialValues={{
-                  name: election.name,
-                  url: election.url,
-                  type: election.type,
-                  pictureId: election.picture.id,
-                  start: moment(election.start).format("YYYY-MM-DDTHH:mm"),
-                  end: moment(election.end).format("YYYY-MM-DDTHH:mm"),
-                  allowedGradYears: election.allowedGradYears,
-                }}
-                submitLabel={"Save"}
-                showCancelButton
-                onCancel={({ resetForm }) => {
-                  setEditing(false);
-                  resetForm();
-                }}
-                onSubmit={handleSave}
-              />
-            </>
+          {election.completed && (
+            <Typography variant={"body1"} color={"primary"} align={"center"}>
+              This election has been closed and changes cannot be made
+            </Typography>
           )}
-        </main>
-      </div>
-    </AdminRequired>
+
+          <AdminElectionTabBar />
+
+          {!election.completed && !editing && (
+            <div className={layout.center}>
+              <Button
+                variant={"outlined"}
+                color={"secondary"}
+                onClick={() => setEditing(true)}
+                startIcon={<Create />}
+                className={styles.electionChangeButton}
+              >
+                Edit Election
+              </Button>
+              <Button
+                variant={"outlined"}
+                color={"primary"}
+                onClick={handleCloseElection}
+                startIcon={<Lock />}
+                className={styles.electionChangeButton}
+              >
+                Close Election
+              </Button>
+
+              <Button
+                variant={"outlined"}
+                onClick={() => setEditing(true)}
+                startIcon={<DeleteForever />}
+                className={styles.deleteElectionButton}
+              >
+                Delete Election
+              </Button>
+            </div>
+          )}
+
+          {election.completed && (
+            <Button
+              variant={"outlined"}
+              onClick={handleOpenElection}
+              startIcon={<LockOpen />}
+            >
+              Reopen Election
+            </Button>
+          )}
+
+          <ElectionForm
+            disabled={!editing || loading}
+            initialValues={{
+              name: election.name,
+              url: election.url,
+              type: election.type,
+              pictureId: election.picture.id,
+              start: moment(election.start).format("YYYY-MM-DDTHH:mm"),
+              end: moment(election.end).format("YYYY-MM-DDTHH:mm"),
+              allowedGradYears: election.allowedGradYears,
+            }}
+            submitLabel={"Save"}
+            showCancelButton
+            onCancel={({ resetForm }) => {
+              setEditing(false);
+              resetForm();
+            }}
+            onSubmit={handleSave}
+          />
+        </>
+      )}
+    </Container>
   );
 };
 

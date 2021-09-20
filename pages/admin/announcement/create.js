@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import AdminRequired from "../../../comps/auth/AdminRequired";
-import { gql, useMutation, useQuery } from "@apollo/client";
+import React from "react";
+import { gql, useMutation } from "@apollo/client";
 import layout from "./../../../styles/layout.module.css";
 import AdminTabBar from "../../../comps/admin/AdminTabBar";
 import Typography from "@material-ui/core/Typography";
@@ -8,6 +7,7 @@ import BackButton from "../../../comps/shared/BackButton";
 import AnnouncementForm from "../../../comps/announcement/AnnouncementForm";
 import alertDialog from "../../../comps/dialog/alertDialog";
 import { useRouter } from "next/router";
+import Container from "@material-ui/core/Container";
 
 const MUTATION = gql`
   mutation (
@@ -65,28 +65,21 @@ const CreateAnnouncement = () => {
   };
 
   return (
-    <AdminRequired>
-      <div className={layout.container}>
-        <main className={layout.main}>
-          <BackButton
-            href={"/admin/announcement"}
-            text={"Back To Announcements"}
-          />
+    <Container maxWidth={"md"} className={layout.page}>
+      <BackButton href={"/admin/announcement"} text={"Back To Announcements"} />
 
-          <Typography variant={"h1"} align={"center"}>
-            Create Announcement | Admin Panel
-          </Typography>
+      <Typography variant={"h1"} align={"center"}>
+        Create Announcement | Admin Panel
+      </Typography>
 
-          <AdminTabBar />
+      <AdminTabBar />
 
-          <AnnouncementForm
-            onSubmit={handleSubmit}
-            submitLabel={"Create"}
-            disabled={loading}
-          />
-        </main>
-      </div>
-    </AdminRequired>
+      <AnnouncementForm
+        onSubmit={handleSubmit}
+        submitLabel={"Create"}
+        disabled={loading}
+      />
+    </Container>
   );
 };
 
