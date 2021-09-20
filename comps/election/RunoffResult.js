@@ -1,19 +1,17 @@
 import { gql, useQuery } from "@apollo/client";
-import {
-  Avatar,
-  ListItem,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  ListItemText,
-} from "@material-ui/core";
+import Avatar from "@material-ui/core/Avatar";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import capitalize from "@material-ui/core/utils/capitalize";
-import { ArrowForwardIos } from "@material-ui/icons";
 import ArrowBackIos from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIos from "@material-ui/icons/ArrowForwardIos";
 import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
 import Pagination from "@material-ui/lab/Pagination";
 import Image from "next/image";
