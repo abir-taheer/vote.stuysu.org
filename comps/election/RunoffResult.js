@@ -286,7 +286,11 @@ const RunoffResult = ({ id, election }) => {
           Round
         </Typography>
         <div className={layout.center}>
-          <Pagination page={round} count={results.rounds.length} />
+          <Pagination
+            page={round}
+            count={results.rounds.length}
+            onChange={(ev, r) => setRound(r)}
+          />
         </div>
         {round === results.rounds.length && (
           <Typography color={"secondary"} variant={"h3"}>
