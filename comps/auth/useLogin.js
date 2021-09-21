@@ -48,22 +48,25 @@ const useLogin = (props = {}) => {
   const signIn = () => {
     {
       if (ready) {
-        if (showedOneTap) {
-          setShowedOneTap(true);
+        let showedPrompt = false;
 
-          window.google.accounts.id.prompt((notification) => {
-            if (
-              notification.isNotDisplayed() ||
-              notification.isSkippedMoment()
-            ) {
-              // continue with another identity provider.
-              console.log("One Tap isn't supported in this browser");
+        if (showedOneTap) {
+          showLoginDialog();
+          showedPrompt = true;
+        }
+
+        window.google.accounts.id.prompt((notification) => {
+          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+            // continue with another identity provider.
+            console.log("One Tap isn't supported in this browser");
+
+            if (!showedPrompt) {
               showLoginDialog();
             }
-          });
-        }
-      } else {
-        showLoginDialog();
+          }
+        });
+
+        setShowedOneTap(true);
       }
     }
   };
