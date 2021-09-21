@@ -24,7 +24,7 @@ const ElectionOverviewText = ({
   refetch,
 }) => {
   const { signedIn } = useContext(UserContext);
-  const { signIn, loading } = useLogin({ onLogin: refetch });
+  const { signIn, loading } = useLogin();
 
   if (completed) {
     return (

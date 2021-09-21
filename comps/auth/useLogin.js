@@ -7,10 +7,9 @@ import layout from "./../../styles/layout.module.css";
 import LoginButton from "./LoginButton";
 import useGSI from "./useGSI";
 
-const useLogin = (props = {}) => {
-  const { onLogin } = props;
+const useLogin = () => {
   const [showedOneTap, setShowedOneTap] = useState(false);
-  const { ready, authenticating } = useGSI({ onLogin });
+  const { ready, authenticating } = useGSI();
 
   const showLoginDialog = () => {
     alertDialog({

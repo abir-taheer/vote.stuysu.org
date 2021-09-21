@@ -62,7 +62,7 @@ function Vote() {
   const { data, refetch, loading } = useQuery(QUERY, { variables: { url } });
   const { now, getReadableDate } = useFormatDate(true, 1000);
   const user = useContext(UserContext);
-  const { signIn } = useLogin({ onLogin: refetch });
+  const { signIn } = useLogin();
 
   // Update the election open form every 5 seconds
   const election = data?.electionByUrl;

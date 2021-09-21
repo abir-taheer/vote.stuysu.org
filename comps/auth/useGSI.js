@@ -11,8 +11,7 @@ const MUTATION = gql`
   }
 `;
 
-export default function useGSI(props = {}) {
-  const { onLogin } = props;
+export default function useGSI() {
   const [ready, setReady] = useState(false);
   const scriptStatus = useScript("https://accounts.google.com/gsi/client");
   const [login, { loading }] = useMutation(MUTATION);
@@ -24,11 +23,7 @@ export default function useGSI(props = {}) {
       const jwt = response.data.login;
       localStorage.setItem("auth-jwt", jwt);
 
-      await user.refetch();
-
-      if (onLogin) {
-        await onLogin();
-      }
+      window.location.reload();
     } catch (e) {
       console.error(e);
       const error = e.graphQLErrors?.[0];
