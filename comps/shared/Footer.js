@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <p>
         Created by{" "}
-        <a href={"https://github.com/abir-taheer"} target={"_blank"}>
+        <a href={"https://abir.nyc"} target={"_blank"}>
           Abir Taheer
         </a>
       </p>
