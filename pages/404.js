@@ -26,14 +26,13 @@ const Error404 = () => {
   // Server side url class is undefined on client so choose based on which is available
   const Url = globalThis?.URL || URL;
 
-  const defaultImageUrl = new Url(defaultImage, PUBLIC_URL).href;
+  const defaultImageUrl = new Url(defaultImage.src, PUBLIC_URL).href;
 
   return (
     <div>
       <Head>
         <title>{title}</title>
         <meta name="title" content={title} />
-        <meta name="theme-color" content={theme.palette.primary.main} />
         <meta name="description" content={description} />
         <meta property="og:description" content={description} />
         <meta property="og:title" content={title} />

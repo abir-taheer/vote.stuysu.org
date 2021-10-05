@@ -48,11 +48,6 @@ class MyDocument extends Document {
     return (
       <Html lang={"end"}>
         <Head />
-        <script
-          src={
-            "https://cdnjs.cloudflare.com/ajax/libs/slipjs/2.1.1/slip.min.js"
-          }
-        />
         <body>
           <div
             dangerouslySetInnerHTML={{

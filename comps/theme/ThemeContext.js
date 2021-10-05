@@ -2,6 +2,7 @@ import {
   createTheme,
   ThemeProvider as Provider,
 } from "@material-ui/core/styles";
+import Head from "next/head";
 
 const theme = createTheme({
   palette: {
@@ -39,7 +40,14 @@ const theme = createTheme({
 });
 
 const ThemeContext = (props) => {
-  return <Provider theme={theme}>{props.children}</Provider>;
+  return (
+    <>
+      <Head>
+        <meta name="theme-color" content={theme.palette.primary.main} />
+      </Head>
+      <Provider theme={theme}>{props.children}</Provider>
+    </>
+  );
 };
 
 export default ThemeContext;

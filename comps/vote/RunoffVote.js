@@ -15,6 +15,7 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import Close from "@material-ui/icons/Close";
 import arrayMove from "array-move";
+import Script from "next/script";
 import { useState } from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import alertDialog from "../dialog/alertDialog";
@@ -200,6 +201,10 @@ const RunoffVote = ({ election, candidates, refetch }) => {
 
   return (
     <form>
+      <Script
+        src={"https://cdnjs.cloudflare.com/ajax/libs/slipjs/2.1.1/slip.min.js"}
+        strategy={"beforeInteractive"}
+      />
       <FormControl component="fieldset">
         <FormLabel component="legend">
           Drag and drop the candidates based on your order of preference.
