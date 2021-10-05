@@ -1,5 +1,4 @@
 import { gql, useMutation } from "@apollo/client";
-import { useMediaQuery } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Chip from "@material-ui/core/Chip";
 import FormControl from "@material-ui/core/FormControl";
@@ -10,6 +9,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Add from "@material-ui/icons/Add";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";

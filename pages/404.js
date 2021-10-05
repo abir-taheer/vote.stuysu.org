@@ -1,6 +1,6 @@
-import { useTheme } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
+import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import HomeOutlined from "@material-ui/icons/HomeOutlined";
 import Head from "next/head";

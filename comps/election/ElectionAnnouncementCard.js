@@ -1,4 +1,4 @@
-import { Card } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import useFormatDate from "../../utils/date/useFormatDate";

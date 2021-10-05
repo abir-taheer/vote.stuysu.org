@@ -1,4 +1,4 @@
-import { CircularProgress } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import { useState } from "react";

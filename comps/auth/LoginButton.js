@@ -1,4 +1,4 @@
-import { CircularProgress } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { useEffect, useRef } from "react";
 import useGSI from "./useGSI";
 
