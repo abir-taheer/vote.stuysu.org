@@ -15,10 +15,9 @@ import ArrowForwardIos from "@material-ui/icons/ArrowForwardIos";
 import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
 import Pagination from "@material-ui/lab/Pagination";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { Chart } from "react-google-charts";
-import useWindowSize from "react-use/lib/useWindowSize";
 import CenteredCircularProgress from "../shared/CenteredCircularProgress";
 import brokenGlass from "./../../img/marginalia-fatal-error.png";
 import layout from "./../../styles/layout.module.css";
@@ -82,30 +81,45 @@ const QUERY = gql`
 const RunoffResult = ({ id, election }) => {
   const { data, loading } = useQuery(QUERY, { variables: { id } });
   const [round, setRound] = useState(1);
-  const { width } = useWindowSize();
+
+  const [width, setWidth] = useState(window?.innerWidth || 200);
+
+  // Used to make sure confetti fills entire page
+  const [height, setHeight] = useState(window?.innerHeight || 200);
+
+  // Used to determine once the user has seen who the winner is
+  const winnerRef = useRef();
+
+  // Once this is set to true the confetti element is displayed and the confetti will fall
   const [confetti, setConfetti] = useState(false);
-  const [height, setHeight] = useState(globalThis?.innerHeight);
 
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
       data &&
       data.electionResults?.rounds.length === round &&
+      winnerRef?.current &&
       !confetti
     ) {
-      const scrollHandler = () => {
-        const offsetTop = window.innerHeight + window.scrollY;
-        const pageHeight = window.document.body.offsetHeight;
+      const options = {
+        threshold: 0.1,
+      };
 
-        if (pageHeight - offsetTop < 150) {
-          setConfetti(true);
+      const callback = (entries) => {
+        if (entries[0].isIntersecting) {
+          const pageHeight = window.document.body.offsetHeight;
           setHeight(pageHeight);
+          setWidth(window.innerWidth);
+
+          setConfetti(true);
         }
       };
 
-      window.addEventListener("scroll", scrollHandler);
+      const observer = new IntersectionObserver(callback, options);
 
-      return () => window.removeEventListener("scroll", scrollHandler);
+      observer.observe(winnerRef.current);
+
+      return () => observer.disconnect();
     }
   }, [data, round, confetti]);
 
@@ -285,6 +299,7 @@ const RunoffResult = ({ id, election }) => {
         <Typography variant={"body1"} align={"center"} color={"textSecondary"}>
           Round
         </Typography>
+
         <div className={layout.center}>
           <Pagination
             page={round}
@@ -292,8 +307,9 @@ const RunoffResult = ({ id, election }) => {
             onChange={(ev, r) => setRound(r)}
           />
         </div>
+
         {round === results.rounds.length && (
-          <Typography color={"secondary"} variant={"h3"}>
+          <Typography color={"secondary"} variant={"h3"} ref={winnerRef}>
             Winner: {results.winner ? results.winner.name : "N/A"}
           </Typography>
         )}

@@ -18,6 +18,7 @@ import ElectionForm from "../../../../comps/election/ElectionForm";
 import ElectionNotFound from "../../../../comps/election/ElectionNotFound";
 import useElectionById from "../../../../comps/election/useElectionById";
 import BackButton from "../../../../comps/shared/BackButton";
+import CenteredCircularProgress from "../../../../comps/shared/CenteredCircularProgress";
 import DateContext from "../../../../comps/shared/DateContext";
 import styles from "../../../../styles/Elections.module.css";
 import layout from "../../../../styles/layout.module.css";
@@ -205,7 +206,11 @@ const ManageElection = () => {
 
       <AdminTabBar />
 
-      {!election && <ElectionNotFound href={"/admin/election"} />}
+      {loading && <CenteredCircularProgress />}
+
+      {!loading && !!id && !election && (
+        <ElectionNotFound href={"/admin/election"} />
+      )}
 
       {!!election && (
         <>
