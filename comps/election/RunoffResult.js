@@ -82,10 +82,10 @@ const RunoffResult = ({ id, election }) => {
   const { data, loading } = useQuery(QUERY, { variables: { id } });
   const [round, setRound] = useState(1);
 
-  const [width, setWidth] = useState(window?.innerWidth || 200);
+  const [width, setWidth] = useState(globalThis.innerWidth || 200);
 
   // Used to make sure confetti fills entire page
-  const [height, setHeight] = useState(window?.innerHeight || 200);
+  const [height, setHeight] = useState(globalThis.innerHeight || 200);
 
   // Used to determine once the user has seen who the winner is
   const winnerRef = useRef();
