@@ -1,10 +1,10 @@
 import { gql, useApolloClient } from "@apollo/client";
-import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import FormLabel from "@material-ui/core/FormLabel";
-import Typography from "@material-ui/core/Typography";
-import AddAPhoto from "@material-ui/icons/AddAPhoto";
-import Clear from "@material-ui/icons/Clear";
+import AddAPhoto from "@mui/icons-material/AddAPhoto";
+import Clear from "@mui/icons-material/Clear";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import FormLabel from "@mui/material/FormLabel";
+import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 import uploadPicture from "../../utils/upload/uploadPicture";
 import alertDialog from "../dialog/alertDialog";

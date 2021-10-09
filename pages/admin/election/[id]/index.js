@@ -1,11 +1,11 @@
 import { gql, useMutation } from "@apollo/client";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Create from "@material-ui/icons/Create";
-import DeleteForever from "@material-ui/icons/DeleteForever";
-import Lock from "@material-ui/icons/Lock";
-import LockOpen from "@material-ui/icons/LockOpen";
+import Create from "@mui/icons-material/Create";
+import DeleteForever from "@mui/icons-material/DeleteForever";
+import Lock from "@mui/icons-material/Lock";
+import LockOpen from "@mui/icons-material/LockOpen";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import moment from "moment-timezone";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";

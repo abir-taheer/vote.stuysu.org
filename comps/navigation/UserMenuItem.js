@@ -1,6 +1,6 @@
-import Button from "@material-ui/core/Button";
-import Popover from "@material-ui/core/Popover";
-import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
+import ArrowDropDown from "@mui/icons-material/ArrowDropDown";
+import Button from "@mui/material/Button";
+import Popover from "@mui/material/Popover";
 import React, { useContext, useState } from "react";
 import UserContext from "../auth/UserContext";
 import styles from "./NavBar.module.css";
@@ -13,9 +13,9 @@ const UserMenuItem = () => {
     <>
       <Button
         disableRipple
-        className={styles.menuItem}
         onClick={(ev) => setAnchorEl(anchorEl ? null : ev.target)}
         endIcon={<ArrowDropDown />}
+        sx={{ color: "black", margin: "0 0.5rem" }}
       >
         Hi {user.firstName}
       </Button>

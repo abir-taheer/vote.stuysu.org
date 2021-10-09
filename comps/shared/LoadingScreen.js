@@ -1,6 +1,6 @@
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import layout from "./../../styles/layout.module.css";
 
 export default function LoadingScreen() {

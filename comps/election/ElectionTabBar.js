@@ -1,9 +1,9 @@
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import BallotOutlined from "@material-ui/icons/BallotOutlined";
-import DashboardOutlined from "@material-ui/icons/DashboardOutlined";
-import GroupWorkOutlined from "@material-ui/icons/GroupWorkOutlined";
-import HowToVoteOutlined from "@material-ui/icons/HowToVoteOutlined";
+import BallotOutlined from "@mui/icons-material/BallotOutlined";
+import DashboardOutlined from "@mui/icons-material/DashboardOutlined";
+import GroupWorkOutlined from "@mui/icons-material/GroupWorkOutlined";
+import HowToVoteOutlined from "@mui/icons-material/HowToVoteOutlined";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../auth/UserContext";

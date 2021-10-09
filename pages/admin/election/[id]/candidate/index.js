@@ -1,10 +1,10 @@
 import { gql, useQuery } from "@apollo/client";
-import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Add from "@material-ui/icons/Add";
+import Add from "@mui/icons-material/Add";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import joinUrl from "url-join";

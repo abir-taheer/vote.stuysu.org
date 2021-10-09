@@ -1,6 +1,6 @@
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
+import Link from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import alertDialog from "../dialog/alertDialog";
 import layout from "./../../styles/layout.module.css";

@@ -1,6 +1,5 @@
-import MomentUtils from "@date-io/moment";
-import { StylesProvider } from "@material-ui/core/styles";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateAdapter from "@mui/lab/AdapterMoment";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { SnackbarProvider } from "notistack";
@@ -26,35 +25,33 @@ function App({ Component, pageProps }) {
   }, [router.asPath]);
 
   return (
-    <MuiPickersUtilsProvider utils={MomentUtils}>
+    <LocalizationProvider dateAdapter={DateAdapter}>
       <UserProvider>
-        <StylesProvider injectFirst>
-          <ThemeContext>
-            <SnackbarProvider
-              classes={{
-                variantSuccess: "successSnackbar",
-              }}
-            >
-              <Head>
-                <title>StuyBOE Voting Site</title>
-                <meta property="og:type" content="website" />
-                <meta property="og:locale" content="en_US" />
-                <meta property="og:site_name" content="StuyBOE Voting Site" />
-                <meta property="og:url" content={PUBLIC_URL + router.asPath} />
-              </Head>
-              <NavBar />
+        <ThemeContext>
+          <SnackbarProvider
+            classes={{
+              variantSuccess: "successSnackbar",
+            }}
+          >
+            <Head>
+              <title>StuyBOE Voting Site</title>
+              <meta property="og:type" content="website" />
+              <meta property="og:locale" content="en_US" />
+              <meta property="og:site_name" content="StuyBOE Voting Site" />
+              <meta property="og:url" content={PUBLIC_URL + router.asPath} />
+            </Head>
+            <NavBar />
 
-              <AdminWrapper>
-                <Component {...pageProps} />
-              </AdminWrapper>
+            <AdminWrapper>
+              <Component {...pageProps} />
+            </AdminWrapper>
 
-              <SharedDialog />
-              <Footer />
-            </SnackbarProvider>
-          </ThemeContext>
-        </StylesProvider>
+            <SharedDialog />
+            <Footer />
+          </SnackbarProvider>
+        </ThemeContext>
       </UserProvider>
-    </MuiPickersUtilsProvider>
+    </LocalizationProvider>
   );
 }
 

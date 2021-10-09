@@ -1,14 +1,14 @@
-import Button from "@material-ui/core/Button";
-import Chip from "@material-ui/core/Chip";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormLabel from "@material-ui/core/FormLabel";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import TextField from "@material-ui/core/TextField";
-import School from "@material-ui/icons/School";
-import { KeyboardDateTimePicker } from "@material-ui/pickers";
+import School from "@mui/icons-material/School";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import Button from "@mui/material/Button";
+import Chip from "@mui/material/Chip";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import FormLabel from "@mui/material/FormLabel";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import React from "react";
 import styles from "./ElectionForm.module.css";
@@ -196,7 +196,7 @@ const ElectionForm = ({
       <FormGroup row>
         <FormControl component="fieldset" className={styles.formControl}>
           <FormLabel component="legend">Start Time</FormLabel>
-          <KeyboardDateTimePicker
+          <DateTimePicker
             variant="inline"
             inputVariant={"outlined"}
             value={values.start}
@@ -213,7 +213,7 @@ const ElectionForm = ({
 
         <FormControl component="fieldset" className={styles.formControl}>
           <FormLabel component="legend">End Time</FormLabel>
-          <KeyboardDateTimePicker
+          <DateTimePicker
             variant="inline"
             inputVariant={"outlined"}
             value={values.end}

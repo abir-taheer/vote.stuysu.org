@@ -1,10 +1,10 @@
 import { gql, useQuery } from "@apollo/client";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import Add from "@material-ui/icons/Add";
-import Search from "@material-ui/icons/Search";
+import Add from "@mui/icons-material/Add";
+import Search from "@mui/icons-material/Search";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";

@@ -1,6 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import React from "react";

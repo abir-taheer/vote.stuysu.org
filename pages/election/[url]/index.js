@@ -1,8 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import capitalize from "@material-ui/core/utils/capitalize";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import capitalize from "@mui/material/utils/capitalize";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -121,6 +121,7 @@ const ElectionCandidates = () => {
       </Typography>
 
       <ElectionTabBar completed={election.completed} />
+
       {!!voteId && (
         <Typography variant={"h3"} gutterBottom align={"center"}>
           Your Vote ID Is: <code className={layout.voteId}>{voteId}</code>
@@ -168,14 +169,16 @@ const ElectionCandidates = () => {
             Announcements 📣
           </Typography>
 
-          {election.activeAnnouncements.map((announcement) => (
-            <ElectionAnnouncementCard
-              key={announcement.id}
-              title={announcement.title}
-              body={announcement.body}
-              updatedAt={announcement.updatedAt}
-            />
-          ))}
+          <Container maxWidth={"sm"}>
+            {election.activeAnnouncements.map((announcement) => (
+              <ElectionAnnouncementCard
+                key={announcement.id}
+                title={announcement.title}
+                body={announcement.body}
+                updatedAt={announcement.updatedAt}
+              />
+            ))}
+          </Container>
         </div>
       )}
     </Container>

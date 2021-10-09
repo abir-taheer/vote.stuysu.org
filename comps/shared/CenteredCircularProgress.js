@@ -1,4 +1,4 @@
-import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 import layout from "./../../styles/layout.module.css";
 
 export default function CenteredCircularProgress() {

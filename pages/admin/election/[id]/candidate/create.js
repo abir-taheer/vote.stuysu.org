@@ -1,7 +1,7 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 import AdminTabBar from "../../../../../comps/admin/AdminTabBar";
 import CandidateForm from "../../../../../comps/candidate/CandidateForm";

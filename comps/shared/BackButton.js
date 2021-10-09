@@ -1,5 +1,5 @@
-import Button from "@material-ui/core/Button";
-import ArrowBackIos from "@material-ui/icons/ArrowBackIos";
+import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
+import Button from "@mui/material/Button";
 import Link from "next/link";
 import React from "react";
 

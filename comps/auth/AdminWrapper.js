@@ -1,6 +1,6 @@
-import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
+import Container from "@mui/material/Container";
+import Link from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";

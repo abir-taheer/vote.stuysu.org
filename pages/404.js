@@ -1,8 +1,8 @@
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import { useTheme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import HomeOutlined from "@material-ui/icons/HomeOutlined";
+import HomeOutlined from "@mui/icons-material/HomeOutlined";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";

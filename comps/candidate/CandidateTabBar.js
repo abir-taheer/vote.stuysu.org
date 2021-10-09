@@ -1,6 +1,9 @@
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import PeopleOutlined from "@material-ui/icons/PeopleOutlined";
+import ManageAccountsOutlined from "@mui/icons-material/ManageAccountsOutlined";
+import PeopleOutlined from "@mui/icons-material/PeopleOutlined";
+import QuestionAnswerOutlined from "@mui/icons-material/QuestionAnswerOutlined";
+import ReportProblemOutlined from "@mui/icons-material/ReportProblemOutlined";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "./CandidateTabBar.module.css";
@@ -15,25 +18,33 @@ const tabs = [
     active: null,
     icon: <PeopleOutlined />,
   },
-  // {
-  //   path: "/election/[url]/candidate/[candidateUrl]/q-a",
-  //   label: "Q & A",
-  //   exact: false,
-  //   isManager: null,
-  //   electionCompleted: null,
-  //   active: null,
-  //   icon: <QuestionAnswerOutlined />,
-  // },
-  // {
-  //   path: "/election/[url]/candidate/[candidateUrl]/strike",
-  //   label: "Strikes",
-  //   exact: false,
-  //   isManager: null,
-  //   electionCompleted: null,
-  //   active: null,
-  //   icon: <ReportProblemOutlined />,
-  // },
-  //
+  {
+    path: "/election/[url]/candidate/[candidateUrl]/q-a",
+    label: "Q & A",
+    exact: false,
+    isManager: null,
+    electionCompleted: null,
+    active: null,
+    icon: <QuestionAnswerOutlined />,
+  },
+  {
+    path: "/election/[url]/candidate/[candidateUrl]/strike",
+    label: "Strikes",
+    exact: false,
+    isManager: null,
+    electionCompleted: null,
+    active: null,
+    icon: <ReportProblemOutlined />,
+  },
+  {
+    path: "/election/[url]/candidate/[candidateUrl]/manage",
+    label: "Manage",
+    exact: false,
+    isManager: null,
+    electionCompleted: null,
+    active: true,
+    icon: <ManageAccountsOutlined />,
+  },
 ];
 
 export default function CandidateTabBar({

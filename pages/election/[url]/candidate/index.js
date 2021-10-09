@@ -1,9 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";

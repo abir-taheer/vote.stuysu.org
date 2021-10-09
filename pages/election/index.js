@@ -1,8 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
-import Container from "@material-ui/core/Container";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import Search from "@material-ui/icons/Search";
+import Search from "@mui/icons-material/Search";
+import Container from "@mui/material/Container";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { parse } from "querystring";

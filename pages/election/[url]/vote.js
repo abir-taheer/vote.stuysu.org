@@ -1,9 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
