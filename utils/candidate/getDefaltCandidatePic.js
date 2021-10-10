@@ -1,5 +1,3 @@
-import { URL } from "url";
-
 const backgroundColors = [
   "00b894",
   "6c5ce7",
@@ -11,7 +9,7 @@ const backgroundColors = [
 
 export default function getDefaultCandidatePic(str) {
   // The url module doesn't work on the client so use the browser url class
-  const Url = URL || globalThis.URL;
+  const Url = globalThis.URL;
   const name = str || "john-alex";
   const colorIndex =
     (name.length * name.charCodeAt(0)) % backgroundColors.length;
