@@ -49,6 +49,9 @@ const AdminCandidateTabBar = () => {
           value={value}
           indicatorColor="secondary"
           textColor="secondary"
+          variant={"scrollable"}
+          scrollButtons={"auto"}
+          allowScrollButtonsMobile
           centered
         >
           {adjustedTabs.map((tab) => (
@@ -56,6 +59,7 @@ const AdminCandidateTabBar = () => {
               label={tab.label}
               key={tab.path}
               onClick={() => router.push(tab.path)}
+              sx={{ minWidth: "8rem" }}
             />
           ))}
         </Tabs>

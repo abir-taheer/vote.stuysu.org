@@ -62,8 +62,9 @@ export default function AdminTabBar() {
         indicatorColor="primary"
         textColor="primary"
         className={styles.tabs}
-        scrollButtons={"on"}
+        scrollButtons={"auto"}
         variant={"scrollable"}
+        allowScrollButtonsMobile
       >
         {tabs.map((tab) => (
           <Tab
@@ -71,6 +72,7 @@ export default function AdminTabBar() {
             icon={tab.icon}
             onClick={() => push(tab.href)}
             key={tab.path.join(" ")}
+            sx={{ minWidth: "8rem" }}
           />
         ))}
       </Tabs>

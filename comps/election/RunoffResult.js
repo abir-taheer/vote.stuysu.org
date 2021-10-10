@@ -23,7 +23,7 @@ import brokenGlass from "./../../img/marginalia-fatal-error.png";
 import layout from "./../../styles/layout.module.css";
 
 const QUERY = gql`
-  query ($id: ObjectId!) {
+  query ($id: ObjectID!) {
     electionResults(election: { id: $id }) {
       ... on RunoffResult {
         rounds {

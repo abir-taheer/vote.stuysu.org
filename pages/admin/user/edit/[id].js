@@ -17,7 +17,7 @@ import UserNotFound from "../../../../comps/user/UserNotFound";
 import layout from "./../../../../styles/layout.module.css";
 
 const QUERY = gql`
-  query ($id: ObjectId!, $pageReady: Boolean!) {
+  query ($id: ObjectID!, $pageReady: Boolean!) {
     userById(id: $id) @include(if: $pageReady) {
       id
       firstName
@@ -33,7 +33,7 @@ const QUERY = gql`
 
 const EDIT_MUTATION = gql`
   mutation (
-    $id: ObjectId!
+    $id: ObjectID!
     $firstName: NonEmptyString!
     $lastName: NonEmptyString!
     $email: EmailAddress!
@@ -60,7 +60,7 @@ const EDIT_MUTATION = gql`
 `;
 
 const DELETE_MUTATION = gql`
-  mutation ($id: ObjectId!) {
+  mutation ($id: ObjectID!) {
     deleteUser(id: $id)
   }
 `;

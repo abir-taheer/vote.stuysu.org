@@ -11,7 +11,12 @@ const BackButton = ({
 }) => {
   return (
     <Link href={href} passHref>
-      <Button color={color} variant={variant} startIcon={<ArrowBackIos />}>
+      <Button
+        color={color}
+        variant={variant}
+        startIcon={<ArrowBackIos />}
+        sx={{ marginBottom: "2rem" }}
+      >
         {text}
       </Button>
     </Link>

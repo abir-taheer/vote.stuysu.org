@@ -36,3 +36,38 @@
 .removedChip {
   margin: 0.5rem 0.5rem 0.5rem 0;
 }
+
+
+@keyframes slide-up {
+  0% {
+    transform: translate(0, -64px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translate(0, -64px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.slidingUp {
+  -webkit-animation-name: slide-up;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-direction: normal;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+}
+
+.slidingDown {
+  -webkit-animation-name: slide-down;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-direction: normal;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+}

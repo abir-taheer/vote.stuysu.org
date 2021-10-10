@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const PictureSchema = new Schema({
   alt: String,
   resourceId: String,
-  uploadedBy: Schema.Types.ObjectId,
+  uploadedBy: Schema.Types.ObjectID,
 });
 
 PictureSchema.statics.idLoader = findOneLoaderFactory("Picture");

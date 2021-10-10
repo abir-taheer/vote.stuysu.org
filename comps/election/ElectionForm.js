@@ -161,7 +161,7 @@ const ElectionForm = ({
             error={touched.name && !!errors.url}
             helperText={
               (touched.url && errors.url) ||
-              "https://vote.stuysu.org/election/" + (values.url || "<url>")
+              "vote.stuysu.org/election/" + (values.url || "<url>")
             }
             placeholder={"junior-caucus-20-21"}
             variant={"outlined"}
@@ -197,34 +197,22 @@ const ElectionForm = ({
         <FormControl component="fieldset" className={styles.formControl}>
           <FormLabel component="legend">Start Time</FormLabel>
           <DateTimePicker
-            variant="inline"
-            inputVariant={"outlined"}
+            renderInput={(props) => <TextField {...props} />}
             value={values.start}
+            label={"10/22/2021 05:00AM"}
             onChange={(val) => setFieldValue("start", val)}
-            onError={console.log}
-            format="MM/DD/yyyy hh:mma"
-            ampm
-            error={touched.start && !!errors.start}
-            helperText={touched.start && errors.start}
             disabled={disabled || isSubmitting}
-            placeholder="05/05/2021 06:00am"
           />
         </FormControl>
 
         <FormControl component="fieldset" className={styles.formControl}>
           <FormLabel component="legend">End Time</FormLabel>
           <DateTimePicker
-            variant="inline"
-            inputVariant={"outlined"}
+            renderInput={(props) => <TextField {...props} />}
             value={values.end}
+            label={"10/22/2021 06:00PM"}
             onChange={(val) => setFieldValue("end", val)}
-            onError={console.log}
-            format="MM/DD/yyyy hh:mma"
-            placeholder="05/05/2021 07:00pm"
             disabled={disabled || isSubmitting}
-            error={touched.end && !!errors.end}
-            helperText={touched.end && errors.end}
-            ampm
           />
         </FormControl>
       </FormGroup>

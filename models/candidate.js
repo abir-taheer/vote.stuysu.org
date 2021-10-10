@@ -12,12 +12,12 @@ const CandidateSchema = new Schema({
 
   url: String,
 
-  electionId: Schema.Types.ObjectId,
+  electionId: Schema.Types.ObjectID,
 
-  pictureId: Schema.Types.ObjectId,
+  pictureId: Schema.Types.ObjectID,
   active: Boolean,
 
-  managerIds: [Schema.Types.ObjectId],
+  managerIds: [Schema.Types.ObjectID],
 
   social: {
     facebook: String,

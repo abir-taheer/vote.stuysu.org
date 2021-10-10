@@ -10,7 +10,7 @@ const AnnouncementSchema = new Schema({
   start: Date,
   end: Date,
   permanent: Boolean,
-  electionId: Schema.Types.ObjectId,
+  electionId: Schema.Types.ObjectID,
   showOnHome: Boolean,
   updatedAt: Date,
 });

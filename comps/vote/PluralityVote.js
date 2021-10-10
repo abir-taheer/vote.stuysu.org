@@ -16,7 +16,7 @@ import DateContext from "../shared/DateContext";
 import styles from "./PluralityVote.module.css";
 
 const MUTATION = gql`
-  mutation ($candidateId: ObjectId!, $electionId: ObjectId!) {
+  mutation ($candidateId: ObjectID!, $electionId: ObjectID!) {
     votePlurality(candidateId: $candidateId, electionId: $electionId) {
       id
       choice {

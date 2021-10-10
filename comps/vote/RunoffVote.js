@@ -16,7 +16,7 @@ import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import arrayMove from "array-move";
 import Script from "next/script";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import alertDialog from "../dialog/alertDialog";
 import confirmDialog from "../dialog/confirmDialog";
@@ -24,7 +24,7 @@ import styles from "./RunoffVote.module.css";
 import VotingCountDown from "./VotingCountDown";
 
 const MUTATION = gql`
-  mutation ($choices: [ObjectId!]!, $electionId: ObjectId!) {
+  mutation ($choices: [ObjectID!]!, $electionId: ObjectID!) {
     voteRunoff(choices: $choices, electionId: $electionId) {
       id
       choices {
@@ -48,38 +48,65 @@ const SortableItem = SortableElement(
       index,
       isDesktop,
     },
-  }) => (
-    <ListItem key={id} button className={"runoff-choice"}>
-      <ListItemText primary={name} className={styles.name} />
-      <ListItemSecondaryAction>
-        {isDesktop && (
-          <>
-            <IconButton
-              aria-label={"Move candidate up"}
-              onClick={() => handleMoveUp(index)}
-              disabled={index === 0}
-            >
-              <ArrowUpward />
-            </IconButton>
-            <IconButton
-              aria-label={"Move Candidate Down"}
-              onClick={() => handleMoveDown(index)}
-              disabled={index + 1 === choices.length}
-            >
-              <ArrowDownward />
-            </IconButton>
-          </>
-        )}
-        <IconButton
-          aria-label={"Remove Candidate"}
-          onClick={() => handleRemove(index)}
-          disabled={choices.length <= 1}
-        >
-          <Close />
-        </IconButton>
-      </ListItemSecondaryAction>
-    </ListItem>
-  )
+  }) => {
+    const [justMoved, setJustMoved] = useState(false);
+
+    useEffect(() => {
+      if (justMoved) {
+        const timeout = setTimeout(() => {
+          setJustMoved(false);
+        }, 500);
+
+        return () => clearTimeout(timeout);
+      }
+    }, [justMoved]);
+
+    return (
+      <ListItem
+        key={id}
+        button
+        className={"runoff-choice"}
+        selected={justMoved}
+      >
+        <ListItemText primary={name} className={styles.name} />
+        <ListItemSecondaryAction>
+          {isDesktop && (
+            <>
+              <IconButton
+                aria-label={"Move candidate up"}
+                onClick={() => {
+                  setJustMoved(true);
+                  handleMoveUp(index);
+                }}
+                disabled={index === 0}
+              >
+                <ArrowUpward />
+              </IconButton>
+              <IconButton
+                aria-label={"Move Candidate Down"}
+                onClick={() => {
+                  handleMoveDown(index);
+                  setJustMoved(true);
+                }}
+                disabled={index + 1 === choices.length}
+              >
+                <ArrowDownward />
+              </IconButton>
+            </>
+          )}
+          <IconButton
+            aria-label={"Remove Candidate"}
+            onClick={() => {
+              handleRemove(index);
+            }}
+            disabled={choices.length <= 1}
+          >
+            <Close />
+          </IconButton>
+        </ListItemSecondaryAction>
+      </ListItem>
+    );
+  }
 );
 
 const SortableList = SortableContainer(
@@ -87,7 +114,7 @@ const SortableList = SortableContainer(
     const isDesktop = useMediaQuery("(min-width: 800px)");
 
     return (
-      <List className={styles.list}>
+      <List>
         {choices.map(({ id, name }, index) => (
           <SortableItem
             key={id}
@@ -210,7 +237,12 @@ const RunoffVote = ({ election, candidates, refetch }) => {
           Drag and drop the candidates based on your order of preference.
         </FormLabel>
         <SortableList
-          items={{ choices, handleMoveUp, handleMoveDown, handleRemove }}
+          items={{
+            choices,
+            handleMoveUp,
+            handleMoveDown,
+            handleRemove,
+          }}
           onSortEnd={({ oldIndex, newIndex }) =>
             setChoices(arrayMove(choices, oldIndex, newIndex))
           }

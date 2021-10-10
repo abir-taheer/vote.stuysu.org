@@ -11,7 +11,7 @@ import BackButton from "../../../../../comps/shared/BackButton";
 import layout from "./../../../../../styles/layout.module.css";
 
 const QUERY = gql`
-  query ($id: ObjectId!) {
+  query ($id: ObjectID!) {
     electionById(id: $id) {
       id
       name
@@ -22,13 +22,13 @@ const QUERY = gql`
 
 const CREATE_MUTATION = gql`
   mutation (
-    $electionId: ObjectId!
+    $electionId: ObjectID!
     $name: NonEmptyString!
     $url: NonEmptyString!
     $blurb: String!
     $platform: String!
-    $managerIds: [ObjectId!]!
-    $pictureId: ObjectId
+    $managerIds: [ObjectID!]!
+    $pictureId: ObjectID
   ) {
     createCandidate(
       electionId: $electionId

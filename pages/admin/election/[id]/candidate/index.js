@@ -16,7 +16,7 @@ import BackButton from "../../../../../comps/shared/BackButton";
 import layout from "./../../../../../styles/layout.module.css";
 
 const QUERY = gql`
-  query ($id: ObjectId!) {
+  query ($id: ObjectID!) {
     electionById(id: $id) {
       id
       name
@@ -86,7 +86,7 @@ const CandidateIndex = () => {
             Click on any of the candidates
           </Typography>
 
-          <Grid container justify={"center"} spacing={3}>
+          <Grid container justifyContent={"center"} spacing={3}>
             {election.candidates.map(({ picture, blurb, name, id }) => (
               <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
                 <CandidateCard

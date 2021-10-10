@@ -14,7 +14,7 @@ import PictureUploadDialog, {
 import styles from "./ElectionPictureSelection.module.css";
 
 const PICTURE_QUERY = gql`
-  query ($id: ObjectId!) {
+  query ($id: ObjectID!) {
     pictureById(id: $id) {
       id
       alt

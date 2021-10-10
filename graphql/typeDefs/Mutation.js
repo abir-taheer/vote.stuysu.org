@@ -8,7 +8,7 @@ export default gql`
     createElection(
       name: NonEmptyString!
       url: NonEmptyString!
-      pictureId: ObjectId!
+      pictureId: ObjectID!
       type: ElectionType!
       allowedGradYears: [PositiveInt!]!
       start: DateTime!
@@ -16,10 +16,10 @@ export default gql`
     ): Election!
 
     editElection(
-      id: ObjectId!
+      id: ObjectID!
       name: NonEmptyString!
       url: NonEmptyString!
-      pictureId: ObjectId!
+      pictureId: ObjectID!
       type: ElectionType!
       allowedGradYears: [PositiveInt!]!
       start: DateTime!
@@ -33,21 +33,21 @@ export default gql`
       end: DateTime
       start: DateTime
       showOnHome: Boolean!
-      electionId: ObjectId
+      electionId: ObjectID
     ): Announcement!
 
     editAnnouncement(
-      id: ObjectId!
+      id: ObjectID!
       title: NonEmptyString!
       body: NonEmptyString!
       permanent: Boolean!
       end: DateTime
       start: DateTime
       showOnHome: Boolean!
-      electionId: ObjectId
+      electionId: ObjectID
     ): Announcement!
 
-    deleteAnnouncement(id: ObjectId!): Void
+    deleteAnnouncement(id: ObjectID!): Void
 
     createUser(
       firstName: NonEmptyString!
@@ -58,7 +58,7 @@ export default gql`
     ): User!
 
     editUser(
-      id: ObjectId!
+      id: ObjectID!
       firstName: NonEmptyString!
       lastName: NonEmptyString!
       gradYear: PositiveInt
@@ -66,36 +66,36 @@ export default gql`
       adminPrivileges: Boolean!
     ): User!
 
-    deleteUser(id: ObjectId!): Void
+    deleteUser(id: ObjectID!): Void
 
     createCandidate(
-      electionId: ObjectId!
+      electionId: ObjectID!
       name: NonEmptyString!
       blurb: String!
       platform: String!
       url: NonEmptyString!
-      managerIds: [ObjectId!]!
+      managerIds: [ObjectID!]!
       """
       If a picture id is not provided a picture will be generated using initials
       """
-      pictureId: ObjectId
+      pictureId: ObjectID
     ): Candidate!
 
     editCandidate(
-      id: ObjectId!
+      id: ObjectID!
       name: NonEmptyString!
       url: NonEmptyString!
       blurb: String!
       platform: String!
-      managerIds: [ObjectId!]!
-      pictureId: ObjectId
+      managerIds: [ObjectID!]!
+      pictureId: ObjectID
     ): Candidate
 
-    completeElection(id: ObjectId!): Election!
-    openElection(id: ObjectId!): Election!
+    completeElection(id: ObjectID!): Election!
+    openElection(id: ObjectID!): Election!
 
-    votePlurality(electionId: ObjectId!, candidateId: ObjectId!): PluralityVote!
-    voteRunoff(electionId: ObjectId!, choices: [ObjectId!]!): RunoffVote!
+    votePlurality(electionId: ObjectID!, candidateId: ObjectID!): PluralityVote!
+    voteRunoff(electionId: ObjectID!, choices: [ObjectID!]!): RunoffVote!
 
     syncUsersWithStuyActivities: StuyActivitiesSync!
   }

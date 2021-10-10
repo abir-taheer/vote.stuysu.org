@@ -68,7 +68,13 @@ export default function ElectionTabBar({ completed }) {
 
   const tabIndex = adjustedTabs.findIndex(isMatch);
 
-  const [value, setValue] = useState(tabIndex);
+  const [value, setValue] = useState(
+    typeof window === "undefined"
+      ? tabIndex
+      : parseInt(
+          window.sessionStorage.getItem("previous-election-tab-value") || "0"
+        )
+  );
 
   useEffect(() => {
     setValue(tabIndex);
@@ -87,7 +93,15 @@ export default function ElectionTabBar({ completed }) {
           <Tab
             label={tab.label}
             key={tab.path}
-            onClick={() => router.push(tab.path)}
+            onClick={() => {
+              window.sessionStorage.setItem(
+                "previous-election-tab-value",
+                value?.toString()
+              );
+
+              router.push(tab.path);
+            }}
+            sx={{ minWidth: "8rem" }}
             icon={tab.icon}
           />
         ))}

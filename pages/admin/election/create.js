@@ -14,7 +14,7 @@ const SUBMIT_MUTATION = gql`
   mutation (
     $name: NonEmptyString!
     $url: NonEmptyString!
-    $pictureId: ObjectId!
+    $pictureId: ObjectID!
     $type: ElectionType!
     $allowedGradYears: [PositiveInt!]!
     $start: DateTime!

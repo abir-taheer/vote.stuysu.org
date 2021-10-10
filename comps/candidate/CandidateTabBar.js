@@ -82,21 +82,26 @@ export default function CandidateTabBar({
   }, [router]);
 
   return (
-    <Tabs
-      value={value}
-      indicatorColor="primary"
-      textColor="primary"
-      className={styles.tabs}
-      centered
-    >
-      {adjustedTabs.map((tab) => (
-        <Tab
-          label={tab.label}
-          key={tab.path}
-          onClick={() => router.push(tab.path)}
-          icon={tab.icon}
-        />
-      ))}
-    </Tabs>
+    <div className={styles.center}>
+      <Tabs
+        value={value}
+        indicatorColor="primary"
+        textColor="primary"
+        className={styles.tabs}
+        variant={"scrollable"}
+        allowScrollButtonsMobile
+        scrollButtons={"auto"}
+      >
+        {adjustedTabs.map((tab) => (
+          <Tab
+            label={tab.label}
+            key={tab.path}
+            onClick={() => router.push(tab.path)}
+            icon={tab.icon}
+            sx={{ minWidth: "8rem" }}
+          />
+        ))}
+      </Tabs>
+    </div>
   );
 }

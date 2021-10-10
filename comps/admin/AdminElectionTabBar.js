@@ -45,12 +45,20 @@ const AdminElectionTabBar = () => {
   return (
     <div className={styles.center}>
       <Paper className={styles.paper}>
-        <Tabs value={value} indicatorColor="secondary" textColor="secondary">
+        <Tabs
+          value={value}
+          indicatorColor="secondary"
+          textColor="secondary"
+          scrollButtons={"auto"}
+          variant={"scrollable"}
+          allowScrollButtonsMobile
+        >
           {adjustedTabs.map((tab) => (
             <Tab
               label={tab.label}
               key={tab.path}
               onClick={() => router.push(tab.path)}
+              sx={{ minWidth: "8rem" }}
             />
           ))}
         </Tabs>

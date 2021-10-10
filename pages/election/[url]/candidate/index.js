@@ -135,7 +135,7 @@ function ElectionCandidates() {
         Click on any of the candidates for more info
       </Typography>
 
-      <Grid container justify={"center"} spacing={3}>
+      <Grid container justifyContent={"center"} spacing={3}>
         {candidates.map(({ picture, blurb, name, url, id }) => (
           <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
             <CandidateCard

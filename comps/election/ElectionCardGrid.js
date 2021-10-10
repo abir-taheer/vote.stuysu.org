@@ -26,7 +26,7 @@ const ElectionCardGrid = ({ page, results, numPages, onPageChange, admin }) => {
 
   return (
     <div>
-      <Grid container className={styles.grid} justify={"center"}>
+      <Grid container className={styles.grid} justifyContent={"center"}>
         {results?.map(({ name, url, picture, id, start, end }) => (
           <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
             <div className={styles.itemContainer}>

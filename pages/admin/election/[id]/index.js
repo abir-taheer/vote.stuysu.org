@@ -5,6 +5,7 @@ import Lock from "@mui/icons-material/Lock";
 import LockOpen from "@mui/icons-material/LockOpen";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import moment from "moment-timezone";
 import { useRouter } from "next/router";
@@ -20,15 +21,14 @@ import useElectionById from "../../../../comps/election/useElectionById";
 import BackButton from "../../../../comps/shared/BackButton";
 import CenteredCircularProgress from "../../../../comps/shared/CenteredCircularProgress";
 import DateContext from "../../../../comps/shared/DateContext";
-import styles from "../../../../styles/Elections.module.css";
 import layout from "../../../../styles/layout.module.css";
 
 const EDIT_MUTATION = gql`
   mutation (
-    $id: ObjectId!
+    $id: ObjectID!
     $name: NonEmptyString!
     $url: NonEmptyString!
-    $pictureId: ObjectId!
+    $pictureId: ObjectID!
     $type: ElectionType!
     $allowedGradYears: [PositiveInt!]!
     $start: DateTime!
@@ -65,7 +65,7 @@ const EDIT_MUTATION = gql`
 `;
 
 const CLOSE_MUTATION = gql`
-  mutation ($id: ObjectId!) {
+  mutation ($id: ObjectID!) {
     completeElection(id: $id) {
       id
       completed
@@ -74,7 +74,7 @@ const CLOSE_MUTATION = gql`
 `;
 
 const OPEN_MUTATION = gql`
-  mutation ($id: ObjectId!) {
+  mutation ($id: ObjectID!) {
     openElection(id: $id) {
       id
       completed
@@ -227,33 +227,33 @@ const ManageElection = () => {
 
           {!election.completed && !editing && (
             <div className={layout.center}>
-              <Button
-                variant={"outlined"}
-                color={"secondary"}
-                onClick={() => setEditing(true)}
-                startIcon={<Create />}
-                className={styles.electionChangeButton}
-              >
-                Edit Election
-              </Button>
-              <Button
-                variant={"outlined"}
-                color={"primary"}
-                onClick={handleCloseElection}
-                startIcon={<Lock />}
-                className={styles.electionChangeButton}
-              >
-                Close Election
-              </Button>
+              <Stack direction={"row"} spacing={3}>
+                <Button
+                  variant={"outlined"}
+                  color={"secondary"}
+                  onClick={() => setEditing(true)}
+                  startIcon={<Create />}
+                >
+                  Edit Election
+                </Button>
+                <Button
+                  variant={"outlined"}
+                  color={"primary"}
+                  onClick={handleCloseElection}
+                  startIcon={<Lock />}
+                >
+                  Close Election
+                </Button>
 
-              <Button
-                variant={"outlined"}
-                onClick={() => setEditing(true)}
-                startIcon={<DeleteForever />}
-                className={styles.deleteElectionButton}
-              >
-                Delete Election
-              </Button>
+                <Button
+                  variant={"outlined"}
+                  onClick={() => setEditing(true)}
+                  startIcon={<DeleteForever />}
+                  color={"warning"}
+                >
+                  Delete Election
+                </Button>
+              </Stack>
             </div>
           )}
 

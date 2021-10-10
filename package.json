@@ -28,7 +28,6 @@
     "formik": "^2.2.6",
     "google-auth-library": "^7.0.4",
     "graphql": "^15.5.0",
-    "graphql-scalar-objectid": "^0.1.2",
     "graphql-scalars": "^1.9.3",
     "graphql-validation-complexity": "^0.4.2",
     "jsonwebtoken": "^8.5.1",

@@ -17,7 +17,7 @@ const MUTATION = gql`
     $end: DateTime
     $permanent: Boolean!
     $showOnHome: Boolean!
-    $electionId: ObjectId
+    $electionId: ObjectID
   ) {
     createAnnouncement(
       title: $title
