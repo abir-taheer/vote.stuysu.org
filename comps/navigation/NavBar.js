@@ -28,7 +28,12 @@ const NavBar = () => {
     <>
       <NavDrawer open={drawerOpen} setOpen={setDrawerOpen} />
 
-      <AppBar position="relative" className={styles.appBar} elevation={0}>
+      <AppBar
+        position="relative"
+        className={styles.appBar}
+        elevation={0}
+        color={"transparent"}
+      >
         <Toolbar className={styles.toolbar}>
           <Link href={"/"}>
             <Typography variant="h6" className={styles.title}>

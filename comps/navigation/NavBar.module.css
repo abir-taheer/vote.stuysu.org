@@ -9,10 +9,8 @@
 }
 
 .appBar {
-  background: white;
   max-width: 1200px;
   margin: auto;
-  color: black;
 }
 
 @media (max-width: 850px) {
