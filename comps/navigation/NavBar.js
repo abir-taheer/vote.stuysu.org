@@ -1,15 +1,17 @@
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import MenuIcon from "@material-ui/icons/Menu";
+import LockOpenOutlined from "@mui/icons-material/LockOpenOutlined";
+import MenuIcon from "@mui/icons-material/Menu";
+import LoadingButton from "@mui/lab/LoadingButton";
+import AppBar from "@mui/material/AppBar";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import useLogin from "../auth/useLogin";
 import UserContext from "../auth/UserContext";
 import styles from "./NavBar.module.css";
+import NavBarButton from "./NavBarButton";
 import NavDrawer from "./NavDrawer";
 import UserMenuItem from "./UserMenuItem";
 
@@ -35,57 +37,39 @@ const NavBar = () => {
           </Link>
 
           <div className={styles.menuLinks}>
-            <Link href={"/"}>
-              <Button
-                disableRipple
-                className={styles.menuItem}
-                color={path === "/" ? "primary" : undefined}
-              >
-                Home
-              </Button>
-            </Link>
+            <NavBarButton href={"/"} label={"Home"} active={path === "/"} />
 
             {user.signedIn && user.adminPrivileges && (
-              <Link href={"/admin/election"}>
-                <Button
-                  disableRipple
-                  className={styles.menuItem}
-                  color={path.startsWith("/admin") ? "primary" : undefined}
-                >
-                  Admin Panel
-                </Button>
-              </Link>
+              <NavBarButton
+                href={"/admin"}
+                active={path.startsWith("/admin")}
+                label={"Admin Panel"}
+              />
             )}
 
-            <Link href={"/election"}>
-              <Button
-                disableRipple
-                className={styles.menuItem}
-                color={path.startsWith("/election") ? "primary" : undefined}
-              >
-                Elections
-              </Button>
-            </Link>
+            <NavBarButton
+              href={"/election"}
+              active={path.startsWith("/election")}
+              label={"Elections"}
+            />
 
-            <Link href={"/faq"}>
-              <Button
-                disableRipple
-                className={styles.menuItem}
-                color={path.startsWith("/faq") ? "primary" : undefined}
-              >
-                FAQs
-              </Button>
-            </Link>
+            <NavBarButton
+              href={"/faq"}
+              active={path.startsWith("/faq")}
+              label={"FAQs"}
+            />
 
             {!user.signedIn && (
-              <Button
+              <LoadingButton
                 disableRipple
-                className={styles.menuItem}
                 onClick={signIn}
-                disabled={loading}
+                sx={{ color: "black" }}
+                loading={loading || !user.ready}
+                loadingPosition={"start"}
+                startIcon={<LockOpenOutlined />}
               >
                 Login
-              </Button>
+              </LoadingButton>
             )}
 
             {user.signedIn && <UserMenuItem />}

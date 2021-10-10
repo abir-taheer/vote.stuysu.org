@@ -1,7 +1,7 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 import AdminTabBar from "../../../../../comps/admin/AdminTabBar";
 import CandidateForm from "../../../../../comps/candidate/CandidateForm";
@@ -11,7 +11,7 @@ import BackButton from "../../../../../comps/shared/BackButton";
 import layout from "./../../../../../styles/layout.module.css";
 
 const QUERY = gql`
-  query ($id: ObjectId!) {
+  query ($id: ObjectID!) {
     electionById(id: $id) {
       id
       name
@@ -22,13 +22,13 @@ const QUERY = gql`
 
 const CREATE_MUTATION = gql`
   mutation (
-    $electionId: ObjectId!
+    $electionId: ObjectID!
     $name: NonEmptyString!
     $url: NonEmptyString!
     $blurb: String!
     $platform: String!
-    $managerIds: [ObjectId!]!
-    $pictureId: ObjectId
+    $managerIds: [ObjectID!]!
+    $pictureId: ObjectID
   ) {
     createCandidate(
       electionId: $electionId

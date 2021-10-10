@@ -2,7 +2,7 @@ import { gql } from "apollo-server-micro";
 
 export default gql`
   type Announcement {
-    id: ObjectId!
+    id: ObjectID!
     title: NonEmptyString!
     body: NonEmptyString!
     start: DateTime

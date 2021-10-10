@@ -1,9 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -135,7 +135,7 @@ function ElectionCandidates() {
         Click on any of the candidates for more info
       </Typography>
 
-      <Grid container justify={"center"} spacing={3}>
+      <Grid container justifyContent={"center"} spacing={3}>
         {candidates.map(({ picture, blurb, name, url, id }) => (
           <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
             <CandidateCard

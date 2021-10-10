@@ -1,6 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 import React from "react";
 import AdminTabBar from "../../../comps/admin/AdminTabBar";
@@ -17,7 +17,7 @@ const MUTATION = gql`
     $end: DateTime
     $permanent: Boolean!
     $showOnHome: Boolean!
-    $electionId: ObjectId
+    $electionId: ObjectID
   ) {
     createAnnouncement(
       title: $title

@@ -16,7 +16,7 @@ const ElectionSchema = new Schema({
   name: String,
   url: String,
   allowedGradYears: [Number],
-  pictureId: Schema.Types.ObjectId,
+  pictureId: Schema.Types.ObjectID,
   type: {
     type: String,
     enum: ["runoff", "plurality"],
@@ -27,7 +27,7 @@ const ElectionSchema = new Schema({
   completed: Boolean,
 
   // Ids of all of the users who voted
-  voterIds: [Schema.Types.ObjectId],
+  voterIds: [Schema.Types.ObjectID],
 
   runoffVotes: {
     type: [
@@ -37,7 +37,7 @@ const ElectionSchema = new Schema({
           default: () => nanoid(),
         },
         gradYear: Number,
-        choices: [Schema.Types.ObjectId],
+        choices: [Schema.Types.ObjectID],
       },
     ],
 
@@ -52,16 +52,16 @@ const ElectionSchema = new Schema({
         numVotes: Number,
         results: [
           {
-            candidateId: Schema.Types.ObjectId,
+            candidateId: Schema.Types.ObjectID,
             eliminated: Boolean,
             percentage: Number,
             numVotes: Number,
           },
         ],
-        eliminatedCandidateIds: [Schema.Types.ObjectId],
+        eliminatedCandidateIds: [Schema.Types.ObjectID],
       },
     ],
-    winnerId: Schema.Types.ObjectId,
+    winnerId: Schema.Types.ObjectID,
     totalVotes: Number,
     isTie: Boolean,
     numEligibleVoters: Number,
@@ -75,7 +75,7 @@ const ElectionSchema = new Schema({
           default: () => nanoid(),
         },
         gradYear: Number,
-        choice: Schema.Types.ObjectId,
+        choice: Schema.Types.ObjectID,
       },
     ],
     select: false,
@@ -84,12 +84,12 @@ const ElectionSchema = new Schema({
   pluralityResults: {
     candidateResults: [
       {
-        candidateId: Schema.Types.ObjectId,
+        candidateId: Schema.Types.ObjectID,
         percentage: Number,
         numVotes: Number,
       },
     ],
-    winnerId: Schema.Types.ObjectId,
+    winnerId: Schema.Types.ObjectID,
     isTie: Boolean,
     totalVotes: Number,
     numEligibleVoters: Number,

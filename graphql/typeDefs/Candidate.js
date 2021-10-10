@@ -5,7 +5,7 @@ export default gql`
     """
     ID of the candidate
     """
-    id: ObjectId!
+    id: ObjectID!
     """
     Name of the candidate
     """

@@ -1,10 +1,10 @@
 import { gql, useQuery } from "@apollo/client";
-import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Add from "@material-ui/icons/Add";
+import Add from "@mui/icons-material/Add";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import joinUrl from "url-join";
@@ -16,7 +16,7 @@ import BackButton from "../../../../../comps/shared/BackButton";
 import layout from "./../../../../../styles/layout.module.css";
 
 const QUERY = gql`
-  query ($id: ObjectId!) {
+  query ($id: ObjectID!) {
     electionById(id: $id) {
       id
       name
@@ -86,7 +86,7 @@ const CandidateIndex = () => {
             Click on any of the candidates
           </Typography>
 
-          <Grid container justify={"center"} spacing={3}>
+          <Grid container justifyContent={"center"} spacing={3}>
             {election.candidates.map(({ picture, blurb, name, id }) => (
               <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
                 <CandidateCard

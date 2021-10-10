@@ -1,15 +1,15 @@
 import { gql, useQuery } from "@apollo/client";
-import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormLabel from "@material-ui/core/FormLabel";
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import { KeyboardDateTimePicker } from "@material-ui/pickers";
+import Autocomplete from "@mui/lab/Autocomplete";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import CircularProgress from "@mui/material/CircularProgress";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormLabel from "@mui/material/FormLabel";
+import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import TinyEditor from "../shared/TinyEditor";
@@ -185,35 +185,23 @@ const AnnouncementForm = ({
       <FormGroup row>
         <FormControl component="fieldset" className={styles.formControl}>
           <FormLabel component="legend">Start Time</FormLabel>
-          <KeyboardDateTimePicker
-            variant="inline"
-            inputVariant={"outlined"}
+          <DateTimePicker
+            renderInput={(props) => <TextField {...props} />}
             value={values.start}
+            label={"10/22/2021 05:00AM"}
             onChange={(val) => setFieldValue("start", val)}
-            onError={console.log}
-            format="MM/DD/yyyy hh:mma"
-            ampm
-            error={touched.start && !!errors.start}
-            helperText={touched.start && errors.start}
-            disabled={disabled || isSubmitting || values.permanent}
-            placeholder="05/05/2021 06:00am"
+            disabled={disabled || isSubmitting}
           />
         </FormControl>
 
         <FormControl component="fieldset" className={styles.formControl}>
           <FormLabel component="legend">End Time</FormLabel>
-          <KeyboardDateTimePicker
-            variant="inline"
-            inputVariant={"outlined"}
+          <DateTimePicker
+            renderInput={(props) => <TextField {...props} />}
             value={values.end}
+            label={"10/22/2021 06:00PM"}
             onChange={(val) => setFieldValue("end", val)}
-            onError={console.log}
-            format="MM/DD/yyyy hh:mma"
-            placeholder="05/05/2021 07:00pm"
-            disabled={disabled || isSubmitting || values.permanent}
-            error={touched.end && !!errors.end}
-            helperText={touched.end && errors.end}
-            ampm
+            disabled={disabled || isSubmitting}
           />
         </FormControl>
       </FormGroup>

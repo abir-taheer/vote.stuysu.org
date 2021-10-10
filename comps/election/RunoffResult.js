@@ -1,19 +1,19 @@
 import { gql, useQuery } from "@apollo/client";
-import Avatar from "@material-ui/core/Avatar";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import Typography from "@material-ui/core/Typography";
-import capitalize from "@material-ui/core/utils/capitalize";
-import ArrowBackIos from "@material-ui/icons/ArrowBackIos";
-import ArrowForwardIos from "@material-ui/icons/ArrowForwardIos";
-import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
-import Pagination from "@material-ui/lab/Pagination";
+import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
+import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
+import Pagination from "@mui/lab/Pagination";
+import Avatar from "@mui/material/Avatar";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
+import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
+import capitalize from "@mui/material/utils/capitalize";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
@@ -23,7 +23,7 @@ import brokenGlass from "./../../img/marginalia-fatal-error.png";
 import layout from "./../../styles/layout.module.css";
 
 const QUERY = gql`
-  query ($id: ObjectId!) {
+  query ($id: ObjectID!) {
     electionResults(election: { id: $id }) {
       ... on RunoffResult {
         rounds {

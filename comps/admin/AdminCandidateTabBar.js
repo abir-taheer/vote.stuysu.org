@@ -1,6 +1,6 @@
-import Paper from "@material-ui/core/Paper";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
+import Paper from "@mui/material/Paper";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "./AdminElectionTabBar.module.css";
@@ -49,6 +49,9 @@ const AdminCandidateTabBar = () => {
           value={value}
           indicatorColor="secondary"
           textColor="secondary"
+          variant={"scrollable"}
+          scrollButtons={"auto"}
+          allowScrollButtonsMobile
           centered
         >
           {adjustedTabs.map((tab) => (
@@ -56,6 +59,7 @@ const AdminCandidateTabBar = () => {
               label={tab.label}
               key={tab.path}
               onClick={() => router.push(tab.path)}
+              sx={{ minWidth: "8rem" }}
             />
           ))}
         </Tabs>

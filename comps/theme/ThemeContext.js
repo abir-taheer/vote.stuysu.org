@@ -1,7 +1,4 @@
-import {
-  createTheme,
-  ThemeProvider as Provider,
-} from "@material-ui/core/styles";
+import { createTheme, ThemeProvider as Provider } from "@mui/material/styles";
 import Head from "next/head";
 
 const theme = createTheme({

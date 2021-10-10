@@ -13,7 +13,7 @@ export default gql`
     """
     Id of the election, must be a valid object id
     """
-    id: ObjectId
+    id: ObjectID
   }
 
   enum sortTypes {
@@ -31,7 +31,7 @@ export default gql`
     """
     Takes an object id and returns the election with the matching id
     """
-    electionById(id: ObjectId!): Election
+    electionById(id: ObjectID!): Election
 
     """
     Takes a url and returns the matching election.
@@ -42,7 +42,7 @@ export default gql`
     """
     Takes an object id and returns the candidate with the matching id
     """
-    candidateById(id: ObjectId!): Candidate
+    candidateById(id: ObjectID!): Candidate
 
     """
     Returns the candidate from the given election that has the specified url or null if there are no matches
@@ -57,7 +57,7 @@ export default gql`
     By default it's sorted by random for fairness
     """
     candidatesByElectionId(
-      electionId: ObjectId!
+      electionId: ObjectID!
       query: String! = ""
       sort: sortTypes! = random
     ): [Candidate!]!
@@ -125,24 +125,24 @@ export default gql`
     """
     Returns the user with the given object id or null if no users were found
     """
-    userById(id: ObjectId!): User
+    userById(id: ObjectID!): User
 
     """
     Takes the id of a user and returns whether or not that user can be deleted
     ONLY ADMINS CAN USE THIS
     """
-    userIsDeletable(id: ObjectId!): Boolean!
+    userIsDeletable(id: ObjectID!): Boolean!
 
     """
     Returns an array of users with the object ids given, preserving the original order.
     Any object ids not found will be null in the returned arry
     """
-    usersById(ids: [ObjectId!]!): [User]!
+    usersById(ids: [ObjectID!]!): [User]!
 
     """
     Takes an id and returns the announcement that it belongs to
     """
-    announcementById(id: ObjectId!): Announcement
+    announcementById(id: ObjectID!): Announcement
 
     allAnnouncements(
       """
@@ -188,7 +188,7 @@ export default gql`
     """
     Takes an object id and returns the picture object with the matching id
     """
-    pictureById(id: ObjectId!): Picture
+    pictureById(id: ObjectID!): Picture
 
     """
     Takes an election identifier and returns the results of that election if available to the current user

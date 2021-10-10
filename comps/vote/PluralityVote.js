@@ -1,12 +1,12 @@
 import { gql, useMutation } from "@apollo/client";
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormLabel from "@material-ui/core/FormLabel";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Typography from "@material-ui/core/Typography";
+import Button from "@mui/material/Button";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormLabel from "@mui/material/FormLabel";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import Typography from "@mui/material/Typography";
 import moment from "moment-timezone";
 import { useContext, useState } from "react";
 import useFormatDate from "../../utils/date/useFormatDate";
@@ -16,7 +16,7 @@ import DateContext from "../shared/DateContext";
 import styles from "./PluralityVote.module.css";
 
 const MUTATION = gql`
-  mutation ($candidateId: ObjectId!, $electionId: ObjectId!) {
+  mutation ($candidateId: ObjectID!, $electionId: ObjectID!) {
     votePlurality(candidateId: $candidateId, electionId: $electionId) {
       id
       choice {

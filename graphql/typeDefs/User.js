@@ -2,7 +2,7 @@ import { gql } from "apollo-server-micro";
 
 export default gql`
   type User {
-    id: ObjectId!
+    id: ObjectID!
     firstName: String
     lastName: String
     email: EmailAddress

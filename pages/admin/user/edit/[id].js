@@ -1,9 +1,9 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Create from "@material-ui/icons/Create";
-import Delete from "@material-ui/icons/Delete";
+import Create from "@mui/icons-material/Create";
+import Delete from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
@@ -17,7 +17,7 @@ import UserNotFound from "../../../../comps/user/UserNotFound";
 import layout from "./../../../../styles/layout.module.css";
 
 const QUERY = gql`
-  query ($id: ObjectId!, $pageReady: Boolean!) {
+  query ($id: ObjectID!, $pageReady: Boolean!) {
     userById(id: $id) @include(if: $pageReady) {
       id
       firstName
@@ -33,7 +33,7 @@ const QUERY = gql`
 
 const EDIT_MUTATION = gql`
   mutation (
-    $id: ObjectId!
+    $id: ObjectID!
     $firstName: NonEmptyString!
     $lastName: NonEmptyString!
     $email: EmailAddress!
@@ -60,7 +60,7 @@ const EDIT_MUTATION = gql`
 `;
 
 const DELETE_MUTATION = gql`
-  mutation ($id: ObjectId!) {
+  mutation ($id: ObjectID!) {
     deleteUser(id: $id)
   }
 `;

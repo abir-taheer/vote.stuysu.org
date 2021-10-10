@@ -1,9 +1,9 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Create from "@material-ui/icons/Create";
-import Delete from "@material-ui/icons/Delete";
+import Create from "@mui/icons-material/Create";
+import Delete from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
@@ -17,7 +17,7 @@ import Error404 from "../../404";
 import layout from "./../../../styles/layout.module.css";
 
 const QUERY = gql`
-  query ($id: ObjectId!) {
+  query ($id: ObjectID!) {
     announcementById(id: $id) {
       id
       title
@@ -37,14 +37,14 @@ const QUERY = gql`
 
 const EDIT_MUTATION = gql`
   mutation (
-    $id: ObjectId!
+    $id: ObjectID!
     $title: NonEmptyString!
     $body: NonEmptyString!
     $start: DateTime
     $end: DateTime
     $permanent: Boolean!
     $showOnHome: Boolean!
-    $electionId: ObjectId
+    $electionId: ObjectID
   ) {
     editAnnouncement(
       id: $id
@@ -73,7 +73,7 @@ const EDIT_MUTATION = gql`
 `;
 
 const DELETE_MUTATION = gql`
-  mutation ($id: ObjectId!) {
+  mutation ($id: ObjectID!) {
     deleteAnnouncement(id: $id)
   }
 `;

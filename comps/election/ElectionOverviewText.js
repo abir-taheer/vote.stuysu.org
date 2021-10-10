@@ -1,8 +1,8 @@
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import BarChart from "@material-ui/icons/BarChart";
-import HowToVoteOutlined from "@material-ui/icons/HowToVoteOutlined";
-import PeopleOutlined from "@material-ui/icons/PeopleOutlined";
+import BarChart from "@mui/icons-material/BarChart";
+import HowToVoteOutlined from "@mui/icons-material/HowToVoteOutlined";
+import PeopleOutlined from "@mui/icons-material/PeopleOutlined";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useContext } from "react";

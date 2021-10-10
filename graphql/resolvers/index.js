@@ -1,4 +1,3 @@
-import ObjectId from "graphql-scalar-objectid";
 import { resolvers as graphqlScalarResolvers } from "graphql-scalars";
 import Announcement from "./Announcement";
 import Candidate from "./Candidate";
@@ -28,7 +27,6 @@ const Resolvers = {
   Election,
   ElectionResult,
   Mutation,
-  ObjectId,
   Picture,
   PluralityCandidateResult,
   PluralityResult,

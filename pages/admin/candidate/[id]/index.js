@@ -1,10 +1,10 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Container from "@material-ui/core/Container";
-import StyledLink from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
-import Create from "@material-ui/icons/Create";
+import Create from "@mui/icons-material/Create";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Container from "@mui/material/Container";
+import StyledLink from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
@@ -18,7 +18,7 @@ import BackButton from "../../../../comps/shared/BackButton";
 import layout from "../../../../styles/layout.module.css";
 
 const QUERY = gql`
-  query ($id: ObjectId!) {
+  query ($id: ObjectID!) {
     candidateById(id: $id) {
       id
       name
@@ -51,13 +51,13 @@ const QUERY = gql`
 
 const MUTATION = gql`
   mutation (
-    $id: ObjectId!
+    $id: ObjectID!
     $name: NonEmptyString!
     $url: NonEmptyString!
     $blurb: String!
     $platform: String!
-    $managerIds: [ObjectId!]!
-    $pictureId: ObjectId
+    $managerIds: [ObjectID!]!
+    $pictureId: ObjectID
   ) {
     editCandidate(
       id: $id
@@ -160,6 +160,7 @@ const ManageCandidate = () => {
           <Typography variant={"h2"} color={"secondary"} align={"center"}>
             {candidate.name}
           </Typography>
+
           <Typography variant={"body1"} align={"center"}>
             Candidate for{" "}
             <Link href={"/admin/election/" + election.id} passHref>
