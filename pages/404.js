@@ -1,20 +1,17 @@
 import HomeOutlined from "@mui/icons-material/HomeOutlined";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { URL } from "url";
 import { PUBLIC_URL } from "../constants";
 import get404Image from "../utils/errors/get404Image";
 import defaultImage from "./../img/404-images/searching-with-dog.png";
 import layout from "./../styles/layout.module.css";
 
 const Error404 = () => {
-  const theme = useTheme();
   const title = "Page Not Found | StuyBOE Voting Site";
   const description = "That page could not be found on this site";
   const [image, setImage] = useState(null);
@@ -24,9 +21,9 @@ const Error404 = () => {
   }, []);
 
   // Server side url class is undefined on client so choose based on which is available
-  const Url = globalThis?.URL || URL;
+  const URL = globalThis?.URL;
 
-  const defaultImageUrl = new Url(defaultImage.src, PUBLIC_URL).href;
+  const defaultImageUrl = new URL(defaultImage.src, PUBLIC_URL).href;
 
   return (
     <div>

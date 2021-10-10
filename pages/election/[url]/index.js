@@ -2,7 +2,6 @@ import { gql, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { capitalize } from "@mui/material/utils";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -14,6 +13,7 @@ import BackButton from "../../../comps/shared/BackButton";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
 import layout from "../../../styles/layout.module.css";
 import useFormatDate from "../../../utils/date/useFormatDate";
+import capitalize from "../../../utils/text/capitalize";
 import Error404 from "../../404";
 
 const ELECTION_QUERY = gql`
