@@ -1,9 +1,15 @@
 import { ForbiddenError, UserInputError } from "apollo-server-micro";
 import Election from "../../../models/election";
 
-export default async (_, { election: { id, url } }, { user, signedIn }) => {
+export default async (
+  _,
+  { election: { id, url } },
+  { authenticationRequired }
+) => {
+  authenticationRequired();
+
   if (!url && !id) {
-    throw new UserInputError("You need to pass an id or url");
+    throw new UserInputError("You need to pass an id or url to use this query");
   }
 
   if (url && id) {
@@ -29,18 +35,16 @@ export default async (_, { election: { id, url } }, { user, signedIn }) => {
   }
 
   if (!election.completed) {
-    if (!signedIn || !user.adminPrivileges) {
-      throw new ForbiddenError(
-        "You are not allowed to view the votes at this time"
-      );
-    }
+    throw new ForbiddenError(
+      "You are not allowed to view the votes at this time"
+    );
   }
 
   const votes = Array.from(
     election.type === "runoff" ? election.runoffVotes : election.pluralityVotes
   );
 
-  votes.sort((a, b) => a._id.localeCompare(b._id));
+  votes.sort((a, b) => a.id.toString().localeCompare(b.id.toString()));
 
   return votes;
 };

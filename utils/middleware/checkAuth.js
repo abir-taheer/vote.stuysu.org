@@ -8,7 +8,8 @@ export default async function checkAuth(req, res, next) {
   let jwt =
     req.cookies["auth-jwt"] ||
     req.headers["x-access-token"] ||
-    req.headers["authorization"];
+    req.headers["authorization"] ||
+    req.query.jwt;
 
   if (jwt && jwt.startsWith("Bearer ")) {
     jwt = jwt.replace("Bearer ", "");

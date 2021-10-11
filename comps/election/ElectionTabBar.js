@@ -2,6 +2,7 @@ import BallotOutlined from "@mui/icons-material/BallotOutlined";
 import DashboardOutlined from "@mui/icons-material/DashboardOutlined";
 import GroupWorkOutlined from "@mui/icons-material/GroupWorkOutlined";
 import HowToVoteOutlined from "@mui/icons-material/HowToVoteOutlined";
+import VerifiedUserOutlined from "@mui/icons-material/VerifiedUserOutlined";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { useRouter } from "next/router";
@@ -41,6 +42,14 @@ const tabs = [
     completed: false,
     showIfAdmin: null,
     icon: <HowToVoteOutlined />,
+  },
+  {
+    path: "/election/[url]/audit",
+    label: "Audit",
+    exact: false,
+    completed: true,
+    showIfAdmin: null,
+    icon: <VerifiedUserOutlined />,
   },
 ];
 
