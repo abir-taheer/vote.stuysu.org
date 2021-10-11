@@ -17,7 +17,7 @@
 }
 
 .spaced {
-  margin: 1rem;
+  margin: 1rem !important;
 }
 
 .link {
