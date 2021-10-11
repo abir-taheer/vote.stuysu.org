@@ -36,7 +36,16 @@ export default function Home() {
         📢
       </Typography>
 
-      <Typography variant={"subtitle1"} className={styles.description}>
+      <Typography
+        variant={"subtitle1"}
+        align={"center"}
+        sx={{
+          lineHeight: 1.5,
+          fontSize: "1.3rem",
+          margin: "0.8em 0",
+        }}
+        paragraph
+      >
         &quot;There&apos;s no such thing as a vote that doesn&apos;t
         matter.&quot;
       </Typography>
@@ -46,8 +55,8 @@ export default function Home() {
           src={voting}
           alt={"People representing voting"}
           className={layout.largeVector}
-          height={300}
-          width={300}
+          height={400}
+          width={400}
           objectFit={"contain"}
         />
       </div>
