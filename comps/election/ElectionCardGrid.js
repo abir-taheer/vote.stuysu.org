@@ -1,5 +1,5 @@
-import Pagination from "@mui/lab/Pagination";
 import Grid from "@mui/material/Grid";
+import Pagination from "@mui/material/Pagination";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import searching from "./../../img/searching.svg";
@@ -65,7 +65,8 @@ function ElectionCardGrid({ page, results, numPages, onPageChange, admin }) {
           </Grid>
         ))}
       </Grid>
-      <div style={layout.center}>
+
+      <div className={layout.center}>
         <Pagination count={numPages} page={page} onChange={onPageChange} />
       </div>
     </div>

@@ -1,7 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import Add from "@mui/icons-material/Add";
 import Search from "@mui/icons-material/Search";
-import Pagination from "@mui/lab/Pagination";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
@@ -9,6 +8,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import ListItemText from "@mui/material/ListItemText";
+import Pagination from "@mui/material/Pagination";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import moment from "moment-timezone/moment-timezone-utils";
