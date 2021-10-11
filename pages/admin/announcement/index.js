@@ -98,7 +98,7 @@ const AdminAnnouncements = () => {
                 />
 
                 <ListItemSecondaryAction>
-                  <Link href={"/admin/announcement/" + id}>
+                  <Link href={"/admin/announcement/" + id} passHref>
                     <Button color={"secondary"} variant={"contained"}>
                       View
                     </Button>

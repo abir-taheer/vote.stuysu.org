@@ -3,6 +3,7 @@ import Create from "@mui/icons-material/Create";
 import Delete from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
@@ -88,6 +89,7 @@ export default function ManageAnnouncement() {
     update: (cache) => cache.reset(),
     variables: { id },
   });
+
   const { enqueueSnackbar } = useSnackbar();
 
   if (loading) {
@@ -154,23 +156,24 @@ export default function ManageAnnouncement() {
       <AdminTabBar />
       {!isEditing && (
         <div className={layout.center}>
-          <Button
-            variant={"outlined"}
-            color={"secondary"}
-            onClick={() => setIsEditing(true)}
-            className={layout.spaced}
-            startIcon={<Create />}
-          >
-            Edit Announcement
-          </Button>
-          <Button
-            variant={"outlined"}
-            className={layout.deleteButton}
-            startIcon={<Delete />}
-            onClick={handleDelete}
-          >
-            Delete Announcement
-          </Button>
+          <Stack direction={"row"} spacing={3}>
+            <Button
+              variant={"outlined"}
+              color={"secondary"}
+              onClick={() => setIsEditing(true)}
+              startIcon={<Create />}
+            >
+              Edit Announcement
+            </Button>
+            <Button
+              variant={"outlined"}
+              startIcon={<Delete />}
+              color={"warning"}
+              onClick={handleDelete}
+            >
+              Delete Announcement
+            </Button>
+          </Stack>
         </div>
       )}
       <AnnouncementForm

@@ -91,7 +91,7 @@ const UserIndex = () => {
 
       <Typography paragraph align={"center"} variant={"body2"}>
         This will import new students from StuyActivities. <br />
-        If all goes well, this is all you'll need to do. <br />
+        If all goes well, this is all you&apos;ll need to do. <br />
         Do this once before every election cycle.
       </Typography>
       <div className={layout.center}>
@@ -192,7 +192,7 @@ const UserIndex = () => {
                     />
 
                     <ListItemSecondaryAction>
-                      <Link href={"/admin/user/edit/" + id}>
+                      <Link href={"/admin/user/edit/" + id} passHref>
                         <IconButton edge="end" focusRipple>
                           <Create />
                         </IconButton>

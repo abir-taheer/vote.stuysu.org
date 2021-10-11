@@ -58,7 +58,7 @@ const Error404 = () => {
         </Typography>
 
         <div className={layout.center}>
-          <Link href={"/"} styles={layout.spaced}>
+          <Link href={"/"} styles={layout.spaced} passHref>
             <Button
               startIcon={<HomeOutlined />}
               color={"secondary"}

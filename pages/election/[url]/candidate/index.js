@@ -110,7 +110,7 @@ function ElectionCandidates() {
         text={"Back To Elections"}
       />
 
-      <Typography variant={"h1"} className={layout.title} align={"center "}>
+      <Typography variant={"h1"} className={layout.title} align={"center"}>
         {election.name}
       </Typography>
 
@@ -130,7 +130,7 @@ function ElectionCandidates() {
         variant={"body2"}
         align={"center"}
         gutterBottom
-        className={layout.spaced}
+        sx={{ marginBottom: 3 }}
       >
         Click on any of the candidates for more info
       </Typography>

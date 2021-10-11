@@ -49,10 +49,13 @@
     "react-google-charts": "^3.0.15",
     "react-sortable-hoc": "^2.0.0",
     "sanitize-html": "^2.3.3",
+    "sharp": "^0.29.1",
     "streamifier": "^0.1.1",
     "url-join": "^4.0.1"
   },
   "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
     "esm": "^3.2.25",
     "prettier": "^2.2.1"
   },

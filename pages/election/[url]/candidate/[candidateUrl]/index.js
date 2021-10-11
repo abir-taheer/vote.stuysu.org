@@ -150,12 +150,9 @@ function CandidatePage() {
             blurb
           </Typography>
         )}
-        <Typography
-          variant={"body1"}
-          children={candidate.blurb}
-          align={"left"}
-          className={layout.spaced}
-        />
+        <Typography variant={"body1"} align={"left"} className={layout.spaced}>
+          {candidate.blurb}
+        </Typography>
 
         <Typography
           variant={"h2"}

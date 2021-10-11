@@ -126,7 +126,7 @@ function Result() {
             />
           </div>
           <Typography align={"center"} variant={"body1"}>
-            Results aren't available for this election yet
+            Results aren&apos;t available for this election yet
           </Typography>
         </>
       )}

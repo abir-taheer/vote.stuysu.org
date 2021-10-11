@@ -149,7 +149,7 @@ const ManageElection = () => {
         body: (
           <div>
             <Typography variant={"body1"}>
-              The election hasn't ended yet and will end on{" "}
+              The election hasn&apos;t ended yet and will end on{" "}
               <b>
                 {moment(end)
                   .tz(Intl.DateTimeFormat().resolvedOptions().timeZone)

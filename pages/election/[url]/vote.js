@@ -147,7 +147,7 @@ function Vote() {
       {election.userIsEligible && !isOpen && (
         <>
           <Typography variant={"h2"} color={"secondary"} align={"center"}>
-            This is election isn't open right now
+            This is election isn&apos;t open right now
           </Typography>
 
           <Image
@@ -170,7 +170,7 @@ function Vote() {
 
           {election.completed && (
             <Typography>
-              <Link href={"/election/" + url + "/result"}>
+              <Link href={"/election/" + url + "/result"} passHref>
                 <Button variant={"outlined"} color={"primary"}>
                   Results
                 </Button>
@@ -214,9 +214,9 @@ function Vote() {
                 vote and ensure that it was recorded accurately.
               </Typography>
               <Typography variant={"body1"}>
-                We'll store this code in your browser for the time being but,
-                because personally identifiable information is not stored with
-                your vote,{" "}
+                We&apos;ll store this code in your browser for the time being
+                but, because personally identifiable information is not stored
+                with your vote,{" "}
                 <b>we may be unable to show this code to you again</b>. It might
                 be a good idea to write it down or take a screenshot of it.
               </Typography>
@@ -248,7 +248,7 @@ function Vote() {
             className={layout.spaced}
             align={"center"}
           >
-            You're not eligible to vote in this election
+            You&apos;re not eligible to vote in this election
           </Typography>
         </>
       )}

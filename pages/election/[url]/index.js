@@ -61,9 +61,9 @@ const ElectionCandidates = () => {
   const { getReadableDate, now } = useFormatDate(true, 10000);
 
   // Refetch every 10 seconds so the user knows exactly when the election ends
-  useEffect(async () => {
-    await refetch();
-  }, [now]);
+  useEffect(() => {
+    refetch();
+  }, [now, refetch]);
 
   if (loading) {
     return <LoadingScreen />;

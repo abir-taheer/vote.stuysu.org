@@ -26,13 +26,19 @@ export default function Home() {
         <meta property="og:image:type" content="image/png" />
       </Head>
 
-      <Typography variant={"h1"} align={"center"} className={styles.title}>
+      <Typography
+        variant={"h1"}
+        align={"center"}
+        className={styles.title}
+        sx={{ margin: 0, lineHeight: 1.15, fontSize: "4rem" }}
+      >
         <span className={styles.purpleTextGradient}>Make your voice heard</span>{" "}
         📢
       </Typography>
 
       <Typography variant={"subtitle1"} className={styles.description}>
-        "There's no such thing as a vote that doesn't matter."
+        &quot;There&apos;s no such thing as a vote that doesn&apos;t
+        matter.&quot;
       </Typography>
 
       <div className={layout.center}>
