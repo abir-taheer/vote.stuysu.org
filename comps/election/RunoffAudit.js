@@ -13,6 +13,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import CenteredCircularProgress from "../shared/CenteredCircularProgress";
+import LoadingScreen from "../shared/LoadingScreen";
 import ElectionVotersTable from "./ElectionVotersTable";
 
 const QUERY = gql`
@@ -76,7 +77,7 @@ export default function RunoffAudit({ election }) {
   const [resultsPerPage, setResultsPerPage] = useState(25);
 
   if (loading) {
-    return <CenteredCircularProgress />;
+    return <LoadingScreen />;
   }
 
   if (error) {
