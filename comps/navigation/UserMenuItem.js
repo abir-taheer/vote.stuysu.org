@@ -3,7 +3,16 @@ import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
 import React, { useContext, useState } from "react";
 import UserContext from "../auth/UserContext";
-import styles from "./NavBar.module.css";
+
+const styles = {
+  button: {
+    color: "black",
+    margin: "0 0.5rem",
+  },
+  popover: {
+    padding: "1rem",
+  },
+};
 
 const UserMenuItem = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -15,7 +24,7 @@ const UserMenuItem = () => {
         disableRipple
         onClick={(ev) => setAnchorEl(anchorEl ? null : ev.target)}
         endIcon={<ArrowDropDown />}
-        sx={{ color: "black", margin: "0 0.5rem" }}
+        sx={styles.button}
       >
         Hi {user.firstName}
       </Button>
@@ -33,7 +42,7 @@ const UserMenuItem = () => {
         open={Boolean(anchorEl)}
         onBackdropClick={() => setAnchorEl(null)}
       >
-        <div className={styles.userItemPopover}>
+        <div style={styles.popover}>
           <p>
             You're signed in as: <b>{user.name}</b>
           </p>

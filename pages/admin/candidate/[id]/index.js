@@ -11,7 +11,7 @@ import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import AdminCandidateTabBar from "../../../../comps/admin/AdminCandidateTabBar";
 import AdminTabBar from "../../../../comps/admin/AdminTabBar";
-import CandidateForm from "../../../../comps/candidate/CandidateForm";
+import CandidateForm from "../../../../comps/candidate/form/CandidateForm";
 import alertDialog from "../../../../comps/dialog/alertDialog";
 import ElectionNotFound from "../../../../comps/election/ElectionNotFound";
 import BackButton from "../../../../comps/shared/BackButton";

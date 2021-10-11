@@ -1,9 +1,19 @@
 import React from "react";
-import styles from "./Footer.module.css";
 
-const Footer = () => {
+const styles = {
+  footer: {
+    width: "100%",
+    height: "100px",
+    borderTop: "1px solid #eaeaea",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+};
+
+function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer style={styles.footer}>
       <p>
         Created by{" "}
         <a href={"https://abir.nyc"} target={"_blank"}>
@@ -12,6 +22,6 @@ const Footer = () => {
       </p>
     </footer>
   );
-};
+}
 
 export default Footer;

@@ -6,7 +6,7 @@ import { useSnackbar } from "notistack";
 import AdminTabBar from "../../../comps/admin/AdminTabBar";
 import alertDialog from "../../../comps/dialog/alertDialog";
 import BackButton from "../../../comps/shared/BackButton";
-import UserForm from "../../../comps/user/UserForm";
+import UserForm from "../../../comps/user/form/UserForm";
 import layout from "./../../../styles/layout.module.css";
 
 const MUTATION = gql`

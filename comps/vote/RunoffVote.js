@@ -20,7 +20,6 @@ import { useEffect, useState } from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import alertDialog from "../dialog/alertDialog";
 import confirmDialog from "../dialog/confirmDialog";
-import styles from "./RunoffVote.module.css";
 import VotingCountDown from "./VotingCountDown";
 
 const MUTATION = gql`
@@ -35,6 +34,47 @@ const MUTATION = gql`
     }
   }
 `;
+
+const styles = {
+  option: {
+    marginBottom: "0.5rem",
+  },
+
+  submit: {
+    margin: "1rem 0",
+  },
+
+  voteId: {
+    background: "rgba(0, 0, 0, 0.08)",
+    borderRadius: "10px",
+    padding: "0.5rem",
+    color: "#6c5ce7",
+    fontSize: "1.5rem",
+    fontWeight: "bold",
+  },
+
+  description: {
+    maxWidth: "500px",
+  },
+
+  sticker: {
+    maxWidth: "200px",
+    maxHeight: "200px",
+    objectFit: "contain",
+  },
+
+  name: {
+    maxWidth: "350px",
+  },
+
+  confirmationList: {
+    listStyle: "decimal",
+  },
+
+  removedChip: {
+    margin: "0.5rem 0.5rem 0.5rem 0",
+  },
+};
 
 const SortableItem = SortableElement(
   ({
@@ -68,7 +108,7 @@ const SortableItem = SortableElement(
         className={"runoff-choice"}
         selected={justMoved}
       >
-        <ListItemText primary={name} className={styles.name} />
+        <ListItemText primary={name} sx={styles.name} />
         <ListItemSecondaryAction>
           {isDesktop && (
             <>
@@ -152,12 +192,12 @@ const RunoffVote = ({ election, candidates, refetch }) => {
       title: "Confirm Vote",
       body: (
         <>
-          <Typography variant={"body1"} className={styles.confirmHeading}>
+          <Typography variant={"body1"}>
             Just to confirm, the order of your preference is:
           </Typography>
           <ol>
             {choices.map((c) => (
-              <li className={styles.confirmationList}>
+              <li sx={styles.confirmationList}>
                 <Typography component={"span"} color={"secondary"}>
                   {c.name}
                 </Typography>
@@ -264,7 +304,7 @@ const RunoffVote = ({ election, candidates, refetch }) => {
                   label={name}
                   onClick={handleRestore}
                   icon={<Add />}
-                  className={styles.removedChip}
+                  sx={styles.removedChip}
                 />
               ))}
             </div>
@@ -275,7 +315,7 @@ const RunoffVote = ({ election, candidates, refetch }) => {
       <Button
         variant="outlined"
         color="primary"
-        className={styles.submit}
+        sx={styles.submit}
         disabled={!choices.length || loading}
         onClick={handleSubmit}
         fullWidth

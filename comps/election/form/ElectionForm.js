@@ -2,6 +2,7 @@ import School from "@mui/icons-material/School";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
+import Container from "@mui/material/Container";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
@@ -11,52 +12,54 @@ import RadioGroup from "@mui/material/RadioGroup";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import React from "react";
-import styles from "./ElectionForm.module.css";
 import ElectionPictureSelection from "./ElectionPictureSelection";
+import getSafeUrl from "./getSafeElectionUrl";
+import validate from "./validateElectionForm";
 
-async function validate(values) {
-  const errors = {};
+const styles = {
+  gradYearInput: {
+    "@media (max-width: 700px)": {
+      maxWidth: "calc(100% - 80px)",
+    },
+  },
 
-  if (!values.name) {
-    errors.name = "Required";
-  } else if (name.length > 48) {
-    errors.name = "Max length 48 characters";
-  }
+  gradYearContainer: {
+    "@media (min-width: 470px)": {
+      marginLeft: "0.5rem",
+    },
+  },
 
-  if (!values.url) {
-    errors.url = "Required";
-  } else if (values.url.length > 48) {
-    errors.url = "Max length 48 characters";
-  }
+  input: {
+    marginTop: "10px",
+    marginBottom: "10px",
+  },
 
-  if (!values.start) {
-    errors.start = "Required";
-  }
+  formControl: {
+    marginBottom: "15px",
 
-  if (!values.end) {
-    errors.end = "Required";
-  } else if (values.start) {
-    const start = new Date(values.start);
-    const end = new Date(values.end);
+    "@media (min-width: 470px)": {
+      margin: "1.25%",
+      width: "45%",
+    },
+  },
 
-    if (end < start) {
-      errors.end = "The start must be before the end";
-    }
-  }
+  gradYearButton: {
+    margin: "0.5rem",
+    height: "54px",
+  },
 
-  if (!values.pictureId) {
-    errors.pictureId = "Required";
-  }
+  chip: {
+    margin: "0.5rem",
+  },
 
-  return errors;
-}
+  submitButton: {
+    margin: "0.5rem",
+  },
 
-function getSafeUrl(str) {
-  return str
-    .toLowerCase()
-    .replace(/ /g, "-")
-    .replace(/[^a-z0-9-]/g, "");
-}
+  cancelButton: {
+    margin: "0.5rem",
+  },
+};
 
 const ElectionForm = ({
   initialValues,
@@ -138,7 +141,7 @@ const ElectionForm = ({
   return (
     <form onSubmit={handleSubmit}>
       <FormGroup row>
-        <FormControl component="fieldset" className={styles.formControl}>
+        <FormControl component="fieldset" sx={styles.formControl}>
           <FormLabel component="legend">Election Name</FormLabel>
           <TextField
             name={"name"}
@@ -152,7 +155,7 @@ const ElectionForm = ({
             onBlur={handleBlur}
           />
         </FormControl>
-        <FormControl component="fieldset" className={styles.formControl}>
+        <FormControl component="fieldset" sx={styles.formControl}>
           <FormLabel component="legend">URL</FormLabel>
           <TextField
             name={"url"}
@@ -171,7 +174,7 @@ const ElectionForm = ({
           />
         </FormControl>
       </FormGroup>
-      <FormControl component="fieldset" className={styles.formControl}>
+      <FormControl component="fieldset" sx={styles.formControl}>
         <FormLabel component="legend">Election Type</FormLabel>
         <RadioGroup
           name="type"
@@ -194,7 +197,7 @@ const ElectionForm = ({
         </RadioGroup>
       </FormControl>
       <FormGroup row>
-        <FormControl component="fieldset" className={styles.formControl}>
+        <FormControl component="fieldset" sx={styles.formControl}>
           <FormLabel component="legend">Start Time</FormLabel>
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
@@ -205,7 +208,7 @@ const ElectionForm = ({
           />
         </FormControl>
 
-        <FormControl component="fieldset" className={styles.formControl}>
+        <FormControl component="fieldset" sx={styles.formControl}>
           <FormLabel component="legend">End Time</FormLabel>
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
@@ -216,7 +219,7 @@ const ElectionForm = ({
           />
         </FormControl>
       </FormGroup>
-      <div className={styles.gradYearContainer}>
+      <Container sx={styles.gradYearContainer} disableGutters>
         <FormLabel component="legend">
           Which Graduating Classes Can Vote?
         </FormLabel>
@@ -233,11 +236,11 @@ const ElectionForm = ({
           type={"number"}
           min={2000}
           placeholder={"2021"}
-          className={styles.gradYearInput}
+          sx={styles.gradYearInput}
         />
         <Button
           variant={"contained"}
-          className={styles.gradYearButton}
+          sx={styles.gradYearButton}
           onClick={addAllowedGradYear}
           color={"secondary"}
           disabled={isSubmitting || disabled}
@@ -247,7 +250,7 @@ const ElectionForm = ({
         <div>
           {values.allowedGradYears.map((year) => (
             <Chip
-              className={styles.chip}
+              sx={styles.chip}
               label={"Class of " + year}
               onDelete={() => removeGradYear(year)}
               color="secondary"
@@ -257,7 +260,7 @@ const ElectionForm = ({
             />
           ))}
         </div>
-      </div>
+      </Container>
       <ElectionPictureSelection
         value={values.pictureId}
         setValue={(val) => setFieldValue("pictureId", val)}
@@ -270,7 +273,7 @@ const ElectionForm = ({
         onClick={submitForm}
         variant={"contained"}
         color={"primary"}
-        className={styles.submitButton}
+        sx={styles.submitButton}
         disabled={disabled || isSubmitting}
       >
         {submitLabel}
@@ -295,7 +298,7 @@ const ElectionForm = ({
             })
           }
           disabled={disabled || isSubmitting}
-          className={styles.cancelButton}
+          sx={styles.cancelButton}
         >
           {cancelLabel}
         </Button>

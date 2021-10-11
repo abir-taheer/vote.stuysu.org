@@ -6,7 +6,7 @@ import { useSnackbar } from "notistack";
 import React from "react";
 import AdminTabBar from "../../../comps/admin/AdminTabBar";
 import alertDialog from "../../../comps/dialog/alertDialog";
-import ElectionForm from "../../../comps/election/ElectionForm";
+import ElectionForm from "../../../comps/election/form/ElectionForm";
 import BackButton from "../../../comps/shared/BackButton";
 import layout from "./../../../styles/layout.module.css";
 

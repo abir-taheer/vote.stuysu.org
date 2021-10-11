@@ -3,6 +3,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import LoadingButton from "@mui/lab/LoadingButton";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
@@ -10,10 +11,32 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import useLogin from "../auth/useLogin";
 import UserContext from "../auth/UserContext";
-import styles from "./NavBar.module.css";
 import NavBarButton from "./NavBarButton";
 import NavDrawer from "./NavDrawer";
 import UserMenuItem from "./UserMenuItem";
+
+const styles = {
+  appBar: {
+    display: "flex",
+    maxWidth: 1200,
+    margin: "auto",
+  },
+  title: {
+    flexGrow: 1,
+  },
+  tabs: {
+    // Only show if screen is larger than 850px
+    "@media (max-width: 850px)": {
+      display: "none",
+    },
+  },
+  menuIcon: {
+    // Only show the menu button if screen is smaller than 851px
+    "@media (min-width: 851px)": {
+      display: "none",
+    },
+  },
+};
 
 const NavBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -30,18 +53,18 @@ const NavBar = () => {
 
       <AppBar
         position="relative"
-        className={styles.appBar}
+        sx={styles.appBar}
         elevation={0}
         color={"transparent"}
       >
-        <Toolbar className={styles.toolbar}>
+        <Toolbar>
           <Link href={"/"}>
-            <Typography variant="h6" className={styles.title}>
+            <Typography variant="h6" sx={styles.title}>
               StuyBOE Voting Site
             </Typography>
           </Link>
 
-          <div className={styles.menuLinks}>
+          <Stack spacing={2} direction={"row"} sx={styles.tabs}>
             <NavBarButton href={"/"} label={"Home"} active={path === "/"} />
 
             {user.signedIn && user.adminPrivileges && (
@@ -78,9 +101,9 @@ const NavBar = () => {
             )}
 
             {user.signedIn && <UserMenuItem />}
-          </div>
+          </Stack>
           <IconButton
-            className={styles.menuButton}
+            sx={styles.menuIcon}
             onClick={() => setDrawerOpen(!drawerOpen)}
           >
             <MenuIcon />

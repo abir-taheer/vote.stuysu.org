@@ -3,18 +3,33 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import styles from "./CandidateCard.module.css";
 
-const CandidateCard = ({ href, picture, blurb, name }) => {
+const styles = {
+  media: {
+    width: "150px",
+    height: "150px",
+    borderRadius: "50%",
+  },
+
+  action: {
+    paddingTop: "1.5rem",
+  },
+
+  mediaContainer: {
+    textAlign: "center",
+  },
+};
+
+function CandidateCard({ href, picture, blurb, name }) {
   return (
     <Card>
       <Link href={href}>
-        <CardActionArea className={styles.action}>
-          <div className={styles.mediaContainer}>
+        <CardActionArea sx={styles.action}>
+          <div style={styles.mediaContainer}>
             <img
               src={picture?.resource?.url}
               alt={picture?.alt}
-              className={styles.media}
+              style={styles.media}
             />
           </div>
           <CardContent>
@@ -30,6 +45,6 @@ const CandidateCard = ({ href, picture, blurb, name }) => {
       </Link>
     </Card>
   );
-};
+}
 
 export default CandidateCard;

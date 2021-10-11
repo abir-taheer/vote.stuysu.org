@@ -7,7 +7,6 @@ export default function NavBarButton({ label, active, href }) {
       <Button
         disableRipple
         sx={{
-          margin: "0 0.5rem",
           color: active ? "primary" : "black",
         }}
       >

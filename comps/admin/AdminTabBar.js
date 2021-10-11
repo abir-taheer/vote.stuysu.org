@@ -6,7 +6,6 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import styles from "./AdminTabBar.module.css";
 
 const tabs = [
   {
@@ -40,6 +39,19 @@ const getActiveTabIndex = (path) =>
     tab.path.some((activePath) => path.startsWith(activePath))
   );
 
+const styles = {
+  tabs: {
+    marginBottom: "2rem",
+  },
+  container: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  tab: {
+    minWidth: "8rem",
+  },
+};
+
 export default function AdminTabBar() {
   const { pathname, push } = useRouter();
   const previousPath = globalThis.sessionStorage?.getItem(
@@ -56,12 +68,12 @@ export default function AdminTabBar() {
   }, [pathname]);
 
   return (
-    <div className={styles.center}>
+    <div style={styles.container}>
       <Tabs
         value={value}
         indicatorColor="primary"
         textColor="primary"
-        className={styles.tabs}
+        sx={styles.tabs}
         scrollButtons={"auto"}
         variant={"scrollable"}
         allowScrollButtonsMobile
@@ -72,7 +84,7 @@ export default function AdminTabBar() {
             icon={tab.icon}
             onClick={() => push(tab.href)}
             key={tab.path.join(" ")}
-            sx={{ minWidth: "8rem" }}
+            sx={styles.tab}
           />
         ))}
       </Tabs>

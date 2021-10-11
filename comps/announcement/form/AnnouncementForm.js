@@ -12,45 +12,8 @@ import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import TinyEditor from "../shared/TinyEditor";
-import styles from "./AnnouncementForm.module.css";
-
-async function validate(values) {
-  const errors = {};
-
-  if (!values.title) {
-    errors.title = "Required";
-  }
-
-  if (!values.body) {
-    errors.body = "Required";
-  }
-
-  if (!values.permanent) {
-    if (!values.start) {
-      errors.start = "Start time required if announcement not always displayed";
-    }
-
-    if (!values.end) {
-      errors.end = "End time required if announcement not always displayed";
-    }
-  }
-
-  if (values.start && values.end) {
-    const start = new Date(values.start);
-    const end = new Date(values.end);
-
-    if (end < start) {
-      errors.end = "The start must be before the end";
-    }
-  }
-  if (!values.election && !values.showOnHome) {
-    errors.election =
-      "Election required if announcement is not shown on home page";
-  }
-
-  return errors;
-}
+import TinyEditor from "../../shared/TinyEditor";
+import validate from "./validateAnnouncementForm";
 
 const QUERY = gql`
   query ($query: String!) {
@@ -64,7 +27,25 @@ const QUERY = gql`
   }
 `;
 
-const AnnouncementForm = ({
+const styles = {
+  form: {
+    maxWidth: "1200px",
+  },
+
+  formControl: {
+    margin: "0.5rem",
+  },
+
+  submitButton: {
+    margin: "0.5rem",
+  },
+
+  cancelButton: {
+    margin: "0.5rem",
+  },
+};
+
+function AnnouncementForm({
   initialValues,
   onSubmit,
   submitLabel = "Submit",
@@ -72,7 +53,7 @@ const AnnouncementForm = ({
   cancelLabel = "Cancel",
   onCancel,
   disabled,
-}) => {
+}) {
   const {
     touched,
     values,
@@ -105,13 +86,9 @@ const AnnouncementForm = ({
   const elections = data?.allElections?.results || [];
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form onSubmit={handleSubmit} style={styles.form}>
       <FormGroup row>
-        <FormControl
-          component="fieldset"
-          className={styles.formControl}
-          fullWidth
-        >
+        <FormControl component="fieldset" sx={styles.formControl} fullWidth>
           <FormLabel component="legend">Title</FormLabel>
           <TextField
             name={"title"}
@@ -126,11 +103,7 @@ const AnnouncementForm = ({
           />
         </FormControl>
       </FormGroup>
-      <FormControl
-        component="fieldset"
-        className={styles.formControl}
-        fullWidth
-      >
+      <FormControl component="fieldset" sx={styles.formControl} fullWidth>
         <FormLabel component="legend">Content</FormLabel>
         <TinyEditor
           value={values.body}
@@ -140,11 +113,7 @@ const AnnouncementForm = ({
         <FormHelperText>{errors.body}</FormHelperText>
       </FormControl>
 
-      <FormControl
-        component="fieldset"
-        className={styles.formControl}
-        fullWidth
-      >
+      <FormControl component="fieldset" sx={styles.formControl} fullWidth>
         <FormLabel component="legend">Assign To Election (optional)</FormLabel>
         <Autocomplete
           getOptionSelected={(option, value) => option.id === value.id}
@@ -183,7 +152,7 @@ const AnnouncementForm = ({
       </FormControl>
 
       <FormGroup row>
-        <FormControl component="fieldset" className={styles.formControl}>
+        <FormControl component="fieldset" sx={styles.formControl}>
           <FormLabel component="legend">Start Time</FormLabel>
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
@@ -194,7 +163,7 @@ const AnnouncementForm = ({
           />
         </FormControl>
 
-        <FormControl component="fieldset" className={styles.formControl}>
+        <FormControl component="fieldset" sx={styles.formControl}>
           <FormLabel component="legend">End Time</FormLabel>
           <DateTimePicker
             renderInput={(props) => <TextField {...props} />}
@@ -208,7 +177,7 @@ const AnnouncementForm = ({
 
       <FormControl
         component="fieldset"
-        className={styles.formControl}
+        sx={styles.formControl}
         disabled={disabled || isSubmitting}
       >
         <FormLabel component="legend">Options</FormLabel>
@@ -244,7 +213,7 @@ const AnnouncementForm = ({
         onClick={submitForm}
         variant={"contained"}
         color={"primary"}
-        className={styles.submitButton}
+        sx={styles.submitButton}
         disabled={disabled || isSubmitting}
       >
         {submitLabel}
@@ -269,13 +238,13 @@ const AnnouncementForm = ({
             })
           }
           disabled={disabled || isSubmitting}
-          className={styles.cancelButton}
+          sx={styles.cancelButton}
         >
           {cancelLabel}
         </Button>
       )}
     </form>
   );
-};
+}
 
 export default AnnouncementForm;

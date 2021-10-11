@@ -6,12 +6,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import FormLabel from "@mui/material/FormLabel";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
-import uploadPicture from "../../utils/upload/uploadPicture";
-import alertDialog from "../dialog/alertDialog";
+import uploadPicture from "../../../utils/upload/uploadPicture";
+import alertDialog from "../../dialog/alertDialog";
 import PictureUploadDialog, {
   promptPicture,
-} from "../shared/PictureUploadDialog";
-import styles from "./ElectionPictureSelection.module.css";
+} from "../../shared/PictureUploadDialog";
 
 const PICTURE_QUERY = gql`
   query ($id: ObjectID!) {
@@ -24,6 +23,26 @@ const PICTURE_QUERY = gql`
     }
   }
 `;
+
+const styles = {
+  image: {
+    maxWidth: "300px",
+    maxHeight: "300px",
+    objectFit: "contain",
+  },
+
+  button: {
+    margin: "0.5rem 0",
+  },
+
+  container: {
+    margin: "0.5rem",
+  },
+
+  error: {
+    fontSize: "12px",
+  },
+};
 
 const ElectionPictureSelection = ({
   value,
@@ -70,7 +89,7 @@ const ElectionPictureSelection = ({
   };
 
   return (
-    <div className={styles.container}>
+    <div style={styles.container}>
       <PictureUploadDialog />
       <FormLabel>Election Picture</FormLabel>
       <br />
@@ -80,7 +99,7 @@ const ElectionPictureSelection = ({
           <img
             src={picture.resource.url}
             alt={picture.alt}
-            className={styles.image}
+            style={styles.image}
           />
           <br />
         </>
@@ -91,7 +110,7 @@ const ElectionPictureSelection = ({
           onClick={handleUpload}
           variant={"outlined"}
           color={"primary"}
-          className={styles.button}
+          sx={styles.button}
           disabled={disabled}
         >
           Upload Election Picture
@@ -103,18 +122,14 @@ const ElectionPictureSelection = ({
           onClick={() => setValue(null)}
           variant={"outlined"}
           color={"secondary"}
-          className={styles.button}
+          sx={styles.button}
           disabled={disabled}
         >
           Clear Picture
         </Button>
       )}
       {touched && !!error && (
-        <Typography
-          variant={"subtitle1"}
-          className={styles.error}
-          color={"error"}
-        >
+        <Typography variant={"subtitle1"} sx={styles.error} color={"error"}>
           {error}
         </Typography>
       )}

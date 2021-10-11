@@ -15,7 +15,12 @@ import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import useLogin from "../auth/useLogin";
 import UserContext from "../auth/UserContext";
-import styles from "./NavBar.module.css";
+
+const styles = {
+  heading: {
+    padding: "0.5rem 1rem",
+  },
+};
 
 const NavDrawer = ({ open, setOpen }) => {
   const router = useRouter();
@@ -27,7 +32,7 @@ const NavDrawer = ({ open, setOpen }) => {
   return (
     <Drawer open={open} onClose={() => setOpen(false)} anchor={"right"}>
       <List>
-        <div className={styles.drawerHeading}>
+        <div style={styles.heading}>
           {!user.signedIn && (
             <div>
               <p>You're not signed in</p>

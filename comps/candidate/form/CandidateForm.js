@@ -11,23 +11,14 @@ import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import getDefaultCandidatePic from "../../utils/candidate/getDefaltCandidatePic";
-import uploadPicture from "../../utils/upload/uploadPicture";
-import alertDialog from "../dialog/alertDialog";
+import getDefaultCandidatePic from "../../../utils/candidate/getDefaltCandidatePic";
+import uploadPicture from "../../../utils/upload/uploadPicture";
+import alertDialog from "../../dialog/alertDialog";
 import PictureUploadDialog, {
   promptPicture,
-} from "../shared/PictureUploadDialog";
-import TinyEditor from "../shared/TinyEditor";
-import styles from "./CandidateForm.module.css";
-
-function getCandidateUrl(val) {
-  return val
-    .toLowerCase()
-    .replace(/[^a-z0-9-& ]/g, "")
-    .split(/ +(?:and|&) +/i)
-    .map((a) => a.split(/ +/).filter(Boolean)[0])
-    .join("-");
-}
+} from "../../shared/PictureUploadDialog";
+import TinyEditor from "../../shared/TinyEditor";
+import getCandidateUrl from "./getCandidateUrl";
 
 const QUERY_USERS = gql`
   query ($query: String!) {
@@ -42,6 +33,66 @@ const QUERY_USERS = gql`
     }
   }
 `;
+
+const styles = {
+  form: {
+    maxWidth: "1200px",
+  },
+  nameControl: {
+    "@media (min-width: 800px)": {
+      marginRight: "1rem",
+      width: "calc(100% - (1rem + 282px))",
+    },
+
+    "@media (max-width: 799px)": {
+      width: "100%",
+    },
+  },
+
+  urlControl: {
+    "@media (min-width: 800px)": {
+      width: "282px",
+    },
+
+    "@media (max-width: 799px)": {
+      width: "100%",
+    },
+  },
+
+  chip: {
+    margin: "0.5rem",
+  },
+
+  submitButton: {
+    margin: "0.5rem",
+  },
+
+  cancelButton: {
+    margin: "0.5rem",
+  },
+
+  uploadButton: {
+    margin: "1rem",
+  },
+
+  picture: {
+    width: "200px",
+    height: "200px",
+    borderRadius: "50%",
+    objectFit: "cover",
+    boxShadow: "0 0 5px 0 grey",
+  },
+
+  pictureContainer: {
+    textAlign: "center",
+    marginTop: "1rem",
+  },
+
+  formGroup: {
+    marginTop: "1rem",
+    marginBottom: "1rem",
+  },
+};
 
 const CandidateForm = ({
   initialValues,
@@ -135,8 +186,8 @@ const CandidateForm = ({
     <div>
       <PictureUploadDialog />
 
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.pictureContainer}>
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <div style={styles.pictureContainer}>
           <img
             src={
               values.picture
@@ -148,7 +199,7 @@ const CandidateForm = ({
                 ? values.picture.alt
                 : "Initials of candidate on a colored background"
             }
-            className={styles.picture}
+            style={styles.picture}
           />
 
           <br />
@@ -158,7 +209,7 @@ const CandidateForm = ({
               variant={"outlined"}
               startIcon={<Clear />}
               onClick={() => setFieldValue("picture", null)}
-              className={styles.uploadButton}
+              sx={styles.uploadButton}
               disabled={disabled || isSubmitting}
             >
               Clear Upload
@@ -168,7 +219,7 @@ const CandidateForm = ({
               variant={"outlined"}
               startIcon={<AddAPhoto />}
               onClick={upload}
-              className={styles.uploadButton}
+              sx={styles.uploadButton}
               disabled={disabled || isSubmitting || uploading}
             >
               Upload Image
@@ -177,7 +228,7 @@ const CandidateForm = ({
         </div>
 
         <FormGroup row>
-          <FormControl component="fieldset" className={styles.nameControl}>
+          <FormControl component="fieldset" sx={styles.nameControl}>
             <FormLabel component="legend">Candidate Names</FormLabel>
             <TextField
               name={"name"}
@@ -192,7 +243,7 @@ const CandidateForm = ({
               fullWidth
             />
           </FormControl>
-          <FormControl component="fieldset" className={styles.urlControl}>
+          <FormControl component="fieldset" sx={styles.urlControl}>
             <FormLabel component="legend">Candidate Url</FormLabel>
             <TextField
               name={"url"}
@@ -217,7 +268,7 @@ const CandidateForm = ({
           </FormControl>
         </FormGroup>
 
-        <FormGroup className={styles.formGroup}>
+        <FormGroup sx={styles.formGroup}>
           <FormControl component="fieldset" fullWidth>
             <FormLabel component="legend">Blurb</FormLabel>
             <TextField
@@ -237,7 +288,7 @@ const CandidateForm = ({
           </FormControl>
         </FormGroup>
 
-        <FormGroup className={styles.formGroup}>
+        <FormGroup sx={styles.formGroup}>
           <FormControl component="fieldset" fullWidth>
             <FormLabel component="legend">Platform</FormLabel>
             <TinyEditor
@@ -252,7 +303,7 @@ const CandidateForm = ({
           </FormHelperText>
         </FormGroup>
 
-        <FormGroup row className={styles.formGroup}>
+        <FormGroup row sx={styles.formGroup}>
           <FormControl fullWidth>
             <FormLabel>Add Users To Manage This Candidate</FormLabel>
             <Autocomplete
@@ -306,7 +357,7 @@ const CandidateForm = ({
           onClick={submitForm}
           variant={"contained"}
           color={"primary"}
-          className={styles.submitButton}
+          sx={styles.submitButton}
           disabled={disabled || isSubmitting}
         >
           {submitLabel}
@@ -331,7 +382,7 @@ const CandidateForm = ({
               })
             }
             disabled={disabled || isSubmitting}
-            className={styles.cancelButton}
+            sx={styles.cancelButton}
           >
             {cancelLabel}
           </Button>

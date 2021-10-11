@@ -7,7 +7,6 @@ import Tabs from "@mui/material/Tabs";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../auth/UserContext";
-import styles from "./ElectionTabBar.module.css";
 
 const tabs = [
   {
@@ -45,6 +44,20 @@ const tabs = [
   },
 ];
 
+const styles = {
+  tabs: {
+    marginTop: "0.5rem",
+    marginBottom: "2rem",
+  },
+  container: {
+    justifyContent: "center",
+    display: "flex",
+  },
+  tab: {
+    minWidth: "8rem",
+  },
+};
+
 export default function ElectionTabBar({ completed }) {
   const router = useRouter();
   const { url } = router.query;
@@ -81,27 +94,31 @@ export default function ElectionTabBar({ completed }) {
   }, [router]);
 
   return (
-    <div className={styles.container}>
+    <div style={styles.container}>
       <Tabs
         value={value}
         indicatorColor="primary"
         textColor="primary"
-        className={styles.tabs}
+        sx={styles.tabs}
         variant={"scrollable"}
       >
         {adjustedTabs.map((tab) => (
           <Tab
             label={tab.label}
             key={tab.path}
-            onClick={() => {
+            onClick={(ev) => {
               window.sessionStorage.setItem(
                 "previous-election-tab-value",
                 value?.toString()
               );
 
-              router.push(tab.path);
+              if (ev.ctrlKey || ev.metaKey) {
+                window.open(tab.path);
+              } else {
+                router.push(tab.path);
+              }
             }}
-            sx={{ minWidth: "8rem" }}
+            sx={styles.tab}
             icon={tab.icon}
           />
         ))}

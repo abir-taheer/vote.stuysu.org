@@ -3,7 +3,6 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import styles from "./AdminElectionTabBar.module.css";
 
 const tabs = [
   {
@@ -22,6 +21,20 @@ const tabs = [
     exact: false,
   },
 ];
+
+const styles = {
+  paper: {
+    marginTop: "0.5rem",
+    marginBottom: "2rem",
+  },
+  container: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  tab: {
+    minWidth: "8rem",
+  },
+};
 
 const AdminCandidateTabBar = () => {
   const router = useRouter();
@@ -43,8 +56,8 @@ const AdminCandidateTabBar = () => {
   }, [router]);
 
   return (
-    <div className={styles.center}>
-      <Paper className={styles.paper}>
+    <div style={styles.container}>
+      <Paper sx={styles.paper}>
         <Tabs
           value={value}
           indicatorColor="secondary"
@@ -59,7 +72,7 @@ const AdminCandidateTabBar = () => {
               label={tab.label}
               key={tab.path}
               onClick={() => router.push(tab.path)}
-              sx={{ minWidth: "8rem" }}
+              sx={styles.tab}
             />
           ))}
         </Tabs>

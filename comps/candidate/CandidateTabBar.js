@@ -6,7 +6,6 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import styles from "./CandidateTabBar.module.css";
 
 const tabs = [
   {
@@ -47,6 +46,20 @@ const tabs = [
   },
 ];
 
+const styles = {
+  tabs: {
+    marginTop: "0.5rem",
+    marginBottom: "2rem",
+  },
+  container: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  tab: {
+    minWidth: "8rem",
+  },
+};
+
 export default function CandidateTabBar({
   isManager,
   active,
@@ -82,12 +95,12 @@ export default function CandidateTabBar({
   }, [router]);
 
   return (
-    <div className={styles.center}>
+    <div style={styles.container}>
       <Tabs
         value={value}
         indicatorColor="primary"
         textColor="primary"
-        className={styles.tabs}
+        sx={styles.tabs}
         variant={"scrollable"}
         allowScrollButtonsMobile
         scrollButtons={"auto"}
@@ -98,7 +111,7 @@ export default function CandidateTabBar({
             key={tab.path}
             onClick={() => router.push(tab.path)}
             icon={tab.icon}
-            sx={{ minWidth: "8rem" }}
+            sx={styles.tab}
           />
         ))}
       </Tabs>

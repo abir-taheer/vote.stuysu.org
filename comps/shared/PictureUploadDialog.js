@@ -8,7 +8,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import EventEmitter from "events";
 import { createRef, useEffect, useState } from "react";
-import styles from "./PictureUploadDialog.module.css";
 
 const pictureDialogEmitter = new EventEmitter();
 
@@ -17,6 +16,25 @@ export function promptPicture(file) {
     pictureDialogEmitter.emit("prompt", { resolve, reject, file });
   });
 }
+
+const styles = {
+  imageContainer: {
+    width: "300px",
+    maxHeight: "400px",
+    height: "200px",
+    maxWidth: "100%",
+  },
+
+  image: {
+    maxWidth: "100%",
+    maxHeight: "85%",
+    objectFit: "contain",
+  },
+
+  altInput: {
+    margin: "1rem 0",
+  },
+};
 
 const PictureUploadDialog = () => {
   const [open, setOpen] = useState(false);
@@ -67,11 +85,11 @@ const PictureUploadDialog = () => {
       <DialogTitle>Upload A Picture</DialogTitle>
       <DialogContent>
         {file && (
-          <div className={styles.imageContainer}>
+          <div style={styles.imageContainer}>
             <img
               src={window.URL.createObjectURL(file)}
               alt={alt}
-              className={styles.image}
+              style={styles.image}
             />
             <br />
             <Button
@@ -113,7 +131,7 @@ const PictureUploadDialog = () => {
             "Briefly the image. This will appear if the image fails to load or for people with assistive readers."
           }
           fullWidth
-          className={styles.altInput}
+          sx={styles.altInput}
         />
       </DialogContent>
       <DialogActions>

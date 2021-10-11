@@ -5,17 +5,22 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import React from "react";
-import styles from "./ElectionCard.module.css";
 import ElectionCardDate from "./ElectionCardDate";
 
-const ElectionCard = ({
+const styles = {
+  media: {
+    height: "200px",
+  },
+};
+
+function ElectionCard({
   picture,
   name,
   start,
   end,
   href,
   dateUpdateInterval = 1000,
-}) => {
+}) {
   return (
     <Card>
       <Link href={href}>
@@ -23,7 +28,7 @@ const ElectionCard = ({
           <CardMedia
             image={picture?.resource?.url}
             title={picture.alt}
-            className={styles.media}
+            sx={styles.media}
           />
           <CardContent>
             <Typography gutterBottom variant="h2">
@@ -40,6 +45,6 @@ const ElectionCard = ({
       </Link>
     </Card>
   );
-};
+}
 
 export default ElectionCard;

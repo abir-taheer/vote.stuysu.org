@@ -13,7 +13,6 @@ import useFormatDate from "../../utils/date/useFormatDate";
 import alertDialog from "../dialog/alertDialog";
 import confirmDialog from "../dialog/confirmDialog";
 import DateContext from "../shared/DateContext";
-import styles from "./PluralityVote.module.css";
 
 const MUTATION = gql`
   mutation ($candidateId: ObjectID!, $electionId: ObjectID!) {
@@ -28,7 +27,32 @@ const MUTATION = gql`
   }
 `;
 
-const PluralityVote = ({ election, candidates, refetch }) => {
+const styles = {
+  option: {
+    marginBottom: "0.5rem",
+  },
+
+  submit: {
+    margin: "1rem 0",
+  },
+
+  voteId: {
+    background: "rgba(0, 0, 0, 0.08)",
+    borderRadius: "10px",
+    padding: "0.5rem",
+    color: "#6c5ce7",
+    fontSize: "1.5rem",
+    fontWeight: "bold",
+  },
+
+  sticker: {
+    maxWidth: "200px",
+    maxHeight: "200px",
+    objectFit: "contain",
+  },
+};
+
+function PluralityVote({ election, candidates, refetch }) {
   const [candidateId, setCandidateId] = useState(null);
   const { formatDuration } = useFormatDate(false);
   const { getNow } = useContext(DateContext);
@@ -96,7 +120,7 @@ const PluralityVote = ({ election, candidates, refetch }) => {
               key={id}
               control={<Radio />}
               label={name}
-              className={styles.option}
+              sx={styles.option}
             />
           ))}
         </RadioGroup>
@@ -110,7 +134,7 @@ const PluralityVote = ({ election, candidates, refetch }) => {
         fullWidth
         variant="outlined"
         color="primary"
-        className={styles.submit}
+        sx={styles.submit}
         disabled={!candidateId || loading}
         onClick={handleSubmit}
       >
@@ -118,6 +142,6 @@ const PluralityVote = ({ election, candidates, refetch }) => {
       </Button>
     </form>
   );
-};
+}
 
 export default PluralityVote;

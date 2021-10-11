@@ -12,7 +12,7 @@ import alertDialog from "../../../../comps/dialog/alertDialog";
 import confirmDialog from "../../../../comps/dialog/confirmDialog";
 import BackButton from "../../../../comps/shared/BackButton";
 import CenteredCircularProgress from "../../../../comps/shared/CenteredCircularProgress";
-import UserForm from "../../../../comps/user/UserForm";
+import UserForm from "../../../../comps/user/form/UserForm";
 import UserNotFound from "../../../../comps/user/UserNotFound";
 import layout from "./../../../../styles/layout.module.css";
 

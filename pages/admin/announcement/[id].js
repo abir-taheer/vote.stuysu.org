@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 import AdminTabBar from "../../../comps/admin/AdminTabBar";
-import AnnouncementForm from "../../../comps/announcement/AnnouncementForm";
+import AnnouncementForm from "../../../comps/announcement/form/AnnouncementForm";
 import alertDialog from "../../../comps/dialog/alertDialog";
 import confirmDialog from "../../../comps/dialog/confirmDialog";
 import BackButton from "../../../comps/shared/BackButton";

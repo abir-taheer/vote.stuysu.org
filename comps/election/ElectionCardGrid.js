@@ -5,12 +5,36 @@ import Image from "next/image";
 import searching from "./../../img/searching.svg";
 import layout from "./../../styles/layout.module.css";
 import ElectionCard from "./ElectionCard";
-import styles from "./ElectionCardGrid.module.css";
 
-const ElectionCardGrid = ({ page, results, numPages, onPageChange, admin }) => {
+const styles = {
+  grid: {
+    margin: "1rem 0",
+  },
+
+  itemContainer: {
+    margin: "0.5rem",
+  },
+
+  notFoundContainer: {
+    textAlign: "center",
+    color: "rgba(0, 0, 0, 0.6)",
+    fontWeight: "bold",
+  },
+
+  notFoundImage: {
+    opacity: 0.8,
+    maxWidth: "300px",
+  },
+
+  container: {
+    marginTop: "20px",
+  },
+};
+
+function ElectionCardGrid({ page, results, numPages, onPageChange, admin }) {
   if (!numPages) {
     return (
-      <div className={styles.notFoundContainer}>
+      <div style={styles.notFoundContainer}>
         <Image
           src={searching}
           alt={"Someone with a magnifying glass pointed at the ground"}
@@ -26,10 +50,10 @@ const ElectionCardGrid = ({ page, results, numPages, onPageChange, admin }) => {
 
   return (
     <div>
-      <Grid container className={styles.grid} justifyContent={"center"}>
+      <Grid container sx={styles.grid} justifyContent={"center"}>
         {results?.map(({ name, url, picture, id, start, end }) => (
           <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
-            <div className={styles.itemContainer}>
+            <div style={styles.itemContainer}>
               <ElectionCard
                 name={name}
                 picture={picture}
@@ -41,11 +65,11 @@ const ElectionCardGrid = ({ page, results, numPages, onPageChange, admin }) => {
           </Grid>
         ))}
       </Grid>
-      <div className={layout.center}>
+      <div style={layout.center}>
         <Pagination count={numPages} page={page} onChange={onPageChange} />
       </div>
     </div>
   );
-};
+}
 
 export default ElectionCardGrid;
