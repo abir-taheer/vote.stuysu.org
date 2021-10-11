@@ -138,7 +138,10 @@ export default function RunoffAudit({ election }) {
         }}
         variant={"outlined"}
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => {
+          setPage(0);
+          setQuery(e.target.value);
+        }}
       />
       <Paper sx={styles.paper}>
         <TableContainer sx={styles.tableContainer}>
@@ -163,7 +166,9 @@ export default function RunoffAudit({ election }) {
                 .map((vote) => {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={vote.id}>
-                      <TableCell>{vote.id}</TableCell>
+                      <TableCell>
+                        <b>{vote.id}</b>
+                      </TableCell>
                       {election.candidates.map((_, i) => (
                         <TableCell
                           key={i}

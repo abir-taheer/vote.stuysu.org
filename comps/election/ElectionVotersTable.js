@@ -80,7 +80,10 @@ export default function ElectionVotersTable({ voters, election }) {
         }}
         variant={"outlined"}
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => {
+          setPage(0);
+          setQuery(e.target.value);
+        }}
       />
       <Paper sx={styles.paper}>
         <TableContainer sx={styles.tableContainer}>
