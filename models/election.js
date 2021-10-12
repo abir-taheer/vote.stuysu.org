@@ -32,7 +32,7 @@ const ElectionSchema = new Schema({
   runoffVotes: {
     type: [
       {
-        id: {
+        _id: {
           type: String,
           default: () => nanoid(),
         },
@@ -70,7 +70,7 @@ const ElectionSchema = new Schema({
   pluralityVotes: {
     type: [
       {
-        id: {
+        _id: {
           type: String,
           default: () => nanoid(),
         },
