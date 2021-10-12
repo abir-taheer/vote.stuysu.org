@@ -205,7 +205,7 @@ function Vote() {
           )}
 
           {voteId ? (
-            <div>
+            <Container maxWidth={"sm"}>
               <Typography variant={"h3"} align={"center"}>
                 Your Vote ID is: <code className={layout.voteId}>{voteId}</code>
               </Typography>
@@ -220,7 +220,7 @@ function Vote() {
                 <b>we may be unable to show this code to you again</b>. It might
                 be a good idea to write it down or take a screenshot of it.
               </Typography>
-            </div>
+            </Container>
           ) : (
             <Typography variant={"body1"} align={"center"}>
               Your vote id is not stored on this browser and cannot be
