@@ -83,7 +83,7 @@ export default function PluralityResult({ election }) {
 
       return () => observer.disconnect();
     }
-  }, [winnerRef, confetti]);
+  }, [winnerRef, confetti, data]);
 
   if (loading) {
     return <LoadingScreen />;
@@ -183,7 +183,7 @@ export default function PluralityResult({ election }) {
                 {eliminated && (
                   <ListItemSecondaryAction>
                     <IconButton disabled>
-                      <HighlightOffRoundedIcon style={{ color: "red" }} />
+                      <HighlightOffRoundedIcon sx={{ color: "red" }} />
                     </IconButton>
                   </ListItemSecondaryAction>
                 )}
