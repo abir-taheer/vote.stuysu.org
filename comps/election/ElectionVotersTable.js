@@ -59,7 +59,7 @@ export default function ElectionVotersTable({ voters, election }) {
         gutterBottom
       >
         If you took part in the election make sure you're present in the list
-        below
+        below. The list is sorted alphabetically.
       </Typography>
       <Typography variant={"subtitle2"} align={"center"} gutterBottom>
         <Link

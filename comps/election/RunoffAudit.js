@@ -117,8 +117,9 @@ export default function RunoffAudit({ election }) {
         align={"center"}
         gutterBottom
       >
-        If you took part in the election make sure you're present in the list
-        below
+        If you voted in this election you can look up your vote id to ensure
+        that your vote was recorded correctly. The votes below are in no
+        particular order.
       </Typography>
       <Typography variant={"subtitle2"} align={"center"} gutterBottom>
         <Link
