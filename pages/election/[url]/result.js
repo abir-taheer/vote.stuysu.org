@@ -10,6 +10,7 @@ import withApollo from "../../../comps/apollo/withApollo";
 import UserContext from "../../../comps/auth/UserContext";
 import ElectionNotFound from "../../../comps/election/ElectionNotFound";
 import ElectionTabBar from "../../../comps/election/ElectionTabBar";
+import PluralityResult from "../../../comps/election/PluralityResult";
 import RunoffResult from "../../../comps/election/RunoffResult";
 import BackButton from "../../../comps/shared/BackButton";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
@@ -111,6 +112,9 @@ function Result() {
         <>
           {election.type === "runoff" && (
             <RunoffResult id={election.id} election={election} />
+          )}
+          {election.type === "plurality" && (
+            <PluralityResult election={election} />
           )}
         </>
       ) : (

@@ -309,8 +309,15 @@ const RunoffResult = ({ id, election }) => {
         </div>
 
         {round === results.rounds.length && (
-          <Typography color={"secondary"} variant={"h3"} ref={winnerRef}>
-            Winner: {results.winner ? results.winner.name : "N/A"}
+          <Typography variant={"h3"} ref={winnerRef}>
+            Winner:{" "}
+            <Typography
+              color={"secondary"}
+              variant={"inherit"}
+              component={"span"}
+            >
+              {results.winner ? results.winner.name : "N/A"}
+            </Typography>
           </Typography>
         )}
       </Container>

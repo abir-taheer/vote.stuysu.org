@@ -51,7 +51,7 @@ export default async function calculatePluralityResults() {
 
     return {
       candidateId: candidate.id,
-      percentage: Math.round(rawPercentage * 10000) / 10000,
+      percentage: Math.round(rawPercentage * 10000) / 100,
       numVotes,
     };
   });
