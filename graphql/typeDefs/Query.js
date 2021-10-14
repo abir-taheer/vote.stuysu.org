@@ -214,5 +214,17 @@ export default gql`
     Get all the users who voted in a certain election
     """
     allVoters(election: electionIdentifier!): [User!]!
+
+    """
+    Takes an id and returns the associated FAQ Object
+    Returns null if there aren't any faqs with that id
+    """
+    faqById(id: ObjectID!): FAQ
+
+    """
+    Takes the url of an faq and returns the associated FAQ Object
+    Returns null if there's no FAQ with that url
+    """
+    faqByUrl(url: NonEmptyString!): FAQ
   }
 `;

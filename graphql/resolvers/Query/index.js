@@ -13,6 +13,8 @@ import date from "./date";
 import electionById from "./electionById";
 import electionByUrl from "./electionByUrl";
 import electionResults from "./electionResults";
+import faqById from "./faqById";
+import faqByUrl from "./faqByUrl";
 import openElections from "./openElections";
 import pastElections from "./pastElections";
 import pictureById from "./pictureById";
@@ -41,6 +43,8 @@ const Query = {
   electionById,
   electionByUrl,
   electionResults,
+  faqById,
+  faqByUrl,
   openElections,
   pastElections,
   pictureById,

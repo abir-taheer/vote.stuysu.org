@@ -7,6 +7,7 @@ import Election from "./Election";
 import ElectionQueryResult from "./ElectionQueryResult";
 import ElectionResult from "./ElectionResult";
 import ElectionTypes from "./ElectionTypes";
+import FAQ from "./FAQ";
 import Mutation from "./Mutation";
 import Picture from "./Picture";
 import PluralityCandidateResult from "./PluralityCandidateResult";
@@ -33,6 +34,7 @@ const typeDefs = [
   ElectionQueryResult,
   ElectionResult,
   ElectionTypes,
+  FAQ,
   Mutation,
   Picture,
   PluralityCandidateResult,
