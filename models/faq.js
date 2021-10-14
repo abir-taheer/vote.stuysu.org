@@ -18,6 +18,6 @@ const FAQSchema = new Schema({
 FAQSchema.statics.idLoader = findOneLoaderFactory("FAQ", "_id");
 FAQSchema.statics.urlLoader = findOneLoaderFactory("FAQ", "url");
 
-const FAQ = mongoose.models.FAQ || mongoose.model("FAQ", FAQ);
+const FAQ = mongoose.models.FAQ || mongoose.model("FAQ", FAQSchema);
 
 export default FAQ;
