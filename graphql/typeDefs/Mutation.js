@@ -89,7 +89,7 @@ export default gql`
       platform: String!
       managerIds: [ObjectID!]!
       pictureId: ObjectID
-    ): Candidate
+    ): Candidate!
 
     completeElection(id: ObjectID!): Election!
     openElection(id: ObjectID!): Election!
@@ -98,5 +98,14 @@ export default gql`
     voteRunoff(electionId: ObjectID!, choices: [ObjectID!]!): RunoffVote!
 
     syncUsersWithStuyActivities: StuyActivitiesSync!
+
+    createFAQ(title: NonEmptyString!, url: NonEmptyString!, body: String!): FAQ!
+    editFAQ(
+      id: ObjectID!
+      title: NonEmptyString!
+      url: NonEmptyString!
+      body: String!
+    ): FAQ!
+    deleteFAQ(id: ObjectID): Void
   }
 `;

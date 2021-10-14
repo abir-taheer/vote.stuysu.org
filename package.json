@@ -41,6 +41,7 @@
     "next-connect": "^0.10.2",
     "next-images": "^1.7.0",
     "next-with-apollo": "^5.2.1",
+    "node-html-parser": "^5.0.0",
     "notistack": "^2.0.2",
     "prettier-plugin-organize-imports": "^2.3.3",
     "react": "17.0.2",
