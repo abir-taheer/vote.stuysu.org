@@ -227,9 +227,18 @@ export default gql`
     """
     faqByUrl(url: NonEmptyString!): FAQ
 
-    allFaqs(
+    allFAQs(
+      """
+      A string used to filter faqs
+      """
       query: String! = ""
+      """
+      The page requested, if the string has more than one page of results.
+      """
       page: PositiveInt! = 1
+      """
+      Number of results on each page. Must be between 1 and 100. Default is 15
+      """
       resultsPerPage: PositiveInt! = 15
     ): FAQQueryResult!
   }
