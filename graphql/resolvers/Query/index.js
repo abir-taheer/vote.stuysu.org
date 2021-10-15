@@ -1,6 +1,7 @@
 import adminPictures from "./adminPictures";
 import allAnnouncements from "./allAnnouncements";
 import allElections from "./allElections";
+import allFAQs from "./allFAQs";
 import allUsers from "./allUsers";
 import allVoters from "./allVoters";
 import allVotes from "./allVotes";
@@ -28,6 +29,7 @@ const Query = {
   announcementById,
   adminPictures,
   allAnnouncements,
+  allFAQs,
   allUsers,
   allVotes,
   allVoters,

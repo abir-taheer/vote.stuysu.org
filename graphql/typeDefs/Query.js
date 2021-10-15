@@ -226,5 +226,11 @@ export default gql`
     Returns null if there's no FAQ with that url
     """
     faqByUrl(url: NonEmptyString!): FAQ
+
+    allFaqs(
+      query: String! = ""
+      page: PositiveInt! = 1
+      resultsPerPage: PositiveInt! = 15
+    ): FAQQueryResult!
   }
 `;

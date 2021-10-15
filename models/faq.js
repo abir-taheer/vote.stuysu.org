@@ -1,5 +1,6 @@
 import findOneLoaderFactory from "../utils/dataloaders/findOneLoaderFactory";
 import mongoose from "./mongoose";
+import queryFAQs from "./statics/faq/queryFAQs";
 
 const Schema = mongoose.Schema;
 
@@ -17,6 +18,7 @@ const FAQSchema = new Schema({
 
 FAQSchema.statics.idLoader = findOneLoaderFactory("FAQ", "_id");
 FAQSchema.statics.urlLoader = findOneLoaderFactory("FAQ", "url");
+FAQSchema.statics.queryFAQs = queryFAQs;
 
 const FAQ = mongoose.models.FAQ || mongoose.model("FAQ", FAQSchema);
 
