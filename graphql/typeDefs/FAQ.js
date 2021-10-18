@@ -6,7 +6,7 @@ export default gql`
     title: NonEmptyString!
     url: NonEmptyString!
     body: String!
-    plainTextString: String!
+    plainTextBody: String!
     createdAt: DateTime!
     updatedAt: DateTime!
   }

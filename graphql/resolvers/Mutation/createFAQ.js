@@ -1,6 +1,7 @@
 import { UserInputError } from "apollo-server-micro";
 import { parse } from "node-html-parser";
 import FAQ from "../../../models/faq";
+import sanitizeHtml from "../../../utils/candidate/sanitizeHtml";
 
 export default async (_, { title, url, body }, { adminRequired }) => {
   adminRequired();
@@ -16,6 +17,8 @@ export default async (_, { title, url, body }, { adminRequired }) => {
   const bodyTree = parse(body);
 
   const plainTextBody = bodyTree.innerText;
+
+  body = sanitizeHtml(body);
 
   const createdAt = new Date();
   const updatedAt = new Date();

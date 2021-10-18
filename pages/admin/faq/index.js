@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { AddOutlined, SearchOutlined } from "@mui/icons-material";
-import { ListItemSecondaryAction, TextField } from "@mui/material";
+import { ListItemSecondaryAction, Pagination, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
@@ -17,14 +17,16 @@ import searching from "../../../img/searching.svg";
 import layout from "./../../../styles/layout.module.css";
 
 const QUERY = gql`
-  query ($query: String!) {
-    allFAQs(query: $query) {
+  query ($query: String!, $page: PositiveInt!) {
+    allFAQs(query: $query, page: $page) {
       results {
         id
         title
         url
         updatedAt
       }
+      page
+      numPages
     }
   }
 `;
@@ -33,13 +35,14 @@ const styles = {
   searchField: {
     margin: "1rem",
   },
-  list: { width: "100%", bgcolor: "background.paper" },
+  list: { width: "100%", bgcolor: "background.paper", marginBottom: "1rem" },
 };
 
 export default function FAQAdminHome() {
   const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
   const { data, loading } = useQuery(QUERY, {
-    variables: { query },
+    variables: { query, page },
     fetchPolicy: "network-only",
   });
 
@@ -66,7 +69,10 @@ export default function FAQAdminHome() {
           sx={styles.searchField}
           variant={"outlined"}
           value={query}
-          onChange={(ev) => setQuery(ev.target.value)}
+          onChange={(ev) => {
+            setQuery(ev.target.value);
+            setPage(1);
+          }}
           label={"Search"}
           InputProps={{
             startAdornment: <SearchOutlined />,
@@ -93,23 +99,36 @@ export default function FAQAdminHome() {
       )}
 
       {!!data && !!data.allFAQs?.results?.length && (
-        <List sx={styles.list}>
-          {data.allFAQs.results.map((faq) => (
-            <Fragment key={faq.id}>
-              <Link href={"/admin/faq/" + faq.id} passHref>
-                <ListItem button>
-                  <ListItemText primary={faq.title} secondary={faq.url} />
-                  <ListItemSecondaryAction>
-                    <Typography variant={"subtitle2"} color={"text.secondary"}>
-                      Click To Edit
-                    </Typography>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              </Link>
-              <Divider />
-            </Fragment>
-          ))}
-        </List>
+        <>
+          <List sx={styles.list}>
+            {data.allFAQs.results.map((faq) => (
+              <Fragment key={faq.id}>
+                <Link href={"/admin/faq/" + faq.id} passHref>
+                  <ListItem button>
+                    <ListItemText primary={faq.title} secondary={faq.url} />
+                    <ListItemSecondaryAction>
+                      <Typography
+                        variant={"subtitle2"}
+                        color={"text.secondary"}
+                      >
+                        Click To Edit
+                      </Typography>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </Link>
+                <Divider />
+              </Fragment>
+            ))}
+          </List>
+
+          <div className={layout.center}>
+            <Pagination
+              page={page}
+              count={data.allFAQs.numPages}
+              onChange={(_, p) => setPage(p)}
+            />
+          </div>
+        </>
       )}
     </Container>
   );
