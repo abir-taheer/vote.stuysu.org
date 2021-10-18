@@ -38,7 +38,10 @@ const styles = {
 
 export default function FAQAdminHome() {
   const [query, setQuery] = useState("");
-  const { data, loading } = useQuery(QUERY, { variables: { query } });
+  const { data, loading } = useQuery(QUERY, {
+    variables: { query },
+    fetchPolicy: "network-only",
+  });
 
   return (
     <Container maxWidth={"sm"} className={layout.page}>

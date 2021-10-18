@@ -53,6 +53,7 @@ export default function FAQForm({
   onSubmit,
   submitLabel = "Submit",
   showCancelButton = false,
+  showSubmitButton = true,
   cancelLabel = "Cancel",
   onCancel,
   disabled,
@@ -127,14 +128,16 @@ export default function FAQForm({
       />
 
       <Divider sx={styles.divider} />
-      <Button
-        sx={styles.button}
-        variant={"contained"}
-        onClick={handleSubmit}
-        disabled={disabled || isSubmitting}
-      >
-        {submitLabel}
-      </Button>
+      {showSubmitButton && (
+        <Button
+          sx={styles.button}
+          variant={"contained"}
+          onClick={handleSubmit}
+          disabled={disabled || isSubmitting}
+        >
+          {submitLabel}
+        </Button>
+      )}
       {showCancelButton && (
         <Button
           sx={styles.button}
