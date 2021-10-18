@@ -8,7 +8,7 @@ export default async ({ page, resultsPerPage, query, filters }) => {
 
   const $and = words.map((word) => {
     const regex = new RegExp(escapeStringRegexp(word), "i");
-    const $or = [{ title: regex }];
+    const $or = [{ title: regex, url: regex }];
 
     return { $or };
   });
