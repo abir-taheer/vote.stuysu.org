@@ -58,13 +58,15 @@ export default function FAQAdminHome() {
       <AdminTabBar />
 
       <div className={layout.center}>
-        <Button
-          startIcon={<AddOutlined />}
-          variant={"contained"}
-          color={"secondary"}
-        >
-          Create FAQ
-        </Button>
+        <Link href={"/admin/faq/create"} passHref>
+          <Button
+            startIcon={<AddOutlined />}
+            variant={"contained"}
+            color={"secondary"}
+          >
+            Create FAQ
+          </Button>
+        </Link>
       </div>
 
       <div className={layout.center}>
