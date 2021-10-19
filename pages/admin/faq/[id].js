@@ -1,5 +1,6 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { DeleteOutlined, EditOutlined } from "@mui/icons-material";
+import DeleteOutlined from "@mui/icons-material/DeleteOutlined";
+import EditOutlined from "@mui/icons-material/EditOutlined";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";

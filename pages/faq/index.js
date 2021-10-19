@@ -1,15 +1,14 @@
 import { gql, useQuery } from "@apollo/client";
-import { HelpOutlineOutlined, SearchOutlined } from "@mui/icons-material";
-import {
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Pagination,
-  TextField,
-} from "@mui/material";
+import HelpOutlineOutlined from "@mui/icons-material/HelpOutlineOutlined";
+import SearchOutlined from "@mui/icons-material/SearchOutlined";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Pagination from "@mui/material/Pagination";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import Image from "next/image";

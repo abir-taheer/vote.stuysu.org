@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
-import { EditOutlined } from "@mui/icons-material";
+import EditOutlined from "@mui/icons-material/EditOutlined";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
