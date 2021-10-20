@@ -49,6 +49,14 @@ export default function FAQHome() {
             "See commonly asked questions about the election process for Student Union."
           }
         />
+        <meta
+          property={"og:image"}
+          content={"https://vote.stuysu.org/logo512.png"}
+        />
+        <meta property={"og:image:height"} content={512} />
+        <meta property={"og:image:width"} content={512} />
+        <meta property={"og:image:alt"} content={"Board of Elections Logo"} />
+        <meta property="og:image:type" content="image/png" />
       </Head>
 
       <Typography variant={"h2"} align={"center"}>
@@ -73,7 +81,7 @@ export default function FAQHome() {
       <List>
         {data?.allFAQs?.results.map((faq, index) => (
           <Fragment key={faq.id}>
-            <Link href={"/faq/" + faq.url}>
+            <Link href={"/faq/" + faq.url} passHref>
               <ListItem button>
                 <ListItemIcon>
                   <HelpOutlineOutlined />

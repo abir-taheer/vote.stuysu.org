@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import withApollo from "../../comps/apollo/withApollo";
 import UserContext from "../../comps/auth/UserContext";
 import BackButton from "../../comps/shared/BackButton";
@@ -69,6 +69,14 @@ function FAQPage() {
               : faq.plainTextBody.substr(0, 100) + "..."
           }
         />
+        <meta
+          property={"og:image"}
+          content={"https://vote.stuysu.org/logo512.png"}
+        />
+        <meta property={"og:image:height"} content={512} />
+        <meta property={"og:image:width"} content={512} />
+        <meta property={"og:image:alt"} content={"Board of Elections Logo"} />
+        <meta property="og:image:type" content="image/png" />
       </Head>
 
       <BackButton href={"/faq"} text={"Back To FAQs"} />
