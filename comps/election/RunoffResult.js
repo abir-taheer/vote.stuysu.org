@@ -82,11 +82,6 @@ const RunoffResult = ({ id, election }) => {
   const { data, loading } = useQuery(QUERY, { variables: { id } });
   const [round, setRound] = useState(1);
 
-  const [width, setWidth] = useState(globalThis.innerWidth || 200);
-
-  // Used to make sure confetti fills entire page
-  const [height, setHeight] = useState(globalThis.innerHeight || 200);
-
   // Used to determine once the user has seen who the winner is
   const winnerRef = useRef();
 
@@ -107,10 +102,6 @@ const RunoffResult = ({ id, election }) => {
 
       const callback = (entries) => {
         if (entries[0].isIntersecting) {
-          const pageHeight = window.document.body.offsetHeight;
-          setHeight(pageHeight);
-          setWidth(window.innerWidth);
-
           setConfetti(true);
         }
       };
@@ -258,10 +249,11 @@ const RunoffResult = ({ id, election }) => {
 
       {round === results.rounds.length && (
         <Confetti
-          width={width * 0.9}
-          height={height}
+          width={globalThis?.innerWidth}
+          height={globalThis?.innerHeight}
           recycle={false}
           run={confetti}
+          style={{ position: "fixed" }}
           numberOfPieces={200}
         />
       )}
