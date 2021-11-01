@@ -20,7 +20,7 @@ const styles = {
   },
 };
 
-function CandidateCard({ href, picture, blurb, name }) {
+function CandidateCard({ href, picture, blurb, name, strikes }) {
   return (
     <Card>
       <Link href={href}>
@@ -36,6 +36,16 @@ function CandidateCard({ href, picture, blurb, name }) {
             <Typography gutterBottom variant="h3" align={"center"}>
               {name}
             </Typography>
+            {!!strikes && (
+              <Typography
+                variant={"body2"}
+                color={"error"}
+                gutterBottom
+                align={"center"}
+              >
+                {strikes} Strike{strikes === 1 ? "" : "s"}
+              </Typography>
+            )}
             {/*Put the dates in a separate component because they re-render every second*/}
             <Typography variant={"body2"} color={"textSecondary"} gutterBottom>
               {blurb || "This candidate has not provided a blurb"}

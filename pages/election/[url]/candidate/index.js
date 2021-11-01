@@ -38,6 +38,7 @@ const QUERY = gql`
         url
         name
         blurb
+        totalStrikes
         picture {
           id
           alt
@@ -136,12 +137,13 @@ function ElectionCandidates() {
       </Typography>
 
       <Grid container justifyContent={"center"} spacing={3}>
-        {candidates.map(({ picture, blurb, name, url, id }) => (
+        {candidates.map(({ picture, blurb, name, url, id, totalStrikes }) => (
           <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
             <CandidateCard
               picture={picture}
               blurb={blurb}
               name={name}
+              strikes={totalStrikes}
               href={"/election/" + election.url + "/candidate/" + url}
             />
           </Grid>

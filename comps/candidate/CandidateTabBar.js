@@ -1,6 +1,5 @@
 import ManageAccountsOutlined from "@mui/icons-material/ManageAccountsOutlined";
 import PeopleOutlined from "@mui/icons-material/PeopleOutlined";
-import QuestionAnswerOutlined from "@mui/icons-material/QuestionAnswerOutlined";
 import ReportProblemOutlined from "@mui/icons-material/ReportProblemOutlined";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -16,15 +15,7 @@ const tabs = [
     electionCompleted: null,
     active: null,
     icon: <PeopleOutlined />,
-  },
-  {
-    path: "/election/[url]/candidate/[candidateUrl]/q-a",
-    label: "Q & A",
-    exact: false,
-    isManager: null,
-    electionCompleted: null,
-    active: null,
-    icon: <QuestionAnswerOutlined />,
+    strikes: null,
   },
   {
     path: "/election/[url]/candidate/[candidateUrl]/strike",
@@ -34,15 +25,17 @@ const tabs = [
     electionCompleted: null,
     active: null,
     icon: <ReportProblemOutlined />,
+    strikes: true,
   },
   {
     path: "/election/[url]/candidate/[candidateUrl]/manage",
     label: "Manage",
     exact: false,
-    isManager: null,
-    electionCompleted: null,
+    isManager: true,
+    electionCompleted: false,
     active: true,
     icon: <ManageAccountsOutlined />,
+    strikes: null,
   },
 ];
 
@@ -64,6 +57,7 @@ export default function CandidateTabBar({
   isManager,
   active,
   electionCompleted,
+  strikes,
 }) {
   const router = useRouter();
   const { url, candidateUrl } = router.query;
@@ -83,7 +77,8 @@ export default function CandidateTabBar({
         (tab.isManager === null || tab.isManager === isManager) &&
         (tab.active === null || tab.active === active) &&
         (tab.electionCompleted === null ||
-          tab.electionCompleted === electionCompleted)
+          tab.electionCompleted === electionCompleted) &&
+        (tab.strikes === null || tab.strikes === !!strikes)
     );
 
   const tabIndex = adjustedTabs.findIndex(isMatch);
@@ -93,6 +88,10 @@ export default function CandidateTabBar({
   useEffect(() => {
     setValue(tabIndex);
   }, [router]);
+
+  if (adjustedTabs.length <= 1) {
+    return null;
+  }
 
   return (
     <div style={styles.container}>

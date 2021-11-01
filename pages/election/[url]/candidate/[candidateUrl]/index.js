@@ -20,6 +20,7 @@ const QUERY = gql`
       name
       blurb
       platform
+      totalStrikes
       picture {
         id
         alt
@@ -129,6 +130,7 @@ function CandidatePage() {
         isManager={candidate.isManager}
         electionCompleted={election.completed}
         active={candidate.active}
+        strikes={candidate.totalStrikes}
       />
 
       <div className={layout.largePageBodyContainer}>

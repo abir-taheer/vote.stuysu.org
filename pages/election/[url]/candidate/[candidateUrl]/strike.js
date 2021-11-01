@@ -151,6 +151,7 @@ function CandidateStrikesPage() {
         isManager={candidate.isManager}
         electionCompleted={election.completed}
         active={candidate.active}
+        strikes={candidate.totalStrikes}
       />
 
       <div className={layout.largePageBodyContainer}>
@@ -168,7 +169,7 @@ function CandidateStrikesPage() {
           >
             {candidate.totalStrikes}
           </Typography>{" "}
-          strikes
+          strike{candidate.totalStrikes === 1 ? "" : "s"}
         </Typography>
       </div>
       <List sx={{ width: "100%", bgcolor: "background.paper" }}>
