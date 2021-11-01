@@ -8,6 +8,7 @@ import withApollo from "../../../comps/apollo/withApollo";
 import LoginButton from "../../../comps/auth/LoginButton";
 import UserContext from "../../../comps/auth/UserContext";
 import ElectionTabBar from "../../../comps/election/ElectionTabBar";
+import PluralityAudit from "../../../comps/election/PluralityAudit";
 import RunoffAudit from "../../../comps/election/RunoffAudit";
 import useElectionByUrl from "../../../comps/election/useElectionByUrl";
 import BackButton from "../../../comps/shared/BackButton";
@@ -119,6 +120,7 @@ function AuditElection() {
       <AuditElectionHeading election={election} />
 
       {election.type === "runoff" && <RunoffAudit election={election} />}
+      {election.type === "plurality" && <PluralityAudit election={election} />}
     </Container>
   );
 }

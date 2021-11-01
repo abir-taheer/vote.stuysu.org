@@ -139,7 +139,7 @@ apiRoute.get(async (req, res) => {
     }
 
     if (election.type === "plurality") {
-      votes = election.runoffVotes.map((vote) => {
+      votes = election.pluralityVotes.map((vote) => {
         return {
           id: vote.id,
           choice: candidateMap[vote.choice].name,
@@ -149,12 +149,12 @@ apiRoute.get(async (req, res) => {
 
     if (format === "json") {
       res.setHeader("Content-Type", "application/json");
-      res.json(JSON.stringify(votes, null, "\t"));
+      res.send(JSON.stringify(votes, null, "\t"));
     }
 
     if (format === "csv") {
       if (election.type === "runoff") {
-        const headers = ["Vote Id"];
+        const headers = ["Vote ID"];
         candidates.forEach((a, i) => headers.push("Choice " + (i + 1)));
 
         const formatted = [
@@ -176,8 +176,8 @@ apiRoute.get(async (req, res) => {
       }
 
       if (election.type === "plurality") {
-        const headers = ["Vote Id", "Choice"];
-        const formatted = [headers, ...votes];
+        const headers = ["Vote ID", "Choice"];
+        const formatted = [headers, ...votes.map((a) => [a.id, a.choice])];
 
         const csv = await stringifyCSV(formatted);
 
@@ -189,6 +189,7 @@ apiRoute.get(async (req, res) => {
             ""
           )} Votes.csv\"`
         );
+
         res.send(csv);
       }
     }

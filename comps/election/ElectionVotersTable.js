@@ -63,9 +63,7 @@ export default function ElectionVotersTable({ voters, election }) {
       </Typography>
       <Typography variant={"subtitle2"} align={"center"} gutterBottom>
         <Link
-          href={`/api/download?data=voters&electionId=${
-            election.id
-          }&format=csv&jwt=${localStorage.getItem("auth-jwt")}`}
+          href={`/api/download?data=voters&electionId=${election.id}&format=csv`}
           target={"_blank"}
         >
           Download as CSV

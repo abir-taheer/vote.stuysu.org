@@ -24,9 +24,9 @@ const QUERY = gql`
       gradYear
     }
     allVotes(election: { id: $id }) {
-      ... on RunoffVote {
+      ... on PluralityVote {
         id
-        choices {
+        choice {
           id
           name
         }
@@ -35,20 +35,6 @@ const QUERY = gql`
     }
   }
 `;
-
-function getVoteColumns(numChoices) {
-  const voteColumns = [{ id: "id", label: "Vote ID", minWidth: 170 }];
-
-  for (let i = 1; i < numChoices + 1; i++) {
-    voteColumns.push({
-      id: "id",
-      label: "Choice " + i,
-      minWidth: 60,
-    });
-  }
-
-  return voteColumns;
-}
 
 const styles = {
   title: {
@@ -66,7 +52,7 @@ const styles = {
   },
 };
 
-export default function RunoffAudit({ election }) {
+export default function PluralityAudit({ election }) {
   const { data, loading, error } = useQuery(QUERY, {
     variables: { id: election.id },
   });
@@ -148,15 +134,8 @@ export default function RunoffAudit({ election }) {
           <Table stickyHeader aria-label="voters table">
             <TableHead>
               <TableRow>
-                {getVoteColumns(election.candidates.length).map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
+                <TableCell align={"left"}>Vote ID</TableCell>
+                <TableCell align={"left"}>Choice</TableCell>
               </TableRow>
             </TableHead>
 
@@ -169,22 +148,19 @@ export default function RunoffAudit({ election }) {
                       <TableCell>
                         <b>{vote.id}</b>
                       </TableCell>
-                      {election.candidates.map((_, i) => (
-                        <TableCell
-                          key={i}
-                          color={vote.choices[i] ? "primary" : "text.secondary"}
-                        >
-                          {vote.choices[i]?.name || (
-                            <Typography
-                              variant={"body2"}
-                              color={"error"}
-                              sx={styles.noChoice}
-                            >
-                              N/A
-                            </Typography>
-                          )}
-                        </TableCell>
-                      ))}
+                      <TableCell
+                        color={vote.choice ? "primary" : "text.secondary"}
+                      >
+                        {vote.choice?.name || (
+                          <Typography
+                            variant={"body2"}
+                            color={"error"}
+                            sx={styles.noChoice}
+                          >
+                            N/A
+                          </Typography>
+                        )}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
