@@ -37,6 +37,7 @@ const QUERY = gql`
       candidates(sort: random) {
         id
         name
+        active
       }
       picture {
         id
@@ -83,6 +84,8 @@ function Vote() {
   // Determine this locally to avoid refreshing
   const isOpen = now > start && now < end && !election.completed;
 
+  const candidates = election.candidates.filter((c) => c.active);
+
   return (
     <Container maxWidth={"md"} className={layout.page}>
       <Head>
@@ -128,7 +131,7 @@ function Vote() {
         <Container maxWidth={"sm"}>
           {election.type === "plurality" && (
             <PluralityVote
-              candidates={election.candidates}
+              candidates={candidates}
               election={election}
               refetch={refetch}
             />
@@ -136,7 +139,7 @@ function Vote() {
 
           {election.type === "runoff" && (
             <RunoffVote
-              candidates={election.candidates}
+              candidates={candidates}
               election={election}
               refetch={refetch}
             />

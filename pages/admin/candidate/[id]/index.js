@@ -1,5 +1,8 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
+import BlockOutlined from "@mui/icons-material/BlockOutlined";
 import Create from "@mui/icons-material/Create";
+import DeleteOutlined from "@mui/icons-material/DeleteOutlined";
+import ReplayOutlined from "@mui/icons-material/ReplayOutlined";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
@@ -13,6 +16,7 @@ import AdminCandidateTabBar from "../../../../comps/admin/AdminCandidateTabBar";
 import AdminTabBar from "../../../../comps/admin/AdminTabBar";
 import CandidateForm from "../../../../comps/candidate/form/CandidateForm";
 import alertDialog from "../../../../comps/dialog/alertDialog";
+import confirmDialog from "../../../../comps/dialog/confirmDialog";
 import ElectionNotFound from "../../../../comps/election/ElectionNotFound";
 import BackButton from "../../../../comps/shared/BackButton";
 import layout from "../../../../styles/layout.module.css";
@@ -44,6 +48,7 @@ const QUERY = gql`
         id
         name
         url
+        completed
       }
     }
   }
@@ -92,6 +97,15 @@ const MUTATION = gql`
   }
 `;
 
+const SET_ACTIVE_MUTATION = gql`
+  mutation ($id: ObjectID!, $active: Boolean!) {
+    setCandidateActive(id: $id, active: $active) {
+      id
+      active
+    }
+  }
+`;
+
 const ManageCandidate = () => {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
@@ -99,6 +113,8 @@ const ManageCandidate = () => {
   const { id } = router.query;
   const { data, loading } = useQuery(QUERY, { variables: { id } });
   const [edit] = useMutation(MUTATION);
+  const [setCandidateActive, { loading: settingActive }] =
+    useMutation(SET_ACTIVE_MUTATION);
 
   const candidate = data?.candidateById;
   const election = candidate?.election;
@@ -136,6 +152,31 @@ const ManageCandidate = () => {
     }
   };
 
+  const handleModifyCandidateActive = async (active) => {
+    const message = candidate.active
+      ? "Suspending a candidate should happen when a candidate has too many strikes but may still appeal and get the strikes removed. If the candidate has dropped out or will no longer be able to run you should delete them instead. Are you sure you want to suspend this candidate?"
+      : "Are you sure you want to reinstate this candidate? ";
+
+    const confirmation = await confirmDialog({
+      title: "Confirm Action",
+      body: message,
+    });
+
+    if (confirmation) {
+      try {
+        await setCandidateActive({ variables: { id, active } });
+        enqueueSnackbar("Your changes were saved successfully", {
+          variant: "success",
+        });
+      } catch (e) {
+        alertDialog({
+          title: "Could not perform that action",
+          body: "There was an error: " + e.message,
+        });
+      }
+    }
+  };
+
   return (
     <Container maxWidth={"md"} className={layout.page}>
       {election && (
@@ -169,8 +210,24 @@ const ManageCandidate = () => {
               </StyledLink>
             </Link>
           </Typography>
+          {!candidate.active && (
+            <Typography align={"center"} color={"error"} paragraph>
+              <b>This candidate has been suspended</b>
+            </Typography>
+          )}
 
           <AdminCandidateTabBar />
+          {!isEditing && election.completed && (
+            <Typography
+              gutterBottom
+              align={"center"}
+              variant={"body1"}
+              color={"text.secondary"}
+            >
+              The election is closed and so deleting/suspending/reinstating
+              candidates is blocked
+            </Typography>
+          )}
 
           {!isEditing && (
             <div className={layout.center}>
@@ -184,13 +241,37 @@ const ManageCandidate = () => {
                 Edit Candidate
               </Button>
 
-              {candidate.active && (
-                <Button className={layout.spaced} variant={"outlined"}>
+              {candidate.active ? (
+                <Button
+                  className={layout.spaced}
+                  variant={"outlined"}
+                  disabled={settingActive || election.completed}
+                  color={"warning"}
+                  startIcon={<BlockOutlined />}
+                  onClick={() => handleModifyCandidateActive(false)}
+                >
                   Suspend Candidate
+                </Button>
+              ) : (
+                <Button
+                  className={layout.spaced}
+                  variant={"outlined"}
+                  color={"warning"}
+                  disabled={settingActive || election.completed}
+                  startIcon={<ReplayOutlined />}
+                  onClick={() => handleModifyCandidateActive(true)}
+                >
+                  Reinstate Candidate
                 </Button>
               )}
 
-              <Button className={layout.spaced} variant={"outlined"}>
+              <Button
+                className={layout.spaced}
+                variant={"outlined"}
+                color={"error"}
+                startIcon={<DeleteOutlined />}
+                disabled={election.completed}
+              >
                 Delete Candidate
               </Button>
             </div>

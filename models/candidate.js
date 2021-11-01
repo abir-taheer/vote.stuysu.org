@@ -19,12 +19,14 @@ const CandidateSchema = new Schema({
 
   managerIds: [Schema.Types.ObjectID],
 
-  social: {
-    facebook: String,
-    website: String,
-    email: String,
-    instagram: String,
-  },
+  strikes: [
+    {
+      reason: String,
+      weight: Number,
+      createdAt: Date,
+      updatedAt: Date,
+    },
+  ],
 });
 
 CandidateSchema.statics.idLoader = findOneLoaderFactory("Candidate");
@@ -49,6 +51,8 @@ CandidateSchema.statics.descElectionIdLoader = findManyLoaderFactory(
 
   { sort: { name: -1 } }
 );
+
+CandidateSchema.methods.delete = () => {};
 
 const Candidate =
   mongoose.models.Candidate || mongoose.model("Candidate", CandidateSchema);

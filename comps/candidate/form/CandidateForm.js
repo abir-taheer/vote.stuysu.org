@@ -1,9 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 import AddAPhoto from "@mui/icons-material/AddAPhoto";
 import Clear from "@mui/icons-material/Clear";
-import Autocomplete from "@mui/lab/Autocomplete";
+import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
-import Chip from "@mui/material/Chip";
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -308,33 +307,25 @@ const CandidateForm = ({
             <FormLabel>Add Users To Manage This Candidate</FormLabel>
             <Autocomplete
               multiple
-              disabled={disabled || isSubmitting}
               options={data?.allUsers?.results || []}
-              getOptionLabel={(option) => option.name}
-              getOptionSelected={(opts, value) => opts.id === value.id}
-              freeSolo
-              filterSelectedOptions={false}
-              filterOptions={(opts) => opts}
-              loading={loadingUsers}
+              getOptionLabel={(option) => `${option.name} (${option.email})`}
               value={values.managers}
+              disabled={disabled || isSubmitting}
+              filterSelectedOptions={false}
+              freeSolo
+              loading={loadingUsers}
+              isOptionEqualToValue={(opts, value) => opts.id === value.id}
               onChange={(ev, opts) => setFieldValue("managers", opts)}
-              renderOption={(option) => (
-                <p>
-                  <b>{option.name}</b>
-                  <br />
-                  {option.email} | Class of {option.gradYear} | Grade{" "}
-                  {option.grade}
-                </p>
+              renderOption={(props, option) => (
+                <div {...props} key={option.id}>
+                  <p>
+                    <b>{option.name}</b>
+                    <br />
+                    {option.email} | Class of {option.gradYear} | Grade{" "}
+                    {option.grade}
+                  </p>
+                </div>
               )}
-              renderTags={(value, getTagProps) =>
-                value.map((option, index) => (
-                  <Chip
-                    variant="outlined"
-                    label={`${option.name} (${option.email})`}
-                    {...getTagProps({ index })}
-                  />
-                ))
-              }
               renderInput={(params) => (
                 <TextField
                   {...params}

@@ -91,6 +91,12 @@ export default gql`
       pictureId: ObjectID
     ): Candidate!
 
+    """
+    Suspend or reinstate a candidate using their id
+    Admin Only
+    """
+    setCandidateActive(id: ObjectID!, active: Boolean!): Candidate!
+
     completeElection(id: ObjectID!): Election!
     openElection(id: ObjectID!): Election!
 

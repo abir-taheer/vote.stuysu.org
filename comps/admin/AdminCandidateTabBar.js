@@ -65,7 +65,6 @@ const AdminCandidateTabBar = () => {
           variant={"scrollable"}
           scrollButtons={"auto"}
           allowScrollButtonsMobile
-          centered
         >
           {adjustedTabs.map((tab) => (
             <Tab

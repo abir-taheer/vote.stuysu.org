@@ -15,6 +15,7 @@ import editUser from "./editUser";
 import login from "./login";
 import logout from "./logout";
 import openElection from "./openElection";
+import setCandidateActive from "./setCandidateActive";
 import syncUsersWithStuyActivities from "./syncUsersWithStuyActivities";
 import votePlurality from "./votePlurality";
 import voteRunoff from "./voteRunoff";
@@ -25,6 +26,7 @@ export default {
   deleteAnnouncement,
   deleteFAQ,
   openElection,
+  setCandidateActive,
   completeElection,
   createElection,
   createFAQ,

@@ -16,8 +16,8 @@ const tabs = [
     exact: false,
   },
   {
-    path: "/admin/election/[id]/posts",
-    label: "Posts",
+    path: "/admin/election/[id]/approval",
+    label: "Approvals",
     exact: false,
   },
 ];

@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import React, { Fragment, useState } from "react";
+import { Fragment, useState } from "react";
 import CenteredCircularProgress from "../../comps/shared/CenteredCircularProgress";
 import searching from "../../img/searching.svg";
 import layout from "./../../styles/layout.module.css";

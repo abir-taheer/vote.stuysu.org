@@ -50,5 +50,15 @@ export default gql`
     Returns true if the user is signed in and is a campaign manager for this candidate
     """
     isManager: Boolean
+
+    """
+    Any strikes that have been assigned to this candidate
+    """
+    strikes: [Strike!]!
+
+    """
+    The sum of the weight of all of the strikes assigned to this candidate
+    """
+    totalStrikes: NonNegativeFloat!
   }
 `;

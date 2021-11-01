@@ -20,6 +20,7 @@ import RunoffResult from "./RunoffResult";
 import RunoffRound from "./RunoffRound";
 import RunoffRoundResult from "./RunoffRoundResult";
 import RunoffVote from "./RunoffVote";
+import Strike from "./Strike";
 import StuyActivitiesSync from "./StuyActivitiesSync";
 import User from "./User";
 import UserQueryResult from "./UserQueryResult";
@@ -48,6 +49,7 @@ const typeDefs = [
   RunoffRound,
   RunoffRoundResult,
   RunoffVote,
+  Strike,
   StuyActivitiesSync,
   User,
   UserQueryResult,
