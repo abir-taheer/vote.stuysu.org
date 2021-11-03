@@ -2,11 +2,19 @@ import { Editor } from "@tinymce/tinymce-react";
 import { useSnackbar } from "notistack";
 import uploadPicture from "../../utils/upload/uploadPicture";
 
-const TinyEditor = ({ value, setValue, className, disabled, style }) => {
+const TinyEditor = ({
+  value,
+  setValue,
+  className,
+  disabled,
+  style,
+  onClick,
+  readonly,
+}) => {
   const { enqueueSnackbar } = useSnackbar();
 
   return (
-    <div className={className} style={style}>
+    <div className={className} style={style} onClick={onClick}>
       <Editor
         value={value}
         apiKey={
@@ -15,6 +23,7 @@ const TinyEditor = ({ value, setValue, className, disabled, style }) => {
         }
         init={{
           height: 350,
+          readonly: true,
           menubar: false,
           default_link_target: "_blank",
           plugins: [

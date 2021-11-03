@@ -5,6 +5,7 @@ import createElection from "./createElection";
 import createFAQ from "./createFAQ";
 import createUser from "./createUser";
 import deleteAnnouncement from "./deleteAnnouncement";
+import deleteCandidateProfileChange from "./deleteCandidateProfileChange";
 import deleteFAQ from "./deleteFAQ";
 import deleteUser from "./deleteUser";
 import editAnnouncement from "./editAnnouncement";
@@ -15,6 +16,8 @@ import editUser from "./editUser";
 import login from "./login";
 import logout from "./logout";
 import openElection from "./openElection";
+import requestCandidateProfileChange from "./requestCandidateProfileChange";
+import reviewCandidateProfileChange from "./reviewCandidateProfileChange";
 import setCandidateActive from "./setCandidateActive";
 import syncUsersWithStuyActivities from "./syncUsersWithStuyActivities";
 import votePlurality from "./votePlurality";
@@ -33,8 +36,11 @@ export default {
   createUser,
   createCandidate,
   deleteUser,
+  deleteCandidateProfileChange,
   editCandidate,
   editElection,
+  requestCandidateProfileChange,
+  reviewCandidateProfileChange,
   editFAQ,
   editUser,
   login,

@@ -4,17 +4,18 @@ export default gql`
   type CandidateProfilePictureChange {
     id: ObjectID!
 
+    candidate: Candidate!
     createdBy: User!
     field: CandidateProfileChangeFieldType!
-    value: Picture!
+    picture: Picture!
 
     reviewed: Boolean!
     reviewedBy: User
     approved: Boolean!
     reasonForRejection: String
 
+    reviewedAt: DateTime
     createdAt: DateTime!
-    reviewedAt: DateTime!
     updatedAt: DateTime!
   }
 `;

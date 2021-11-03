@@ -1,5 +1,5 @@
 export default (change) => {
-  if (change.field === "picture") {
+  if (change.field === "pictureId") {
     return "CandidateProfilePictureChange";
   }
 

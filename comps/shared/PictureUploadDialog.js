@@ -128,7 +128,7 @@ const PictureUploadDialog = () => {
           variant={"outlined"}
           placeholder={"e.g. people smiling in front of a bridge"}
           helperText={
-            "Briefly the image. This will appear if the image fails to load or for people with assistive readers."
+            "Briefly describe the image. This will appear if the image fails to load or for people with assistive readers."
           }
           fullWidth
           sx={styles.altInput}

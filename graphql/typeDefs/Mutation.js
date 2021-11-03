@@ -113,5 +113,20 @@ export default gql`
       body: String!
     ): FAQ!
     deleteFAQ(id: ObjectID): Void
+
+    requestCandidateProfileChange(
+      candidateId: ObjectID!
+      pictureId: ObjectID
+      blurb: String
+      platform: String
+    ): CandidateProfileChange!
+
+    reviewCandidateProfileChange(
+      id: ObjectID!
+      approved: Boolean!
+      reasonForRejection: String
+    ): CandidateProfileChange!
+
+    deleteCandidateProfileChange(id: ObjectID!): Void
   }
 `;
