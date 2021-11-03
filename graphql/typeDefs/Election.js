@@ -11,7 +11,7 @@ export default gql`
     start: DateTime!
     end: DateTime!
     completed: Boolean!
-    candidates(sort: sortTypes! = random): [Candidate!]!
+    candidates(sort: SortType! = random): [Candidate!]!
 
     """
     Returns null if the user is not signed in

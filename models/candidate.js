@@ -8,6 +8,51 @@ const CandidateSchema = new Schema({
   name: String,
 
   blurb: String,
+
+  profileChanges: [
+    {
+      createdBy: Schema.Types.ObjectId,
+
+      field: {
+        type: String,
+        enum: ["picture", "blurb", "platform"],
+        required: true,
+      },
+      // We'll implement validation through GraphQL
+      value: {
+        type: Schema.Types.Mixed,
+        required: true,
+      },
+
+      reviewed: {
+        type: Boolean,
+        default: false,
+        required: true,
+      },
+
+      reviewedAt: Date,
+      reviewedBy: Schema.Types.ObjectId,
+
+      approved: {
+        type: Boolean,
+        default: false,
+        required: true,
+      },
+
+      reasonForRejection: String,
+
+      createdAt: {
+        type: Date,
+        default: () => new Date(),
+      },
+
+      updatedAt: {
+        type: Date,
+        default: () => new Date(),
+      },
+    },
+  ],
+
   platform: String,
 
   url: String,
@@ -15,6 +60,7 @@ const CandidateSchema = new Schema({
   electionId: Schema.Types.ObjectID,
 
   pictureId: Schema.Types.ObjectID,
+
   active: Boolean,
 
   managerIds: [Schema.Types.ObjectID],

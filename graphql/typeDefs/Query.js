@@ -16,12 +16,6 @@ export default gql`
     id: ObjectID
   }
 
-  enum sortTypes {
-    random
-    alphabeticalDesc
-    alphabeticalAsc
-  }
-
   type Query {
     """
     Returns the current user if authentication is provided (is signed in), otherwise returns null
@@ -59,7 +53,7 @@ export default gql`
     candidatesByElectionId(
       electionId: ObjectID!
       query: String! = ""
-      sort: sortTypes! = random
+      sort: SortType! = random
     ): [Candidate!]!
 
     """

@@ -1,6 +1,9 @@
 import { resolvers as graphqlScalarResolvers } from "graphql-scalars";
 import Announcement from "./Announcement";
 import Candidate from "./Candidate";
+import CandidateProfileChange from "./CandidateProfileChange";
+import CandidateProfilePictureChange from "./CandidateProfilePictureChange";
+import CandidateProfileStringChange from "./CandidateProfileStringChange";
 import CloudinaryResource from "./CloudinaryResource";
 import Election from "./Election";
 import ElectionResult from "./ElectionResult";
@@ -23,6 +26,9 @@ const Resolvers = {
 
   Announcement,
   Candidate,
+  CandidateProfileChange,
+  CandidateProfilePictureChange,
+  CandidateProfileStringChange,
   CloudinaryResource,
   Election,
   ElectionResult,

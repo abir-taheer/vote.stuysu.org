@@ -60,5 +60,10 @@ export default gql`
     The sum of the weight of all of the strikes assigned to this candidate
     """
     totalStrikes: NonNegativeFloat!
+
+    """
+    All changes proposed to the candidate's profile
+    """
+    profileChanges: [CandidateProfileChange!]!
   }
 `;

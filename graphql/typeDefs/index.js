@@ -2,6 +2,10 @@ import { typeDefs as graphqlScalarDefs } from "graphql-scalars";
 import Announcement from "./Announcement";
 import AnnouncementQueryResult from "./AnnouncementQueryResult";
 import Candidate from "./Candidate";
+import CandidateProfileChange from "./CandidateProfileChange";
+import CandidateProfileChangeType from "./CandidateProfileChangeType";
+import CandidateProfilePictureChange from "./CandidateProfilePictureChange";
+import CandidateProfileStringChange from "./CandidateProfileStringChange";
 import CloudinaryResource from "./CloudinaryResource";
 import Election from "./Election";
 import ElectionQueryResult from "./ElectionQueryResult";
@@ -20,6 +24,7 @@ import RunoffResult from "./RunoffResult";
 import RunoffRound from "./RunoffRound";
 import RunoffRoundResult from "./RunoffRoundResult";
 import RunoffVote from "./RunoffVote";
+import SortType from "./SortType";
 import Strike from "./Strike";
 import StuyActivitiesSync from "./StuyActivitiesSync";
 import User from "./User";
@@ -31,6 +36,10 @@ const typeDefs = [
   Announcement,
   AnnouncementQueryResult,
   Candidate,
+  CandidateProfileChange,
+  CandidateProfileChangeType,
+  CandidateProfilePictureChange,
+  CandidateProfileStringChange,
   CloudinaryResource,
   Election,
   ElectionQueryResult,
@@ -49,6 +58,7 @@ const typeDefs = [
   RunoffRound,
   RunoffRoundResult,
   RunoffVote,
+  SortType,
   Strike,
   StuyActivitiesSync,
   User,

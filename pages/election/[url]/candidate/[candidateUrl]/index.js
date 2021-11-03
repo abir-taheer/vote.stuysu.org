@@ -1,6 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
+import { AddPhotoAlternateOutlined } from "@mui/icons-material";
 import Container from "@mui/material/Container";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import Image from "next/image";
@@ -120,11 +122,52 @@ function CandidatePage() {
           width={200}
           className={layout.candidatePicture}
         />
+        {candidate.isManager && (
+          <Tooltip title={"Click to upload a new picture"}>
+            <Container
+              sx={{
+                position: "absolute",
+                height: "200px",
+                width: "200px",
+                color: "white",
+                background: "black",
+                borderRadius: "50%",
+                opacity: 0,
+                ":hover": {
+                  opacity: 0.7,
+                },
+                padding: 0,
+                margin: 0,
+                cursor: "pointer",
+              }}
+              disableGutters
+            >
+              <AddPhotoAlternateOutlined
+                sx={{
+                  width: "100px",
+                  height: "100px",
+                  padding: "50px",
+                }}
+              />
+            </Container>
+          </Tooltip>
+        )}
       </div>
 
       <Typography variant={"h1"} className={layout.title} color={"primary"}>
         {candidate.name}
       </Typography>
+
+      {candidate.isManager && (
+        <Typography
+          paragraph
+          variant={"subtitle2"}
+          color={"text.secondary"}
+          align={"center"}
+        >
+          Click on the picture, blurb, or platform text to change it.
+        </Typography>
+      )}
 
       <CandidateTabBar
         isManager={candidate.isManager}
@@ -152,9 +195,15 @@ function CandidatePage() {
             blurb
           </Typography>
         )}
-        <Typography variant={"body1"} align={"left"} className={layout.spaced}>
-          {candidate.blurb}
-        </Typography>
+        <Tooltip title={"Click here to change the blurb"}>
+          <Typography
+            variant={"body1"}
+            align={"left"}
+            className={layout.spaced}
+          >
+            {candidate.blurb}
+          </Typography>
+        </Tooltip>
 
         <Typography
           variant={"h2"}
