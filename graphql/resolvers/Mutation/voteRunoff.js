@@ -35,8 +35,9 @@ export default async (
     );
   }
 
+  const id = Election.nanoid();
   const vote = {
-    id: Election.nanoid(),
+    _id: id,
     gradYear: user.gradYear,
     choices,
   };
@@ -58,5 +59,9 @@ export default async (
     }
   );
 
-  return vote;
+  return {
+    id,
+    gradYear: user.gradYear,
+    choices,
+  };
 };

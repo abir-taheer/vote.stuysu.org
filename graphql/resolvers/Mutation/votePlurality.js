@@ -28,8 +28,9 @@ export default async (
     );
   }
 
+  const id = Election.nanoid();
   const vote = {
-    id: Election.nanoid(),
+    _id: id,
     gradYear: user.gradYear,
     choice: candidate.id,
   };
@@ -51,5 +52,9 @@ export default async (
     }
   );
 
-  return vote;
+  return {
+    id,
+    gradYear: user.gradYear,
+    choice: candidate.id,
+  };
 };
