@@ -48,6 +48,7 @@ export default function ProfileChangeCard({
             src={candidate.picture.resource.url}
             width={40}
             height={40}
+            objectFit={"cover"}
             className={layout.avatar}
           />
           <Typography
