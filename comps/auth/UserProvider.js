@@ -18,6 +18,26 @@ const QUERY = gql`
       adminPrivileges
     }
 
+    candidatesManagedByAuthenticatedUser {
+      id
+      name
+      url
+      picture {
+        id
+        resource {
+          width
+          height
+          url
+        }
+      }
+      election {
+        id
+        url
+        name
+        completed
+      }
+    }
+
     date
   }
 `;
@@ -69,6 +89,7 @@ const UserProvider = ({ children }) => {
     gradYear: null,
     grade: null,
     ready: false,
+    candidatesManaged: null,
   };
 
   if (!loading) {
@@ -98,6 +119,7 @@ const UserProvider = ({ children }) => {
       gradYear,
       grade,
       adminPrivileges,
+      candidatesManaged: data.candidatesManagedByAuthenticatedUser,
       ready: true,
     });
   }

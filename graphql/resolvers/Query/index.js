@@ -10,6 +10,7 @@ import authenticatedUser from "./authenticatedUser";
 import candidateById from "./candidateById";
 import candidateByUrl from "./candidateByUrl";
 import candidatesByElectionId from "./candidatesByElectionId";
+import candidatesManagedByAuthenticatedUser from "./candidatesManagedByAuthenticatedUser";
 import date from "./date";
 import electionById from "./electionById";
 import electionByUrl from "./electionByUrl";
@@ -42,6 +43,7 @@ const Query = {
   candidateById,
   candidateByUrl,
   candidatesByElectionId,
+  candidatesManagedByAuthenticatedUser,
   pendingCandidateProfileChanges,
   userHasVoted,
   electionById,

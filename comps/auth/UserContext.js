@@ -12,6 +12,7 @@ export const defaultUserContextValue = {
   gradYear: null,
   grade: null,
   ready: false,
+  candidatesManaged: null,
 };
 
 const UserContext = createContext(defaultUserContextValue);

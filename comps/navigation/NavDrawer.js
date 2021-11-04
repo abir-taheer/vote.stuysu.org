@@ -4,10 +4,12 @@ import HomeOutlined from "@mui/icons-material/HomeOutlined";
 import HowToVoteOutlined from "@mui/icons-material/HowToVoteOutlined";
 import LockOpenOutlined from "@mui/icons-material/LockOpenOutlined";
 import PowerSettingsNewOutlined from "@mui/icons-material/PowerSettingsNewOutlined";
+import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Link from "next/link";
@@ -105,10 +107,41 @@ const NavDrawer = ({ open, setOpen }) => {
           </ListItem>
         </Link>
 
+        {user.signedIn &&
+          user.candidatesManaged
+            ?.filter((c) => !c.election.completed)
+            .map((candidate) => (
+              <Link
+                href={`/election/${candidate.election.url}/candidate/${candidate.url}`}
+              >
+                <ListItem
+                  button
+                  selected={router.asPath.startsWith(
+                    `/election/${candidate.election.url}/candidate/${candidate.url}`
+                  )}
+                  onClick={closeDrawer}
+                >
+                  <ListItemAvatar>
+                    <Avatar
+                      src={candidate.picture.resource.url}
+                      title={candidate.name}
+                    />
+                  </ListItemAvatar>
+                  <ListItemText primary={candidate.name} />
+                </ListItem>
+              </Link>
+            ))}
+
         <Link href={"/election"}>
           <ListItem
             button
-            selected={router.asPath.startsWith("/election")}
+            selected={
+              router.asPath.startsWith("/election") &&
+              !user.candidatesManaged?.some(
+                (candidate) =>
+                  `/election/${candidate.election.url}/candidate/${candidate.url}`
+              )
+            }
             onClick={closeDrawer}
           >
             <ListItemIcon>

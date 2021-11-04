@@ -240,5 +240,10 @@ export default gql`
     All profile changes with their reviewed property set to false
     """
     pendingCandidateProfileChanges: [CandidateProfileChange!]!
+
+    """
+    Candidates that this user has the ability to manage
+    """
+    candidatesManagedByAuthenticatedUser: [Candidate!]
   }
 `;

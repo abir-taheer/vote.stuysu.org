@@ -67,6 +67,28 @@ const NavBar = () => {
           <Stack spacing={2} direction={"row"} sx={styles.tabs}>
             <NavBarButton href={"/"} label={"Home"} active={path === "/"} />
 
+            {user.signedIn &&
+              user.candidatesManaged
+                ?.filter((c) => !c.election.completed)
+                .map((candidate) => (
+                  <NavBarButton
+                    key={candidate.id}
+                    href={
+                      "/election/" +
+                      candidate.election.url +
+                      "/candidate/" +
+                      candidate.url
+                    }
+                    active={path.startsWith(
+                      "/election/" +
+                        candidate.election.url +
+                        "/candidate/" +
+                        candidate.url
+                    )}
+                    label={candidate.name}
+                  />
+                ))}
+
             {user.signedIn && user.adminPrivileges && (
               <NavBarButton
                 href={"/admin"}
@@ -77,7 +99,13 @@ const NavBar = () => {
 
             <NavBarButton
               href={"/election"}
-              active={path.startsWith("/election")}
+              active={
+                path.startsWith("/election") &&
+                !user.candidatesManaged?.some(
+                  (candidate) =>
+                    `/election/${candidate.election.url}/candidate/${candidate.url}`
+                )
+              }
               label={"Elections"}
             />
 
