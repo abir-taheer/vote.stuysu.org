@@ -44,6 +44,8 @@ const QUERY = gql`
           alt
           resource {
             url
+            height
+            width
           }
         }
       }

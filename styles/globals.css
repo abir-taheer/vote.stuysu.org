@@ -36,3 +36,7 @@ li {
 .sanitized-html iframe {
   max-width: 100%;
 }
+
+.crop-circle {
+  border-radius: 50%;
+}

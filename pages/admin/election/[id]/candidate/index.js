@@ -27,6 +27,8 @@ const QUERY = gql`
         picture {
           resource {
             url
+            height
+            width
           }
           alt
         }

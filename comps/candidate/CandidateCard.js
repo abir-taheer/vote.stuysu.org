@@ -2,15 +2,10 @@ import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import Image from "next/image";
 import Link from "next/link";
 
 const styles = {
-  media: {
-    width: "150px",
-    height: "150px",
-    borderRadius: "50%",
-  },
-
   action: {
     paddingTop: "1.5rem",
   },
@@ -26,10 +21,13 @@ function CandidateCard({ href, picture, blurb, name, strikes }) {
       <Link href={href}>
         <CardActionArea sx={styles.action}>
           <div style={styles.mediaContainer}>
-            <img
+            <Image
               src={picture?.resource?.url}
               alt={picture?.alt}
-              style={styles.media}
+              objectFit={"cover"}
+              height={150}
+              width={150}
+              className={"crop-circle"}
             />
           </div>
           <CardContent>
