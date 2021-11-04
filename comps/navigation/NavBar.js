@@ -101,9 +101,10 @@ const NavBar = () => {
               href={"/election"}
               active={
                 path.startsWith("/election") &&
-                !user.candidatesManaged?.some(
-                  (candidate) =>
+                !user.candidatesManaged?.some((candidate) =>
+                  path.startsWith(
                     `/election/${candidate.election.url}/candidate/${candidate.url}`
+                  )
                 )
               }
               label={"Elections"}

@@ -137,9 +137,10 @@ const NavDrawer = ({ open, setOpen }) => {
             button
             selected={
               router.asPath.startsWith("/election") &&
-              !user.candidatesManaged?.some(
-                (candidate) =>
+              !user.candidatesManaged?.some((candidate) =>
+                router.asPath.startsWith(
                   `/election/${candidate.election.url}/candidate/${candidate.url}`
+                )
               )
             }
             onClick={closeDrawer}
