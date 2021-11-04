@@ -1,11 +1,11 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
-import { AddPhotoAlternateOutlined } from "@mui/icons-material";
+import AddPhotoAlternateOutlined from "@mui/icons-material/AddPhotoAlternateOutlined";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useFormik } from "formik";
 import Head from "next/head";
@@ -72,6 +72,14 @@ const QUERY = gql`
           updatedAt
           candidate {
             name
+            picture {
+              alt
+              resource {
+                width
+                height
+                url
+              }
+            }
           }
         }
 
@@ -107,6 +115,14 @@ const QUERY = gql`
           updatedAt
           candidate {
             name
+            picture {
+              alt
+              resource {
+                width
+                height
+                url
+              }
+            }
           }
         }
       }

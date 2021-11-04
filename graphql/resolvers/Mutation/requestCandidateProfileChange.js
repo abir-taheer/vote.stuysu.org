@@ -1,5 +1,6 @@
 import { ForbiddenError, UserInputError } from "apollo-server-micro";
 import Candidate from "../../../models/candidate";
+import Election from "../../../models/election";
 import Picture from "../../../models/picture";
 import ProfileChange from "../../../models/profileChange";
 import sanitizeHtml from "../../../utils/candidate/sanitizeHtml";
@@ -30,6 +31,18 @@ export default async (
   if (!candidate.active) {
     throw new ForbiddenError(
       "That candidate is not active and changes cannot be made to the profile."
+    );
+  }
+
+  const election = await Election.findById(candidate.electionId);
+
+  if (!election) {
+    throw new ForbiddenError("That election does not exist anymore");
+  }
+
+  if (election.completed) {
+    throw new ForbiddenError(
+      "That election has been completed and changes can no longer be requested"
     );
   }
 

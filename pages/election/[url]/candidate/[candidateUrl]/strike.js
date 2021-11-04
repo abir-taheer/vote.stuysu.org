@@ -1,10 +1,12 @@
 import { gql, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
-import { WarningOutlined } from "@mui/icons-material";
-import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import WarningOutlined from "@mui/icons-material/WarningOutlined";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import Image from "next/image";

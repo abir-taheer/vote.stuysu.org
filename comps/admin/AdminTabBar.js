@@ -2,6 +2,7 @@ import AccountCircleOutlined from "@mui/icons-material/AccountCircleOutlined";
 import HelpOutlined from "@mui/icons-material/HelpOutlineOutlined";
 import HowToVoteOutlined from "@mui/icons-material/HowToVoteOutlined";
 import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
+import ReviewsOutlined from "@mui/icons-material/ReviewsOutlined";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { useRouter } from "next/router";
@@ -31,6 +32,12 @@ const tabs = [
     label: "Announcements",
     icon: <NotificationsActiveOutlinedIcon />,
     href: "/admin/announcement",
+  },
+  {
+    path: ["/admin/approval"],
+    label: "Approvals",
+    icon: <ReviewsOutlined />,
+    href: "/admin/approval",
   },
 ];
 

@@ -235,5 +235,10 @@ export default gql`
       """
       resultsPerPage: PositiveInt! = 15
     ): FAQQueryResult!
+
+    """
+    All profile changes with their reviewed property set to false
+    """
+    pendingCandidateProfileChanges: [CandidateProfileChange!]!
   }
 `;

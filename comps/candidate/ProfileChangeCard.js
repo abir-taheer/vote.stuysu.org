@@ -1,9 +1,11 @@
-import { CancelOutlined } from "@mui/icons-material";
-import { CardActions, TextField } from "@mui/material";
+import CancelOutlined from "@mui/icons-material/CancelOutlined";
+import { Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import { useState } from "react";
@@ -35,13 +37,36 @@ export default function ProfileChangeCard({
   return (
     <Card sx={{ padding: 2 }}>
       <div style={{ padding: "0.75rem" }}>
-        <Typography variant={"body1"}>
-          <b>{createdBy.name}</b> requested to change the{" "}
-          <b>{field === "pictureId" ? "picture" : field}</b> for{" "}
-          <Typography variant={"body1"} color={"primary"} component={"span"}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            paddingBottom: "1rem",
+          }}
+        >
+          <Image
+            src={candidate.picture.resource.url}
+            width={40}
+            height={40}
+            className={layout.avatar}
+          />
+          <Typography
+            variant={"body1"}
+            color={"primary"}
+            sx={{ paddingLeft: "1rem" }}
+          >
             {candidate.name}
           </Typography>
+        </div>
+
+        <Typography variant={"body1"}>
+          <Tooltip title={createdBy.email}>
+            <b>{createdBy.name}</b>
+          </Tooltip>{" "}
+          requested to change the{" "}
+          <b>{field === "pictureId" ? "picture" : field}</b>
         </Typography>
+
         <Typography variant={"body2"} color={"text.secondary"}>
           Created {getReadableDate(createdAt)}
         </Typography>
@@ -71,7 +96,7 @@ export default function ProfileChangeCard({
               color={"primary"}
               component={"span"}
             >
-              Not Yet Reviewed
+              Awaiting Review
             </Typography>
           )}
         </Typography>
@@ -138,7 +163,7 @@ export default function ProfileChangeCard({
                 variant={"contained"}
                 color={"error"}
                 disabled={disabled}
-                onClick={onRejection}
+                onClick={() => onRejection(reasonForRejection)}
               >
                 Reject
               </Button>

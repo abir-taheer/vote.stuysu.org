@@ -18,6 +18,7 @@ import faqById from "./faqById";
 import faqByUrl from "./faqByUrl";
 import openElections from "./openElections";
 import pastElections from "./pastElections";
+import pendingCandidateProfileChanges from "./pendingCandidateProfileChanges";
 import pictureById from "./pictureById";
 import publicKey from "./publicKey";
 import userById from "./userById";
@@ -41,6 +42,7 @@ const Query = {
   candidateById,
   candidateByUrl,
   candidatesByElectionId,
+  pendingCandidateProfileChanges,
   userHasVoted,
   electionById,
   electionByUrl,
