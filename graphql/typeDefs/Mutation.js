@@ -26,6 +26,8 @@ export default gql`
       end: DateTime!
     ): Election!
 
+    deleteElection(id: ObjectID!): Void
+
     createAnnouncement(
       title: NonEmptyString!
       body: NonEmptyString!
@@ -90,6 +92,8 @@ export default gql`
       managerIds: [ObjectID!]!
       pictureId: ObjectID
     ): Candidate!
+
+    deleteCandidate(id: ObjectID!): Void
 
     """
     Suspend or reinstate a candidate using their id

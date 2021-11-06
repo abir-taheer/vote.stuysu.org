@@ -82,6 +82,12 @@ const OPEN_MUTATION = gql`
   }
 `;
 
+const DELETE_MUTATION = gql`
+  mutation ($id: ObjectID!) {
+    deleteElection(id: $id)
+  }
+`;
+
 const ManageElection = () => {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
@@ -93,6 +99,30 @@ const ManageElection = () => {
   const [updateElection] = useMutation(EDIT_MUTATION);
   const [closeElection] = useMutation(CLOSE_MUTATION, { variables: { id } });
   const [openElection] = useMutation(OPEN_MUTATION, { variables: { id } });
+
+  const [remove] = useMutation(DELETE_MUTATION, { variables: { id } });
+
+  const handleRemove = async () => {
+    const confirmation = await confirmDialog({
+      title: "Confirm Deletion",
+      body: `Are you sure you want to delete ${election.name}? This action cannot be undone?`,
+    });
+
+    if (confirmation) {
+      try {
+        await remove();
+        enqueueSnackbar("The election was successfully deleted", {
+          variant: "success",
+        });
+        await router.push("/admin/election");
+      } catch (e) {
+        await alertDialog({
+          title: "Error removing election",
+          body: e.message,
+        });
+      }
+    }
+  };
 
   async function handleOpenElection() {
     const confirmation = await confirmDialog({
@@ -247,7 +277,7 @@ const ManageElection = () => {
 
                 <Button
                   variant={"outlined"}
-                  onClick={() => setEditing(true)}
+                  onClick={handleRemove}
                   startIcon={<DeleteForever />}
                   color={"warning"}
                 >

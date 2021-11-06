@@ -6,7 +6,9 @@ import createFAQ from "./createFAQ";
 import createStrike from "./createStrike";
 import createUser from "./createUser";
 import deleteAnnouncement from "./deleteAnnouncement";
+import deleteCandidate from "./deleteCandidate";
 import deleteCandidateProfileChange from "./deleteCandidateProfileChange";
+import deleteElection from "./deleteElection";
 import deleteFAQ from "./deleteFAQ";
 import deleteStrike from "./deleteStrike";
 import deleteUser from "./deleteUser";
@@ -37,11 +39,13 @@ export default {
   editStrike,
   deleteStrike,
   completeElection,
+  deleteElection,
   createElection,
   createFAQ,
   createUser,
   createCandidate,
   deleteUser,
+  deleteCandidate,
   deleteCandidateProfileChange,
   editCandidate,
   editElection,

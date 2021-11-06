@@ -97,6 +97,12 @@ const MUTATION = gql`
   }
 `;
 
+const DELETE_MUTATION = gql`
+  mutation ($id: ObjectID!) {
+    deleteCandidate(id: $id)
+  }
+`;
+
 const SET_ACTIVE_MUTATION = gql`
   mutation ($id: ObjectID!, $active: Boolean!) {
     setCandidateActive(id: $id, active: $active) {
@@ -115,9 +121,36 @@ const ManageCandidate = () => {
   const [edit] = useMutation(MUTATION);
   const [setCandidateActive, { loading: settingActive }] =
     useMutation(SET_ACTIVE_MUTATION);
+  const [remove, { loading: removing }] = useMutation(DELETE_MUTATION, {
+    variables: { id },
+  });
 
   const candidate = data?.candidateById;
   const election = candidate?.election;
+
+  const handleRemove = async () => {
+    const confirmation = await confirmDialog({
+      title: "Confirm Deletion",
+      body: "Are you sure you want to delete this candidate? This action cannot be undone.",
+    });
+
+    if (confirmation) {
+      try {
+        await remove();
+
+        enqueueSnackbar("Successfully deleted the candidate", {
+          variant: "success",
+        });
+
+        await router.push("/admin/election/" + election.id + "/candidate");
+      } catch (e) {
+        await alertDialog({
+          title: "Error removing candidate",
+          body: e.message,
+        });
+      }
+    }
+  };
 
   const handleSave = async (
     { name, url, blurb, platform, managers, picture },
@@ -271,6 +304,7 @@ const ManageCandidate = () => {
                 color={"error"}
                 startIcon={<DeleteOutlined />}
                 disabled={election.completed}
+                onClick={handleRemove}
               >
                 Delete Candidate
               </Button>

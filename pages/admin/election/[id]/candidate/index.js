@@ -41,6 +41,7 @@ const CandidateIndex = () => {
   const router = useRouter();
   const { data, loading } = useQuery(QUERY, {
     variables: { id: router.query.id },
+    fetchPolicy: "network-only",
   });
 
   const election = data?.electionById;
