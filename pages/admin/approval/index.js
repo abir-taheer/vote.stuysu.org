@@ -125,8 +125,7 @@ export default function AdminApprovals() {
 
       {!loading && !data?.pendingCandidateProfileChanges?.length && (
         <Typography variant={"body1"} align={"center"}>
-          No items pending review. Go to the approval tab of an election to view
-          its approval history.
+          No items pending review.
         </Typography>
       )}
 
