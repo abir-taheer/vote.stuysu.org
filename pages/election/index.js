@@ -12,8 +12,31 @@ import CenteredCircularProgress from "../../comps/shared/CenteredCircularProgres
 import layout from "./../../styles/layout.module.css";
 
 const QUERY = gql`
-  query ($query: String!, $page: PositiveInt!) {
-    allElections(query: $query, page: $page) {
+  query ($query: String!, $openPage: PositiveInt!, $closedPage: PositiveInt!) {
+    openElections(page: $openPage, query: $query) {
+      page
+      numPages
+      total
+      results {
+        id
+        name
+        url
+        start
+        end
+        picture {
+          id
+          resource {
+            id
+            url
+            width
+            height
+          }
+          alt
+        }
+      }
+    }
+
+    pastElections(query: $query, page: $closedPage) {
       page
       numPages
       total
@@ -42,17 +65,22 @@ const ElectionIndex = () => {
   const router = useRouter();
   const params = parse(router.asPath.substr(router.asPath.indexOf("?") + 1));
   const [query, setQuery] = useState(params.q || "");
-  const [page, setPage] = useState(1);
+  const [closedPage, setClosedPage] = useState(1);
+  const [openPage, setOpenPage] = useState(1);
 
-  const { data, loading } = useQuery(QUERY, { variables: { query, page } });
+  const { data, loading } = useQuery(QUERY, {
+    variables: { query, openPage, closedPage },
+  });
 
   function handleQueryChange(ev) {
     setQuery(ev.target.value);
-    setPage(1);
+    setClosedPage(1);
+    setOpenPage(1);
     router.push(router.pathname, { query: { q: ev.target.value } });
   }
 
-  const allElections = data?.allElections;
+  const pastElections = data?.pastElections;
+  const openElections = data?.openElections;
 
   return (
     <Container maxWidth={"md"} className={layout.page}>
@@ -93,13 +121,33 @@ const ElectionIndex = () => {
 
       {loading && <CenteredCircularProgress />}
 
+      {!loading && !!openElections?.results?.length && (
+        <>
+          <Typography variant={"h3"} align={"center"}>
+            Current Elections
+          </Typography>
+          <ElectionCardGrid
+            numPages={openElections?.numPages}
+            page={openElections?.page}
+            results={openElections?.results}
+            onPageChange={(ev, page) => setOpenPage(page)}
+          />
+        </>
+      )}
+
       {!loading && (
-        <ElectionCardGrid
-          numPages={allElections?.numPages}
-          page={allElections?.page}
-          results={allElections?.results}
-          onPageChange={(ev, page) => setPage(page)}
-        />
+        <>
+          <Typography variant={"h3"} align={"center"}>
+            Completed Elections
+          </Typography>
+
+          <ElectionCardGrid
+            numPages={pastElections?.numPages}
+            page={pastElections?.page}
+            results={pastElections?.results}
+            onPageChange={(ev, page) => setClosedPage(page)}
+          />
+        </>
       )}
     </Container>
   );
