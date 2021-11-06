@@ -66,9 +66,11 @@ function ElectionCardGrid({ page, results, numPages, onPageChange, admin }) {
         ))}
       </Grid>
 
-      <div className={layout.center}>
-        <Pagination count={numPages} page={page} onChange={onPageChange} />
-      </div>
+      {!!numPages && (
+        <div className={layout.center}>
+          <Pagination count={numPages} page={page} onChange={onPageChange} />
+        </div>
+      )}
     </div>
   );
 }

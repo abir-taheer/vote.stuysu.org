@@ -1,16 +1,50 @@
+import { gql, useQuery } from "@apollo/client";
+import { HowToVote } from "@mui/icons-material";
+import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useContext } from "react";
+import withApollo from "../comps/apollo/withApollo";
 import LoginButton from "../comps/auth/LoginButton";
 import UserContext from "../comps/auth/UserContext";
+import ElectionCard from "../comps/election/ElectionCard";
+import CenteredCircularProgress from "../comps/shared/CenteredCircularProgress";
 import styles from "../styles/Home.module.css";
 import layout from "../styles/layout.module.css";
 import voting from "./../img/voting.svg";
 
-export default function Home() {
+const QUERY = gql`
+  query {
+    currentElections {
+      id
+      name
+      url
+      start
+      end
+      picture {
+        id
+        resource {
+          id
+          url
+          width
+          height
+        }
+        alt
+      }
+    }
+  }
+`;
+
+function Home() {
   const user = useContext(UserContext);
+
+  const { data, loading } = useQuery(QUERY);
+
   return (
     <Container maxWidth={"md"} className={layout.page}>
       <Head>
@@ -55,17 +89,54 @@ export default function Home() {
           src={voting}
           alt={"People representing voting"}
           className={layout.largeVector}
-          height={400}
-          width={400}
+          height={270}
+          width={300}
           objectFit={"contain"}
         />
       </div>
 
-      {!user.signedIn && (
-        <div className={layout.center}>
-          <LoginButton />
-        </div>
+      {loading && <CenteredCircularProgress />}
+
+      {!!data?.currentElections?.length && (
+        <>
+          <Typography align={"center"} variant={"h2"} gutterBottom>
+            Current Elections
+          </Typography>
+          <Grid
+            container
+            alignContent={"center"}
+            alignItems={"center"}
+            justifyItems={"center"}
+            justifyContent={"center"}
+            sx={{ marginBottom: "2rem" }}
+          >
+            {data.currentElections.map((election) => (
+              <ElectionCard
+                key={election.id}
+                picture={election.picture}
+                name={election.name}
+                start={election.start}
+                end={election.end}
+                href={"/election/" + election.url}
+              />
+            ))}
+          </Grid>
+        </>
       )}
+
+      <div className={layout.center}>
+        <Stack direction={"row"} spacing={3}>
+          {!user.signedIn && <LoginButton />}
+
+          <Link href={"/election"} passHref>
+            <Button variant={"outlined"} startIcon={<HowToVote />}>
+              View All Elections
+            </Button>
+          </Link>
+        </Stack>
+      </div>
     </Container>
   );
 }
+
+export default withApollo(Home);

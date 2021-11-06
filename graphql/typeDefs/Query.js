@@ -245,5 +245,10 @@ export default gql`
     Candidates that this user has the ability to manage
     """
     candidatesManagedByAuthenticatedUser: [Candidate!]
+
+    """
+    Returns elections that haven't been completed or ended later than 30 days ago
+    """
+    currentElections: [Election!]!
   }
 `;
