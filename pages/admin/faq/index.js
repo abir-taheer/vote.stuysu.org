@@ -50,7 +50,7 @@ export default function FAQAdminHome() {
   });
 
   return (
-    <Container maxWidth={"sm"} className={layout.page}>
+    <Container maxWidth={"md"} className={layout.page}>
       <Typography variant={"h1"} align={"center"}>
         FAQ | Admin Panel
       </Typography>
@@ -103,38 +103,40 @@ export default function FAQAdminHome() {
         </div>
       )}
 
-      {!!data && !!data.allFAQs?.results?.length && (
-        <>
-          <List sx={styles.list}>
-            {data.allFAQs.results.map((faq) => (
-              <Fragment key={faq.id}>
-                <Link href={"/admin/faq/" + faq.id} passHref>
-                  <ListItem button>
-                    <ListItemText primary={faq.title} secondary={faq.url} />
-                    <ListItemSecondaryAction>
-                      <Typography
-                        variant={"subtitle2"}
-                        color={"text.secondary"}
-                      >
-                        Click To Edit
-                      </Typography>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                </Link>
-                <Divider />
-              </Fragment>
-            ))}
-          </List>
+      <Container maxWidth={"sm"}>
+        {!!data && !!data.allFAQs?.results?.length && (
+          <>
+            <List sx={styles.list}>
+              {data.allFAQs.results.map((faq) => (
+                <Fragment key={faq.id}>
+                  <Link href={"/admin/faq/" + faq.id} passHref>
+                    <ListItem button>
+                      <ListItemText primary={faq.title} secondary={faq.url} />
+                      <ListItemSecondaryAction>
+                        <Typography
+                          variant={"subtitle2"}
+                          color={"text.secondary"}
+                        >
+                          Click To Edit
+                        </Typography>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  </Link>
+                  <Divider />
+                </Fragment>
+              ))}
+            </List>
 
-          <div className={layout.center}>
-            <Pagination
-              page={page}
-              count={data.allFAQs.numPages}
-              onChange={(_, p) => setPage(p)}
-            />
-          </div>
-        </>
-      )}
+            <div className={layout.center}>
+              <Pagination
+                page={page}
+                count={data.allFAQs.numPages}
+                onChange={(_, p) => setPage(p)}
+              />
+            </div>
+          </>
+        )}
+      </Container>
     </Container>
   );
 }

@@ -40,18 +40,20 @@ export default function AdminCreateFAQ() {
   };
 
   return (
-    <Container maxWidth={"sm"} className={layout.page}>
+    <Container maxWidth={"md"} className={layout.page}>
       <Typography variant={"h1"} align={"center"}>
         Create FAQ | Admin Panel
       </Typography>
 
       <AdminTabBar />
 
-      <FAQForm
-        submitLabel={"Create"}
-        disabled={loading}
-        onSubmit={handleSubmit}
-      />
+      <Container maxWidth={"sm"}>
+        <FAQForm
+          submitLabel={"Create"}
+          disabled={loading}
+          onSubmit={handleSubmit}
+        />
+      </Container>
     </Container>
   );
 }

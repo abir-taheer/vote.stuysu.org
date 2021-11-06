@@ -110,7 +110,7 @@ export default function EditFAQ() {
   };
 
   return (
-    <Container className={layout.page} maxWidth={"sm"}>
+    <Container className={layout.page} maxWidth={"md"}>
       <Typography variant={"h1"} align={"center"}>
         Manage FAQ | Admin Panel
       </Typography>
@@ -119,52 +119,54 @@ export default function EditFAQ() {
 
       {loading && <CenteredCircularProgress />}
 
-      {!!data?.faqById && (
-        <>
-          <Typography variant={"h4"} align={"center"}>
-            {data.faqById.title}
-          </Typography>
+      <Container maxWidth={"sm"}>
+        {!!data?.faqById && (
+          <>
+            <Typography variant={"h4"} align={"center"}>
+              {data.faqById.title}
+            </Typography>
 
-          {!editing && (
-            <div className={layout.center}>
-              <Stack direction={"row"} spacing={3} sx={styles.stack}>
-                <Button
-                  variant={"contained"}
-                  color={"primary"}
-                  onClick={() => setEditing(true)}
-                  disabled={deleting}
-                  startIcon={<EditOutlined />}
-                >
-                  Edit
-                </Button>
+            {!editing && (
+              <div className={layout.center}>
+                <Stack direction={"row"} spacing={3} sx={styles.stack}>
+                  <Button
+                    variant={"contained"}
+                    color={"primary"}
+                    onClick={() => setEditing(true)}
+                    disabled={deleting}
+                    startIcon={<EditOutlined />}
+                  >
+                    Edit
+                  </Button>
 
-                <Button
-                  variant={"outlined"}
-                  color={"warning"}
-                  startIcon={<DeleteOutlined />}
-                  onClick={handleDelete}
-                  disabled={deleting}
-                >
-                  Delete
-                </Button>
-              </Stack>
-            </div>
-          )}
+                  <Button
+                    variant={"outlined"}
+                    color={"warning"}
+                    startIcon={<DeleteOutlined />}
+                    onClick={handleDelete}
+                    disabled={deleting}
+                  >
+                    Delete
+                  </Button>
+                </Stack>
+              </div>
+            )}
 
-          <FAQForm
-            initialValues={data.faqById}
-            onCancel={({ resetForm }) => {
-              resetForm();
-              setEditing(false);
-            }}
-            disabled={!editing || updating}
-            onSubmit={handleSubmit}
-            showCancelButton={editing}
-            showSubmitButton={editing}
-            submitLabel={"Save"}
-          />
-        </>
-      )}
+            <FAQForm
+              initialValues={data.faqById}
+              onCancel={({ resetForm }) => {
+                resetForm();
+                setEditing(false);
+              }}
+              disabled={!editing || updating}
+              onSubmit={handleSubmit}
+              showCancelButton={editing}
+              showSubmitButton={editing}
+              submitLabel={"Save"}
+            />
+          </>
+        )}
+      </Container>
     </Container>
   );
 }
