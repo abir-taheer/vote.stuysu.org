@@ -15,11 +15,6 @@ const tabs = [
     label: "Candidates",
     exact: false,
   },
-  {
-    path: "/admin/election/[id]/approval",
-    label: "Approvals",
-    exact: false,
-  },
 ];
 
 const styles = {

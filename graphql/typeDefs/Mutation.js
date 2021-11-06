@@ -128,5 +128,20 @@ export default gql`
     ): CandidateProfileChange!
 
     deleteCandidateProfileChange(id: ObjectID!): Void
+
+    createStrike(
+      candidateId: ObjectID!
+      weight: NonNegativeFloat!
+      reason: String!
+    ): Strike!
+
+    editStrike(
+      candidateId: ObjectID!
+      strikeId: ObjectID!
+      weight: NonNegativeFloat!
+      reason: String!
+    ): Strike!
+
+    deleteStrike(candidateId: ObjectID!, strikeId: ObjectID!): Void
   }
 `;

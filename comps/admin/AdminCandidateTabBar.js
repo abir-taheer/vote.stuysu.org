@@ -11,11 +11,6 @@ const tabs = [
     exact: true,
   },
   {
-    path: "/admin/candidate/[id]/approval",
-    label: "Approvals",
-    exact: false,
-  },
-  {
     path: "/admin/candidate/[id]/strike",
     label: "Strikes",
     exact: false,

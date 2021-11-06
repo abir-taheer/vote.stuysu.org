@@ -1,6 +1,5 @@
 import ManageAccountsOutlined from "@mui/icons-material/ManageAccountsOutlined";
 import PeopleOutlined from "@mui/icons-material/PeopleOutlined";
-import QuestionAnswerOutlined from "@mui/icons-material/QuestionAnswerOutlined";
 import ReportProblemOutlined from "@mui/icons-material/ReportProblemOutlined";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -27,16 +26,6 @@ const tabs = [
     active: null,
     icon: <ReportProblemOutlined />,
     strikes: true,
-  },
-  {
-    path: "/election/[url]/candidate/[candidateUrl]/q-a",
-    label: "Q & A",
-    exact: true,
-    isManager: null,
-    electionCompleted: null,
-    active: null,
-    icon: <QuestionAnswerOutlined />,
-    strikes: null,
   },
   {
     path: "/election/[url]/candidate/[candidateUrl]/manage",
