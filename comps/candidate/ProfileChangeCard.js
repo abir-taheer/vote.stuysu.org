@@ -164,7 +164,7 @@ export default function ProfileChangeCard({
                 variant={"contained"}
                 color={"error"}
                 disabled={disabled}
-                onClick={() => onRejection(reasonForRejection)}
+                onClick={() => onRejection(reason)}
               >
                 Reject
               </Button>
