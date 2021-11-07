@@ -1,8 +1,11 @@
 import { gql, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
+import { TouchApp } from "@mui/icons-material";
+import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import withApollo from "../../../comps/apollo/withApollo";
@@ -134,6 +137,33 @@ const ElectionCandidates = () => {
         </Typography>
 
         <Container maxWidth={"xs"}>
+          <Typography variant={"body1"}>
+            Type:{" "}
+            <Typography color={"secondary"} component={"span"}>
+              {election.type === "runoff" &&
+                "Instant Runoff Voting (Ranked Choice)"}
+              {election.type === "plurality" && "Plurality (Single Choice)"}
+            </Typography>
+          </Typography>
+          {election.type === "runoff" && (
+            <Link
+              href={`/faq/what-is-instant-runoff-voting?backLabel=${encodeURIComponent(
+                "Back to " + election.name
+              )}&backPath=${router.asPath}`}
+              passHref
+            >
+              <Button
+                startIcon={<TouchApp />}
+                variant={"contained"}
+                color={"secondary"}
+                fullWidth
+                sx={{ marginBottom: "1rem" }}
+              >
+                What is Instant Runoff Voting ?
+              </Button>
+            </Link>
+          )}
+
           <Typography variant={"body1"}>
             Start{now < start ? "s" : "ed"}:{" "}
             <Typography color={"secondary"} component={"span"}>
