@@ -104,7 +104,7 @@ function PluralityVote({ election, candidates, refetch }) {
 
         gaEvent({
           category: "vote",
-          action: "voting time plurality",
+          action: "voting time - " + election.name,
           label: seconds + "s",
           nonInteraction: true,
         });

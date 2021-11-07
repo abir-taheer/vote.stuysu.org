@@ -231,7 +231,7 @@ const RunoffVote = ({ election, candidates, refetch }) => {
 
         gaEvent({
           category: "vote",
-          action: "voting time runoff",
+          action: "voting time - " + election.name,
           label: seconds + "s",
           nonInteraction: true,
         });
