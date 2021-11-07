@@ -1,11 +1,13 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import gaEvent from "../../utils/analytics/gaEvent";
 import layout from "./../../styles/layout.module.css";
 
 export default function LoadingScreen() {
+  const router = useRouter();
   useEffect(() => {
     const start = new Date();
 
@@ -16,12 +18,12 @@ export default function LoadingScreen() {
 
       gaEvent({
         category: "loading",
-        action: "loading screen",
+        action: "loading screen - " + router.asPath,
         label: seconds + "s",
         nonInteraction: true,
       });
     };
-  }, []);
+  }, [router]);
 
   return (
     <Container maxWidth={"sm"} className={layout.page}>

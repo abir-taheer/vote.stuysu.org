@@ -1,9 +1,11 @@
 import CircularProgress from "@mui/material/CircularProgress";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import gaEvent from "../../utils/analytics/gaEvent";
 import layout from "./../../styles/layout.module.css";
 
 export default function CenteredCircularProgress() {
+  const router = useRouter();
   useEffect(() => {
     const start = new Date();
 
@@ -14,12 +16,12 @@ export default function CenteredCircularProgress() {
 
       gaEvent({
         category: "loading",
-        action: "centered circular progress",
+        action: "centered loader " + router.asPath,
         label: seconds + "s",
         nonInteraction: true,
       });
     };
-  }, []);
+  }, [router]);
 
   return (
     <div className={layout.center}>
