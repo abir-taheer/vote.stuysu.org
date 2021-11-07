@@ -2,6 +2,7 @@ import ArrowDropDown from "@mui/icons-material/ArrowDropDown";
 import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
 import React, { useContext, useState } from "react";
+import gaEvent from "../../utils/analytics/gaEvent";
 import UserContext from "../auth/UserContext";
 
 const styles = {
@@ -22,7 +23,15 @@ const UserMenuItem = () => {
     <>
       <Button
         disableRipple
-        onClick={(ev) => setAnchorEl(anchorEl ? null : ev.target)}
+        onClick={(ev) => {
+          setAnchorEl(anchorEl ? null : ev.target);
+          gaEvent({
+            category: "click",
+            action: "user menu item",
+            label: "user menu item toggled",
+            nonInteraction: false,
+          });
+        }}
         endIcon={<ArrowDropDown />}
         sx={styles.button}
       >
@@ -40,7 +49,15 @@ const UserMenuItem = () => {
         }}
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
-        onBackdropClick={() => setAnchorEl(null)}
+        onBackdropClick={() => {
+          setAnchorEl(null);
+          gaEvent({
+            category: "click",
+            action: "backdrop click",
+            label: "user menu item closed",
+            nonInteraction: false,
+          });
+        }}
       >
         <div style={styles.popover}>
           <p>

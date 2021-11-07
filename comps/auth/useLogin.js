@@ -2,6 +2,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import gaEvent from "../../utils/analytics/gaEvent";
 import alertDialog from "../dialog/alertDialog";
 import layout from "./../../styles/layout.module.css";
 import LoginButton from "./LoginButton";
@@ -58,10 +59,29 @@ const useLogin = () => {
           if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
             // continue with another identity provider.
             console.log("One Tap isn't supported in this browser");
-
             if (!showedPrompt) {
               showLoginDialog();
+              gaEvent({
+                category: "authentication",
+                action: "success",
+                label: "Dialog prompt was displayed",
+                nonInteraction: false,
+              });
             }
+
+            gaEvent({
+              category: "authentication",
+              action: "error",
+              label: "One tap prompt not displayed",
+              nonInteraction: true,
+            });
+          } else {
+            gaEvent({
+              category: "authentication",
+              action: "success",
+              label: "One tap prompt displayed",
+              nonInteraction: true,
+            });
           }
         });
 

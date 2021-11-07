@@ -4,8 +4,9 @@ import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import entryDenied from "../../img/entry-denied.svg";
+import gaEvent from "../../utils/analytics/gaEvent";
 import CenteredCircularProgress from "../shared/CenteredCircularProgress";
 import layout from "./../../styles/layout.module.css";
 import UserContext from "./UserContext";
@@ -18,6 +19,19 @@ export default function AdminWrapper({ children }) {
   const adminRequired = router.pathname.startsWith("/admin");
 
   const userIsAdmin = user.ready && user.adminPrivileges;
+
+  useEffect(() => {
+    if (adminRequired && user.ready && !user.adminPrivileges) {
+      gaEvent({
+        category: "navigation",
+        action: user.signedIn
+          ? "authenticated non-admin request"
+          : "unauthenticated admin request",
+        label: "non admin visited admin page",
+        nonInteraction: false,
+      });
+    }
+  }, [adminRequired, userIsAdmin]);
 
   if (!adminRequired || userIsAdmin) {
     return children;

@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import gaEvent from "../../utils/analytics/gaEvent";
 import CenteredCircularProgress from "../shared/CenteredCircularProgress";
 import LoadingScreen from "../shared/LoadingScreen";
 import ElectionVotersTable from "./ElectionVotersTable";
@@ -111,6 +112,14 @@ export default function PluralityAudit({ election }) {
         <Link
           href={`/api/download?data=votes&electionId=${election.id}&format=csv`}
           target={"_blank"}
+          onClick={() => {
+            gaEvent({
+              category: "click",
+              action: "csv votes download",
+              label: election.name,
+              nonInteraction: false,
+            });
+          }}
         >
           Download as CSV
         </Link>

@@ -8,7 +8,8 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import Typography from "@mui/material/Typography";
 import moment from "moment-timezone";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import gaEvent from "../../utils/analytics/gaEvent";
 import useFormatDate from "../../utils/date/useFormatDate";
 import alertDialog from "../dialog/alertDialog";
 import confirmDialog from "../dialog/confirmDialog";
@@ -62,6 +63,7 @@ function PluralityVote({ election, candidates, refetch }) {
       candidateId,
     },
   });
+  const voteLoaded = useRef(new Date());
 
   const now = moment(getNow());
   const end = moment(election.end);
@@ -82,12 +84,31 @@ function PluralityVote({ election, candidates, refetch }) {
     });
 
     if (confirmation) {
+      gaEvent({
+        category: "vote",
+        action: "user confirmed vote",
+        label: election.name,
+        nonInteraction: false,
+      });
+
       try {
         const { data } = await vote();
         window.localStorage.setItem(
           "vote-id-" + election.id,
           data.votePlurality.id
         );
+
+        const end = new Date();
+        const time = end.getTime() - voteLoaded.current.getTime();
+        const seconds = Math.round(time / 1000);
+
+        gaEvent({
+          category: "vote",
+          action: "voting time plurality",
+          label: seconds + "s",
+          nonInteraction: true,
+        });
+
         await refetch();
       } catch (e) {
         await alertDialog({
@@ -104,6 +125,13 @@ function PluralityVote({ election, candidates, refetch }) {
           ),
         });
       }
+    } else {
+      gaEvent({
+        category: "vote",
+        action: "user cancelled vote",
+        label: election.name,
+        nonInteraction: false,
+      });
     }
   };
 

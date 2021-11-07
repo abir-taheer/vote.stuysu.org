@@ -1,6 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import { useContext, useEffect, useState } from "react";
 import { GOOGLE_CLIENT_ID } from "../../constants";
+import gaEvent from "../../utils/analytics/gaEvent";
 import alertDialog from "../dialog/alertDialog";
 import UserContext from "./UserContext";
 import useScript from "./useScript";
@@ -34,6 +35,12 @@ export default function useGSI() {
           title: "There was an error authenticating you",
           body: `There's no user with that email in the database. \nIf you feel this is an error, please email stuyboe@gmail.com`,
         });
+        gaEvent({
+          category: "authentication",
+          action: "error",
+          label: "User not in database",
+          nonInteraction: true,
+        });
       } else {
         await alertDialog({
           title: "There was an error authenticating you",
@@ -49,6 +56,12 @@ export default function useGSI() {
         title: "Error Logging in",
         body: "There was an error loading the library for logging in with Google. Make sure you don't have any content blockers enabled on this site.",
       });
+      gaEvent({
+        category: "authentication",
+        action: "error",
+        label: "GSI library failed to load",
+        nonInteraction: true,
+      });
     }
 
     if (scriptStatus === "ready" && user.ready && !user.signedIn) {
@@ -62,6 +75,19 @@ export default function useGSI() {
         if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
           // continue with another identity provider.
           console.log("One Tap isn't supported in this browser");
+          gaEvent({
+            category: "authentication",
+            action: "error",
+            label: "One tap prompt not displayed",
+            nonInteraction: true,
+          });
+        } else {
+          gaEvent({
+            category: "authentication",
+            action: "success",
+            label: "One tap prompt displayed",
+            nonInteraction: true,
+          });
         }
       });
       setReady(true);

@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import gaEvent from "../../utils/analytics/gaEvent";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -65,6 +66,14 @@ export default function ElectionVotersTable({ voters, election }) {
         <Link
           href={`/api/download?data=voters&electionId=${election.id}&format=csv`}
           target={"_blank"}
+          onClick={() => {
+            gaEvent({
+              category: "click",
+              action: "csv voters download",
+              label: election.name,
+              nonInteraction: false,
+            });
+          }}
         >
           Download as CSV
         </Link>
@@ -134,10 +143,24 @@ export default function ElectionVotersTable({ voters, election }) {
           count={users.length}
           rowsPerPage={resultsPerPage}
           page={page}
-          onPageChange={(event, page) => setPage(page)}
+          onPageChange={(event, page) => {
+            setPage(page);
+            gaEvent({
+              category: "pagination",
+              action: "page changed",
+              label: election.name + " - page: " + page,
+              nonInteraction: false,
+            });
+          }}
           onRowsPerPageChange={(ev) => {
             setPage(0);
             setResultsPerPage(+ev.target.value);
+            gaEvent({
+              category: "pagination",
+              action: "rows per page changed",
+              label: election.name + " - rows per page: " + ev.target.value,
+              nonInteraction: false,
+            });
           }}
         />
       </Paper>

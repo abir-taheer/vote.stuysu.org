@@ -15,6 +15,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
+import gaEvent from "../../utils/analytics/gaEvent";
 import useLogin from "../auth/useLogin";
 import UserContext from "../auth/UserContext";
 
@@ -29,7 +30,15 @@ const NavDrawer = ({ open, setOpen }) => {
   const user = useContext(UserContext);
   const { signIn } = useLogin();
 
-  const closeDrawer = () => setOpen(false);
+  const closeDrawer = (ev) => {
+    gaEvent({
+      category: "click",
+      action: "nav drawer link",
+      label: ev.target?.innerText || "unknown button",
+      nonInteraction: false,
+    });
+    setOpen(false);
+  };
 
   return (
     <Drawer open={open} onClose={() => setOpen(false)} anchor={"right"}>
@@ -68,7 +77,15 @@ const NavDrawer = ({ open, setOpen }) => {
                 color={"primary"}
                 variant={"outlined"}
                 fullWidth
-                onClick={user.logout}
+                onClick={() => {
+                  gaEvent({
+                    category: "authentication",
+                    action: "signout",
+                    label: "drawer",
+                    nonInteraction: false,
+                  });
+                  user.logout();
+                }}
                 startIcon={<PowerSettingsNewOutlined />}
               >
                 Sign Out

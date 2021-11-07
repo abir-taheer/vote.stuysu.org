@@ -7,6 +7,7 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
+import gaEvent from "../../utils/analytics/gaEvent";
 import UserContext from "../auth/UserContext";
 
 const tabs = [
@@ -126,6 +127,13 @@ export default function ElectionTabBar({ completed }) {
               } else {
                 router.push(tab.path);
               }
+
+              gaEvent({
+                category: "click",
+                action: "navigation",
+                label: tab.label,
+                nonInteraction: false,
+              });
             }}
             sx={styles.tab}
             icon={tab.icon}

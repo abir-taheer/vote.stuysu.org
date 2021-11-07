@@ -1,4 +1,5 @@
 import React from "react";
+import gaEvent from "../../utils/analytics/gaEvent";
 
 const styles = {
   footer: {
@@ -16,7 +17,18 @@ function Footer() {
     <footer style={styles.footer}>
       <p>
         Created by{" "}
-        <a href={"https://abir.nyc"} target={"_blank"}>
+        <a
+          href={"https://abir.nyc?utm_referrer=vote.stuysu.org"}
+          target={"_blank"}
+          onClick={() =>
+            gaEvent({
+              category: "click",
+              action: "Clicked on Footer (Abir Taheer)",
+              label: "Abir Taheer",
+              nonInteraction: false,
+            })
+          }
+        >
           Abir Taheer
         </a>
       </p>

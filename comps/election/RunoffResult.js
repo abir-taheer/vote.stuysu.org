@@ -17,6 +17,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { Chart } from "react-google-charts";
+import gaEvent from "../../utils/analytics/gaEvent";
 import capitalize from "../../utils/text/capitalize";
 import CenteredCircularProgress from "../shared/CenteredCircularProgress";
 import brokenGlass from "./../../img/marginalia-fatal-error.png";
@@ -89,6 +90,15 @@ const RunoffResult = ({ id, election }) => {
   const [confetti, setConfetti] = useState(false);
 
   useEffect(() => {
+    gaEvent({
+      category: "pagination",
+      action: "election results round navigation",
+      label: election.name + " - round: " + round,
+      nonInteraction: false,
+    });
+  }, [round]);
+
+  useEffect(() => {
     if (
       typeof window !== "undefined" &&
       data &&
@@ -103,6 +113,12 @@ const RunoffResult = ({ id, election }) => {
       const callback = (entries) => {
         if (entries[0].isIntersecting) {
           setConfetti(true);
+          gaEvent({
+            category: "confetti",
+            action: "confetti displayed",
+            label: election.name,
+            nonInteraction: true,
+          });
         }
       };
 

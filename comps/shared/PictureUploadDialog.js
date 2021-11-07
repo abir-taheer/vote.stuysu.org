@@ -7,7 +7,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import EventEmitter from "events";
+import { useRouter } from "next/router";
 import { createRef, useEffect, useState } from "react";
+import gaEvent from "../../utils/analytics/gaEvent";
 
 const pictureDialogEmitter = new EventEmitter();
 
@@ -41,6 +43,7 @@ const PictureUploadDialog = () => {
   const [promise, setPromise] = useState(null);
   const [file, setFile] = useState(null);
   const [alt, setAlt] = useState("");
+  const router = useRouter();
   const uploadRef = createRef();
 
   const resetValues = () => {
@@ -57,11 +60,24 @@ const PictureUploadDialog = () => {
 
   const handleCancel = () => {
     promise.resolve(null);
+    gaEvent({
+      category: "picture",
+      action: "picture upload cancelled",
+      label: router.asPath,
+      nonInteraction: false,
+    });
     resetValues();
   };
 
   const handleConfirm = () => {
     promise.resolve({ file, alt });
+
+    gaEvent({
+      category: "picture",
+      action: "picture uploaded",
+      label: router.asPath,
+      nonInteraction: false,
+    });
     resetValues();
   };
 

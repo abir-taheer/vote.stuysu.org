@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import React from "react";
+import gaEvent from "../../utils/analytics/gaEvent";
 import ElectionCardDate from "./ElectionCardDate";
 
 const styles = {
@@ -22,7 +23,16 @@ function ElectionCard({
   dateUpdateInterval = 1000,
 }) {
   return (
-    <Card>
+    <Card
+      onClick={() =>
+        gaEvent({
+          category: "click",
+          action: "election card click",
+          label: name,
+          nonInteraction: false,
+        })
+      }
+    >
       <Link href={href}>
         <CardActionArea>
           <CardMedia

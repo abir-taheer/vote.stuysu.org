@@ -15,6 +15,7 @@ import Confetti from "react-confetti";
 import { Chart } from "react-google-charts";
 import brokenGlass from "../../img/marginalia-fatal-error.png";
 import layout from "../../styles/layout.module.css";
+import gaEvent from "../../utils/analytics/gaEvent";
 import capitalize from "../../utils/text/capitalize";
 import LoadingScreen from "../shared/LoadingScreen";
 
@@ -67,6 +68,12 @@ export default function PluralityResult({ election }) {
       const callback = (entries) => {
         if (entries[0].isIntersecting) {
           setConfetti(true);
+          gaEvent({
+            category: "confetti",
+            action: "confetti shown",
+            label: election.name,
+            nonInteraction: true,
+          });
         }
       };
 

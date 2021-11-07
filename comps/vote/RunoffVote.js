@@ -16,8 +16,9 @@ import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import arrayMove from "array-move";
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import gaEvent from "../../utils/analytics/gaEvent";
 import alertDialog from "../dialog/alertDialog";
 import confirmDialog from "../dialog/confirmDialog";
 import VotingCountDown from "./VotingCountDown";
@@ -179,6 +180,7 @@ const SortableList = SortableContainer(
 const RunoffVote = ({ election, candidates, refetch }) => {
   const [choices, setChoices] = useState(candidates);
   const [removed, setRemoved] = useState([]);
+  const voteLoaded = useRef(new Date());
 
   const [vote, { loading }] = useMutation(MUTATION, {
     variables: {
@@ -209,12 +211,31 @@ const RunoffVote = ({ election, candidates, refetch }) => {
     });
 
     if (confirmation) {
+      gaEvent({
+        category: "vote",
+        action: "user confirmed vote",
+        label: election.name,
+        nonInteraction: false,
+      });
+
       try {
         const { data } = await vote();
         window.localStorage.setItem(
           "vote-id-" + election.id,
           data.voteRunoff.id
         );
+
+        const end = new Date();
+        const time = end.getTime() - voteLoaded.current.getTime();
+        const seconds = Math.round(time / 1000);
+
+        gaEvent({
+          category: "vote",
+          action: "voting time runoff",
+          label: seconds + "s",
+          nonInteraction: true,
+        });
+
         await refetch();
       } catch (e) {
         await alertDialog({
@@ -231,6 +252,13 @@ const RunoffVote = ({ election, candidates, refetch }) => {
           ),
         });
       }
+    } else {
+      gaEvent({
+        category: "vote",
+        action: "user cancelled vote",
+        label: election.name,
+        nonInteraction: false,
+      });
     }
   };
 
