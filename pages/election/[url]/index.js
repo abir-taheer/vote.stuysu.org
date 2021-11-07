@@ -15,6 +15,7 @@ import ElectionTabBar from "../../../comps/election/ElectionTabBar";
 import BackButton from "../../../comps/shared/BackButton";
 import LoadingScreen from "../../../comps/shared/LoadingScreen";
 import layout from "../../../styles/layout.module.css";
+import gaEvent from "../../../utils/analytics/gaEvent";
 import useFormatDate from "../../../utils/date/useFormatDate";
 import capitalize from "../../../utils/text/capitalize";
 import Error404 from "../../404";
@@ -157,6 +158,14 @@ const ElectionCandidates = () => {
                 variant={"contained"}
                 color={"secondary"}
                 fullWidth
+                onClick={() => {
+                  gaEvent({
+                    category: "click",
+                    action: "what is instant runoff voting button",
+                    label: election.name,
+                    nonInteraction: false,
+                  });
+                }}
                 sx={{ marginBottom: "1rem" }}
               >
                 What is Instant Runoff Voting ?
