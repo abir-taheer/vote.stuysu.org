@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
-import { TouchApp } from "@mui/icons-material";
+import TouchApp from "@mui/icons-material/TouchApp";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";

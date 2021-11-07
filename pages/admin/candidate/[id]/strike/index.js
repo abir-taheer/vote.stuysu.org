@@ -1,7 +1,8 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { AddOutlined, DeleteOutlined, EditOutlined } from "@mui/icons-material";
+import AddOutlined from "@mui/icons-material/AddOutlined";
+import DeleteOutlined from "@mui/icons-material/DeleteOutlined";
+import EditOutlined from "@mui/icons-material/EditOutlined";
 import WarningOutlined from "@mui/icons-material/WarningOutlined";
-import { ListItemSecondaryAction } from "@mui/material";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
@@ -9,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";

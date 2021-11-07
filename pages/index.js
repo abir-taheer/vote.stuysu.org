@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import { HowToVote } from "@mui/icons-material";
+import HowToVote from "@mui/icons-material/HowToVote";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
