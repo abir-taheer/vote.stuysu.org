@@ -10,7 +10,7 @@ export default function CenteredCircularProgress() {
     return () => {
       const end = new Date();
       const time = end.getTime() - start.getTime();
-      const seconds = Math.round((time * 100) / 1000) / 100;
+      const seconds = Math.round((time * 10) / 1000) / 10;
 
       gaEvent({
         category: "loading",
