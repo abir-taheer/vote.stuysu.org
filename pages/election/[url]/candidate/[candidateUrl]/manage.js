@@ -183,15 +183,18 @@ function CandidateManagePage() {
     validateOnChange: false,
   });
 
+  const [remove, { loading: removing }] = useMutation(DELETE_MUTATION);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const election = data?.electionByUrl;
+  const candidate = data?.candidateByUrl;
+
   useEffect(() => {
     if (!values.blurb && !values.platform && candidate) {
       setFieldValue("blurb", candidate.blurb || "");
       setFieldValue("platform", candidate.platform || "");
     }
-  }, [data, setFieldValue, values]);
-
-  const [remove, { loading: removing }] = useMutation(DELETE_MUTATION);
-  const { enqueueSnackbar } = useSnackbar();
+  }, [data, setFieldValue, values, candidate]);
 
   const handleCancel = async (id) => {
     const confirmation = await confirmDialog({
@@ -223,9 +226,6 @@ function CandidateManagePage() {
   if (loading || !candidateUrl || !url) {
     return <LoadingScreen />;
   }
-
-  const election = data?.electionByUrl;
-  const candidate = data?.candidateByUrl;
 
   if (!data || !candidate || !election) {
     return <Error404 />;

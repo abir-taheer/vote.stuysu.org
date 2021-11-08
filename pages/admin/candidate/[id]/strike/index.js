@@ -111,7 +111,7 @@ const AlterStrike = () => {
       <AdminCandidateTabBar />
 
       <div className={layout.center}>
-        <Link href={"/admin/candidate/" + id + "/strike/create"}>
+        <Link href={"/admin/candidate/" + id + "/strike/create"} passHref>
           <Button
             variant={"outlined"}
             color={"secondary"}
