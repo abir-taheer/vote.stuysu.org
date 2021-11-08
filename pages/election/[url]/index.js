@@ -168,7 +168,7 @@ const ElectionCandidates = () => {
                 }}
                 sx={{ marginBottom: "1rem" }}
               >
-                What is Instant Runoff Voting ?
+                What's Instant Runoff Voting?
               </Button>
             </Link>
           )}
