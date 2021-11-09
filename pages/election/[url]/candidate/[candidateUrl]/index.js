@@ -1,7 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
 import Container from "@mui/material/Container";
-import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import Image from "next/image";
@@ -153,15 +152,9 @@ function CandidatePage() {
             blurb
           </Typography>
         )}
-        <Tooltip title={"Click here to change the blurb"}>
-          <Typography
-            variant={"body1"}
-            align={"left"}
-            className={layout.spaced}
-          >
-            {candidate.blurb}
-          </Typography>
-        </Tooltip>
+        <Typography variant={"body1"} align={"left"} className={layout.spaced}>
+          {candidate.blurb}
+        </Typography>
 
         <Typography
           variant={"h2"}
