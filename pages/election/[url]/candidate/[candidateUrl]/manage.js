@@ -340,7 +340,7 @@ function CandidateManagePage() {
         value={values.blurb}
         onChange={(e) => setFieldValue("blurb", e.target.value.substr(0, 200))}
         variant={"outlined"}
-        label={"Candidate Blurb"}
+        label={"Candidate Blurb / Summary"}
         disabled={!values.editingBlurb}
         onClick={() => {
           if (!values.editingBlurb) {
@@ -425,7 +425,7 @@ function CandidateManagePage() {
           value={values.platform}
           setValue={(v) => setFieldValue("platform", v.substr(0, 10000))}
           variant={"outlined"}
-          label={"Candidate Platform"}
+          label={"Candidate Platform / Policies"}
           disabled={!values.editingPlatform}
           helperText={!values.editingPlatform ? "Click to edit" : ""}
         />

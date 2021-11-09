@@ -140,7 +140,7 @@ function CandidatePage() {
           className={layout.spaced}
           color={"secondary"}
         >
-          Blurb:
+          Summary Blurb:
         </Typography>
         {!candidate.blurb && (
           <Typography
@@ -162,7 +162,7 @@ function CandidatePage() {
           className={layout.spaced}
           color={"secondary"}
         >
-          Platform:
+          Platform / Policies:
         </Typography>
         {!candidate.platform && (
           <Typography
