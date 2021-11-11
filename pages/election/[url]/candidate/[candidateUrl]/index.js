@@ -152,7 +152,15 @@ function CandidatePage() {
             blurb
           </Typography>
         )}
-        <Typography variant={"body1"} align={"left"} className={layout.spaced}>
+        <Typography
+          variant={"body1"}
+          align={"left"}
+          className={layout.spaced}
+          sx={{
+            maxWidth: "100%",
+            overflowWrap: "break-word",
+          }}
+        >
           {candidate.blurb}
         </Typography>
 
@@ -169,10 +177,6 @@ function CandidatePage() {
             variant={"body1"}
             color={"textSecondary"}
             className={layout.spaced}
-            style={{
-              maxWidth: "100%",
-              overflowWrap: "break-word",
-            }}
           >
             This candidate has not {!election.completed && "yet"} provided a
             platform
