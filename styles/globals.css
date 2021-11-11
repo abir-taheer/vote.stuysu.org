@@ -47,8 +47,16 @@ li {
 }
 
 .sanitized-html {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   max-width: 100%;
+}
+
+.sanitized-html a {
+  color: rgba(108, 92, 231, 0.9);
+}
+
+.sanitized-html a:hover {
+  color: rgba(108, 92, 231, 1)
 }
 
 .sanitized-html h1 {

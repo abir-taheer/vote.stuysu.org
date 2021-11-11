@@ -1,3 +1,4 @@
+import Link from "@mui/material/Link";
 import React from "react";
 import gaEvent from "../../utils/analytics/gaEvent";
 
@@ -17,7 +18,7 @@ function Footer() {
     <footer style={styles.footer}>
       <p>
         Created by{" "}
-        <a
+        <Link
           href={"https://abir.nyc?utm_referrer=vote.stuysu.org"}
           target={"_blank"}
           onClick={() =>
@@ -30,7 +31,7 @@ function Footer() {
           }
         >
           Abir Taheer
-        </a>
+        </Link>
       </p>
     </footer>
   );
