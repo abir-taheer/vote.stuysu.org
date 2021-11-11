@@ -340,8 +340,8 @@ function CandidateManagePage() {
       <Typography variant={"body2"} color={"text.secondary"}>
         Try to summarize your candidacy in a short tweet (less than 200
         characters). This is the text that will show up in the preview when you
-        share your candidate page on social media. Don't add any links here but
-        instead add them in the platform field that's below this.
+        share your candidate page on social media. Don&apos;t add any links here
+        but instead add them in the platform field that&apos;s below this.
       </Typography>
       <TextField
         value={values.blurb}
