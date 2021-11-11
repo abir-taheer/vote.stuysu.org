@@ -34,7 +34,41 @@ li {
 }
 
 .sanitized-html iframe {
+  max-width: 95%;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.sanitized-html pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.sanitized-html {
+  overflow-wrap: anywhere;
   max-width: 100%;
+}
+
+.sanitized-html h1 {
+  font-size: 1.8rem;
+}
+
+.sanitized-html h2 {
+  font-size: 1.6rem;
+}
+
+.sanitized-html h3 {
+  font-size: 1.4rem;
+}
+
+.sanitized-html h4 {
+  font-size: 1.25rem;
+}
+
+.sanitized-html h5 {
+  font-size: 1rem;
 }
 
 .crop-circle {

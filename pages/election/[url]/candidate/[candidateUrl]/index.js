@@ -169,6 +169,10 @@ function CandidatePage() {
             variant={"body1"}
             color={"textSecondary"}
             className={layout.spaced}
+            style={{
+              maxWidth: "100%",
+              overflowWrap: "break-word",
+            }}
           >
             This candidate has not {!election.completed && "yet"} provided a
             platform
@@ -176,7 +180,7 @@ function CandidatePage() {
         )}
         <div
           dangerouslySetInnerHTML={{ __html: candidate.platform }}
-          className={layout.spaced}
+          className={layout.spaced + " sanitized-html"}
         />
       </div>
     </Container>

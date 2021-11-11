@@ -108,7 +108,10 @@ function FAQPage() {
 
       <Divider sx={styles.divider} />
 
-      <div dangerouslySetInnerHTML={{ __html: faq.body }} />
+      <div
+        className="sanitized-html"
+        dangerouslySetInnerHTML={{ __html: faq.body }}
+      />
     </Container>
   );
 }

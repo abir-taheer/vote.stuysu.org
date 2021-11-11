@@ -13,7 +13,7 @@ const BackButton = ({
 }) => {
   const router = useRouter();
 
-  const { backPath, backLabel } = router.query;
+  const { backPath, backLabel } = router.query || {}; // Empty object in case query undefined
 
   return (
     <Link href={backPath || href} passHref>

@@ -336,6 +336,13 @@ function CandidateManagePage() {
         Upload New Image
       </LoadingButton>
 
+      <Typography variant={"h3"}>Candidate Summary / Blurb</Typography>
+      <Typography variant={"body2"} color={"text.secondary"}>
+        Try to summarize your candidacy in a short tweet (less than 200
+        characters). This is the text that will show up in the preview when you
+        share your candidate page on social media. Don't add any links here but
+        instead add them in the platform field that's below this.
+      </Typography>
       <TextField
         value={values.blurb}
         onChange={(e) => setFieldValue("blurb", e.target.value.substr(0, 200))}
@@ -350,17 +357,16 @@ function CandidateManagePage() {
         helperText={
           !values.editingBlurb
             ? "Click to edit"
-            : "Must be less than 200 characters. (" +
-              values.blurb.length +
-              "/200)"
+            : "(" + values.blurb.length + "/200)"
         }
         fullWidth
         multiline
         rows={3}
+        sx={{ marginBottom: "1rem" }}
       />
 
       {values.editingBlurb && (
-        <Stack direction={"row"} spacing={2}>
+        <Stack direction={"row"} spacing={2} sx={{ marginBottom: "2rem" }}>
           <Button
             variant={"contained"}
             color={"secondary"}
@@ -403,6 +409,11 @@ function CandidateManagePage() {
         </Stack>
       )}
 
+      <Typography variant={"h3"}>Candidate Platform</Typography>
+      <Typography variant={"body2"} color={"text.secondary"}>
+        Here you can go over your candidacy in more detail, as well as include
+        any relevant links, photos, or embed videos from youtube.
+      </Typography>
       <div style={{ position: "relative" }}>
         {!values.editingPlatform && (
           <div
