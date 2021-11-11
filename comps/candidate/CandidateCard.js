@@ -13,6 +13,13 @@ const styles = {
   mediaContainer: {
     textAlign: "center",
   },
+
+  secondaryText: {
+    overflowWrap: "break-word",
+  },
+  primaryText: {
+    overflowWrap: "break-word",
+  },
 };
 
 function CandidateCard({ href, picture, blurb, name, strikes }) {
@@ -31,7 +38,12 @@ function CandidateCard({ href, picture, blurb, name, strikes }) {
             />
           </div>
           <CardContent>
-            <Typography gutterBottom variant="h3" align={"center"}>
+            <Typography
+              gutterBottom
+              variant="h3"
+              align={"center"}
+              sx={styles.primaryText}
+            >
               {name}
             </Typography>
             {!!strikes && (
@@ -45,7 +57,12 @@ function CandidateCard({ href, picture, blurb, name, strikes }) {
               </Typography>
             )}
             {/*Put the dates in a separate component because they re-render every second*/}
-            <Typography variant={"body2"} color={"textSecondary"} gutterBottom>
+            <Typography
+              variant={"body2"}
+              color={"textSecondary"}
+              gutterBottom
+              sx={styles.secondaryText}
+            >
               {blurb || "This candidate has not provided a blurb"}
             </Typography>
           </CardContent>
