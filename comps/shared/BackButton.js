@@ -26,7 +26,7 @@ const BackButton = ({
           gaEvent({
             category: "click",
             action: "back button",
-            label,
+            label: text,
             nonInteraction: false,
           });
         }}
