@@ -74,21 +74,23 @@ const ElectionOverviewText = ({
   if (now > end) {
     return (
       <>
-        <Image
-          src={waitingPale}
-          alt={"Someone leaning against a clock"}
-          objectFit={"contain"}
-          height={200}
-          width={200}
-          className={layout.smallVector}
-        />
+        <div className={layout.center}>
+          <Image
+            src={waitingPale}
+            alt={"Someone leaning against a clock"}
+            objectFit={"contain"}
+            height={200}
+            width={200}
+            className={layout.smallVector}
+          />
+        </div>
 
         <br />
-        <Typography variant={"h3"}>
+        <Typography variant={"h3"} align={"center"}>
           The election's over but results aren't out yet
         </Typography>
 
-        <Typography variant={"body1"} paragraph gutterBottom>
+        <Typography variant={"body1"} paragraph gutterBottom align={"center"}>
           Don't worry, this page will automatically update once they're out 😌
         </Typography>
       </>

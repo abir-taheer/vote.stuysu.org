@@ -189,17 +189,19 @@ const ElectionCandidates = () => {
 
         <br />
 
-        <ElectionOverviewText
-          completed={election.completed}
-          url={url}
-          end={end}
-          start={start}
-          isOpen={election.isOpen}
-          userHasVoted={data.userHasVoted}
-          userIsEligible={election.userIsEligible}
-          now={now}
-          refetch={refetch}
-        />
+        <Container maxWidth={"sm"}>
+          <ElectionOverviewText
+            completed={election.completed}
+            url={url}
+            end={end}
+            start={start}
+            isOpen={election.isOpen}
+            userHasVoted={data.userHasVoted}
+            userIsEligible={election.userIsEligible}
+            now={now}
+            refetch={refetch}
+          />
+        </Container>
       </div>
 
       {!!election.activeAnnouncements.length && (
