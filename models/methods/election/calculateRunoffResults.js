@@ -31,10 +31,6 @@ export default async function calculateRunoffResults() {
       number++;
       let numVotesThisRound = 0;
 
-      if (number === 7) {
-        break;
-      }
-
       let voteCountsThisRound = {};
 
       if (number === 1) {
