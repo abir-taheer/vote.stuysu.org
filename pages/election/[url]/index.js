@@ -155,7 +155,7 @@ const ElectionCandidates = () => {
             >
               <Button
                 startIcon={<TouchApp />}
-                variant={"contained"}
+                variant={election.completed ? "outlined" : "contained"}
                 color={"secondary"}
                 fullWidth
                 onClick={() => {
