@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import layout from "../../styles/layout.module.css";
 import useLogin from "../auth/useLogin";
 import UserContext from "../auth/UserContext";
@@ -25,13 +25,6 @@ const ElectionOverviewText = ({
 }) => {
   const { signedIn } = useContext(UserContext);
   const { signIn, loading } = useLogin();
-
-  useEffect(() => {
-    if (!completed) {
-      const interval = setInterval(() => refetch(), 1000 * 10);
-      return () => clearTimeout(interval);
-    }
-  }, [completed]);
 
   if (completed) {
     return (
