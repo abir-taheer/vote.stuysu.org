@@ -18,6 +18,9 @@ body {
 .platform-iframe {
   max-width: 90vw;
   max-height: 600px;
+}
+
+.platform-image {
   object-fit: contain;
 }
 
