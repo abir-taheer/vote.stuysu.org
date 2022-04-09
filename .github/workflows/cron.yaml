@@ -1,0 +1,15 @@
+name: keep-mongodb-alive
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask GraphQL endpoint for a single election
+        run: |
+          curl -g \
+            -X POST \
+            -H "Content-Type: application/json" \
+            -d '{"query": "query { allElections(page:1, resultsPerPage:1){ results { id } } }"}' \
+            https://vote.stuysu.org/api/graphql
