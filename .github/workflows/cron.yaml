@@ -1,7 +1,7 @@
 name: keep-mongodb-alive
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '0 0 * * *'
 jobs:
   cron:
     runs-on: ubuntu-latest
