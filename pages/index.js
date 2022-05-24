@@ -98,7 +98,7 @@ function Home() {
       {loading && <CenteredCircularProgress />}
 
       {!!data?.currentElections?.length && (
-        <>
+        <Stack spacing={2}>
           <Typography align={"center"} variant={"h2"} gutterBottom>
             Current Elections
           </Typography>
@@ -121,7 +121,7 @@ function Home() {
               />
             ))}
           </Grid>
-        </>
+        </Stack>
       )}
 
       <div className={layout.center}>
