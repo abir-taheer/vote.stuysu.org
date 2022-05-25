@@ -98,7 +98,7 @@ function Home() {
       {loading && <CenteredCircularProgress />}
 
       {!!data?.currentElections?.length && (
-        <Stack spacing={2}>
+        <>
           <Typography align={"center"} variant={"h2"} gutterBottom>
             Current Elections
           </Typography>
@@ -109,6 +109,8 @@ function Home() {
             justifyItems={"center"}
             justifyContent={"center"}
             sx={{ marginBottom: "2rem" }}
+            rowGap={2}
+            columnGap={2}
           >
             {data.currentElections.map((election) => (
               <ElectionCard
@@ -121,7 +123,7 @@ function Home() {
               />
             ))}
           </Grid>
-        </Stack>
+        </>
       )}
 
       <div className={layout.center}>
