@@ -55,20 +55,23 @@ const ElectionPictureSelection = ({
   const [picture, setPicture] = useState(null);
   const client = useApolloClient();
 
-  useEffect(async () => {
+  useEffect(() => {
     const pictureNeedsUpdating = !picture || picture.id !== value;
-    if (value && pictureNeedsUpdating) {
+
+    if (value && pictureNeedsUpdating && !loading) {
       setLoading(true);
 
-      const { data } = await client.query({
-        query: PICTURE_QUERY,
-        variables: { id: value },
-      });
-
-      setPicture(data.pictureById);
-      setLoading(false);
+      client
+        .query({
+          query: PICTURE_QUERY,
+          variables: { id: value },
+        })
+        .then(({ data }) => {
+          setPicture(data.pictureById);
+          setLoading(false);
+        });
     }
-  }, [value]);
+  }, [value, client, picture, loading]);
 
   const handleUpload = async () => {
     const pictureInput = await promptPicture();

@@ -17,7 +17,7 @@ const CandidateNotFound = ({ href, buttonLabel }) => {
       <Typography variant={"h1"} align={"center"}>
         Candidate Not Found
       </Typography>
-      <Link href={href}>
+      <Link href={href} passHref>
         <Button
           startIcon={<HowToVote />}
           color={"secondary"}

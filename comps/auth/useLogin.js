@@ -29,12 +29,12 @@ const useLogin = () => {
             to sign you in and only requests the basic profile scope.
           </Typography>
           <Typography variant={"body1"}>
-            Click the "Sign In With Google" button on the below and sign in
-            using your <b>@stuy.edu</b> email address.
+            Click the &quot;Sign In With Google&quot; button on the below and
+            sign in using your <b>@stuy.edu</b> email address.
           </Typography>
           <Typography variant={"body1"}>
-            If the login popup doesn't open, refresh the page and try again or
-            contact stuyboe@gmail.com
+            If the login popup doesn&apos;t open, refresh the page and try again
+            or contact stuyboe@gmail.com
           </Typography>
 
           <div className={layout.flexCenter}>

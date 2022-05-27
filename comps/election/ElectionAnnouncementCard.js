@@ -18,11 +18,9 @@ export default function ElectionAnnouncementCard({ title, updatedAt, body }) {
   return (
     <Card sx={styles.card}>
       <Typography variant={"h3"}>{title}</Typography>
-      <Typography
-        variant={"subtitle2"}
-        color={"secondary"}
-        children={getReadableDate(updatedAt)}
-      />
+      <Typography variant={"subtitle2"} color={"secondary"}>
+        {getReadableDate(updatedAt)}
+      </Typography>
 
       <hr style={styles.hr} />
 

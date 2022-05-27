@@ -46,6 +46,7 @@ export default function ProfileChangeCard({
         >
           <Image
             src={candidate.picture.resource.url}
+            alt={"Profile picture"}
             width={40}
             height={40}
             objectFit={"cover"}

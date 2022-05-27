@@ -116,11 +116,9 @@ function PluralityVote({ election, candidates, refetch }) {
           body: (
             <Typography variant={"body1"}>
               There was an error processing your vote:{" "}
-              <Typography
-                component={"span"}
-                color={"primary"}
-                children={e.message}
-              />
+              <Typography component={"span"} color={"primary"}>
+                {e.message}
+              </Typography>
             </Typography>
           ),
         });

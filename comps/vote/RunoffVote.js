@@ -199,7 +199,7 @@ const RunoffVote = ({ election, candidates, refetch }) => {
           </Typography>
           <ol>
             {choices.map((c) => (
-              <li sx={styles.confirmationList}>
+              <li sx={styles.confirmationList} key={c.id}>
                 <Typography component={"span"} color={"secondary"}>
                   {c.name}
                 </Typography>
@@ -243,11 +243,9 @@ const RunoffVote = ({ election, candidates, refetch }) => {
           body: (
             <Typography variant={"body1"}>
               There was an error processing your vote:{" "}
-              <Typography
-                component={"span"}
-                color={"primary"}
-                children={e.message}
-              />
+              <Typography component={"span"} color={"primary"}>
+                {e.message}
+              </Typography>
             </Typography>
           ),
         });

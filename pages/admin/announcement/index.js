@@ -13,7 +13,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import moment from "moment-timezone/moment-timezone-utils";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import AdminTabBar from "../../../comps/admin/AdminTabBar";
 import layout from "./../../../styles/layout.module.css";
 
@@ -83,8 +83,8 @@ const AdminAnnouncements = () => {
       <Container maxWidth={"sm"}>
         <List>
           {data?.allAnnouncements.results.map(({ id, title, updatedAt }) => (
-            <>
-              <ListItem alignItems="flex-start" key={id}>
+            <Fragment key={id}>
+              <ListItem alignItems="flex-start">
                 <ListItemText
                   primary={
                     <Typography
@@ -109,7 +109,7 @@ const AdminAnnouncements = () => {
                 </ListItemSecondaryAction>
               </ListItem>
               <Divider />
-            </>
+            </Fragment>
           ))}
         </List>
       </Container>

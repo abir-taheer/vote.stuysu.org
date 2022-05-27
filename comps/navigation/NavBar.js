@@ -58,7 +58,7 @@ const NavBar = () => {
         color={"transparent"}
       >
         <Toolbar>
-          <Link href={"/"}>
+          <Link href={"/"} passHref>
             <Typography variant="h6" sx={styles.title}>
               StuyBOE Voting Site
             </Typography>

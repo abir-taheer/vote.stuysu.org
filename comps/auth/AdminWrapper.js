@@ -31,7 +31,7 @@ export default function AdminWrapper({ children }) {
         nonInteraction: false,
       });
     }
-  }, [adminRequired, userIsAdmin]);
+  }, [adminRequired, user?.signedIn, user?.adminPrivileges, user?.ready]);
 
   if (!adminRequired || userIsAdmin) {
     return children;

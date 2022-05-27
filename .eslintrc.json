@@ -1,4 +1,13 @@
 {
   "extends": "next/core-web-vitals",
-  "ignorePatterns": ["import/no-anonymous-default-export"]
+  "overrides": [
+    {
+      "files": "**/*.js",
+      "rules": {
+        "@next/next/no-img-element": "off",
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ],
+  "ignorePatterns": ["node_modules/"]
 }

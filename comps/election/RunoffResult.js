@@ -96,7 +96,7 @@ const RunoffResult = ({ id, election }) => {
       label: election.name + " - round: " + round,
       nonInteraction: false,
     });
-  }, [round]);
+  }, [round, election]);
 
   useEffect(() => {
     if (
@@ -128,7 +128,7 @@ const RunoffResult = ({ id, election }) => {
 
       return () => observer.disconnect();
     }
-  }, [data, round, confetti]);
+  }, [data, round, confetti, election]);
 
   if (loading) {
     return <CenteredCircularProgress />;
@@ -159,7 +159,7 @@ const RunoffResult = ({ id, election }) => {
         </div>
 
         <Typography variant={"body1"} align={"center"}>
-          There aren't any votes
+          There aren&apos;t any votes
         </Typography>
       </>
     );

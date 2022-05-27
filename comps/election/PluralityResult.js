@@ -83,7 +83,7 @@ export default function PluralityResult({ election }) {
 
       return () => observer.disconnect();
     }
-  }, [winnerRef, confetti, data]);
+  }, [winnerRef, confetti, data, election?.name]);
 
   if (loading) {
     return <LoadingScreen />;
@@ -119,7 +119,7 @@ export default function PluralityResult({ election }) {
         </div>
 
         <Typography variant={"body1"} align={"center"}>
-          There aren't any votes
+          There aren&apos;t any votes
         </Typography>
       </>
     );

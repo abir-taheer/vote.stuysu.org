@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { GOOGLE_CLIENT_ID } from "../../constants";
 import gaEvent from "../../utils/analytics/gaEvent";
 import alertDialog from "../dialog/alertDialog";
@@ -18,37 +18,40 @@ export default function useGSI() {
   const [login, { loading }] = useMutation(MUTATION);
   const user = useContext(UserContext);
 
-  const onSuccess = async (tokenId) => {
-    try {
-      const response = await login({ variables: { idToken: tokenId } });
-      const jwt = response.data.login;
-      localStorage.setItem("auth-jwt", jwt);
+  const onSuccess = useCallback(
+    async (tokenId) => {
+      try {
+        const response = await login({ variables: { idToken: tokenId } });
+        const jwt = response.data.login;
+        localStorage.setItem("auth-jwt", jwt);
 
-      window.location.reload();
-    } catch (e) {
-      console.error(e);
-      const error = e.graphQLErrors?.[0];
-      const code = error?.extensions?.code;
+        window.location.reload();
+      } catch (e) {
+        console.error(e);
+        const error = e.graphQLErrors?.[0];
+        const code = error?.extensions?.code;
 
-      if (code === "UNKNOWN_USER") {
-        await alertDialog({
-          title: "There was an error authenticating you",
-          body: `There's no user with that email in the database. \nIf you feel this is an error, please email stuyboe@gmail.com`,
-        });
-        gaEvent({
-          category: "authentication",
-          action: "error",
-          label: "User not in database",
-          nonInteraction: true,
-        });
-      } else {
-        await alertDialog({
-          title: "There was an error authenticating you",
-          body: e.message,
-        });
+        if (code === "UNKNOWN_USER") {
+          await alertDialog({
+            title: "There was an error authenticating you",
+            body: `There's no user with that email in the database. \nIf you feel this is an error, please email stuyboe@gmail.com`,
+          });
+          gaEvent({
+            category: "authentication",
+            action: "error",
+            label: "User not in database",
+            nonInteraction: true,
+          });
+        } else {
+          await alertDialog({
+            title: "There was an error authenticating you",
+            body: e.message,
+          });
+        }
       }
-    }
-  };
+    },
+    [login]
+  );
 
   useEffect(() => {
     if (scriptStatus === "error") {
@@ -92,7 +95,7 @@ export default function useGSI() {
       });
       setReady(true);
     }
-  }, [scriptStatus, user]);
+  }, [scriptStatus, user, onSuccess]);
 
   return { ready, authenticating: loading };
 }

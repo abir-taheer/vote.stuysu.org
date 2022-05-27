@@ -59,8 +59,8 @@ export default function ElectionVotersTable({ voters, election }) {
         align={"center"}
         gutterBottom
       >
-        If you took part in the election make sure you're present in the list
-        below. The list is sorted alphabetically.
+        If you took part in the election make sure you&apos;re present in the
+        list below. The list is sorted alphabetically.
       </Typography>
       <Typography variant={"subtitle2"} align={"center"} gutterBottom>
         <Link

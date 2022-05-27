@@ -25,7 +25,7 @@ const styles = {
 function CandidateCard({ href, picture, blurb, name, strikes }) {
   return (
     <Card>
-      <Link href={href}>
+      <Link href={href} passHref>
         <CardActionArea sx={styles.action}>
           <div style={styles.mediaContainer}>
             <Image

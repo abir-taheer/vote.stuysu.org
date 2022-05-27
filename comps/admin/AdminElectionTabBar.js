@@ -48,7 +48,7 @@ const AdminElectionTabBar = () => {
 
   useEffect(() => {
     setValue(tabIndex);
-  }, [router]);
+  }, [router, tabIndex]);
 
   return (
     <div style={styles.container}>

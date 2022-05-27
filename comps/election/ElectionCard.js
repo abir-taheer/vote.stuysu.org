@@ -33,7 +33,7 @@ function ElectionCard({
         })
       }
     >
-      <Link href={href}>
+      <Link href={href} passHref>
         <CardActionArea>
           <CardMedia
             image={picture?.resource?.url}

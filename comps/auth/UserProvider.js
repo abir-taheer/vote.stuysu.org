@@ -126,7 +126,7 @@ const UserProvider = ({ children }) => {
 
   return (
     <DateContext.Provider value={{ offset: dateOffset, getNow }}>
-      <UserContext.Provider children={children} value={value} />
+      <UserContext.Provider value={value}>{children}</UserContext.Provider>
     </DateContext.Provider>
   );
 };

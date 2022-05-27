@@ -61,7 +61,7 @@ const UserMenuItem = () => {
       >
         <div style={styles.popover}>
           <p>
-            You're signed in as: <b>{user.name}</b>
+            You&apos;re signed in as: <b>{user.name}</b>
           </p>
           <p>
             Email: <b>{user.email}</b>

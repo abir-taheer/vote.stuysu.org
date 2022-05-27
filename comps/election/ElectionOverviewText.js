@@ -40,7 +40,7 @@ const ElectionOverviewText = ({
           />
         </div>
         <Typography variant={"h3"} align={"center"}>
-          The election's over and results are available 🎉
+          The election&apos;s over and results are available 🎉
         </Typography>
 
         {userHasVoted && (
@@ -50,7 +50,7 @@ const ElectionOverviewText = ({
             paragraph
             align={"center"}
           >
-            Someone awesome voted in this election (hint: it's you! 😎)
+            Someone awesome voted in this election (hint: it&apos;s you! 😎)
           </Typography>
         )}
 
@@ -87,17 +87,18 @@ const ElectionOverviewText = ({
 
         <br />
         <Typography variant={"h3"} align={"center"}>
-          The election's over but results aren't out yet
+          The election&apos;s over but results aren&apos;t out yet
         </Typography>
 
         <Typography variant={"body1"} paragraph gutterBottom align={"center"}>
-          Don't worry, this page will automatically update once they're out 😌
+          Don&apos;t worry, this page will automatically update once
+          they&apos;re out 😌
         </Typography>
       </>
     );
   }
 
-  // We can presume it's now before the end time
+  // We can presume it&apos;s now before the end time
   if (userHasVoted) {
     return (
       <>
@@ -106,8 +107,8 @@ const ElectionOverviewText = ({
         </Typography>
 
         <Typography variant={"body1"} paragraph align={"center"}>
-          The election isn't over yet, but this page will automatically update
-          once results are available
+          The election isn&apos;t over yet, but this page will automatically
+          update once results are available
         </Typography>
       </>
     );
@@ -118,7 +119,7 @@ const ElectionOverviewText = ({
     return (
       <>
         <Typography variant={"h3"} align={"center"}>
-          You're eligible. It's time to vote! 🤩
+          You&apos;re eligible. It&apos;s time to vote! 🤩
         </Typography>
 
         <div className={layout.center}>
@@ -140,7 +141,7 @@ const ElectionOverviewText = ({
     return (
       <>
         <Typography variant={"h3"} align={"center"}>
-          ⌛ You're eligible, but it's not time to vote yet ⌛
+          ⌛ You&apos;re eligible, but it&apos;s not time to vote yet ⌛
         </Typography>
         <Typography variant={"body1"} align={"center"}>
           In the meantime, &nbsp;&nbsp;
@@ -163,7 +164,7 @@ const ElectionOverviewText = ({
     return (
       <>
         <Typography variant={"h3"} align={"center"}>
-          There's still time to vote ⌛
+          There&apos;s still time to vote ⌛
         </Typography>
         <Typography variant={"body1"} paragraph align={"center"}>
           <Button
@@ -174,7 +175,7 @@ const ElectionOverviewText = ({
           >
             Sign In
           </Button>
-          &nbsp;, and we'll check if you're eligible for this election
+          &nbsp;, and we&apos;ll check if you&apos;re eligible for this election
         </Typography>
       </>
     );
@@ -184,10 +185,10 @@ const ElectionOverviewText = ({
     return (
       <>
         <Typography variant={"h3"} align={"center"}>
-          It looks like you're not eligible for this election
+          It looks like you&apos;re not eligible for this election
         </Typography>
         <Typography variant={"body1"} align={"center"}>
-          Still, that doesn't mean you can't have a look around &nbsp;
+          Still, that doesn&apos;t mean you can&apos;t have a look around &nbsp;
           ¯\_(ツ)_/¯
         </Typography>
       </>
@@ -197,7 +198,7 @@ const ElectionOverviewText = ({
   return (
     <>
       <Typography variant={"h3"} align={"center"}>
-        The election hasn't started yet
+        The election hasn&apos;t started yet
       </Typography>
       <Typography variant={"body1"} align={"center"}>
         <Button
@@ -208,7 +209,7 @@ const ElectionOverviewText = ({
         >
           Sign In
         </Button>
-        &nbsp;, and we'll check if you're eligible for this election
+        &nbsp;, and we&apos;ll check if you&apos;re eligible for this election
       </Typography>
     </>
   );

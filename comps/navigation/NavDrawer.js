@@ -46,7 +46,7 @@ const NavDrawer = ({ open, setOpen }) => {
         <div style={styles.heading}>
           {!user.signedIn && (
             <div>
-              <p>You're not signed in</p>
+              <p>You&apos;re not signed in</p>
               <Button
                 color={"primary"}
                 variant={"outlined"}
@@ -62,7 +62,7 @@ const NavDrawer = ({ open, setOpen }) => {
           {user.signedIn && (
             <div>
               <p>
-                You're signed in as: <b>{user.name}</b>
+                You&apos;re signed in as: <b>{user.name}</b>
               </p>
               <p>
                 Email: <b>{user.email}</b>
@@ -97,7 +97,7 @@ const NavDrawer = ({ open, setOpen }) => {
         <br />
 
         {user.signedIn && user.adminPrivileges && (
-          <Link href={"/admin"}>
+          <Link href={"/admin"} passHref>
             <ListItem
               button
               selected={router.asPath.startsWith("/admin")}
@@ -111,7 +111,7 @@ const NavDrawer = ({ open, setOpen }) => {
           </Link>
         )}
 
-        <Link href={"/"}>
+        <Link href={"/"} passHref>
           <ListItem
             button
             selected={router.asPath === "/"}
@@ -129,6 +129,8 @@ const NavDrawer = ({ open, setOpen }) => {
             ?.filter((c) => !c.election.completed)
             .map((candidate) => (
               <Link
+                key={candidate.id}
+                passHref
                 href={`/election/${candidate.election.url}/candidate/${candidate.url}`}
               >
                 <ListItem
@@ -149,7 +151,7 @@ const NavDrawer = ({ open, setOpen }) => {
               </Link>
             ))}
 
-        <Link href={"/election"}>
+        <Link href={"/election"} passHref>
           <ListItem
             button
             selected={
@@ -169,7 +171,7 @@ const NavDrawer = ({ open, setOpen }) => {
           </ListItem>
         </Link>
 
-        <Link href={"/faq"}>
+        <Link href={"/faq"} passHref>
           <ListItem
             button
             selected={router.asPath.startsWith("/faq")}

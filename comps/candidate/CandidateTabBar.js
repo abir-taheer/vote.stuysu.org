@@ -87,7 +87,7 @@ export default function CandidateTabBar({
 
   useEffect(() => {
     setValue(tabIndex);
-  }, [router]);
+  }, [router, tabIndex]);
 
   if (adjustedTabs.length <= 1) {
     return null;

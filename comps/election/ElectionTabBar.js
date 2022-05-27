@@ -101,7 +101,7 @@ export default function ElectionTabBar({ completed }) {
 
   useEffect(() => {
     setValue(tabIndex);
-  }, [router]);
+  }, [router, tabIndex]);
 
   return (
     <div style={styles.container}>

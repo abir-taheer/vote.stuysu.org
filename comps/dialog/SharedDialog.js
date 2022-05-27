@@ -16,7 +16,7 @@ const SharedDialog = () => {
     queue.emitter.on("display", setItem);
 
     return () => queue.emitter.removeListener("display", setItem);
-  });
+  }, [item]);
 
   if (!item) {
     return null;

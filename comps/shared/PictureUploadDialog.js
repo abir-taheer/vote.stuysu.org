@@ -106,6 +106,8 @@ const PictureUploadDialog = () => {
               src={window.URL.createObjectURL(file)}
               alt={alt}
               style={styles.image}
+              height={200}
+              width={300}
             />
             <br />
             <Button

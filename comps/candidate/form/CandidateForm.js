@@ -297,8 +297,8 @@ const CandidateForm = ({
             />
           </FormControl>
           <FormHelperText>
-            A longer explanation of the candidate's policies and any relevant
-            information
+            A longer explanation of the candidate&apos;s policies and any
+            relevant information
           </FormHelperText>
         </FormGroup>
 
