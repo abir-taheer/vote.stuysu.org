@@ -1,3 +1,4 @@
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import { ApolloServer, ForbiddenError } from "apollo-server-micro";
 import { createComplexityLimitRule } from "graphql-validation-complexity";
 import resolvers from "../../graphql/resolvers";
@@ -56,12 +57,26 @@ const apolloServer = new ApolloServer({
     maxFileSize: 10000000,
   },
   validationRules: [ComplexityLimitRule],
+  plugins: [new ApolloServerPluginLandingPageGraphQLPlayground()],
 });
 
-export default apolloServer.createHandler({
-  path: "/api/graphql",
-  disableHealthCheck: true,
-});
+let serverStarted = false;
+let handler = null;
+
+const APIHandler = async (req, res) => {
+  if (!serverStarted) {
+    await apolloServer.start();
+    handler = apolloServer.createHandler({
+      path: "/api/graphql",
+      disableHealthCheck: true,
+    });
+    serverStarted = true;
+  }
+
+  return handler(req, res);
+};
+
+export default APIHandler;
 
 export const config = {
   api: {
