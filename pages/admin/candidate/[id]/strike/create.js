@@ -88,7 +88,10 @@ const CreateStrike = () => {
         <Typography variant={"inherit"} component={"span"} color={"secondary"}>
           {candidate.name}
         </Typography>{" "}
-        | Admin Panel
+        |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

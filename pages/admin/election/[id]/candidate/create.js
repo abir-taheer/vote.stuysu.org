@@ -89,7 +89,10 @@ const CreateCandidate = () => {
       )}
 
       <Typography variant={"h1"} align={"center"}>
-        Create Candidate | Admin Panel
+        Create Candidate |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

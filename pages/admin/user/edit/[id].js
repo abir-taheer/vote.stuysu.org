@@ -147,7 +147,10 @@ const EditUser = () => {
     <Container maxWidth={"md"} className={layout.page}>
       <BackButton href={"/admin/user"} text={"Back To Users"} />
       <Typography variant={"h1"} align={"center"}>
-        Edit User | Admin Panel
+        Edit User |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

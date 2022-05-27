@@ -116,7 +116,10 @@ export default function AdminApprovals() {
   return (
     <Container maxWidth={"md"} className={layout.page}>
       <Typography variant={"h1"} align={"center"}>
-        Pending Approvals | Admin Panel
+        Pending Approvals |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

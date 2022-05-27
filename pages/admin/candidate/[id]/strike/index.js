@@ -99,7 +99,10 @@ const AlterStrike = () => {
       />
 
       <Typography variant={"h1"} align={"center"}>
-        Strikes | Admin Panel
+        Strikes |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

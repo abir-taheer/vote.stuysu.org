@@ -68,7 +68,10 @@ const CreateElection = () => {
       <BackButton href={"/admin/election"} text={"Back To Elections"} />
 
       <Typography variant={"h1"} align={"center"}>
-        Create Election | Admin Panel
+        Create Election |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

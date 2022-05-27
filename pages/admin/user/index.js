@@ -80,7 +80,10 @@ const UserIndex = () => {
   return (
     <Container maxWidth={"md"} className={layout.page}>
       <Typography variant={"h1"} align={"center"}>
-        Users | Admin Panel
+        Users |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

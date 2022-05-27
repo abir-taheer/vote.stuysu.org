@@ -69,7 +69,10 @@ const CreateAnnouncement = () => {
       <BackButton href={"/admin/announcement"} text={"Back To Announcements"} />
 
       <Typography variant={"h1"} align={"center"}>
-        Create Announcement | Admin Panel
+        Create Announcement |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

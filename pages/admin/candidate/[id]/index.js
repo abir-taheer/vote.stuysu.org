@@ -220,7 +220,10 @@ const ManageCandidate = () => {
       )}
 
       <Typography variant={"h1"} align={"center"}>
-        Manage Candidate | Admin Panel
+        Manage Candidate |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

@@ -73,7 +73,7 @@ const APIHandler = async (req, res) => {
     serverStarted = true;
   }
 
-  return handler(req, res);
+  return await handler(req, res);
 };
 
 export default APIHandler;

@@ -42,7 +42,10 @@ export default function AdminCreateFAQ() {
   return (
     <Container maxWidth={"md"} className={layout.page}>
       <Typography variant={"h1"} align={"center"}>
-        Create FAQ | Admin Panel
+        Create FAQ |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

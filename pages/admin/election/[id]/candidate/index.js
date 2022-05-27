@@ -55,7 +55,10 @@ const CandidateIndex = () => {
         />
       )}
       <Typography variant={"h1"} align={"center"}>
-        Candidates | Admin Panel
+        Candidates |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

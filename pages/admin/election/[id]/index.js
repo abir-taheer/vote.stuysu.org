@@ -231,7 +231,10 @@ const ManageElection = () => {
     <Container maxWidth={"md"} className={layout.page}>
       <BackButton href={"/admin/election"} text={"Back To Elections"} />
       <Typography variant={"h1"} align={"center"}>
-        Manage Election | Admin Panel
+        Manage Election |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

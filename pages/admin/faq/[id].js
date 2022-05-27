@@ -112,7 +112,10 @@ export default function EditFAQ() {
   return (
     <Container className={layout.page} maxWidth={"md"}>
       <Typography variant={"h1"} align={"center"}>
-        Manage FAQ | Admin Panel
+        Manage FAQ |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

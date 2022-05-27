@@ -65,7 +65,10 @@ const Create = () => {
       <BackButton href={"/admin/user"} text={"Back To Users"} />
 
       <Typography variant={"h1"} align={"center"}>
-        Create User | Admin Panel
+        Create User |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />

@@ -151,7 +151,10 @@ export default function ManageAnnouncement() {
     <Container maxWidth={"md"} className={layout.page}>
       <BackButton href={"/admin/announcement"} text={"Back To Announcements"} />
       <Typography variant={"h1"} align={"center"}>
-        Manage Announcement | Admin Panel
+        Manage Announcement |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
       <AdminTabBar />
       {!isEditing && (

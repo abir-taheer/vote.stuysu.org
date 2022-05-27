@@ -42,7 +42,10 @@ const AdminAnnouncements = () => {
   return (
     <Container maxWidth={"md"} className={layout.page}>
       <Typography variant={"h1"} align={"center"}>
-        Announcements | Admin Panel
+        Announcements |{" "}
+        <Typography variant="inherit" component={"span"} color="secondary">
+          Admin Panel
+        </Typography>
       </Typography>
 
       <AdminTabBar />
