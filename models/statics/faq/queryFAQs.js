@@ -1,14 +1,14 @@
 import escapeStringRegexp from "escape-string-regexp";
 import mongoose from "./../../mongoose";
 
-export default async ({ page, resultsPerPage, query, filters }) => {
+const queryFAQs = async ({ page, resultsPerPage, query, filters }) => {
   const offset = (page - 1) * resultsPerPage;
 
   const words = query.split(/\s/).filter(Boolean);
 
   const $and = words.map((word) => {
     const regex = new RegExp(escapeStringRegexp(word), "i");
-    const $or = [{ title: regex, url: regex }];
+    const $or = [{ title: regex }, { url: regex }, { plainTextBody: regex }];
 
     return { $or };
   });
@@ -45,3 +45,5 @@ export default async ({ page, resultsPerPage, query, filters }) => {
     results,
   };
 };
+
+export default queryFAQs;
