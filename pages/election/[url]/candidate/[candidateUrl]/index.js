@@ -273,9 +273,9 @@ function CandidatePage() {
         >
           Other Candidates
         </Typography>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} columns={{ xs: 6, sm: 9, md: 12 }}>
           {otherCandidates.map((c) => (
-            <Grid key={c.id} item xs={3}>
+            <Grid key={c.id} item xs={3} md={3}>
               <Card>
                 <Link
                   href={`/election/${election.url}/candidate/${c.url}`}
