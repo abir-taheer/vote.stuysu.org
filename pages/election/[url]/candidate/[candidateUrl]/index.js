@@ -113,28 +113,29 @@ function CandidatePage() {
     );
   }
 
-  const otherCandidates = election.candidates
-    .filter((c) => c.id !== candidate.id)
-    .sort((a, b) => {
+  const otherCandidates = election.candidates.filter(
+    (c) => c.id !== candidate.id
+  );
+
+  if (typeof window !== "undefined") {
+    const existing = window.sessionStorage.getItem("viewed-candidate-pages");
+    let viewed = [];
+    if (existing) {
+      try {
+        viewed = JSON.parse(existing);
+      } catch (e) {
+        viewed = [];
+      }
+    }
+
+    const viewedSet = new Set(viewed);
+
+    otherCandidates.sort((a, b) => {
       const aUrl = `/election/${election.url}/candidate/${a.url}`;
       const bUrl = `/election/${election.url}/candidate/${b.url}`;
 
-      const existing =
-        typeof window !== "undefined"
-          ? window.sessionStorage.getItem("viewed-candidate-pages")
-          : "[]";
-
-      let viewed = [];
-      if (existing) {
-        try {
-          viewed = JSON.parse(existing);
-        } catch (e) {
-          viewed = [];
-        }
-      }
-
-      const aViewed = viewed.includes(aUrl);
-      const bViewed = viewed.includes(bUrl);
+      const aViewed = viewedSet.has(aUrl);
+      const bViewed = viewedSet.has(bUrl);
 
       if (aViewed && !bViewed) {
         return 1;
@@ -146,6 +147,7 @@ function CandidatePage() {
 
       return 0;
     });
+  }
 
   const title = `${candidate.name} for ${election.name} | StuyBOE Voting Site`;
   // Now that both election and candidate are defined we can do whatever

@@ -81,14 +81,8 @@ function ElectionCandidates() {
     )
   );
 
-  const candidatesSortedByViews = candidates.sort((a, b) => {
-    const aUrl = `/election/${election.url}/candidate/${a.url}`;
-    const bUrl = `/election/${election.url}/candidate/${b.url}`;
-
-    const existing =
-      typeof window !== "undefined"
-        ? window.sessionStorage.getItem("viewed-candidate-pages")
-        : "[]";
+  if (typeof window !== "undefined") {
+    const existing = window.sessionStorage.getItem("viewed-candidate-pages");
     let viewed = [];
     if (existing) {
       try {
@@ -98,19 +92,26 @@ function ElectionCandidates() {
       }
     }
 
-    const aViewed = viewed.includes(aUrl);
-    const bViewed = viewed.includes(bUrl);
+    const viewedSet = new Set(viewed);
 
-    if (aViewed && !bViewed) {
-      return 1;
-    }
+    candidates.sort((a, b) => {
+      const aUrl = `/election/${election.url}/candidate/${a.url}`;
+      const bUrl = `/election/${election.url}/candidate/${b.url}`;
 
-    if (!aViewed && bViewed) {
-      return -1;
-    }
+      const aViewed = viewedSet.has(aUrl);
+      const bViewed = viewedSet.has(bUrl);
 
-    return 0;
-  });
+      if (aViewed && !bViewed) {
+        return 1;
+      }
+
+      if (!aViewed && bViewed) {
+        return -1;
+      }
+
+      return 0;
+    });
+  }
 
   return (
     <Container maxWidth={"md"} className={layout.page}>
@@ -170,19 +171,17 @@ function ElectionCandidates() {
       </Typography>
 
       <Grid container justifyContent={"center"} spacing={3}>
-        {candidatesSortedByViews.map(
-          ({ picture, blurb, name, url, id, totalStrikes }) => (
-            <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
-              <CandidateCard
-                picture={picture}
-                blurb={blurb}
-                name={name}
-                strikes={totalStrikes}
-                href={"/election/" + election.url + "/candidate/" + url}
-              />
-            </Grid>
-          )
-        )}
+        {candidates.map(({ picture, blurb, name, url, id, totalStrikes }) => (
+          <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
+            <CandidateCard
+              picture={picture}
+              blurb={blurb}
+              name={name}
+              strikes={totalStrikes}
+              href={"/election/" + election.url + "/candidate/" + url}
+            />
+          </Grid>
+        ))}
       </Grid>
     </Container>
   );
