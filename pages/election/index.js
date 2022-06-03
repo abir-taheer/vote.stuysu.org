@@ -84,11 +84,11 @@ const ElectionIndex = () => {
   const openElections = data?.openElections;
 
   if (openElections?.results?.length) {
-    sortElections(openElections);
+    sortElections(openElections.results);
   }
 
   if (pastElections?.results?.length) {
-    sortElections(pastElections);
+    sortElections(pastElections.results);
   }
 
   return (
