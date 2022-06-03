@@ -119,7 +119,11 @@ function CandidatePage() {
       const aUrl = `/election/${election.url}/candidate/${a.url}`;
       const bUrl = `/election/${election.url}/candidate/${b.url}`;
 
-      const existing = window.sessionStorage.getItem("viewed-candidate-pages");
+      const existing =
+        typeof window !== "undefined"
+          ? window.sessionStorage.getItem("viewed-candidate-pages")
+          : "[]";
+
       let viewed = [];
       if (existing) {
         try {
