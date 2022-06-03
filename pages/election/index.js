@@ -9,6 +9,7 @@ import { parse } from "querystring";
 import { useState } from "react";
 import ElectionCardGrid from "../../comps/election/ElectionCardGrid";
 import CenteredCircularProgress from "../../comps/shared/CenteredCircularProgress";
+import sortElections from "../../utils/election/sortElections";
 import layout from "./../../styles/layout.module.css";
 
 const QUERY = gql`
@@ -81,6 +82,14 @@ const ElectionIndex = () => {
 
   const pastElections = data?.pastElections;
   const openElections = data?.openElections;
+
+  if (openElections.results?.length) {
+    sortElections(openElections);
+  }
+
+  if (pastElections.results?.length) {
+    sortElections(pastElections);
+  }
 
   return (
     <Container maxWidth={"md"} className={layout.page}>
