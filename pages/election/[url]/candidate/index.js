@@ -81,6 +81,34 @@ function ElectionCandidates() {
     )
   );
 
+  const candidatesSortedByViews = candidates.sort((a, b) => {
+    const aUrl = `/election/${election.url}/candidate/${a.url}`;
+    const bUrl = `/election/${election.url}/candidate/${b.url}`;
+
+    const existing = window.sessionStorage.getItem("viewed-candidate-pages");
+    let viewed = [];
+    if (existing) {
+      try {
+        viewed = JSON.parse(existing);
+      } catch (e) {
+        viewed = [];
+      }
+    }
+
+    const aViewed = viewed.includes(aUrl);
+    const bViewed = viewed.includes(bUrl);
+
+    if (aViewed && !bViewed) {
+      return 1;
+    }
+
+    if (!aViewed && bViewed) {
+      return -1;
+    }
+
+    return 0;
+  });
+
   return (
     <Container maxWidth={"md"} className={layout.page}>
       <Head>
@@ -139,17 +167,19 @@ function ElectionCandidates() {
       </Typography>
 
       <Grid container justifyContent={"center"} spacing={3}>
-        {candidates.map(({ picture, blurb, name, url, id, totalStrikes }) => (
-          <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
-            <CandidateCard
-              picture={picture}
-              blurb={blurb}
-              name={name}
-              strikes={totalStrikes}
-              href={"/election/" + election.url + "/candidate/" + url}
-            />
-          </Grid>
-        ))}
+        {candidatesSortedByViews.map(
+          ({ picture, blurb, name, url, id, totalStrikes }) => (
+            <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
+              <CandidateCard
+                picture={picture}
+                blurb={blurb}
+                name={name}
+                strikes={totalStrikes}
+                href={"/election/" + election.url + "/candidate/" + url}
+              />
+            </Grid>
+          )
+        )}
       </Grid>
     </Container>
   );

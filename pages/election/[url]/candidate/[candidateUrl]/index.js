@@ -1,10 +1,15 @@
 import { gql, useQuery } from "@apollo/client";
 import { getDataFromTree } from "@apollo/client/react/ssr";
+import { Card, Grid } from "@mui/material";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import withApollo from "../../../../../comps/apollo/withApollo";
 import CandidateNotFound from "../../../../../comps/candidate/CandidateNotFound";
 import CandidateTabBar from "../../../../../comps/candidate/CandidateTabBar";
@@ -40,6 +45,23 @@ const QUERY = gql`
       name
       url
       completed
+
+      candidates {
+        id
+        url
+        name
+        picture {
+          id
+          alt
+          resource {
+            width
+            height
+            resourceType
+            format
+            url
+          }
+        }
+      }
     }
   }
 `;
@@ -51,6 +73,26 @@ function CandidatePage() {
   const { data, loading } = useQuery(QUERY, {
     variables: { electionUrl: url, candidateUrl },
   });
+
+  useEffect(() => {
+    const existing = window.sessionStorage.getItem("viewed-candidate-pages");
+    let viewed = [];
+    if (existing) {
+      try {
+        viewed = JSON.parse(existing);
+      } catch (e) {
+        viewed = [];
+      }
+    }
+
+    if (!viewed.includes(router.asPath)) {
+      viewed.push(router.asPath);
+      window.sessionStorage.setItem(
+        "viewed-candidate-pages",
+        JSON.stringify(viewed)
+      );
+    }
+  }, [router]);
 
   if (loading) {
     return <LoadingScreen />;
@@ -70,6 +112,36 @@ function CandidatePage() {
       />
     );
   }
+
+  const otherCandidates = election.candidates
+    .filter((c) => c.id !== candidate.id)
+    .sort((a, b) => {
+      const aUrl = `/election/${election.url}/candidate/${a.url}`;
+      const bUrl = `/election/${election.url}/candidate/${b.url}`;
+
+      const existing = window.sessionStorage.getItem("viewed-candidate-pages");
+      let viewed = [];
+      if (existing) {
+        try {
+          viewed = JSON.parse(existing);
+        } catch (e) {
+          viewed = [];
+        }
+      }
+
+      const aViewed = viewed.includes(aUrl);
+      const bViewed = viewed.includes(bUrl);
+
+      if (aViewed && !bViewed) {
+        return 1;
+      }
+
+      if (!aViewed && bViewed) {
+        return -1;
+      }
+
+      return 0;
+    });
 
   const title = `${candidate.name} for ${election.name} | StuyBOE Voting Site`;
   // Now that both election and candidate are defined we can do whatever
@@ -186,6 +258,45 @@ function CandidatePage() {
           dangerouslySetInnerHTML={{ __html: candidate.platform }}
           className={layout.spaced + " sanitized-html"}
         />
+
+        <Typography
+          variant="h1"
+          align="center"
+          color="primary"
+          sx={{ margin: 5 }}
+        >
+          Other Candidates
+        </Typography>
+        <Grid container spacing={3}>
+          {otherCandidates.map((c) => (
+            <Grid key={c.id} item xs={3}>
+              <Card>
+                <Link
+                  href={`/election/${election.url}/candidate/${c.url}`}
+                  passHref
+                >
+                  <CardActionArea sx={{ paddingTop: 2 }}>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <Image
+                        src={c.picture?.resource?.url}
+                        alt={c.picture?.alt}
+                        objectFit={"cover"}
+                        height={80}
+                        width={80}
+                        className={"crop-circle"}
+                      />
+                    </div>
+                    <CardContent>
+                      <Typography gutterBottom variant="body1" align={"center"}>
+                        {c.name}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Link>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </div>
     </Container>
   );
