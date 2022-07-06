@@ -51,7 +51,7 @@
     "react-google-charts": "^3.0.15",
     "react-sortable-hoc": "^2.0.0",
     "sanitize-html": "^2.3.3",
-    "sharp": "^0.29.2",
+    "sharp": "^0.30.5",
     "streamifier": "^0.1.1",
     "url-join": "^4.0.1"
   },
