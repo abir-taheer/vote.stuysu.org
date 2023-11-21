@@ -221,13 +221,7 @@ const RunoffResult = ({ id, election }) => {
     ]),
   ];
 
-  const colors = graphData.slice(1).map((row) => {
-    console.log(getCandidateColor("banana"));
-    return getCandidateColor(row[0]);
-  });
-  console.log(colors);
-
-  console.log(graphData);
+  const colors = graphData.slice(1).map((row) =>  getCandidateColor(row[0]));
 
   const turnout =
     results.numEligibleVoters > 0
