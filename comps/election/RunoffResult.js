@@ -14,7 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Pagination from "@mui/material/Pagination";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Confetti from "react-confetti";
 import { Chart } from "react-google-charts";
 import gaEvent from "../../utils/analytics/gaEvent";
@@ -22,6 +22,29 @@ import capitalize from "../../utils/text/capitalize";
 import CenteredCircularProgress from "../shared/CenteredCircularProgress";
 import brokenGlass from "./../../img/marginalia-fatal-error.png";
 import layout from "./../../styles/layout.module.css";
+
+const possiblePieChartColors = [
+  "#00b894", // Mint Green
+  "#fdcb6e", // Mustard Yellow
+  "#e17055", // Salmon
+  "#6c5ce7", // Soft Purple
+  "#ffeaa7", // Pale Yellow
+  "#74b9ff", // Soft Blue
+  "#a29bfe", // Lavender
+  "#ff7675", // Pastel Red
+  "#fd79a8", // Pink
+  "#55efc4", // Aquamarine
+  "#81ecec", // Sky Blue
+  "#fab1a0", // Peach
+  "#636e72", // Slate Grey
+  "#dfe6e9", // Cloud
+  "#00cec9", // Electric Blue
+  "#ff9ff3", // Mauve
+  "#badc58", // Lime
+  "#c7ecee", // Light Blue Grey
+  "#ffeaa7", // Vanilla
+  "#576574", // Blue Grey
+];
 
 const QUERY = gql`
   query ($id: ObjectID!) {
@@ -82,6 +105,29 @@ const QUERY = gql`
 const RunoffResult = ({ id, election }) => {
   const { data, loading } = useQuery(QUERY, { variables: { id } });
   const [round, setRound] = useState(1);
+
+  const availableColors = useMemo(() => new Set(possiblePieChartColors), []);
+  const candidateColorCache = useMemo(() => ({}), []);
+
+  const getAvailableColor = () => {
+    if (!availableColors.size) {
+      // repeat if we run out
+      possiblePieChartColors.forEach((color) => availableColors.add(color));
+    }
+    const value = [...availableColors][0];
+
+    availableColors.delete(value);
+
+    return value;
+  };
+
+  const getCandidateColor = (name) => {
+    if (!candidateColorCache[name]) {
+      candidateColorCache[name] = getAvailableColor();
+    }
+
+    return candidateColorCache[name];
+  };
 
   // Used to determine once the user has seen who the winner is
   const winnerRef = useRef();
@@ -175,6 +221,14 @@ const RunoffResult = ({ id, election }) => {
     ]),
   ];
 
+  const colors = graphData.slice(1).map((row) => {
+    console.log(getCandidateColor("banana"));
+    return getCandidateColor(row[0]);
+  });
+  console.log(colors);
+
+  console.log(graphData);
+
   const turnout =
     results.numEligibleVoters > 0
       ? Math.round((results.totalVotes * 1000) / results.numEligibleVoters) / 10
@@ -261,6 +315,7 @@ const RunoffResult = ({ id, election }) => {
         width="100%"
         height="400px"
         legendToggle
+        options={{ colors }}
       />
 
       {round === results.rounds.length && (
