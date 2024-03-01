@@ -17,6 +17,7 @@
     "@mui/lab": "^5.0.0-alpha.50",
     "@mui/material": "^5.0.3",
     "@tinymce/tinymce-react": "^3.12.2",
+    "@vercel/analytics": "^1.2.2",
     "apollo-server-micro": "^3.8.1",
     "array-move": "^3.0.1",
     "axios": "^0.28.0",

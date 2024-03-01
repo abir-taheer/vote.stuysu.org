@@ -14,6 +14,7 @@ import Footer from "../comps/shared/Footer";
 import ThemeContext from "../comps/theme/ThemeContext";
 import { PUBLIC_URL } from "../constants";
 import "../styles/globals.css";
+import {Analytics} from "@vercel/analytics/react";
 
 ReactGA.initialize(process.env.NEXT_APP_GTAG_ID || "G-H31TC1CQTT");
 
@@ -30,6 +31,7 @@ function App({ Component, pageProps }) {
 
   return (
     <LocalizationProvider dateAdapter={DateAdapter}>
+      <Analytics />
       <UserProvider>
         <ThemeContext>
           <SnackbarProvider
