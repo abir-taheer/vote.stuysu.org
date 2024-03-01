@@ -4,7 +4,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { SnackbarProvider } from "notistack";
 import { useEffect } from "react";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 import withApollo from "../comps/apollo/withApollo";
 import AdminWrapper from "../comps/auth/AdminWrapper";
 import UserProvider from "../comps/auth/UserProvider";
@@ -15,13 +15,17 @@ import ThemeContext from "../comps/theme/ThemeContext";
 import { PUBLIC_URL } from "../constants";
 import "../styles/globals.css";
 
-ReactGA.initialize(process.env.NEXT_APP_GTAG_ID || "UA-75064374-8");
+ReactGA.initialize(process.env.NEXT_APP_GTAG_ID || "G-H31TC1CQTT");
 
 function App({ Component, pageProps }) {
   const router = useRouter();
 
   useEffect(() => {
-    ReactGA.pageview(router.asPath);
+    ReactGA.event("page_view", {
+      page_path: router.asPath,
+      page_search: "",
+      page_hash: "",
+    });
   }, [router.asPath]);
 
   return (
