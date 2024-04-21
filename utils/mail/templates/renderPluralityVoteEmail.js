@@ -14,10 +14,6 @@ export const renderPluralityVoteEmail = ({ election, vote, choice }) => {
         }
 
         .flex-root {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             width: 100%;
             min-height: 600px;
         }
@@ -28,10 +24,11 @@ export const renderPluralityVoteEmail = ({ election, vote, choice }) => {
             border: 2px solid rgba(108, 92, 231, 0.1);
             width: 600px;
             max-width: 90%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            margin: auto;
+        }
+
+        .text-center {
+            text-align: center;
         }
 
         .checkmark {
@@ -42,6 +39,7 @@ export const renderPluralityVoteEmail = ({ election, vote, choice }) => {
 
         p {
             font-weight: lighter;
+            margin: 28px 10px;
         }
 
         .vote-id {
@@ -56,22 +54,24 @@ export const renderPluralityVoteEmail = ({ election, vote, choice }) => {
 <body>
 <div class="flex-root">
     <div class="card">
-       <img
-        src="https://vote.stuysu.org/email-checkmark.png"
-        class="checkmark"
-        alt="a checkmark icon"
-    />
+        <div class="text-center">
+            <img
+                src="https://vote.stuysu.org/email-checkmark.png"
+                class="checkmark"
+                alt="a checkmark icon"
+            />
+        </div>
+
         <h1>You've voted!</h1>
-        
+
         <p>Your vote for ${election.name} was saved.</p>
-        
+
         <p>You voted for ${choice.name}<p>
-        
+
         <p>Your Vote ID is: <span class="vote-id">${vote._id.toUpperCase()}</span></p>
-        
+
         <p>You may audit the election after it has concluded and look up your vote using your Vote ID to ensure that it was recorded correctly.</p>
-        
-        <p>
+        <p class="text-center">
             <a href="https://vote.stuysu.org/election/${election.url}/audit">
                 https://vote.stuysu.org/election/${election.url}/audit
             </a>
