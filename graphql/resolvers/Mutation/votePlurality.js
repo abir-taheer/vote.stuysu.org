@@ -1,6 +1,8 @@
 import { ForbiddenError, UserInputError } from "apollo-server-micro";
 import Candidate from "../../../models/candidate";
 import Election from "../../../models/election";
+import { renderPluralityVoteEmail } from "../../../utils/mail/templates/renderPluralityVoteEmail";
+import { transporter } from "../../../utils/mail/transporter";
 
 export default async (
   _,
@@ -28,6 +30,10 @@ export default async (
     );
   }
 
+  if (candidate.electionId.toString() !== electionId.toString()) {
+    throw new ForbiddenError("That candidate is not running in this election");
+  }
+
   const id = Election.nanoid();
   const vote = {
     _id: id,
@@ -51,6 +57,21 @@ export default async (
       },
     }
   );
+
+  try {
+    const body = renderPluralityVoteEmail({
+      election,
+      vote,
+      choice: candidate,
+    });
+
+    await transporter.sendMail({
+      from: '"StuyBOE Mailer" <no-reply@vote.stuysu.org>', // sender address
+      to: user.email,
+      subject: `Vote Confirmation | ${election.name}`, // Subject line
+      html: body,
+    });
+  } catch (e) {}
 
   return {
     id,

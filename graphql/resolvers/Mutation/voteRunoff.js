@@ -1,6 +1,8 @@
 import { ForbiddenError, UserInputError } from "apollo-server-micro";
 import Candidate from "../../../models/candidate";
 import Election from "../../../models/election";
+import { renderRunoffVoteEmail } from "../../../utils/mail/templates/renderRunoffVoteEmail";
+import { transporter } from "../../../utils/mail/transporter";
 
 export default async (
   _,
@@ -27,7 +29,12 @@ export default async (
     );
   }
 
-  const everyChoiceValid = candidates.every((c) => Boolean(c) && c.active); // Make sure all of them exist
+  const everyChoiceValid = candidates.every(
+    (c) =>
+      Boolean(c) &&
+      c.active &&
+      c.electionId.toString() === electionId.toString()
+  ); // Make sure all of them exist and belong to this election
 
   if (!everyChoiceValid) {
     throw new ForbiddenError(
@@ -59,6 +66,20 @@ export default async (
     }
   );
 
+  try {
+    const body = renderRunoffVoteEmail({
+      election,
+      vote,
+      choices: candidates,
+    });
+
+    await transporter.sendMail({
+      from: '"StuyBOE Mailer" <no-reply@vote.stuysu.org>', // sender address
+      to: user.email,
+      subject: `Vote Confirmation | ${election.name}`, // Subject line
+      html: body,
+    });
+  } catch (e) {}
   return {
     id,
     gradYear: user.gradYear,
