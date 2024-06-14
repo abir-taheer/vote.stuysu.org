@@ -16,7 +16,7 @@
     "@mui/icons-material": "^5.0.3",
     "@mui/lab": "^5.0.0-alpha.50",
     "@mui/material": "^5.0.3",
-    "@tinymce/tinymce-react": "^3.12.2",
+    "@tinymce/tinymce-react": "^5.0.1",
     "apollo-server-micro": "^3.8.1",
     "array-move": "^3.0.1",
     "axios": "^0.28.0",
