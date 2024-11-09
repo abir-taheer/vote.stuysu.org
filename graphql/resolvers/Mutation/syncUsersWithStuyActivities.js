@@ -24,7 +24,7 @@ export default async (_, __, { adminRequired, user }) => {
   try {
     const {
       data: { data },
-    } = await get("https://api.stuyactivities.org/stuyboe/syncUsers", {
+    } = await get("https://base.stuysu.org/functions/v1/export-voters", {
       headers: {
         authorization: "Bearer " + token,
       },
