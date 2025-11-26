@@ -1,6 +1,8 @@
 import { UserInputError } from "apollo-server-micro";
 import Election from "../../../models/election";
 
+const sixtyDays = 1000 * 60 * 60 * 24 * 60;
+
 export default (_, { query, page, resultsPerPage }) => {
   if (resultsPerPage < 1 || resultsPerPage > 50) {
     throw new UserInputError(
@@ -16,6 +18,9 @@ export default (_, { query, page, resultsPerPage }) => {
     query,
     page,
     resultsPerPage,
-    filters: { completed: false },
+    filters: {
+      completed: false,
+      end: { $gt: new Date(Date.now() - sixtyDays) },
+    },
   });
 };
