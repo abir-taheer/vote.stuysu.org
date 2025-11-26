@@ -1,5 +1,4 @@
 import { ApolloError } from "apollo-server-micro";
-import { get } from "axios";
 import { sign } from "jsonwebtoken";
 import KeyPair from "../../../models/keyPair";
 import User from "../../../models/user";
@@ -22,14 +21,17 @@ export default async (_, __, { adminRequired, user }) => {
   let stuyactivitiesUsers = null;
 
   try {
-    const {
-      data: { data },
-    } = await get("https://base.stuysu.org/functions/v1/export-voters", {
+    const response = await fetch("https://base.stuysu.org/functions/v1/export-voters", {
       headers: {
         authorization: "Bearer " + token,
       },
     });
 
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const { data } = await response.json();
     stuyactivitiesUsers = data;
   } catch (e) {
     throw new ApolloError(

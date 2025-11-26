@@ -20,9 +20,6 @@ const Error404 = () => {
     setImage(get404Image());
   }, []);
 
-  // Server side url class is undefined on client so choose based on which is available
-  const URL = globalThis?.URL;
-
   const defaultImageUrl = new URL(defaultImage.src, PUBLIC_URL).href;
 
   return (
