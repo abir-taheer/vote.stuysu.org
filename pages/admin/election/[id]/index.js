@@ -1,4 +1,5 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
 import Create from "@mui/icons-material/Create";
 import DeleteForever from "@mui/icons-material/DeleteForever";
 import Lock from "@mui/icons-material/Lock";

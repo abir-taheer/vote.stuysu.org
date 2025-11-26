@@ -1,4 +1,4 @@
-import { ForbiddenError, UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import Candidate from "../../../models/candidate";
 import Election from "../../../models/election";
 import { renderPluralityVoteEmail } from "../../../utils/mail/templates/renderPluralityVoteEmail";
@@ -14,24 +14,25 @@ export default async (
   const election = await Election.findById(electionId);
 
   if (!election) {
-    throw new UserInputError("There's no election with that id");
+    throw new GraphQLError("There's no election with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
   election.verifyUserCanVote(user);
 
   const candidate = await Candidate.findById(candidateId);
 
   if (!candidate) {
-    throw new UserInputError("There is no candidate with that id");
+    throw new GraphQLError("There is no candidate with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   if (!candidate.active) {
-    throw new ForbiddenError(
-      "That candidate is not running and you may not cast a vote for them"
+    throw new GraphQLError(
+      "That candidate is not running and you may not cast a vote for them",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 
   if (candidate.electionId.toString() !== electionId.toString()) {
-    throw new ForbiddenError("That candidate is not running in this election");
+    throw new GraphQLError("That candidate is not running in this election", { extensions: { code: "FORBIDDEN" } });
   }
 
   const id = Election.nanoid();

@@ -1,4 +1,4 @@
-import { ApolloError, ForbiddenError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import { sign } from "jsonwebtoken";
 import User from "../../../models/user";
 import getIdTokenPayload from "../../../utils/auth/getIdTokenPayload";
@@ -7,7 +7,7 @@ import validateIdTokenPayload from "../../../utils/auth/validateIdTokenPayload";
 
 export default async (mutation, { idToken }, { signedIn, setCookie }) => {
   if (signedIn) {
-    throw new ForbiddenError("You are already signed in.");
+    throw new GraphQLError("You are already signed in.", { extensions: { code: "FORBIDDEN" } });
   }
 
   const payload = await getIdTokenPayload(idToken);
@@ -16,9 +16,9 @@ export default async (mutation, { idToken }, { signedIn, setCookie }) => {
   const user = await User.findByEmail(payload.email);
 
   if (!user) {
-    throw new ApolloError(
+    throw new GraphQLError(
       "There is no user with that email address",
-      "UNKNOWN_USER"
+      { extensions: { code: "UNKNOWN_USER" } }
     );
   }
 

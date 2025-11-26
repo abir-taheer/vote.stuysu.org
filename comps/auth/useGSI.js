@@ -1,4 +1,5 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { GOOGLE_CLIENT_ID } from "../../constants";
 import gaEvent from "../../utils/analytics/gaEvent";

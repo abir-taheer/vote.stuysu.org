@@ -1,15 +1,16 @@
-import { ForbiddenError, UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import Election from "../../../models/election";
 
 export default async (_, { election: { id, url } }, { user, signedIn }) => {
   if (!url && !id) {
-    throw new UserInputError(
-      "You need to pass either an id or a url to query the results of an election"
+    throw new GraphQLError(
+      "You need to pass either an id or a url to query the results of an election",
+      { extensions: { code: "BAD_USER_INPUT" } }
     );
   }
 
   if (url && id) {
-    throw new UserInputError("Do not pass both an id and a url");
+    throw new GraphQLError("Do not pass both an id and a url", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   const election = id
@@ -17,13 +18,14 @@ export default async (_, { election: { id, url } }, { user, signedIn }) => {
     : await Election.findOne({ url });
 
   if (!election) {
-    throw new UserInputError("There's no election with that id or url");
+    throw new GraphQLError("There's no election with that id or url", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   if (!election.completed) {
     if (!signedIn || !user.adminPrivileges) {
-      throw new ForbiddenError(
-        "You are not allowed to view the results of this election yet"
+      throw new GraphQLError(
+        "You are not allowed to view the results of this election yet",
+        { extensions: { code: "FORBIDDEN" } }
       );
     }
   }

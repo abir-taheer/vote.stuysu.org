@@ -1,6 +1,6 @@
 import { randomBytes } from "crypto";
 import multer from "multer";
-import nextConnect from "next-connect";
+import { createRouter } from "next-connect";
 import Candidate from "../../models/candidate";
 import Election from "../../models/election";
 import Picture from "../../models/picture";
@@ -22,12 +22,12 @@ const uploadMiddleware = multer({
   limits: { fileSize: 1024 * 1024 * 20 },
 }).single("file");
 
-const apiRoute = nextConnect({ onError: errorHandler });
-// Adds the middleware to Next-Connect
-apiRoute.use(uploadMiddleware);
-apiRoute.use(checkAuth);
+const router = createRouter();
 
-apiRoute.post(async (req, res) => {
+router.use(uploadMiddleware);
+router.use(checkAuth);
+
+router.post(async (req, res) => {
   if (!req.signedIn || !req.user) {
     throw new HTTPError(
       401,
@@ -104,4 +104,4 @@ apiRoute.post(async (req, res) => {
   res.json({ success: true, data });
 });
 
-export default apiRoute;
+export default router.handler({ onError: errorHandler });

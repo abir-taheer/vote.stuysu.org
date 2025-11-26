@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import User from "../../../models/user";
 
 export default async (_, { id }, { adminRequired }) => {
@@ -7,7 +7,7 @@ export default async (_, { id }, { adminRequired }) => {
   const user = await User.findById(id);
 
   if (!user) {
-    throw new UserInputError("There's no user with that id");
+    throw new GraphQLError("There's no user with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   const hasEverVoted = await user.hasEverVoted();

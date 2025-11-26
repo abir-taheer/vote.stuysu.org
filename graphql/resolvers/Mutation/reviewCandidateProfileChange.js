@@ -1,4 +1,4 @@
-import { ForbiddenError, UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import Candidate from "../../../models/candidate";
 import ProfileChange from "../../../models/profileChange";
 
@@ -12,12 +12,13 @@ export default async (
   const request = await ProfileChange.findById(id);
 
   if (!request) {
-    throw new UserInputError("There's no profile change request with that id");
+    throw new GraphQLError("There's no profile change request with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   if (request.reviewed) {
-    throw new ForbiddenError(
-      "That request has already been reviewed. Ask the candidate to make another request if necessary."
+    throw new GraphQLError(
+      "That request has already been reviewed. Ask the candidate to make another request if necessary.",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 
@@ -25,7 +26,7 @@ export default async (
     const candidate = await Candidate.findById(request.candidateId);
 
     if (!candidate) {
-      throw new UserInputError("There's no candidate with that id");
+      throw new GraphQLError("There's no candidate with that id", { extensions: { code: "BAD_USER_INPUT" } });
     }
     candidate[request.field] = request.value;
 

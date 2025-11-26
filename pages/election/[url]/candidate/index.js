@@ -1,4 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import { getDataFromTree } from "@apollo/client/react/ssr";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -172,7 +173,7 @@ function ElectionCandidates() {
 
       <Grid container justifyContent={"center"} spacing={3}>
         {candidates.map(({ picture, blurb, name, url, id, totalStrikes }) => (
-          <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
+          <Grid size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 4 }} key={id}>
             <CandidateCard
               picture={picture}
               blurb={blurb}

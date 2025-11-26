@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import { parse } from "node-html-parser";
 import FAQ from "../../../models/faq";
 import sanitizeHtml from "../../../utils/candidate/sanitizeHtml";
@@ -11,7 +11,7 @@ export default async (_, { title, url, body }, { adminRequired }) => {
   const existing = await FAQ.findOne({ url });
 
   if (existing) {
-    throw new UserInputError("There's already another FAQ with that url");
+    throw new GraphQLError("There's already another FAQ with that url", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   const bodyTree = parse(body);

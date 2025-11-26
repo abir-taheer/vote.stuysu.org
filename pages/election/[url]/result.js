@@ -1,4 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import { getDataFromTree } from "@apollo/client/react/ssr";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";

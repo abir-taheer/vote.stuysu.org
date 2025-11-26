@@ -1,4 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import Add from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -94,7 +95,7 @@ const CandidateIndex = () => {
 
           <Grid container justifyContent={"center"} spacing={3}>
             {election.candidates.map(({ picture, blurb, name, id }) => (
-              <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
+              <Grid size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 4 }} key={id}>
                 <CandidateCard
                   picture={picture}
                   blurb={blurb}

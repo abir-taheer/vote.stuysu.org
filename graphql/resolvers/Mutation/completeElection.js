@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import Election from "../../../models/election";
 
 export default async (_, { id }, { adminRequired }) => {
@@ -7,7 +7,7 @@ export default async (_, { id }, { adminRequired }) => {
   const election = await Election.findById(id);
 
   if (!election) {
-    throw new UserInputError("There's no election with that id");
+    throw new GraphQLError("There's no election with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   if (election.type === "plurality") {

@@ -1,4 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import AddAPhoto from "@mui/icons-material/AddAPhoto";
 import Clear from "@mui/icons-material/Clear";
 import Autocomplete from "@mui/material/Autocomplete";

@@ -1,4 +1,4 @@
-import { ForbiddenError, UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import Candidate from "../../../models/candidate";
 import Election from "../../../models/election";
 import { renderRunoffVoteEmail } from "../../../utils/mail/templates/renderRunoffVoteEmail";
@@ -14,7 +14,7 @@ export default async (
   const election = await Election.findById(electionId);
 
   if (!election) {
-    throw new UserInputError("There's no election with that id");
+    throw new GraphQLError("There's no election with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   election.verifyUserCanVote(user);
@@ -24,8 +24,9 @@ export default async (
   const uniqueChoices = new Set(candidates.map((a) => a.id));
 
   if (uniqueChoices.size !== candidates.length) {
-    throw new UserInputError(
-      "One or more candidates were ranked more than once on the ballot"
+    throw new GraphQLError(
+      "One or more candidates were ranked more than once on the ballot",
+      { extensions: { code: "BAD_USER_INPUT" } }
     );
   }
 
@@ -37,8 +38,9 @@ export default async (
   ); // Make sure all of them exist and belong to this election
 
   if (!everyChoiceValid) {
-    throw new ForbiddenError(
-      "One or more candidates do not exist or are not running and you may not cast a vote for them"
+    throw new GraphQLError(
+      "One or more candidates do not exist or are not running and you may not cast a vote for them",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 

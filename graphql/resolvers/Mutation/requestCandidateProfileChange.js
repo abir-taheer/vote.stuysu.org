@@ -1,4 +1,4 @@
-import { ForbiddenError, UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import Candidate from "../../../models/candidate";
 import Election from "../../../models/election";
 import Picture from "../../../models/picture";
@@ -15,7 +15,7 @@ export default async (
   const candidate = await Candidate.findById(candidateId);
 
   if (!candidate) {
-    throw new UserInputError("There's no candidate with that ID");
+    throw new GraphQLError("There's no candidate with that ID", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   const isManager = candidate.managerIds.some(
@@ -23,26 +23,29 @@ export default async (
   );
 
   if (!isManager) {
-    throw new ForbiddenError(
-      "You are not a manager for that campaign and cannot make changes to the profile."
+    throw new GraphQLError(
+      "You are not a manager for that campaign and cannot make changes to the profile.",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 
   if (!candidate.active) {
-    throw new ForbiddenError(
-      "That candidate is not active and changes cannot be made to the profile."
+    throw new GraphQLError(
+      "That candidate is not active and changes cannot be made to the profile.",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 
   const election = await Election.findById(candidate.electionId);
 
   if (!election) {
-    throw new ForbiddenError("That election does not exist anymore");
+    throw new GraphQLError("That election does not exist anymore", { extensions: { code: "FORBIDDEN" } });
   }
 
   if (election.completed) {
-    throw new ForbiddenError(
-      "That election has been completed and changes can no longer be requested"
+    throw new GraphQLError(
+      "That election has been completed and changes can no longer be requested",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 
@@ -53,14 +56,15 @@ export default async (
   );
 
   if (!changes.length) {
-    throw new UserInputError("No new field value was provided.");
+    throw new GraphQLError("No new field value was provided.", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   const field = changes[0];
 
   if (changes.length > 1) {
-    throw new UserInputError(
-      "More than one field was provided. A change may only update one field. Make multiple requests to update multiple fields."
+    throw new GraphQLError(
+      "More than one field was provided. A change may only update one field. Make multiple requests to update multiple fields.",
+      { extensions: { code: "BAD_USER_INPUT" } }
     );
   }
 
@@ -77,7 +81,7 @@ export default async (
     const picture = await Picture.findById(pictureId);
 
     if (!picture) {
-      throw new UserInputError("That picture ID is not valid");
+      throw new GraphQLError("That picture ID is not valid", { extensions: { code: "BAD_USER_INPUT" } });
     }
 
     value = pictureId;
@@ -85,7 +89,7 @@ export default async (
 
   if (field === "blurb") {
     if (blurb.length > 200) {
-      throw new UserInputError("The blurb must be 200 characters or less");
+      throw new GraphQLError("The blurb must be 200 characters or less", { extensions: { code: "BAD_USER_INPUT" } });
     }
 
     value = blurb;
@@ -95,8 +99,9 @@ export default async (
     platform = sanitizeHtml(platform);
 
     if (platform.length > 10000) {
-      throw new UserInputError(
-        "The platform field must be less than 10,000 characters"
+      throw new GraphQLError(
+        "The platform field must be less than 10,000 characters",
+        { extensions: { code: "BAD_USER_INPUT" } }
       );
     }
 

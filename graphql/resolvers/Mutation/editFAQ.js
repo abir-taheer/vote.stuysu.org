@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import { parse } from "node-html-parser";
 import FAQ from "../../../models/faq";
 import sanitizeHtml from "../../../utils/candidate/sanitizeHtml";
@@ -9,7 +9,7 @@ export default async (_, { id, title, url, body }, { adminRequired }) => {
   const faq = await FAQ.findById(id);
 
   if (!faq) {
-    throw new UserInputError("There's no FAQ with that ID");
+    throw new GraphQLError("There's no FAQ with that ID", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   faq.title = title;

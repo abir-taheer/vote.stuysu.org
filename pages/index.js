@@ -1,4 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import HowToVote from "@mui/icons-material/HowToVote";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";

@@ -1,4 +1,4 @@
-import { ForbiddenError, UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import User from "../../../models/user";
 
 export default async (
@@ -9,20 +9,22 @@ export default async (
   adminRequired();
   const user = await User.findById(id);
   if (!user) {
-    throw new UserInputError("There's no user with that id");
+    throw new GraphQLError("There's no user with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   if (user.id === authenticatedUser.id) {
-    throw new ForbiddenError(
-      "You are not allowed to delete yourself. If necessary ask another admin to do so for you."
+    throw new GraphQLError(
+      "You are not allowed to delete yourself. If necessary ask another admin to do so for you.",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 
   const hasEverVoted = await user.hasEverVoted();
 
   if (hasEverVoted) {
-    throw new ForbiddenError(
-      "That user has voted at least once and cannot be deleted"
+    throw new GraphQLError(
+      "That user has voted at least once and cannot be deleted",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 

@@ -1,4 +1,6 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
+import { arrayMoveImmutable } from "array-move";
 import Add from "@mui/icons-material/Add";
 import ArrowDownward from "@mui/icons-material/ArrowDownward";
 import ArrowUpward from "@mui/icons-material/ArrowUpward";
@@ -14,7 +16,6 @@ import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import arrayMove from "array-move";
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
@@ -310,7 +311,7 @@ const RunoffVote = ({ election, candidates, refetch }) => {
             handleRemove,
           }}
           onSortEnd={({ oldIndex, newIndex }) =>
-            setChoices(arrayMove(choices, oldIndex, newIndex))
+            setChoices(arrayMoveImmutable(choices, oldIndex, newIndex))
           }
           distance={5}
           lockAxis={"y"}

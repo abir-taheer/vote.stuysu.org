@@ -1,6 +1,7 @@
-import { gql, useQuery } from "@apollo/client";
-import Autocomplete from "@mui/lab/Autocomplete";
-import DateTimePicker from "@mui/lab/DateTimePicker";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
+import Autocomplete from "@mui/material/Autocomplete";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import CircularProgress from "@mui/material/CircularProgress";

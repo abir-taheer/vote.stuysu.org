@@ -1,7 +1,7 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client/react";
 import { getDataFromTree } from "@apollo/client/react/ssr";
 import AddPhotoAlternateOutlined from "@mui/icons-material/AddPhotoAlternateOutlined";
-import LoadingButton from "@mui/lab/LoadingButton";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
@@ -294,7 +294,7 @@ function CandidateManagePage() {
       />
 
       <PictureUploadDialog />
-      <LoadingButton
+      <Button
         startIcon={<AddPhotoAlternateOutlined />}
         loading={uploading}
         loadingPosition={"center"}
@@ -334,7 +334,7 @@ function CandidateManagePage() {
         }}
       >
         Upload New Image
-      </LoadingButton>
+      </Button>
 
       <Typography variant={"h3"}>Candidate Summary / Blurb</Typography>
       <Typography variant={"body2"} color={"text.secondary"}>

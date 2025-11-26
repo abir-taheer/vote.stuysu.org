@@ -9,7 +9,7 @@
     That way the plugin knows they exist but duplicates aren't being created
  */
 
-import { gql } from "apollo-server-micro";
+import { gql } from "graphql-tag";
 
 // All of the following scalars are defined in external packages
 gql`

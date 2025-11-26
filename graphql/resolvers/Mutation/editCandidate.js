@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import { randomBytes } from "crypto";
 import Candidate from "../../../models/candidate";
 import Picture from "../../../models/picture";
@@ -16,25 +16,26 @@ export default async (
   adminRequired();
 
   if (blurb.length > 200) {
-    throw new UserInputError("The blurb must be 200 characters or less");
+    throw new GraphQLError("The blurb must be 200 characters or less", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   if (platform.length > 10000) {
-    throw new UserInputError(
-      "The platform field must be less than 10,000 characters"
+    throw new GraphQLError(
+      "The platform field must be less than 10,000 characters",
+      { extensions: { code: "BAD_USER_INPUT" } }
     );
   }
 
   const candidate = await Candidate.findById(id);
   if (!candidate) {
-    throw new UserInputError("There's no candidate with that id");
+    throw new GraphQLError("There's no candidate with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   if (pictureId) {
     const picture = await Picture.findById(pictureId);
 
     if (!picture) {
-      throw new UserInputError("There's no picture with that id");
+      throw new GraphQLError("There's no picture with that id", { extensions: { code: "BAD_USER_INPUT" } });
     }
   }
 
@@ -56,7 +57,7 @@ export default async (
   const managers = await User.idLoader.loadMany(managerIds);
   for (let i = 0; i < managers.length; i++) {
     if (!managers[i]) {
-      throw new UserInputError("There's no user with the id " + managerIds[i]);
+      throw new GraphQLError("There's no user with the id " + managerIds[i], { extensions: { code: "BAD_USER_INPUT" } });
     }
   }
 
@@ -67,7 +68,7 @@ export default async (
     });
 
     if (urlIsUsed) {
-      throw new UserInputError("There's already another candidate at that url");
+      throw new GraphQLError("There's already another candidate at that url", { extensions: { code: "BAD_USER_INPUT" } });
     }
   }
 

@@ -1,4 +1,5 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client/react";
 import BlockOutlined from "@mui/icons-material/BlockOutlined";
 import Create from "@mui/icons-material/Create";
 import DeleteOutlined from "@mui/icons-material/DeleteOutlined";

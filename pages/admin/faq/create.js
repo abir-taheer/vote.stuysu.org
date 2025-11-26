@@ -1,4 +1,5 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";

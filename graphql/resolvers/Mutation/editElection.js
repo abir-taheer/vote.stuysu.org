@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import Election from "../../../models/election";
 import Picture from "../../../models/picture";
 
@@ -12,7 +12,7 @@ export default async (
   const election = await Election.findById(id);
 
   if (!election) {
-    throw new UserInputError("There's no election with that ID");
+    throw new GraphQLError("There's no election with that ID", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   if (url !== election.url) {
@@ -20,18 +20,18 @@ export default async (
     const existingElection = await Election.findOne({ url });
 
     if (existingElection) {
-      throw new UserInputError("There's another election at that url");
+      throw new GraphQLError("There's another election at that url", { extensions: { code: "BAD_USER_INPUT" } });
     }
   }
 
   if (end < start) {
-    throw new UserInputError("The start date must be before the end date");
+    throw new GraphQLError("The start date must be before the end date", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   const coverPic = await Picture.findById(pictureId);
 
   if (!coverPic) {
-    throw new UserInputError("There's no picture with that id");
+    throw new GraphQLError("There's no picture with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   election.name = name;

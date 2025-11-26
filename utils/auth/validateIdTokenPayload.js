@@ -1,26 +1,29 @@
-import { ForbiddenError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import { GOOGLE_CLIENT_ID } from "../../constants";
 
 // Any checks that need to be performed on the idToken payload can be performed here
 export default function validateIdTokenPayload(payload) {
   // Make sure the payload actually exists
   if (!payload) {
-    throw new ForbiddenError(
-      "That idToken is not valid and cannot be used to authenticate."
+    throw new GraphQLError(
+      "That idToken is not valid and cannot be used to authenticate.",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 
   // Make sure the user isn't using an unverified account
   if (!payload.email_verified) {
-    throw new ForbiddenError(
-      "Your email is not verified and cannot be used for sign in yet."
+    throw new GraphQLError(
+      "Your email is not verified and cannot be used for sign in yet.",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 
   // Make sure that the token the user is using was generated for this app
   if (payload.azp !== GOOGLE_CLIENT_ID || payload.aud !== GOOGLE_CLIENT_ID) {
-    throw new ForbiddenError(
-      "That login token was not generated for this app and cannot be used."
+    throw new GraphQLError(
+      "That login token was not generated for this app and cannot be used.",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 }

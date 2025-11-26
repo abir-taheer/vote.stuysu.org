@@ -1,4 +1,4 @@
-import { ForbiddenError, UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import { randomBytes } from "crypto";
 import Candidate from "../../../models/candidate";
 import Election from "../../../models/election";
@@ -17,37 +17,39 @@ export default async (
   adminRequired();
 
   if (blurb.length > 200) {
-    throw new UserInputError("The blurb must be 200 characters or less");
+    throw new GraphQLError("The blurb must be 200 characters or less", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   if (platform.length > 10000) {
-    throw new UserInputError(
-      "The platform field must be less than 10,000 characters"
+    throw new GraphQLError(
+      "The platform field must be less than 10,000 characters",
+      { extensions: { code: "BAD_USER_INPUT" } }
     );
   }
 
   // Make sure the election that the candidate is associated to is valid
   const election = await Election.findById(electionId);
   if (!election) {
-    throw new UserInputError("There's no election with that id");
+    throw new GraphQLError("There's no election with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   if (election.completed) {
-    throw new ForbiddenError(
-      "That election is closed and new candidates cannot be added"
+    throw new GraphQLError(
+      "That election is closed and new candidates cannot be added",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 
   // Make sure there's not already another candidate at that url
   const urlIsUsed = await Candidate.exists({ electionId, url });
   if (urlIsUsed) {
-    throw new UserInputError("There's already another candidate at that url");
+    throw new GraphQLError("There's already another candidate at that url", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   const managers = await User.idLoader.loadMany(managerIds);
   for (let i = 0; i < managers.length; i++) {
     if (!managers[i]) {
-      throw new UserInputError("There's no user with the id " + managerIds[i]);
+      throw new GraphQLError("There's no user with the id " + managerIds[i], { extensions: { code: "BAD_USER_INPUT" } });
     }
   }
 
@@ -55,7 +57,7 @@ export default async (
     const picture = await Picture.findById(pictureId);
 
     if (!picture) {
-      throw new UserInputError("There's no picture with that id");
+      throw new GraphQLError("There's no picture with that id", { extensions: { code: "BAD_USER_INPUT" } });
     }
   }
 

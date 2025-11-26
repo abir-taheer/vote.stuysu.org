@@ -1,7 +1,7 @@
 import LockOpenOutlined from "@mui/icons-material/LockOpenOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
-import LoadingButton from "@mui/lab/LoadingButton";
 import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
@@ -117,7 +117,7 @@ const NavBar = () => {
             />
 
             {!user.signedIn && (
-              <LoadingButton
+              <Button
                 disableRipple
                 onClick={signIn}
                 sx={{ color: "black" }}
@@ -126,7 +126,7 @@ const NavBar = () => {
                 startIcon={<LockOpenOutlined />}
               >
                 Login
-              </LoadingButton>
+              </Button>
             )}
 
             {user.signedIn && <UserMenuItem />}
