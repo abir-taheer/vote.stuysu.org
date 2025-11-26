@@ -1,4 +1,5 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client/react";
 import Create from "@mui/icons-material/Create";
 import Delete from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";

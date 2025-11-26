@@ -1,4 +1,4 @@
-import { ForbiddenError, UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import User from "../../../models/user";
 
 export default async (
@@ -11,22 +11,24 @@ export default async (
   const user = await User.findById(id);
 
   if (!user) {
-    throw new UserInputError("There's no user with that id");
+    throw new GraphQLError("There's no user with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   if (user.email !== email || user.gradYear !== gradYear) {
     const exists = await User.exists({ email, gradYear });
 
     if (exists) {
-      throw new UserInputError(
-        "There's already another user with that email and graduation year."
+      throw new GraphQLError(
+        "There's already another user with that email and graduation year.",
+        { extensions: { code: "BAD_USER_INPUT" } }
       );
     }
   }
 
   if (user.id === authenticatedUser.id && !adminPrivileges) {
-    throw new ForbiddenError(
-      "You are not allowed to remove your own admin privileges. Ask another admin to do this for you."
+    throw new GraphQLError(
+      "You are not allowed to remove your own admin privileges. Ask another admin to do this for you.",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 

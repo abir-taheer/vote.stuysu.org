@@ -1,4 +1,4 @@
-import { ForbiddenError, UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import Candidate from "../../../models/candidate";
 import Election from "../../../models/election";
 
@@ -7,14 +7,15 @@ export default async (_, { id, active }, { adminRequired }) => {
 
   const candidate = await Candidate.findById(id);
   if (!candidate) {
-    throw new UserInputError("There's no candidate with that id");
+    throw new GraphQLError("There's no candidate with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   const election = await Election.findById(candidate.electionId);
 
   if (election.completed) {
-    throw new ForbiddenError(
-      "That election is closed and so the candidate can no longer be suspended on reinstated."
+    throw new GraphQLError(
+      "That election is closed and so the candidate can no longer be suspended on reinstated.",
+      { extensions: { code: "FORBIDDEN" } }
     );
   }
 

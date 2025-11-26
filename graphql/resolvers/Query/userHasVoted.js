@@ -1,10 +1,11 @@
-import { UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import Election from "../../../models/election";
 
 export default async (_, { election: { id, url } }, { user, signedIn }) => {
   if (!url && !id) {
-    throw new UserInputError(
-      "An id or url must be provided to view if a user voted for an election"
+    throw new GraphQLError(
+      "An id or url must be provided to view if a user voted for an election",
+      { extensions: { code: "BAD_USER_INPUT" } }
     );
   }
 
@@ -23,7 +24,7 @@ export default async (_, { election: { id, url } }, { user, signedIn }) => {
   const election = await Election.findOne(filter).select("+votedIds").exec();
 
   if (!election) {
-    throw new UserInputError("There's no election with that url or id");
+    throw new GraphQLError("There's no election with that url or id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   return election.voterIds.includes(user.id);

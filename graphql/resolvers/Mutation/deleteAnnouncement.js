@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import Announcement from "../../../models/announcement";
 
 export default async (_, { id }, { adminRequired }) => {
@@ -7,7 +7,7 @@ export default async (_, { id }, { adminRequired }) => {
   const announcement = await Announcement.findById(id);
 
   if (!announcement) {
-    throw new UserInputError("There's no announcement with that id");
+    throw new GraphQLError("There's no announcement with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   await announcement.delete();

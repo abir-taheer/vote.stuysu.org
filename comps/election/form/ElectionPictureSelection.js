@@ -1,4 +1,5 @@
-import { gql, useApolloClient } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useApolloClient } from "@apollo/client/react";
 import AddAPhoto from "@mui/icons-material/AddAPhoto";
 import Clear from "@mui/icons-material/Clear";
 import Button from "@mui/material/Button";

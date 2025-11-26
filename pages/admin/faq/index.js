@@ -1,4 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import AddOutlined from "@mui/icons-material/AddOutlined";
 import SearchOutlined from "@mui/icons-material/SearchOutlined";
 import Button from "@mui/material/Button";

@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import User from "../../../models/user";
 
 export default async (
@@ -11,8 +11,9 @@ export default async (
   const existingUser = await User.exists({ email, gradYear });
 
   if (existingUser) {
-    throw new UserInputError(
-      "There's already a user with that email and graduation year."
+    throw new GraphQLError(
+      "There's already a user with that email and graduation year.",
+      { extensions: { code: "BAD_USER_INPUT" } }
     );
   }
 

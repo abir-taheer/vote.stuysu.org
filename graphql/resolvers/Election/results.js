@@ -1,12 +1,13 @@
-import { ForbiddenError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 
 export default (election, _, { user, authenticationRequired }) => {
   if (!election.completed) {
     authenticationRequired();
 
     if (!user.adminPrivileges) {
-      throw new ForbiddenError(
-        "At this time you must be an admin to view the results of this election"
+      throw new GraphQLError(
+        "At this time you must be an admin to view the results of this election",
+        { extensions: { code: "FORBIDDEN" } }
       );
     }
   }

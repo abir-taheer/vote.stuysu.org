@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import mongoose from "mongoose";
 import Candidate from "../../../models/candidate";
 
@@ -12,7 +12,7 @@ export default async (
   const candidate = await Candidate.findById(candidateId);
 
   if (!candidate) {
-    throw new UserInputError("There's no candidate with that id");
+    throw new GraphQLError("There's no candidate with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   const _id = new mongoose.Types.ObjectId();

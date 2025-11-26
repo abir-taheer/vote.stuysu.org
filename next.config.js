@@ -1,6 +1,15 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["vote.stuysu.org", "res.cloudinary.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "vote.stuysu.org",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
   },
 };

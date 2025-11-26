@@ -52,7 +52,7 @@ function ElectionCardGrid({ page, results, numPages, onPageChange, admin }) {
     <div>
       <Grid container sx={styles.grid} justifyContent={"center"}>
         {results?.map(({ name, url, picture, id, start, end }) => (
-          <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
+          <Grid size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 4 }} key={id}>
             <div style={styles.itemContainer}>
               <ElectionCard
                 name={name}

@@ -1,11 +1,12 @@
-import { UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import Candidate from "../../../models/candidate";
 import Election from "../../../models/election";
 
 export default async (_, { url, election }) => {
   if (!election.url && !election.id) {
-    throw new UserInputError(
-      "An election url or id must be passed to query a candidate by url"
+    throw new GraphQLError(
+      "An election url or id must be passed to query a candidate by url",
+      { extensions: { code: "BAD_USER_INPUT" } }
     );
   }
 

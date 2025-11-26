@@ -1,4 +1,4 @@
-import { ApolloError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import { sign } from "jsonwebtoken";
 import KeyPair from "../../../models/keyPair";
 import User from "../../../models/user";
@@ -34,9 +34,9 @@ export default async (_, __, { adminRequired, user }) => {
     const { data } = await response.json();
     stuyactivitiesUsers = data;
   } catch (e) {
-    throw new ApolloError(
+    throw new GraphQLError(
       "There was an error getting the users from StuyActivities: " + e.message,
-      "FETCH_ERROR"
+      { extensions: { code: "FETCH_ERROR" } }
     );
   }
 

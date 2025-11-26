@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { GraphQLError } from "graphql";
 import Candidate from "../../../models/candidate";
 
 export default async (_, { candidateId, strikeId }, { adminRequired }) => {
@@ -7,7 +7,7 @@ export default async (_, { candidateId, strikeId }, { adminRequired }) => {
   const candidate = await Candidate.findById(candidateId);
 
   if (!candidate) {
-    throw new UserInputError("There's no candidate with that id");
+    throw new GraphQLError("There's no candidate with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   const strikeIndex = candidate.strikes?.findIndex(
@@ -15,7 +15,7 @@ export default async (_, { candidateId, strikeId }, { adminRequired }) => {
   );
 
   if (strikeIndex === -1) {
-    throw new UserInputError("There's no strike with that id");
+    throw new GraphQLError("There's no strike with that id", { extensions: { code: "BAD_USER_INPUT" } });
   }
 
   candidate.strikes.splice(strikeIndex, 1);

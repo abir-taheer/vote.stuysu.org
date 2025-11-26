@@ -1,4 +1,5 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client/react";
 import withApollo from "next-with-apollo";
 import { PUBLIC_URL } from "../../constants";
 

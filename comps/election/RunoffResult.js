@@ -1,4 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
@@ -255,7 +256,7 @@ const RunoffResult = ({ id, election }) => {
         justifyContent={"center"}
         spacing={3}
       >
-        <Grid item>
+        <Grid>
           <IconButton
             color={"primary"}
             disabled={round === 1}
@@ -264,7 +265,7 @@ const RunoffResult = ({ id, election }) => {
             <ArrowBackIos />
           </IconButton>
         </Grid>
-        <Grid item>
+        <Grid>
           <Typography
             variant={"h2"}
             align={"center"}
@@ -288,7 +289,7 @@ const RunoffResult = ({ id, election }) => {
             </Typography>
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid>
           <IconButton
             color={"primary"}
             disabled={round >= results.rounds.length}
