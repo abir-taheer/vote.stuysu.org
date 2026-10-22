@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { UserInputError } from "apollo-server-errors";
 import Announcement from "../../../models/announcement";
 
 export default async (_, { id }, { adminRequired }) => {

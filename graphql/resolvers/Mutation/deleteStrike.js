@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { UserInputError } from "apollo-server-errors";
 import Candidate from "../../../models/candidate";
 
 export default async (_, { candidateId, strikeId }, { adminRequired }) => {

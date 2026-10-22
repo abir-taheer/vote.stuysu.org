@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { UserInputError } from "apollo-server-errors";
 import mongoose from "mongoose";
 import Candidate from "../../../models/candidate";
 

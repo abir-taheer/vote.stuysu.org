@@ -1,4 +1,4 @@
-import { ForbiddenError } from "apollo-server-micro";
+import { ForbiddenError } from "apollo-server-errors";
 import { GOOGLE_CLIENT_ID } from "../../constants";
 
 // Any checks that need to be performed on the idToken payload can be performed here

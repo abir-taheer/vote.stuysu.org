@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { UserInputError } from "apollo-server-errors";
 import User from "../../../models/user";
 
 export default async (

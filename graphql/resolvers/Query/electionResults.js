@@ -1,4 +1,4 @@
-import { ForbiddenError, UserInputError } from "apollo-server-micro";
+import { ForbiddenError, UserInputError } from "apollo-server-errors";
 import Election from "../../../models/election";
 
 export default async (_, { election: { id, url } }, { user, signedIn }) => {

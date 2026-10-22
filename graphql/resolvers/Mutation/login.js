@@ -1,4 +1,4 @@
-import { ApolloError, ForbiddenError } from "apollo-server-micro";
+import { ApolloError, ForbiddenError } from "apollo-server-errors";
 import { sign } from "jsonwebtoken";
 import User from "../../../models/user";
 import getIdTokenPayload from "../../../utils/auth/getIdTokenPayload";

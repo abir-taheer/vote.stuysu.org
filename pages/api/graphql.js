@@ -1,5 +1,6 @@
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
-import { ApolloServer, ForbiddenError } from "apollo-server-micro";
+import { ApolloServer } from "@apollo/server";
+import { startServerAndCreateNextHandler } from "@as-integrations/next";
+import { ForbiddenError } from "apollo-server-errors";
 import { createComplexityLimitRule } from "graphql-validation-complexity";
 import resolvers from "../../graphql/resolvers";
 import typeDefs from "../../graphql/typeDefs";
@@ -16,7 +17,12 @@ const ComplexityLimitRule = createComplexityLimitRule(35000, {
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: async ({ req, res }) => {
+  introspection: true,
+  validationRules: [ComplexityLimitRule],
+});
+
+const APIHandler = startServerAndCreateNextHandler(apolloServer, {
+  context: async (req, res) => {
     await runMiddleware(req, res, checkAuth);
 
     const user = req.user;
@@ -45,36 +51,7 @@ const apolloServer = new ApolloServer({
       setCookie,
     };
   },
-  playground: {
-    settings: {
-      "schema.polling.enable": false,
-      "request.credentials": "same-origin",
-      "prettier.useTabs": true,
-    },
-  },
-  introspection: true,
-  uploads: {
-    maxFileSize: 10000000,
-  },
-  validationRules: [ComplexityLimitRule],
-  plugins: [new ApolloServerPluginLandingPageGraphQLPlayground()],
 });
-
-let serverStarted = false;
-let handler = null;
-
-const APIHandler = async (req, res) => {
-  if (!serverStarted) {
-    await apolloServer.start();
-    handler = apolloServer.createHandler({
-      path: "/api/graphql",
-      disableHealthCheck: true,
-    });
-    serverStarted = true;
-  }
-
-  return await handler(req, res);
-};
 
 export default APIHandler;
 

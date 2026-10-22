@@ -1,4 +1,4 @@
-import { ForbiddenError, UserInputError } from "apollo-server-micro";
+import { ForbiddenError, UserInputError } from "apollo-server-errors";
 import User from "../../../models/user";
 
 export default async (

@@ -1,4 +1,4 @@
-import { ApolloError } from "apollo-server-micro";
+import { ApolloError } from "apollo-server-errors";
 import { sign } from "jsonwebtoken";
 import KeyPair from "../../../models/keyPair";
 import User from "../../../models/user";

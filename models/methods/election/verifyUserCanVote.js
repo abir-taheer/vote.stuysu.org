@@ -1,4 +1,4 @@
-import { ForbiddenError } from "apollo-server-micro";
+import { ForbiddenError } from "apollo-server-errors";
 
 export default function verifyUserCanVote(user) {
   if (!this.isVotingPeriod()) {

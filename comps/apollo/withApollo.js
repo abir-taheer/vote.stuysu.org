@@ -1,4 +1,9 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  HttpLink,
+  InMemoryCache,
+} from "@apollo/client";
 import withApollo from "next-with-apollo";
 import { PUBLIC_URL } from "../../constants";
 
@@ -25,10 +30,7 @@ export default withApollo(
 
     return new ApolloClient({
       cache,
-      uri,
-      headers: {
-        authorization,
-      },
+      link: new HttpLink({ uri, headers: { authorization } }),
     });
   },
   {

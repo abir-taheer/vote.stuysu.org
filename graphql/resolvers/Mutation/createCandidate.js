@@ -1,4 +1,4 @@
-import { ForbiddenError, UserInputError } from "apollo-server-micro";
+import { ForbiddenError, UserInputError } from "apollo-server-errors";
 import { randomBytes } from "crypto";
 import Candidate from "../../../models/candidate";
 import Election from "../../../models/election";

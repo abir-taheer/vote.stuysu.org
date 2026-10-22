@@ -1,4 +1,4 @@
-import { UserInputError } from "apollo-server-micro";
+import { UserInputError } from "apollo-server-errors";
 import { parse } from "node-html-parser";
 import FAQ from "../../../models/faq";
 import sanitizeHtml from "../../../utils/candidate/sanitizeHtml";
