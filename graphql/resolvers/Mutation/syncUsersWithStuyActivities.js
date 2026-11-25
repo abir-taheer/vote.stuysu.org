@@ -2,6 +2,7 @@ import { ApolloError } from "apollo-server-errors";
 import { sign } from "jsonwebtoken";
 import KeyPair from "../../../models/keyPair";
 import User from "../../../models/user";
+import fetchStuyActivitiesVoters from "../../../utils/user/fetchStuyActivitiesVoters";
 
 export default async (_, __, { adminRequired, user }) => {
   adminRequired();
@@ -21,18 +22,7 @@ export default async (_, __, { adminRequired, user }) => {
   let stuyactivitiesUsers = null;
 
   try {
-    const response = await fetch("https://base.stuysu.org/functions/v1/export-voters", {
-      headers: {
-        authorization: "Bearer " + token,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-
-    const { data } = await response.json();
-    stuyactivitiesUsers = data;
+    stuyactivitiesUsers = await fetchStuyActivitiesVoters(token);
   } catch (e) {
     throw new ApolloError(
       "There was an error getting the users from StuyActivities: " + e.message,
